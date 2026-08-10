@@ -25,13 +25,12 @@ import {
 
 export default function AdminCategoriesPage() {
   const searchParams = useSearchParams();
-  const initialType = searchParams.get('type') === 'sub' ? 'sub' : '';
 
   const [categories, setCategories] = useState<any[]>([]);
   const [parentCategories, setParentCategories] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
-  const [typeFilter, setTypeFilter] = useState(initialType);
+  const [typeFilter, setTypeFilter] = useState(searchParams.get('type') || '');
 
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -42,6 +41,11 @@ export default function AdminCategoriesPage() {
   });
   const [saving, setSaving] = useState(false);
   const [notification, setNotification] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+
+  useEffect(() => {
+    const urlType = searchParams.get('type') || '';
+    setTypeFilter(urlType);
+  }, [searchParams]);
 
   useEffect(() => {
     loadCategories();

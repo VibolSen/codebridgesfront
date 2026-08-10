@@ -53,8 +53,7 @@ export function SuperAdminSidebar({ sidebarOpen, userRole = 'admin' }: SuperAdmi
         { name: 'Create Product', href: '/admin/products?action=create', icon: Plus },
         { name: 'Expired Products', href: '/admin/inventory/expired', icon: Clock },
         { name: 'Low Stocks', href: '/admin/inventory?status=low_stock', icon: Boxes },
-        { name: 'Category', href: '/admin/categories', icon: Tag },
-        { name: 'Sub Category', href: '/admin/categories?type=sub', icon: Layers },
+        { name: 'Categories', href: '/admin/categories', icon: Tag },
         { name: 'Brands', href: '/admin/brands', icon: Tag },
         { name: 'Print Barcode', href: '#', icon: Printer },
         { name: 'Print QR Code', href: '#', icon: QrCode },
@@ -66,7 +65,7 @@ export function SuperAdminSidebar({ sidebarOpen, userRole = 'admin' }: SuperAdmi
       items: [
         { name: 'Manage Stock', href: '/admin/inventory', icon: Boxes },
         { name: 'Stock Adjustment Ledger', href: '/admin/inventory/ledger', icon: RefreshCw },
-        { name: 'Stock Transfer', href: '#', icon: ArrowRightLeft },
+        { name: 'Stock Transfer', href: '/admin/inventory/transfer', icon: ArrowRightLeft },
       ],
     },
     {

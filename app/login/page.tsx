@@ -29,6 +29,7 @@ export default function LoginPage() {
         router.push('/pos');
       }
     } catch (err: any) {
+      console.error('Login Error:', err);
       setError(err.message || 'Login failed. Please check your credentials.');
     } finally {
       setLoading(false);

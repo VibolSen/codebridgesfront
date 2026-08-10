@@ -26,12 +26,15 @@ import {
   FileText,
 } from 'lucide-react';
 
+import { useSearchParams } from 'next/navigation';
+
 export default function AdminInventoryPage() {
+  const searchParams = useSearchParams();
   const [balances, setBalances] = useState<any[]>([]);
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [outletId, setOutletId] = useState(1);
-  const [statusFilter, setStatusFilter] = useState('');
+  const [statusFilter, setStatusFilter] = useState(searchParams.get('status') || '');
   const [search, setSearch] = useState('');
 
   // Modals state
@@ -59,6 +62,11 @@ export default function AdminInventoryPage() {
 
   const [saving, setSaving] = useState(false);
   const [notification, setNotification] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+
+  useEffect(() => {
+    const urlStatus = searchParams.get('status') || '';
+    setStatusFilter(urlStatus);
+  }, [searchParams]);
 
   useEffect(() => {
     loadInventory();

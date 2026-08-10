@@ -1,4 +1,12 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api/v1';
+export function getApiUrl(): string {
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return process.env.NEXT_PUBLIC_API_URL;
+  }
+  if (typeof window !== 'undefined') {
+    return `http://${window.location.hostname}:8080/api/v1`;
+  }
+  return 'http://127.0.0.1:8080/api/v1';
+}
 
 export function getAuthToken(): string | null {
   if (typeof window !== 'undefined') {
@@ -36,6 +44,7 @@ export function getAuthUser(): any | null {
 
 export async function apiFetch(endpoint: string, options: RequestInit = {}) {
   const token = getAuthToken();
+  const baseUrl = getApiUrl();
 
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
@@ -47,7 +56,9 @@ export async function apiFetch(endpoint: string, options: RequestInit = {}) {
     headers['Authorization'] = `Bearer ${token}`;
   }
 
-  const response = await fetch(`${API_URL}${endpoint}`, {
+  console.log(`[API Request] Calling: ${baseUrl}${endpoint}`, { options, headers });
+
+  const response = await fetch(`${baseUrl}${endpoint}`, {
     ...options,
     headers,
   });
@@ -106,10 +117,20 @@ export async function getDashboardChartsApi() {
 }
 
 // Catalog API calls
-export async function getProductsApi(outletId: number = 1, categoryId?: string, search?: string) {
+export async function getProductsApi(
+  outletId: number = 1,
+  categoryId?: string,
+  search?: string,
+  stockStatus?: string,
+  sortBy?: string,
+  sortOrder?: string
+) {
   let url = `/products?outlet_id=${outletId}`;
   if (categoryId) url += `&category_id=${categoryId}`;
   if (search) url += `&q=${encodeURIComponent(search)}`;
+  if (stockStatus) url += `&stock_status=${stockStatus}`;
+  if (sortBy) url += `&sort_by=${sortBy}`;
+  if (sortOrder) url += `&sort_order=${sortOrder}`;
   return await apiFetch(url);
 }
 
@@ -121,6 +142,13 @@ export async function createProductApi(data: any) {
   return await apiFetch('/products', {
     method: 'POST',
     body: JSON.stringify(data),
+  });
+}
+
+export async function bulkCreateProductsApi(items: any[]) {
+  return await apiFetch('/products/bulk', {
+    method: 'POST',
+    body: JSON.stringify({ items }),
   });
 }
 
@@ -466,6 +494,34 @@ export async function adjustStockApi(data: any) {
   return await apiFetch('/inventory/adjust', {
     method: 'POST',
     body: JSON.stringify(data),
+  });
+}
+
+// Stock Transfers API calls
+export async function getTransfersApi(outletId?: number, status?: string, search?: string) {
+  let url = '/inventory/transfers';
+  const params: string[] = [];
+  if (outletId) params.push(`outlet_id=${outletId}`);
+  if (status) params.push(`status=${status}`);
+  if (search) params.push(`q=${encodeURIComponent(search)}`);
+  if (params.length > 0) url += `?${params.join('&')}`;
+  return await apiFetch(url);
+}
+
+export async function getTransferDetailApi(id: string) {
+  return await apiFetch(`/inventory/transfers/${id}`);
+}
+
+export async function createTransferApi(data: any) {
+  return await apiFetch('/inventory/transfers', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
+
+export async function receiveTransferApi(id: string) {
+  return await apiFetch(`/inventory/transfers/${id}/receive`, {
+    method: 'POST',
   });
 }
 
