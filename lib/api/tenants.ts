@@ -1,0 +1,173 @@
+import { apiFetch } from './client';
+
+// SaaS Multi-Tenancy
+export async function getSuperAdminTenantsApi() {
+  try {
+    return await apiFetch('/super-admin/tenants');
+  } catch (err) {
+    console.warn('[Tenants API] Unable to fetch super-admin tenants:', err);
+    return [];
+  }
+}
+
+export async function registerTenantApi(data: any) {
+  return await apiFetch('/tenants/register', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
+
+// Customers & Loyalty
+export async function getCustomersApi(search?: string) {
+  let url = '/customers';
+  if (search) url += `?q=${encodeURIComponent(search)}`;
+  return await apiFetch(url);
+}
+
+export async function createCustomerApi(data: any) {
+  return await apiFetch('/customers', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
+
+export async function updateCustomerApi(id: number | string, data: any) {
+  return await apiFetch(`/customers/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  });
+}
+
+export async function deleteCustomerApi(id: number | string) {
+  return await apiFetch(`/customers/${id}`, {
+    method: 'DELETE',
+  });
+}
+
+export async function adjustCustomerStoreCreditApi(customerId: string, payload: { amount_change: number; entry_type: string; notes?: string }) {
+  return await apiFetch(`/customers/${customerId}/store-credit`, {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function convertCustomerPointsApi(customerId: string) {
+  return await apiFetch(`/customers/${customerId}/convert-points`, {
+    method: 'POST',
+  });
+}
+
+export async function getCustomerHistoryApi(customerId: string) {
+  return await apiFetch(`/customers/${customerId}/history`);
+}
+
+// Suppliers
+export async function getSuppliersApi(search?: string) {
+  let url = '/suppliers';
+  if (search) url += `?q=${encodeURIComponent(search)}`;
+  return await apiFetch(url);
+}
+
+export async function createSupplierApi(data: any) {
+  return await apiFetch('/suppliers', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
+
+export async function updateSupplierApi(id: number | string, data: any) {
+  return await apiFetch(`/suppliers/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  });
+}
+
+export async function deleteSupplierApi(id: number | string) {
+  return await apiFetch(`/suppliers/${id}`, {
+    method: 'DELETE',
+  });
+}
+
+// Outlets / Stores
+export async function getOutletsApi(search?: string) {
+  let url = '/outlets';
+  if (search) url += `?q=${encodeURIComponent(search)}`;
+  return await apiFetch(url);
+}
+
+export async function createOutletApi(data: any) {
+  return await apiFetch('/outlets', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
+
+export async function updateOutletApi(id: number | string, data: any) {
+  return await apiFetch(`/outlets/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  });
+}
+
+export async function deleteOutletApi(id: number | string) {
+  return await apiFetch(`/outlets/${id}`, {
+    method: 'DELETE',
+  });
+}
+
+// HRM Departments
+export async function getDepartmentsApi(search?: string) {
+  let url = '/departments';
+  if (search) url += `?q=${encodeURIComponent(search)}`;
+  return await apiFetch(url);
+}
+
+export async function createDepartmentApi(data: any) {
+  return await apiFetch('/departments', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
+
+export async function updateDepartmentApi(id: number | string, data: any) {
+  return await apiFetch(`/departments/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  });
+}
+
+export async function deleteDepartmentApi(id: number | string) {
+  return await apiFetch(`/departments/${id}`, {
+    method: 'DELETE',
+  });
+}
+
+// HRM Employees
+export async function getEmployeesApi(departmentId?: number, search?: string) {
+  let url = '/employees';
+  const params: string[] = [];
+  if (departmentId) params.push(`department_id=${departmentId}`);
+  if (search) params.push(`q=${encodeURIComponent(search)}`);
+  if (params.length > 0) url += `?${params.join('&')}`;
+  return await apiFetch(url);
+}
+
+export async function createEmployeeApi(data: any) {
+  return await apiFetch('/employees', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
+
+export async function updateEmployeeApi(id: number | string, data: any) {
+  return await apiFetch(`/employees/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  });
+}
+
+export async function deleteEmployeeApi(id: number | string) {
+  return await apiFetch(`/employees/${id}`, {
+    method: 'DELETE',
+  });
+}
