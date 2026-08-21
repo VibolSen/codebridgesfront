@@ -65,7 +65,7 @@ export function TenantSuccessCard({
             onClick={onLaunchHub}
             className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-black text-xs shadow-lg shadow-orange-500/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
           >
-            <span>Launch Modules in Onboarding Hub</span>
+            <span>Enable Modules for {registeredTenant.name}</span>
             <ArrowRight className="w-4 h-4" />
           </button>
           <button

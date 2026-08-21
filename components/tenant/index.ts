@@ -3,3 +3,6 @@ export type { PlanTier } from './PlanTierSelector';
 export { TenantRegistrationForm } from './TenantRegistrationForm';
 export type { TenantFormData } from './TenantRegistrationForm';
 export { TenantSuccessCard } from './TenantSuccessCard';
+export { CreateOrgModal } from './CreateOrgModal';
+export type { CreateOrgModalProps } from './CreateOrgModal';
+

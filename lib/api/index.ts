@@ -6,3 +6,4 @@ export * from './shifts';
 export * from './payments';
 export * from './sales';
 export * from './tenants';
+export * from '../modules';

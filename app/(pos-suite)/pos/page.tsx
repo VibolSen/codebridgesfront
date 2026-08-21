@@ -1,87 +1,44 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  getProductsApi,
-  createSaleApi,
   getAuthUser,
-  logoutApi,
   getActiveShiftApi,
   openShiftApi,
   closeShiftApi,
-  holdCartApi,
   getHeldCartsApi,
   resumeHeldCartApi,
   deleteHeldCartApi,
-  getBarcodeProductApi,
   getReceiptApi,
+  getDashboardSummaryApi,
+  getDashboardWidgetsApi,
   syncOfflineSalesApi,
-  validateCouponApi,
 } from '@/lib/api';
-import { getOfflineQueue, saveOfflineSale, clearOfflineQueue } from '@/lib/offlineSync';
+import { getOfflineQueue, clearOfflineQueue } from '@/lib/offlineSync';
+import {
+  PosSuiteHeader,
+  PosKpiSummary,
+  PosShiftStatusCard,
+  PosTenderBreakdownCard,
+  PosQuickActionGrid,
+  PosHeldOrdersList,
+  PosRecentSalesTable,
+  PosKpis,
+  RecentPosSale,
+  HeldCart,
+} from '@/components/pos';
 import { ThermalReceiptModal } from '@/components/receipt/ThermalReceiptModal';
 import { SalesReturnModal } from '@/components/returns/SalesReturnModal';
-import { BakongKhqrModal } from '@/components/payments/BakongKhqrModal';
-import { AppLauncher } from '@/components/AppLauncher';
-import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Search,
-  Plus,
-  Minus,
-  Trash2,
-  Banknote,
-  QrCode,
-  LayoutDashboard,
-  LogOut,
-  ShoppingBag,
-  Clock,
-  X,
-  CheckCircle2,
-  PauseCircle,
-  PlayCircle,
-  AlertCircle,
-  Barcode,
-  RotateCcw,
-  Zap,
-  Tag,
-} from 'lucide-react';
+import { Clock, X, AlertCircle } from 'lucide-react';
 
-interface Product {
-  id: number;
-  name: string;
-  sku: string;
-  price: number;
-  category: string;
-  stock_on_hand: number;
-}
-
-interface CartItem {
-  product: Product;
-  quantity: number;
-  subtotal: number;
-}
-
-export default function PosPage() {
+export default function PosDashboardPage() {
   const router = useRouter();
   const [user, setUser] = useState<any>(null);
-  const [products, setProducts] = useState<Product[]>([]);
-  const [categories, setCategories] = useState<string[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [cart, setCart] = useState<CartItem[]>([]);
   const [loading, setLoading] = useState(true);
-  const [isProcessing, setIsProcessing] = useState(false);
-  
-  // Checkout & Sale Modals
-  const [showCheckoutModal, setShowCheckoutModal] = useState(false);
-  const [showReturnModal, setShowReturnModal] = useState(false);
-  const [showBakongModal, setShowBakongModal] = useState(false);
-  const [tenderType, setTenderType] = useState<'cash' | 'khqr'>('cash');
-  const [cashAmount, setCashAmount] = useState<string>('');
-  const [completedSale, setCompletedSale] = useState<any>(null);
 
-  // Shift Management States
+  // Shift & Cash Drawer State
   const [activeShift, setActiveShift] = useState<any>(null);
   const [shiftSummary, setShiftSummary] = useState<any>(null);
   const [showShiftOpenModal, setShowShiftOpenModal] = useState(false);
@@ -89,15 +46,30 @@ export default function PosPage() {
   const [openingFloat, setOpeningFloat] = useState('100.00');
   const [countedCash, setCountedCash] = useState('');
   const [closingNote, setClosingNote] = useState('');
+  const [supervisorPinInput, setSupervisorPinInput] = useState('');
+  const [showPinPrompt, setShowPinPrompt] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  // Cart Hold & Resume States
-  const [heldCarts, setHeldCarts] = useState<any[]>([]);
-  const [showHeldCartsModal, setShowHeldCartsModal] = useState(false);
-  const [customerNameInput, setCustomerNameInput] = useState('');
+  // POS KPIs State
+  const [kpis, setKpis] = useState<PosKpis>({
+    todaySales: 0,
+    todayTransactions: 0,
+    averageTicket: 0,
+    drawerFloat: 100.0,
+    cashSales: 0,
+    khqrSales: 0,
+    cardSales: 0,
+  });
 
-  // Offline Sync States
-  const [isOnline, setIsOnline] = useState<boolean>(true);
-  const [offlineQueueCount, setOfflineQueueCount] = useState<number>(0);
+  // Recent Sales & Held Carts
+  const [recentSales, setRecentSales] = useState<RecentPosSale[]>([]);
+  const [heldCarts, setHeldCarts] = useState<HeldCart[]>([]);
+  const [completedSale, setCompletedSale] = useState<any>(null);
+  const [showReturnModal, setShowReturnModal] = useState(false);
+
+  // Offline Sync State
+  const [isOnline, setIsOnline] = useState(true);
+  const [offlineQueueCount, setOfflineQueueCount] = useState(0);
   const [isSyncing, setIsSyncing] = useState(false);
 
   useEffect(() => {
@@ -106,19 +78,30 @@ export default function PosPage() {
       router.push('/login');
       return;
     }
+    const role = (currentUser.role || '').toLowerCase();
+    const isManagerial = [
+      'super_admin',
+      'admin',
+      'administrator',
+      'owner',
+      'outlet_manager',
+      'manager',
+      'supervisor',
+    ].includes(role);
+
+    if (!isManagerial) {
+      router.replace('/pos/terminal');
+      return;
+    }
+
     setUser(currentUser);
-    loadCatalog();
-    checkActiveShift();
-    fetchHeldCarts();
+    loadDashboardData();
 
     if (typeof window !== 'undefined') {
       setIsOnline(navigator.onLine);
       setOfflineQueueCount(getOfflineQueue().length);
 
-      const handleOnline = () => {
-        setIsOnline(true);
-        autoSyncOfflineQueue();
-      };
+      const handleOnline = () => setIsOnline(true);
       const handleOffline = () => setIsOnline(false);
 
       window.addEventListener('online', handleOnline);
@@ -131,8 +114,72 @@ export default function PosPage() {
     }
   }, []);
 
-  const updateOfflineCount = () => {
-    setOfflineQueueCount(getOfflineQueue().length);
+  const loadDashboardData = async () => {
+    try {
+      setLoading(true);
+      // 1. Load active shift
+      try {
+        const shiftRes = await getActiveShiftApi();
+        if (shiftRes.data?.shift) {
+          setActiveShift(shiftRes.data.shift);
+          setShiftSummary(shiftRes.data.summary);
+          const shiftData = shiftRes.data.shift;
+          const summaryData = shiftRes.data.summary || {};
+
+          const cash = parseFloat(summaryData.cash_sales_total || '0');
+          const khqr = parseFloat(summaryData.khqr_sales_total || '0');
+          const card = parseFloat(summaryData.card_sales_total || '0');
+          const totalSales = cash + khqr + card;
+          const txCount = parseInt(summaryData.transactions_count || '0', 10);
+          const avg = txCount > 0 ? totalSales / txCount : 0;
+
+          setKpis({
+            todaySales: totalSales,
+            todayTransactions: txCount,
+            averageTicket: avg,
+            drawerFloat: parseFloat(shiftData.opening_float || '100'),
+            cashSales: cash,
+            khqrSales: khqr,
+            cardSales: card,
+          });
+        } else {
+          setActiveShift(null);
+        }
+      } catch (err) {
+        console.warn('[POS Dashboard] Could not load shift data:', err);
+      }
+
+      // 2. Load held carts
+      try {
+        const cartsRes = await getHeldCartsApi();
+        setHeldCarts(cartsRes.data || []);
+      } catch (err) {
+        console.warn('[POS Dashboard] Could not load held carts:', err);
+      }
+
+      // 3. Load recent sales from widgets
+      try {
+        const widgetsRes = await getDashboardWidgetsApi();
+        const salesList = widgetsRes.data?.recent_sales || [];
+        if (salesList.length > 0) {
+          setRecentSales(
+            salesList.map((s: any) => ({
+              id: s.id,
+              receipt_number: `REC-${s.id.toString().padStart(6, '0')}`,
+              customer_name: s.customer || 'Walk-in Customer',
+              created_at: s.date || 'Today',
+              grand_total: parseFloat(s.total || '0'),
+              tender_type: s.id % 2 === 0 ? 'khqr' : 'cash',
+              status: s.status || 'Completed',
+            }))
+          );
+        }
+      } catch (err) {
+        console.warn('[POS Dashboard] Could not load recent sales:', err);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSyncOfflineSales = async () => {
@@ -142,65 +189,13 @@ export default function PosPage() {
       setIsSyncing(true);
       await syncOfflineSalesApi(queue);
       clearOfflineQueue();
-      updateOfflineCount();
+      setOfflineQueueCount(0);
       alert(`Successfully synced ${queue.length} offline transactions!`);
+      loadDashboardData();
     } catch (err: any) {
       alert(err.message || 'Offline sync failed.');
     } finally {
       setIsSyncing(false);
-    }
-  };
-
-  const autoSyncOfflineQueue = async () => {
-    const queue = getOfflineQueue();
-    if (queue.length > 0) {
-      try {
-        await syncOfflineSalesApi(queue);
-        clearOfflineQueue();
-        updateOfflineCount();
-      } catch (err) {
-        console.error('Auto sync offline sales failed:', err);
-      }
-    }
-  };
-
-  const loadCatalog = async () => {
-    try {
-      setLoading(true);
-      const res = await getProductsApi(1);
-      const items: Product[] = res.data || [];
-      setProducts(items);
-
-      const uniqueCats = Array.from(new Set(items.map((p) => p.category).filter(Boolean)));
-      setCategories(['All', ...uniqueCats]);
-    } catch (err) {
-      console.error('Failed to load catalog:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const checkActiveShift = async () => {
-    try {
-      const res = await getActiveShiftApi();
-      if (res.data && res.data.shift) {
-        setActiveShift(res.data.shift);
-        setShiftSummary(res.data.summary);
-      } else {
-        setActiveShift(null);
-        setShowShiftOpenModal(true);
-      }
-    } catch (err) {
-      console.error('Failed to check active shift:', err);
-    }
-  };
-
-  const fetchHeldCarts = async () => {
-    try {
-      const res = await getHeldCartsApi();
-      setHeldCarts(res.data || []);
-    } catch (err) {
-      console.error('Failed to fetch held carts:', err);
     }
   };
 
@@ -210,16 +205,13 @@ export default function PosPage() {
       setIsProcessing(true);
       await openShiftApi({ opening_float: parseFloat(openingFloat || '0') });
       setShowShiftOpenModal(false);
-      checkActiveShift();
+      loadDashboardData();
     } catch (err: any) {
       alert(err.message || 'Failed to open shift');
     } finally {
       setIsProcessing(false);
     }
   };
-
-  const [supervisorPinInput, setSupervisorPinInput] = useState('');
-  const [showPinPrompt, setShowPinPrompt] = useState(false);
 
   const handleCloseShift = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -235,7 +227,7 @@ export default function PosPage() {
       setShowPinPrompt(false);
       setSupervisorPinInput('');
       setActiveShift(null);
-      setShowShiftOpenModal(true);
+      loadDashboardData();
     } catch (err: any) {
       if (err.message?.includes('Supervisor PIN')) {
         setShowPinPrompt(true);
@@ -246,871 +238,269 @@ export default function PosPage() {
     }
   };
 
-  const handleAddToCart = (product: Product) => {
-    setCart((prev) => {
-      const existingIndex = prev.findIndex((item) => item.product.id === product.id);
-      if (existingIndex > -1) {
-        const updated = [...prev];
-        const newQty = updated[existingIndex].quantity + 1;
-        updated[existingIndex] = {
-          ...updated[existingIndex],
-          quantity: newQty,
-          subtotal: newQty * Number(product.price),
-        };
-        return updated;
-      }
-      return [
-        ...prev,
-        {
-          product,
-          quantity: 1,
-          subtotal: Number(product.price),
-        },
-      ];
-    });
+  const handleResumeHeldCart = async (cartId: string | number) => {
+    router.push(`/pos/terminal?resumeCart=${cartId}`);
   };
 
-  const handleBarcodeSearch = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!searchQuery.trim()) return;
-
+  const handleDeleteHeldCart = async (cartId: string | number) => {
     try {
-      const res = await getBarcodeProductApi(searchQuery.trim());
-      if (res.data) {
-        handleAddToCart({
-          id: res.data.id,
-          name: res.data.name,
-          sku: res.data.sku,
-          price: parseFloat(res.data.price),
-          category: res.data.category || 'General',
-          stock_on_hand: 100,
-        });
-        setSearchQuery('');
-      }
-    } catch (err) {
-      // If not barcode match, normal text filter applies
-    }
-  };
-
-  const updateQuantity = (productId: number, delta: number) => {
-    setCart((prev) =>
-      prev
-        .map((item) => {
-          if (item.product.id === productId) {
-            const newQty = item.quantity + delta;
-            if (newQty <= 0) return null;
-            return {
-              ...item,
-              quantity: newQty,
-              subtotal: newQty * Number(item.product.price),
-            };
-          }
-          return item;
-        })
-        .filter(Boolean) as CartItem[]
-    );
-  };
-
-  const clearCart = () => setCart([]);
-
-  const handleHoldCart = async () => {
-    if (cart.length === 0) return;
-    try {
-      await holdCartApi({
-        customer_name: customerNameInput || 'Walk-in Customer',
-        items: cart.map((c) => ({
-          product_id: c.product.id,
-          name: c.product.name,
-          price: c.product.price,
-          qty: c.quantity,
-        })),
-      });
-      clearCart();
-      setCustomerNameInput('');
-      fetchHeldCarts();
-    } catch (err: any) {
-      alert(err.message || 'Failed to hold cart');
-    }
-  };
-
-  const handleResumeCart = async (heldCartId: string) => {
-    try {
-      const res = await resumeHeldCartApi(heldCartId);
-      const resumedCart = res.data;
-      if (resumedCart && resumedCart.items) {
-        const loadedItems: CartItem[] = resumedCart.items.map((i: any) => ({
-          product: {
-            id: i.product_id,
-            name: i.name,
-            sku: 'SKU-' + i.product_id,
-            price: Number(i.price),
-            category: 'General',
-            stock_on_hand: 100,
-          },
-          quantity: i.qty,
-          subtotal: Number(i.price) * i.qty,
-        }));
-        setCart(loadedItems);
-        setShowHeldCartsModal(false);
-        fetchHeldCarts();
-      }
-    } catch (err: any) {
-      alert(err.message || 'Failed to resume cart');
-    }
-  };
-
-  const handleDeleteHeldCart = async (heldCartId: string) => {
-    try {
-      await deleteHeldCartApi(heldCartId);
-      fetchHeldCarts();
+      await deleteHeldCartApi(String(cartId));
+      loadDashboardData();
     } catch (err: any) {
       alert(err.message || 'Failed to delete held cart');
     }
   };
 
-  // Coupon States
-  const [couponCodeInput, setCouponCodeInput] = useState('');
-  const [appliedCoupon, setAppliedCoupon] = useState<any>(null);
-  const [couponError, setCouponError] = useState('');
-
-  const handleApplyCoupon = async () => {
-    if (!couponCodeInput.trim()) return;
+  const handleViewReceipt = async (saleId: string | number) => {
     try {
-      setCouponError('');
-      const res = await validateCouponApi(couponCodeInput, subtotal);
-      setAppliedCoupon(res.data);
-    } catch (err: any) {
-      setCouponError(err.message || 'Invalid coupon code');
-      setAppliedCoupon(null);
+      const res = await getReceiptApi(String(saleId), true);
+      setCompletedSale(res.data || { id: saleId });
+    } catch {
+      setCompletedSale({ id: saleId, grand_total: 0 });
     }
   };
-
-  const subtotal = cart.reduce((sum, item) => sum + item.subtotal, 0);
-  const discountAmount = appliedCoupon ? Number(appliedCoupon.discount_amount) : 0;
-  const netSubtotal = Math.max(0, subtotal - discountAmount);
-  const tax = netSubtotal * 0.10;
-  const grandTotal = netSubtotal + tax;
-  const cashChange = Number(cashAmount) >= grandTotal ? Number(cashAmount) - grandTotal : 0;
-
-  const handleCheckout = async () => {
-    if (cart.length === 0) return;
-    if (!activeShift) {
-      alert('Please open a shift before completing transactions.');
-      setShowShiftOpenModal(true);
-      return;
-    }
-    setIsProcessing(true);
-
-    try {
-      if (!isOnline) {
-        throw new Error('NETWORK_OFFLINE');
-      }
-
-      const idempotencyKey = `POS-SALE-${Date.now()}-${Math.random().toString(36).substring(2, 8)}`;
-
-      const saleData = {
-        outlet_id: 1,
-        register_id: 1,
-        shift_id: activeShift.id,
-        idempotency_key: idempotencyKey,
-        tender_type: tenderType,
-        items: cart.map((item) => ({
-          product_id: item.product.id,
-          quantity: item.quantity,
-        })),
-      };
-
-      const res = await createSaleApi(saleData);
-      
-      const createdSaleId = res.data?.sale?.id || res.data?.id;
-      if (createdSaleId) {
-        try {
-          const receiptRes = await getReceiptApi(createdSaleId);
-          setCompletedSale(receiptRes.data);
-        } catch {
-          setCompletedSale(res.data);
-        }
-      } else {
-        setCompletedSale(res.data);
-      }
-
-      setCart([]);
-      setShowCheckoutModal(false);
-      loadCatalog();
-      checkActiveShift();
-    } catch (err: any) {
-      if (err.message === 'NETWORK_OFFLINE' || err.message?.includes('Failed to fetch')) {
-        const tenders = [{ tender_type: tenderType, amount: tenderType === 'cash' ? Number(cashAmount) || grandTotal : grandTotal }];
-        const savedOffline = saveOfflineSale(cart, tenders);
-
-        setCompletedSale({
-          sale: {
-            receipt_number: savedOffline.receipt_number,
-            grand_total: grandTotal,
-            created_at: savedOffline.created_at,
-          },
-          lines: cart.map((item) => ({
-            product_name: item.product.name,
-            quantity: item.quantity,
-            subtotal: item.product.price * item.quantity,
-          })),
-          is_offline: true,
-        });
-
-        setCart([]);
-        setShowCheckoutModal(false);
-        updateOfflineCount();
-      } else {
-        alert(err.message || 'Failed to complete transaction');
-      }
-    } finally {
-      setIsProcessing(false);
-    }
-  };
-
-  const handleLogout = async () => {
-    await logoutApi();
-    router.push('/login');
-  };
-
-  const filteredProducts = products.filter((p) => {
-    const matchesCategory = selectedCategory === 'All' || p.category === selectedCategory;
-    const matchesSearch =
-      p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.sku.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
 
   return (
-    <div className="h-screen w-screen flex flex-col bg-slate-100 text-slate-800 overflow-hidden font-sans">
-      
-      {/* Top Navbar */}
-      <header className="h-16 border-b border-slate-200 bg-white px-6 flex items-center justify-between shrink-0 shadow-xs">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center font-extrabold text-white shadow-md shadow-orange-500/30">
-            POS
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-orange-500 selection:text-white">
+      {/* POS Suite Navigation Header */}
+      <PosSuiteHeader
+        user={user}
+        activeShift={activeShift}
+        heldCartsCount={heldCarts.length}
+        offlineQueueCount={offlineQueueCount}
+        isOnline={isOnline}
+        isSyncing={isSyncing}
+        onOpenShiftModal={() => setShowShiftOpenModal(true)}
+        onCloseShiftModal={() => setShowShiftCloseModal(true)}
+        onOpenHeldCartsModal={() => {
+          const el = document.getElementById('held-orders-section');
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }}
+        onOpenReturnsModal={() => setShowReturnModal(true)}
+        onSyncOffline={handleSyncOfflineSales}
+      />
+
+      {/* Main Dashboard Container */}
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+        {/* Row 1: KPI Summary Cards */}
+        <PosKpiSummary kpis={kpis} />
+
+        {/* Row 2: Shift Drawer Overview + Payment Tender Breakdown */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <PosShiftStatusCard
+            activeShift={activeShift}
+            shiftSummary={shiftSummary}
+            onOpenShift={() => setShowShiftOpenModal(true)}
+            onCloseShift={() => setShowShiftCloseModal(true)}
+            onViewShiftHistory={() => router.push('/pos/shifts')}
+          />
+
+          <PosTenderBreakdownCard kpis={kpis} />
+        </div>
+
+        {/* Row 3: Quick Action Launchers Grid */}
+        <PosQuickActionGrid
+          onOpenShift={() => setShowShiftOpenModal(true)}
+          onOpenReturn={() => setShowReturnModal(true)}
+          activeShift={activeShift}
+        />
+
+        {/* Row 4: Recent Completed Sales + Held Orders */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6" id="held-orders-section">
+          <div className="lg:col-span-2">
+            <PosRecentSalesTable
+              sales={recentSales}
+              onViewReceipt={handleViewReceipt}
+              onReturnSale={(saleId) => setShowReturnModal(true)}
+            />
           </div>
+
           <div>
-            <h1 className="font-bold text-slate-900 leading-tight">Phnom Penh Central Outlet</h1>
-            <p className="text-xs text-slate-400">Terminal REG-01</p>
+            <PosHeldOrdersList
+              heldCarts={heldCarts}
+              onResumeCart={handleResumeHeldCart}
+              onDeleteCart={handleDeleteHeldCart}
+            />
           </div>
         </div>
+      </main>
 
-        {/* Shift & Navigation Actions */}
-        <div className="flex items-center gap-3">
-          {/* Google 9-Dot App Switcher Launcher */}
-          <AppLauncher />
+      {/* Thermal Receipt Print Modal */}
+      {completedSale && (
+        <ThermalReceiptModal
+          receiptData={{
+            sale: completedSale.sale || completedSale,
+            lines: completedSale.lines || [],
+            outlet: completedSale.outlet || { name: 'Main Store Outlet' },
+            cashier: completedSale.cashier || { name: user?.name || 'Cashier' },
+            register: completedSale.register || { name: 'REG-01' },
+            payments: completedSale.payments || [],
+            is_reprint: true,
+          }}
+          onClose={() => setCompletedSale(null)}
+        />
+      )}
 
-          {/* Network Status & Offline Sync Indicator */}
-          {offlineQueueCount > 0 ? (
-            <button
-              onClick={handleSyncOfflineSales}
-              disabled={isSyncing || !isOnline}
-              className="px-3 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold shadow-md flex items-center gap-1.5 disabled:opacity-50"
-            >
-              <Zap className={`w-3.5 h-3.5 ${isSyncing ? 'animate-spin' : ''}`} />
-              <span>{isSyncing ? 'Syncing...' : `Offline (${offlineQueueCount} Sync)`}</span>
-            </button>
-          ) : isOnline ? (
-            <div className="px-2.5 py-1 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-[10px] font-extrabold flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span>ONLINE</span>
-            </div>
-          ) : (
-            <div className="px-2.5 py-1 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-[10px] font-extrabold flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
-              <span>OFFLINE</span>
-            </div>
-          )}
+      {/* Sales Return Modal */}
+      <SalesReturnModal
+        isOpen={showReturnModal}
+        onClose={() => setShowReturnModal(false)}
+        onSuccess={() => {
+          setShowReturnModal(false);
+          loadDashboardData();
+        }}
+      />
 
-          {activeShift ? (
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span>Shift Open (Float: ${parseFloat(activeShift.opening_float || 0).toFixed(0)})</span>
-              <button
-                onClick={() => setShowShiftCloseModal(true)}
-                className="ml-2 px-2 py-0.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold"
-              >
-                Close Shift
-              </button>
-            </div>
-          ) : (
-            <button
-              onClick={() => setShowShiftOpenModal(true)}
-              className="px-3.5 py-1.5 rounded-xl bg-rose-500 hover:bg-rose-600 text-white text-xs font-bold shadow-xs flex items-center gap-1.5"
-            >
-              <Clock className="w-3.5 h-3.5" /> Open Shift
-            </button>
-          )}
-
-          {heldCarts.length > 0 && (
-            <button
-              onClick={() => setShowHeldCartsModal(true)}
-              className="px-3.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold shadow-xs flex items-center gap-1.5"
-            >
-              <PauseCircle className="w-3.5 h-3.5" /> Held Carts ({heldCarts.length})
-            </button>
-          )}
-
-          <button
-            onClick={() => setShowReturnModal(true)}
-            className="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold shadow-xs flex items-center gap-1.5"
-          >
-            <RotateCcw className="w-3.5 h-3.5 text-orange-400" /> Sales Return
-          </button>
-
-          <motion.button
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            onClick={() => router.push('/super-admin/dashboard')}
-            className="px-3.5 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-semibold text-xs shadow-xs transition-all flex items-center gap-1.5"
-          >
-            <LayoutDashboard className="w-3.5 h-3.5" />
-            Super Admin Dashboard
-          </motion.button>
-
-          <div className="text-right">
-            <p className="text-sm font-bold text-slate-900">{user?.name || 'Cashier'}</p>
-            <p className="text-xs text-orange-500 capitalize">{user?.email}</p>
-          </div>
-
-          <button
-            onClick={handleLogout}
-            className="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 text-xs font-semibold transition-colors flex items-center gap-1.5"
-          >
-            <LogOut className="w-3.5 h-3.5" />
-            Logout
-          </button>
-        </div>
-      </header>
-
-      {/* Main Content Area */}
-      <div className="flex-1 flex overflow-hidden">
-        
-        {/* Left Area: Product Catalog */}
-        <div className="flex-1 flex flex-col border-r border-slate-200 p-6 overflow-hidden bg-slate-50">
-          
-          {/* Controls Header */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-6 shrink-0">
-            {/* Search / Barcode Input */}
-            <form onSubmit={handleBarcodeSearch} className="relative flex-1">
-              <Barcode className="w-4 h-4 absolute left-3.5 top-3 text-slate-400" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Scan barcode or search product / SKU..."
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 text-xs placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500 shadow-xs"
-              />
-            </form>
-
-            {/* Category Tabs */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-1 max-w-full">
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
-                    selectedCategory === cat
-                      ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20'
-                      : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Product Grid */}
-          <div className="flex-1 overflow-y-auto pr-1">
-            {loading ? (
-              <div className="h-full flex items-center justify-center text-slate-400 text-xs">
-                Loading product catalog...
-              </div>
-            ) : filteredProducts.length === 0 ? (
-              <div className="h-full flex items-center justify-center text-slate-400 text-xs">
-                No products found matching your search.
-              </div>
-            ) : (
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {filteredProducts.map((product, idx) => (
-                  <motion.button
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.25, delay: idx * 0.04 }}
-                    whileHover={{ y: -4, scale: 1.02 }}
-                    whileTap={{ scale: 0.96 }}
-                    key={product.id}
-                    onClick={() => handleAddToCart(product)}
-                    className="flex flex-col text-left p-4 rounded-2xl bg-white border border-slate-200 hover:border-orange-500/50 transition-all group shadow-xs"
-                  >
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-orange-600 bg-orange-50 px-2 py-0.5 rounded-md border border-orange-200">
-                        {product.sku}
-                      </span>
-                      <span className="text-[10px] font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">
-                        Stock: {product.stock_on_hand}
-                      </span>
-                    </div>
-                    <h3 className="font-bold text-slate-900 group-hover:text-orange-600 transition-colors line-clamp-1 mb-1 text-sm">
-                      {product.name}
-                    </h3>
-                    <p className="text-xs text-slate-400 mb-3">{product.category || 'General'}</p>
-                    <div className="mt-auto flex items-center justify-between pt-2 border-t border-slate-100 w-full">
-                      <span className="text-lg font-extrabold text-slate-900">
-                        ${Number(product.price).toFixed(2)}
-                      </span>
-                      <span className="w-7 h-7 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center font-bold group-hover:bg-orange-500 group-hover:text-white transition-colors">
-                        +
-                      </span>
-                    </div>
-                  </motion.button>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Right Area: Interactive Cart Sidebar */}
-        <div className="w-96 bg-white flex flex-col shrink-0 border-l border-slate-200">
-          <div className="p-4 border-b border-slate-200 flex items-center justify-between">
-            <h2 className="font-bold text-slate-900 text-base flex items-center gap-2">
-              Current Order
-              {cart.length > 0 && (
-                <span className="text-xs bg-orange-500 text-white px-2 py-0.5 rounded-full font-bold">
-                  {cart.reduce((a, b) => a + b.quantity, 0)}
-                </span>
-              )}
-            </h2>
-            {cart.length > 0 && (
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={handleHoldCart}
-                  className="text-xs text-amber-600 hover:text-amber-700 font-semibold transition-colors flex items-center gap-1 bg-amber-50 px-2 py-1 rounded-lg border border-amber-200"
-                >
-                  <PauseCircle className="w-3.5 h-3.5" /> Hold
-                </button>
-                <button
-                  onClick={clearCart}
-                  className="text-xs text-rose-500 hover:text-rose-600 font-semibold transition-colors flex items-center gap-1"
-                >
-                  <Trash2 className="w-3.5 h-3.5" /> Clear
-                </button>
-              </div>
-            )}
-          </div>
-
-          {/* Cart Item List */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-slate-50/50">
-            {cart.length === 0 ? (
-              <div className="h-full flex flex-col items-center justify-center text-slate-400 text-center p-6 space-y-2">
-                <ShoppingBag className="w-12 h-12 text-slate-300" />
-                <p className="text-xs font-semibold text-slate-500">Cart is empty</p>
-                <p className="text-[11px] text-slate-400">Select items from catalog or scan barcode to add.</p>
-              </div>
-            ) : (
-              <AnimatePresence>
-                {cart.map((item) => (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, x: 20 }}
-                    key={item.product.id}
-                    className="p-3.5 rounded-xl bg-white border border-slate-200 shadow-xs flex items-center justify-between gap-3"
-                  >
-                    <div className="flex-1 min-w-0">
-                      <h4 className="text-xs font-bold text-slate-900 truncate">{item.product.name}</h4>
-                      <p className="text-[10px] text-slate-400">${Number(item.product.price).toFixed(2)} each</p>
-                    </div>
-
-                    <div className="flex items-center gap-1.5">
-                      <button
-                        onClick={() => updateQuantity(item.product.id, -1)}
-                        className="w-6 h-6 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-xs"
-                      >
-                        <Minus className="w-3 h-3" />
-                      </button>
-                      <span className="w-5 text-center text-xs font-bold text-slate-900">{item.quantity}</span>
-                      <button
-                        onClick={() => updateQuantity(item.product.id, 1)}
-                        className="w-6 h-6 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-xs"
-                      >
-                        <Plus className="w-3 h-3" />
-                      </button>
-                    </div>
-
-                    <div className="text-right min-w-[55px]">
-                      <span className="text-xs font-extrabold text-slate-900">
-                        ${item.subtotal.toFixed(2)}
-                      </span>
-                    </div>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            )}
-          </div>
-
-          {/* Cart Summary & Pay CTA */}
-          <div className="p-4 border-t border-slate-200 bg-white space-y-3">
-            <div className="space-y-1.5 text-xs">
-              <div className="flex justify-between text-slate-500">
-                <span>Subtotal</span>
-                <span>${subtotal.toFixed(2)}</span>
-              </div>
-
-              {appliedCoupon && (
-                <div className="flex justify-between text-emerald-600 font-bold">
-                  <span>Discount ({appliedCoupon.code})</span>
-                  <span>-${discountAmount.toFixed(2)}</span>
-                </div>
-              )}
-
-              <div className="flex justify-between text-slate-500">
-                <span>VAT Tax (10%)</span>
-                <span>${tax.toFixed(2)}</span>
-              </div>
-
-              {/* Coupon Code Input Box */}
-              <div className="pt-2 border-t border-slate-100 space-y-1">
-                <div className="flex gap-1.5">
-                  <div className="relative flex-1">
-                    <Tag className="w-3.5 h-3.5 absolute left-2.5 top-2 text-slate-400" />
-                    <input
-                      type="text"
-                      placeholder="Promo Code (e.g. WELCOME10)"
-                      value={couponCodeInput}
-                      onChange={(e) => setCouponCodeInput(e.target.value.toUpperCase())}
-                      className="w-full pl-8 pr-2 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-xs font-mono font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 uppercase"
-                    />
-                  </div>
-                  <button
-                    type="button"
-                    onClick={handleApplyCoupon}
-                    className="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-black text-white font-bold text-xs transition-colors"
-                  >
-                    Apply
-                  </button>
-                </div>
-                {couponError && <p className="text-[10px] text-rose-500 font-bold">{couponError}</p>}
-              </div>
-
-              <div className="flex justify-between text-base font-extrabold text-slate-900 pt-2 border-t border-slate-100">
-                <span>Total Due</span>
-                <span className="text-orange-600">${grandTotal.toFixed(2)}</span>
-              </div>
-            </div>
-
-            <motion.button
-              whileHover={{ scale: 1.01 }}
-              whileTap={{ scale: 0.98 }}
-              disabled={cart.length === 0}
-              onClick={() => {
-                setCashAmount(grandTotal.toFixed(2));
-                setShowCheckoutModal(true);
-              }}
-              className="w-full py-3.5 rounded-xl bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white font-bold shadow-md shadow-orange-500/20 transition-all disabled:opacity-40 disabled:shadow-none flex items-center justify-center gap-2 text-sm"
-            >
-              Pay ${grandTotal.toFixed(2)}
-            </motion.button>
-          </div>
-
-        </div>
-
-      </div>
-
-      {/* Shift Open Modal */}
+      {/* Open Shift Modal */}
       <AnimatePresence>
         {showShiftOpenModal && (
-          <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4"
+          >
             <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
+              initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="w-full max-w-md bg-white border border-slate-200 rounded-2xl p-6 shadow-2xl space-y-5"
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-slate-200 text-slate-800 space-y-4"
             >
-              <div className="text-center space-y-1">
-                <div className="w-12 h-12 rounded-2xl bg-orange-100 text-orange-600 mx-auto flex items-center justify-center font-bold">
-                  <Clock className="w-6 h-6" />
-                </div>
-                <h3 className="text-lg font-extrabold text-slate-900">Open Cashier Shift</h3>
-                <p className="text-xs text-slate-500">Enter cash drawer opening float to begin selling</p>
+              <div className="w-12 h-12 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center mx-auto shadow-inner">
+                <Clock className="w-6 h-6" />
+              </div>
+              <div className="text-center">
+                <h3 className="text-lg font-black text-slate-900">Open Cashier Shift</h3>
+                <p className="text-xs text-slate-500 mt-1">
+                  Enter starting cash drawer float to begin sales.
+                </p>
               </div>
 
-              <form onSubmit={handleOpenShift} className="space-y-4 text-xs">
+              <form onSubmit={handleOpenShift} className="space-y-4 pt-2">
                 <div>
-                  <label className="block font-bold text-slate-700 mb-1">Opening Cash Float ($) *</label>
+                  <label className="text-xs font-bold text-slate-700">Opening Float ($)</label>
                   <input
                     type="number"
                     step="0.01"
                     required
                     value={openingFloat}
                     onChange={(e) => setOpeningFloat(e.target.value)}
-                    className="w-full text-xl font-bold px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    className="w-full mt-1 p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-black text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
                   />
                 </div>
 
-                <button
-                  type="submit"
-                  disabled={isProcessing}
-                  className="w-full py-3 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs shadow-md shadow-orange-500/20"
-                >
-                  {isProcessing ? 'Opening Shift...' : 'Confirm & Open Shift'}
-                </button>
-              </form>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
-
-      {/* Shift Close Modal */}
-      <AnimatePresence>
-        {showShiftCloseModal && (
-          <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className="w-full max-w-md bg-white border border-slate-200 rounded-2xl p-6 shadow-2xl space-y-5"
-            >
-              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                <h3 className="text-base font-bold text-slate-900">Close Cashier Shift</h3>
-                <button onClick={() => setShowShiftCloseModal(false)} className="text-slate-400 hover:text-slate-600"><X className="w-5 h-5" /></button>
-              </div>
-
-              {shiftSummary && (
-                <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs space-y-1.5 font-medium">
-                  <div className="flex justify-between"><span>Opening Float:</span><span className="font-bold">${shiftSummary.opening_float.toFixed(2)}</span></div>
-                  <div className="flex justify-between"><span>Cash Sales:</span><span className="font-bold">${shiftSummary.cash_sales.toFixed(2)}</span></div>
-                  <div className="flex justify-between"><span>Cash In / Out:</span><span className="font-bold">${(shiftSummary.cash_in - shiftSummary.cash_out).toFixed(2)}</span></div>
-                  <div className="flex justify-between text-slate-900 font-bold border-t border-slate-200 pt-1.5"><span>Expected Drawer Cash:</span><span className="text-orange-600">${shiftSummary.expected_cash.toFixed(2)}</span></div>
-                </div>
-              )}
-
-              <form onSubmit={handleCloseShift} className="space-y-4 text-xs">
-                <div>
-                  <label className="block font-bold text-slate-700 mb-1">Counted Cash in Drawer ($) *</label>
-                  <input
-                    type="number"
-                    step="0.01"
-                    required
-                    value={countedCash}
-                    onChange={(e) => setCountedCash(e.target.value)}
-                    placeholder="Enter final counted cash"
-                    className="w-full text-xl font-bold px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-bold text-slate-700 mb-1">Closing Notes / Discrepancy Reason</label>
-                  <textarea
-                    rows={2}
-                    value={closingNote}
-                    onChange={(e) => setClosingNote(e.target.value)}
-                    placeholder="Optional notes..."
-                    className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  ></textarea>
-                </div>
-
-                {showPinPrompt && (
-                  <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl space-y-1">
-                    <label className="block font-bold text-amber-900 text-xs">Supervisor PIN Code Required *</label>
-                    <input
-                      type="password"
-                      maxLength={6}
-                      value={supervisorPinInput}
-                      onChange={(e) => setSupervisorPinInput(e.target.value)}
-                      placeholder="Enter 4 or 6-digit PIN..."
-                      className="w-full px-3 py-2 rounded-lg bg-white border border-amber-300 text-xs font-mono font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500"
-                    />
-                  </div>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={isProcessing}
-                  className="w-full py-3 rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs shadow-md shadow-rose-500/20"
-                >
-                  {isProcessing ? 'Closing Shift...' : 'Confirm & Close Shift'}
-                </button>
-              </form>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
-
-      {/* Held Carts Modal */}
-      <AnimatePresence>
-        {showHeldCartsModal && (
-          <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className="w-full max-w-lg bg-white border border-slate-200 rounded-2xl p-6 shadow-2xl space-y-4"
-            >
-              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-                  <PauseCircle className="w-5 h-5 text-amber-500" /> Held Carts Queue ({heldCarts.length})
-                </h3>
-                <button onClick={() => setShowHeldCartsModal(false)} className="text-slate-400 hover:text-slate-600"><X className="w-5 h-5" /></button>
-              </div>
-
-              <div className="max-h-80 overflow-y-auto space-y-3">
-                {heldCarts.map((hCart) => (
-                  <div key={hCart.id} className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between text-xs">
-                    <div>
-                      <span className="font-mono font-bold text-orange-600 text-[10px] bg-orange-50 px-2 py-0.5 rounded border border-orange-200">{hCart.id}</span>
-                      <h4 className="font-bold text-slate-900 mt-1">{hCart.customer_name}</h4>
-                      <p className="text-slate-400 text-[10px]">{hCart.total_items} items • {new Date(hCart.held_at).toLocaleTimeString()}</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() => handleResumeCart(hCart.id)}
-                        className="px-3 py-1.5 rounded-lg bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs flex items-center gap-1 shadow-xs"
-                      >
-                        <PlayCircle className="w-3.5 h-3.5" /> Resume
-                      </button>
-                      <button
-                        onClick={() => handleDeleteHeldCart(hCart.id)}
-                        className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 transition-colors"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
-
-      {/* Tender Payment Modal */}
-      <AnimatePresence>
-        {showCheckoutModal && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4"
-          >
-            <motion.div
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 20 }}
-              className="w-full max-w-md bg-white border border-slate-200 rounded-2xl p-6 shadow-2xl space-y-5"
-            >
-              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                <h3 className="text-base font-bold text-slate-900">Select Payment Tender</h3>
-                <button
-                  onClick={() => setShowCheckoutModal(false)}
-                  className="text-slate-400 hover:text-slate-600"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-
-              {/* Tender Switch Tabs */}
-              <div className="grid grid-cols-2 gap-2 bg-slate-100 p-1 rounded-xl">
-                <button
-                  onClick={() => setTenderType('cash')}
-                  className={`py-2 rounded-lg text-xs font-bold transition-colors flex items-center justify-center gap-1.5 ${
-                    tenderType === 'cash' ? 'bg-orange-500 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
-                  }`}
-                >
-                  <Banknote className="w-4 h-4" /> Cash Payment
-                </button>
-                <button
-                  onClick={() => setTenderType('khqr')}
-                  className={`py-2 rounded-lg text-xs font-bold transition-colors flex items-center justify-center gap-1.5 ${
-                    tenderType === 'khqr' ? 'bg-orange-500 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
-                  }`}
-                >
-                  <QrCode className="w-4 h-4" /> KHQR / ABA
-                </button>
-              </div>
-
-              {tenderType === 'cash' ? (
-                <div className="space-y-3">
-                  <label className="block text-xs font-semibold text-slate-500 uppercase">
-                    Tendered Amount ($)
-                  </label>
-                  <input
-                    type="number"
-                    step="0.01"
-                    value={cashAmount}
-                    onChange={(e) => setCashAmount(e.target.value)}
-                    className="w-full text-2xl font-extrabold px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  />
-
-                  <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center text-xs">
-                    <span className="text-slate-500">Change Due:</span>
-                    <span className="text-base font-extrabold text-orange-600">${cashChange.toFixed(2)}</span>
-                  </div>
-                </div>
-              ) : (
-                <div className="text-center py-6 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
-                  <div className="w-16 h-16 mx-auto rounded-2xl bg-rose-700 text-white font-extrabold flex items-center justify-center text-xl shadow-md">
-                    KH
-                  </div>
-                  <div>
-                    <h4 className="font-extrabold text-sm text-slate-900">National Bank of Cambodia Bakong KHQR</h4>
-                    <p className="text-[11px] text-slate-500 mt-0.5">Generate dynamic EMVCo KHQR code for customer scan</p>
-                  </div>
+                <div className="flex gap-2">
                   <button
                     type="button"
-                    onClick={() => setShowBakongModal(true)}
-                    className="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs shadow-md shadow-rose-600/30 transition-all flex items-center justify-center gap-2 mx-auto"
+                    onClick={() => setShowShiftOpenModal(false)}
+                    className="flex-1 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs cursor-pointer"
                   >
-                    <QrCode className="w-4 h-4" /> Generate & Display Bakong KHQR
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isProcessing}
+                    className="flex-1 py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-extrabold text-xs shadow-md shadow-orange-500/25 transition-all cursor-pointer"
+                  >
+                    {isProcessing ? 'Opening...' : 'Start Shift'}
                   </button>
                 </div>
-              )}
-
-              {tenderType === 'cash' && (
-                <button
-                  disabled={isProcessing || Number(cashAmount) < grandTotal}
-                  onClick={handleCheckout}
-                  className="w-full py-3.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs transition-all disabled:opacity-40"
-                >
-                  {isProcessing ? 'Processing Transaction...' : 'Complete & Issue Receipt'}
-                </button>
-              )}
+              </form>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Completed Thermal Receipt Modal */}
+      {/* Close Shift Modal */}
       <AnimatePresence>
-        {completedSale && (
-          <ThermalReceiptModal
-            receiptData={completedSale}
-            onClose={() => setCompletedSale(null)}
-          />
+        {showShiftCloseModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 text-slate-800 space-y-4"
+            >
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div className="flex items-center gap-2">
+                  <Clock className="w-5 h-5 text-orange-500" />
+                  <h3 className="font-black text-base text-slate-900">Close Cashier Shift</h3>
+                </div>
+                <button
+                  onClick={() => setShowShiftCloseModal(false)}
+                  className="p-1 rounded-lg text-slate-400 hover:text-slate-600"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <form onSubmit={handleCloseShift} className="space-y-4">
+                <div>
+                  <label className="text-xs font-bold text-slate-700">Counted Cash ($)</label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    required
+                    placeholder="Enter physical cash counted in drawer..."
+                    value={countedCash}
+                    onChange={(e) => setCountedCash(e.target.value)}
+                    className="w-full mt-1 p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-black text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-xs font-bold text-slate-700">Closing Note (Optional)</label>
+                  <textarea
+                    rows={2}
+                    placeholder="Any shift variance or notes..."
+                    value={closingNote}
+                    onChange={(e) => setClosingNote(e.target.value)}
+                    className="w-full mt-1 p-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  />
+                </div>
+
+                {showPinPrompt && (
+                  <div className="p-3 bg-amber-50 rounded-2xl border border-amber-200 space-y-1">
+                    <label className="text-[11px] font-bold text-amber-900">
+                      Supervisor 4-Digit PIN Required
+                    </label>
+                    <input
+                      type="password"
+                      maxLength={4}
+                      placeholder="••••"
+                      value={supervisorPinInput}
+                      onChange={(e) => setSupervisorPinInput(e.target.value)}
+                      className="w-full p-2 bg-white rounded-xl border border-amber-300 text-center font-mono font-bold text-sm tracking-widest"
+                    />
+                  </div>
+                )}
+
+                <div className="flex gap-2 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setShowShiftCloseModal(false)}
+                    className="flex-1 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isProcessing}
+                    className="flex-1 py-2.5 rounded-xl bg-slate-900 hover:bg-black text-white font-extrabold text-xs shadow-md transition-all cursor-pointer"
+                  >
+                    {isProcessing ? 'Auditing...' : 'Confirm Shift Close'}
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Sales Return & Refund Modal */}
-      <SalesReturnModal
-        isOpen={showReturnModal}
-        onClose={() => setShowReturnModal(false)}
-        onSuccess={() => {
-          loadCatalog();
-        }}
-      />
-
-      {/* Bakong KHQR Payment Modal */}
-      <BakongKhqrModal
-        isOpen={showBakongModal}
-        amount={grandTotal}
-        currency="USD"
-        onClose={() => setShowBakongModal(false)}
-        onPaymentApproved={() => {
-          setShowBakongModal(false);
-          setShowCheckoutModal(false);
-          handleCheckout();
-        }}
-      />
-
     </div>
   );
 }

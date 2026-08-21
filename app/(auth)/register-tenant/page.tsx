@@ -88,8 +88,8 @@ const PLANS: PlanTier[] = [
 ];
 
 export default function RegisterTenantPage() {
-  const [selectedPlan, setSelectedPlan] = useState<PlanTier | null>(null);
-  const [step, setStep] = useState<'choose' | 'register' | 'success'>('choose');
+  const [selectedPlan, setSelectedPlan] = useState<PlanTier | null>(PLANS[1]);
+  const [step, setStep] = useState<'choose' | 'register' | 'success'>('register');
   const [formData, setFormData] = useState<TenantFormData>({
     workspaceType: 'company',
     fullName: '',
@@ -132,9 +132,11 @@ export default function RegisterTenantPage() {
         setStep('register');
       } else {
         setSelectedPlan(PLANS[1]);
+        setStep('register');
       }
     }
   }, []);
+
 
   const handleSelectPlanType = (type: 'personal' | 'company') => {
     setFormData((prev) => ({ ...prev, workspaceType: type }));
@@ -241,7 +243,9 @@ export default function RegisterTenantPage() {
             selectedPlan={selectedPlan}
             formData={formData}
             setFormData={setFormData}
-            onBackToPlans={() => setStep('choose')}
+            onBackToPlans={() => {
+              window.location.href = '/CodeBridgesOnboardingLaunchpad';
+            }}
             onSelectPlanType={handleSelectPlanType}
             onSubmit={handleRegister}
             loading={loading}
@@ -255,7 +259,7 @@ export default function RegisterTenantPage() {
             registeredTenant={registeredTenant}
             onLaunchHub={() => {
               localStorage.setItem('active_org', registeredTenant.name);
-              window.location.href = '/CodeBridgesOnboardingLaunchpad';
+              window.location.href = `/CodeBridgesOnboardingLaunchpad?action=enable&org=${encodeURIComponent(registeredTenant.name)}`;
             }}
             onEnterAdmin={() => {
               localStorage.setItem('active_org', registeredTenant.name);

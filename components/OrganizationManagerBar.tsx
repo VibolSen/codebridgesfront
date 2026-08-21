@@ -21,6 +21,7 @@ import {
   getOutletsApi,
   getSuperAdminTenantsApi,
 } from '@/lib/api';
+import { CreateOrgModal } from '@/components/tenant';
 
 export interface OrgItem {
   id: string | number;
@@ -33,11 +34,14 @@ export function OrganizationManagerBar() {
   const router = useRouter();
   const [showCreateDropdown, setShowCreateDropdown] = useState(false);
   const [showOrgDropdown, setShowOrgDropdown] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [createModalType, setCreateModalType] = useState<'personal' | 'company'>('company');
   const [user, setUser] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
   const [organizations, setOrganizations] = useState<OrgItem[]>([]);
   const [activeOrg, setActiveOrg] = useState<string>('Primary Organization');
   const dropdownRef = useRef<HTMLDivElement>(null);
+
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -91,19 +95,21 @@ export function OrganizationManagerBar() {
 
         if (outletsData.length > 0) {
           outletsData.forEach((outlet: any) => {
-            orgList.push({
-              id: `outlet-${outlet.id}`,
-              name: outlet.name || `Outlet #${outlet.id}`,
-              type: 'Outlet',
-              code: outlet.code,
-            });
+            if (!orgList.some((existing) => existing.name.toLowerCase() === (outlet.name || '').toLowerCase())) {
+              orgList.push({
+                id: `outlet-${outlet.id}`,
+                name: outlet.name || `Outlet #${outlet.id}`,
+                type: 'Outlet',
+                code: outlet.code,
+              });
+            }
           });
         }
       } catch (err) {
         console.warn('[OrganizationManagerBar] Could not load outlets API:', err);
       }
 
-      // 3. If super_admin, fetch real tenants from backend API
+      // 4. If super_admin, fetch real tenants from backend API
       if (currentUser.role === 'super_admin') {
         try {
           const tenantsRes = await getSuperAdminTenantsApi();
@@ -112,7 +118,7 @@ export function OrganizationManagerBar() {
             : tenantsRes?.data || [];
 
           tenantsData.forEach((t: any) => {
-            if (!orgList.some((existing) => existing.name === t.name)) {
+            if (!orgList.some((existing) => existing.name.toLowerCase() === (t.name || '').toLowerCase())) {
               orgList.push({
                 id: `tenant-${t.id}`,
                 name: t.name,
@@ -141,20 +147,47 @@ export function OrganizationManagerBar() {
     }
 
     loadRealOrganizations();
+
+    // Listen to live organization changes
+    const handleOrgChanged = (e: any) => {
+      const newOrgName = e.detail?.orgName;
+      if (newOrgName) {
+        setActiveOrg(newOrgName);
+      }
+      loadRealOrganizations();
+    };
+
+    window.addEventListener('cb_org_changed', handleOrgChanged);
+    return () => {
+      window.removeEventListener('cb_org_changed', handleOrgChanged);
+    };
   }, []);
 
   const handleSelectOrg = (orgName: string) => {
     setActiveOrg(orgName);
     localStorage.setItem('active_org', orgName);
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('cb_org_changed', { detail: { orgName } }));
+    }
     setShowOrgDropdown(false);
   };
 
   const handleCreateOrg = (type: 'personal' | 'company') => {
     setShowCreateDropdown(false);
-    router.push(`/register-tenant?type=${type}`);
+    setCreateModalType(type);
+    setIsCreateModalOpen(true);
+  };
+
+  const handleOrgCreated = (newOrg: { id: string | number; name: string; type: 'Personal' | 'Company' }) => {
+    setOrganizations((prev) => {
+      if (prev.some((o) => o.name === newOrg.name)) return prev;
+      return [{ id: newOrg.id, name: newOrg.name, type: newOrg.type }, ...prev];
+    });
+    setActiveOrg(newOrg.name);
   };
 
   const getManageButtonLabel = () => {
+
     if (!user) return 'Sign In to Workspace';
     const role = user.role || 'cashier';
     if (['super_admin', 'administrator', 'tenant_admin', 'admin', 'outlet_manager'].includes(role)) {
@@ -260,9 +293,10 @@ export function OrganizationManagerBar() {
                   <button
                     onClick={() => {
                       setShowOrgDropdown(false);
-                      router.push('/register-tenant');
+                      setCreateModalType('company');
+                      setIsCreateModalOpen(true);
                     }}
-                    className="w-full py-1.5 bg-orange-500 hover:bg-orange-600 text-white font-extrabold rounded-xl text-xs flex items-center justify-center gap-1 shadow-xs transition-colors"
+                    className="w-full py-1.5 bg-orange-500 hover:bg-orange-600 text-white font-extrabold rounded-xl text-xs flex items-center justify-center gap-1 shadow-xs transition-colors cursor-pointer"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     <span>Create Organization</span>
@@ -306,12 +340,13 @@ export function OrganizationManagerBar() {
                 <button
                   onClick={() => {
                     setShowOrgDropdown(false);
-                    router.push('/register-tenant');
+                    setCreateModalType('company');
+                    setIsCreateModalOpen(true);
                   }}
                   className="w-full flex items-center gap-2 p-2 rounded-xl text-orange-600 hover:bg-orange-50 font-bold text-xs transition-colors cursor-pointer"
                 >
                   <Plus className="w-4 h-4 text-orange-600" />
-                  <span>Register New Tenant</span>
+                  <span>Register New Workspace</span>
                 </button>
               </div>
             </motion.div>
@@ -325,67 +360,25 @@ export function OrganizationManagerBar() {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => {
-            setShowCreateDropdown(!showCreateDropdown);
+            setCreateModalType('company');
+            setIsCreateModalOpen(true);
             setShowOrgDropdown(false);
+            setShowCreateDropdown(false);
           }}
           className="bg-slate-100 hover:bg-slate-200/90 text-slate-800 font-extrabold text-sm w-9 h-9 rounded-xl border border-slate-200 shadow-2xs flex items-center justify-center transition-all cursor-pointer"
           title="Create New Organization"
         >
           <Plus className="w-4 h-4 text-slate-800" />
         </motion.button>
-
-        {/* Create New Organization Dropdown */}
-        <AnimatePresence>
-          {showCreateDropdown && (
-            <motion.div
-              initial={{ opacity: 0, y: 8, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 8, scale: 0.95 }}
-              className="absolute right-0 mt-2 w-72 rounded-2xl bg-white border border-slate-200/90 shadow-2xl p-2.5 z-50 text-slate-800"
-            >
-              <p className="text-[10px] font-bold tracking-wider uppercase text-slate-400 px-2 py-1 mb-1 border-b border-slate-100">
-                Create new organization
-              </p>
-
-              <div className="space-y-1">
-                <button
-                  onClick={() => handleCreateOrg('personal')}
-                  className="w-full flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors text-left group"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-orange-50 border border-orange-200/60 group-hover:bg-gradient-to-br group-hover:from-orange-500 group-hover:to-amber-500 text-orange-600 group-hover:text-white flex items-center justify-center shrink-0 transition-all shadow-xs">
-                    <User className="w-5 h-5 transition-colors" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-slate-900 group-hover:text-orange-600 transition-colors tracking-tight">
-                      Personal Workspace
-                    </p>
-                    <p className="text-[10px] text-slate-500 font-medium">
-                      For solopreneurs & individual use
-                    </p>
-                  </div>
-                </button>
-
-                <button
-                  onClick={() => handleCreateOrg('company')}
-                  className="w-full flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors text-left group"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-orange-50 border border-orange-200/60 group-hover:bg-gradient-to-br group-hover:from-orange-500 group-hover:to-amber-500 text-orange-600 group-hover:text-white flex items-center justify-center shrink-0 transition-all shadow-xs">
-                    <Building2 className="w-5 h-5 transition-colors" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-slate-900 group-hover:text-orange-600 transition-colors tracking-tight">
-                      Company / Multi-Outlet
-                    </p>
-                    <p className="text-[10px] text-slate-500 font-medium">
-                      For teams & enterprise chains
-                    </p>
-                  </div>
-                </button>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
+
+      {/* Instant Popup Create Organization Modal */}
+      <CreateOrgModal
+        isOpen={isCreateModalOpen}
+        onClose={() => setIsCreateModalOpen(false)}
+        initialType={createModalType}
+        onOrgCreated={handleOrgCreated}
+      />
     </div>
   );
 }

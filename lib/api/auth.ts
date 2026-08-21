@@ -122,7 +122,11 @@ export async function getRoleDetailApi(id: string) {
   return await apiFetch(`/roles/${id}`);
 }
 
-export async function getAuditLogsApi() {
-  return await apiFetch('/audit-logs');
+export async function getAuditLogsApi(module?: string) {
+  let url = '/audit-logs';
+  if (module && module !== 'all') {
+    url += `?module=${encodeURIComponent(module)}`;
+  }
+  return await apiFetch(url);
 }
 
