@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import {
   getInventoryBalancesApi,
   receiveStockApi,
@@ -28,7 +28,7 @@ import {
 
 import { useSearchParams } from 'next/navigation';
 
-export default function AdminInventoryPage() {
+function InventoryContent() {
   const searchParams = useSearchParams();
   const [balances, setBalances] = useState<any[]>([]);
   const [products, setProducts] = useState<any[]>([]);
@@ -712,3 +712,12 @@ export default function AdminInventoryPage() {
     </div>
   );
 }
+
+export default function AdminInventoryPage() {
+  return (
+    <Suspense fallback={<div className="p-8 text-xs text-slate-400">Loading inventory balances...</div>}>
+      <InventoryContent />
+    </Suspense>
+  );
+}
+

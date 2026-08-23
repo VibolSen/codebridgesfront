@@ -16,6 +16,7 @@ import {
   LogOut,
   ChevronRight,
   Store,
+  KeyRound,
 } from 'lucide-react';
 import { AppLauncher } from '@/components/AppLauncher';
 import { OrganizationManagerBar } from '@/components/OrganizationManagerBar';
@@ -33,6 +34,7 @@ interface PosSuiteHeaderProps {
   onOpenHeldCartsModal?: () => void;
   onOpenReturnsModal?: () => void;
   onSyncOffline?: () => void;
+  onOpenQuickSwitchModal?: () => void;
   outletName?: string;
   terminalCode?: string;
 }
@@ -49,6 +51,7 @@ export function PosSuiteHeader({
   onOpenHeldCartsModal,
   onOpenReturnsModal,
   onSyncOffline,
+  onOpenQuickSwitchModal,
   outletName = 'Main Store Outlet',
   terminalCode = 'REG-01',
 }: PosSuiteHeaderProps) {
@@ -184,14 +187,26 @@ export function PosSuiteHeader({
             </button>
           )}
 
-          {/* User Profile & Logout */}
-          <div className="hidden sm:block text-right pl-2 border-l border-slate-200">
-            <p className="text-xs font-bold text-slate-900 truncate max-w-[120px]">
-              {user?.name || 'Cashier'}
-            </p>
-            <p className="text-[10px] text-orange-500 font-bold capitalize">
-              {user?.role?.replace('_', ' ') || 'Staff'}
-            </p>
+          {/* User Profile & Quick-Switch */}
+          <div className="hidden sm:flex items-center gap-2 pl-2 border-l border-slate-200">
+            <div className="text-right">
+              <p className="text-xs font-bold text-slate-900 truncate max-w-[120px]">
+                {user?.name || 'Cashier'}
+              </p>
+              <p className="text-[10px] text-orange-500 font-bold capitalize">
+                {user?.role?.replace('_', ' ') || 'Staff'}
+              </p>
+            </div>
+            {onOpenQuickSwitchModal && (
+              <button
+                onClick={onOpenQuickSwitchModal}
+                title="Quick-Switch Staff (Enter PIN)"
+                className="px-2.5 py-1.5 rounded-xl bg-orange-50 hover:bg-orange-100 border border-orange-200 text-orange-700 text-xs font-extrabold flex items-center gap-1 shadow-xs transition-all cursor-pointer"
+              >
+                <KeyRound className="w-3.5 h-3.5" />
+                <span className="hidden md:inline">Switch PIN</span>
+              </button>
+            )}
           </div>
 
           <button

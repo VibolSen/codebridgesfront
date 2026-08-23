@@ -1,7 +1,7 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import {
   getCategoriesApi,
   createCategoryApi,
@@ -23,7 +23,7 @@ import {
   Package,
 } from 'lucide-react';
 
-export default function AdminCategoriesPage() {
+function CategoriesContent() {
   const searchParams = useSearchParams();
 
   const [categories, setCategories] = useState<any[]>([]);
@@ -444,3 +444,12 @@ export default function AdminCategoriesPage() {
     </div>
   );
 }
+
+export default function AdminCategoriesPage() {
+  return (
+    <Suspense fallback={<div className="p-8 text-xs text-slate-400">Loading categories...</div>}>
+      <CategoriesContent />
+    </Suspense>
+  );
+}
+

@@ -10,6 +10,7 @@ interface UserStatsHeaderProps {
   superAdminsCount: number;
   onOpenPermissionsModal: () => void;
   onOpenCreateModal: () => void;
+  onOpenInviteModal?: () => void;
 }
 
 export function UserStatsHeader({
@@ -18,6 +19,7 @@ export function UserStatsHeader({
   superAdminsCount,
   onOpenPermissionsModal,
   onOpenCreateModal,
+  onOpenInviteModal,
 }: UserStatsHeaderProps) {
   return (
     <div className="space-y-6">
@@ -37,7 +39,7 @@ export function UserStatsHeader({
           </p>
         </div>
 
-        <div className="flex items-center gap-2 self-start sm:self-auto">
+        <div className="flex items-center gap-2 self-start sm:self-auto flex-wrap">
           <motion.button
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
@@ -47,6 +49,18 @@ export function UserStatsHeader({
             <Grid className="w-4 h-4 text-orange-500" />
             Permissions Matrix
           </motion.button>
+
+          {onOpenInviteModal && (
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              onClick={onOpenInviteModal}
+              className="px-3.5 py-2.5 rounded-xl bg-orange-50 hover:bg-orange-100 border border-orange-200 text-orange-700 font-bold text-xs shadow-xs flex items-center gap-1.5 cursor-pointer"
+            >
+              <UserPlus className="w-4 h-4" />
+              Invite Link
+            </motion.button>
+          )}
 
           <motion.button
             whileHover={{ scale: 1.03 }}

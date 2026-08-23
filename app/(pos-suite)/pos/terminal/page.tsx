@@ -22,7 +22,7 @@ import { getOfflineQueue, saveOfflineSale, clearOfflineQueue } from '@/lib/offli
 import { ThermalReceiptModal } from '@/components/receipt/ThermalReceiptModal';
 import { SalesReturnModal } from '@/components/returns/SalesReturnModal';
 import { BakongKhqrModal } from '@/components/payments/BakongKhqrModal';
-import { PosSuiteHeader } from '@/components/pos';
+import { PosSuiteHeader, CashierQuickSwitchModal } from '@/components/pos';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Search,
@@ -57,6 +57,9 @@ export default function PosTerminalPage() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [isProcessing, setIsProcessing] = useState(false);
+
+  // Quick-Switch Modal State
+  const [showQuickSwitchModal, setShowQuickSwitchModal] = useState(false);
 
   // Checkout & Sale Modals
   const [showCheckoutModal, setShowCheckoutModal] = useState(false);
@@ -482,6 +485,7 @@ export default function PosTerminalPage() {
         onOpenHeldCartsModal={() => setShowHeldCartsModal(true)}
         onOpenReturnsModal={() => setShowReturnModal(true)}
         onSyncOffline={handleSyncOfflineSales}
+        onOpenQuickSwitchModal={() => setShowQuickSwitchModal(true)}
       />
 
       {/* Main Content Area */}
@@ -1043,6 +1047,17 @@ export default function PosTerminalPage() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Cashier PIN Quick-Switch Modal */}
+      <CashierQuickSwitchModal
+        isOpen={showQuickSwitchModal}
+        onClose={() => setShowQuickSwitchModal(false)}
+        currentUser={user}
+        onSwitchSuccess={(newUser) => {
+          setUser(newUser);
+          checkActiveShift();
+        }}
+      />
     </div>
   );
 }

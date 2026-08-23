@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { getAuthUser, logoutApi } from '@/lib/api';
@@ -91,8 +91,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Main Container */}
       <div className="flex-1 flex overflow-hidden">
         
-        {/* Left Sidebar Navigation Component */}
-        <SuperAdminSidebar sidebarOpen={sidebarOpen} userRole={userRole} />
+        {/* Left Sidebar Navigation Component wrapped in Suspense */}
+        <Suspense fallback={<aside className="h-full w-64 bg-white border-r border-slate-200" />}>
+          <SuperAdminSidebar sidebarOpen={sidebarOpen} userRole={userRole} />
+        </Suspense>
 
         {/* Page Content Viewport */}
         <main className="flex-1 overflow-y-auto bg-slate-50 p-4 sm:p-6 lg:p-8">
@@ -104,3 +106,4 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     </div>
   );
 }
+

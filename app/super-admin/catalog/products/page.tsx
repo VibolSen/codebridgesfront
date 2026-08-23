@@ -1,7 +1,7 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import {
   getProductsApi,
   getCategoriesApi,
@@ -33,7 +33,7 @@ import {
   SlidersHorizontal,
 } from 'lucide-react';
 
-export default function AdminProductsPage() {
+function ProductsContent() {
   const searchParams = useSearchParams();
   const actionParam = searchParams.get('action');
 
@@ -938,3 +938,12 @@ Butter Croissant,SNK-CRO-01,885000000003,2.00,0.80,50,5,Bakery,Freshly baked but
     </div>
   );
 }
+
+export default function AdminProductsPage() {
+  return (
+    <Suspense fallback={<div className="p-8 text-xs text-slate-400">Loading products catalog...</div>}>
+      <ProductsContent />
+    </Suspense>
+  );
+}
+

@@ -14,6 +14,20 @@ export async function loginApi(email: string, password: string) {
   return res;
 }
 
+export async function quickSwitchApi(pin_code: string, outlet_id?: string) {
+  const res = await apiFetch('/auth/quick-switch', {
+    method: 'POST',
+    body: JSON.stringify({ pin_code, outlet_id }),
+  });
+
+  if (res.token) {
+    setAuthToken(res.token);
+    setAuthUser(res.user);
+  }
+
+  return res;
+}
+
 export async function registerApi(userData: { name: string; email?: string; password: string; role?: string; phone?: string }) {
   const res = await apiFetch('/auth/register', {
     method: 'POST',
@@ -44,6 +58,83 @@ export async function verifyPinApi(pin_code: string) {
   return await apiFetch('/auth/verify-pin', {
     method: 'POST',
     body: JSON.stringify({ pin_code }),
+  });
+}
+
+export async function getSessionsApi() {
+  return await apiFetch('/auth/sessions');
+}
+
+export async function revokeSessionApi(id: string | number) {
+  return await apiFetch(`/auth/sessions/${id}`, {
+    method: 'DELETE',
+  });
+}
+
+export async function logoutAllDevicesApi(include_current = false) {
+  return await apiFetch('/auth/logout-all-devices', {
+    method: 'POST',
+    body: JSON.stringify({ include_current }),
+  });
+}
+
+export async function toggle2faApi(enable: boolean) {
+  return await apiFetch('/auth/2fa/toggle', {
+    method: 'POST',
+    body: JSON.stringify({ enable }),
+  });
+}
+
+export async function inviteStaffApi(email: string, role: string, outlet_id?: string) {
+  return await apiFetch('/users/invite', {
+    method: 'POST',
+    body: JSON.stringify({ email, role, outlet_id }),
+  });
+}
+
+export async function verifyInviteApi(token: string) {
+  return await apiFetch(`/auth/verify-invite?token=${encodeURIComponent(token)}`);
+}
+
+export async function acceptInviteApi(data: { token: string; name: string; password: string; pin_code?: string; phone?: string }) {
+  const res = await apiFetch('/auth/accept-invite', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+
+  if (res.token) {
+    setAuthToken(res.token);
+    setAuthUser(res.user);
+  }
+
+  return res;
+}
+
+export async function getQuotaUsageApi() {
+  return await apiFetch('/tenants/quota-usage');
+}
+
+// Developer / Merchant API Keys
+export async function getApiKeysApi() {
+  return await apiFetch('/api-keys');
+}
+
+export async function createApiKeyApi(data: { name: string; permissions?: string[]; expires_in_days?: number }) {
+  return await apiFetch('/api-keys', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
+
+export async function deleteApiKeyApi(id: string) {
+  return await apiFetch(`/api-keys/${id}`, {
+    method: 'DELETE',
+  });
+}
+
+export async function toggleApiKeyApi(id: string) {
+  return await apiFetch(`/api-keys/${id}/toggle`, {
+    method: 'PUT',
   });
 }
 
@@ -129,4 +220,3 @@ export async function getAuditLogsApi(module?: string) {
   }
   return await apiFetch(url);
 }
-

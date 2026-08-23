@@ -6,3 +6,5 @@ export * from './dashboard/PosTenderBreakdownCard';
 export * from './dashboard/PosQuickActionGrid';
 export * from './dashboard/PosHeldOrdersList';
 export * from './dashboard/PosRecentSalesTable';
+export * from './CashierQuickSwitchModal';
+

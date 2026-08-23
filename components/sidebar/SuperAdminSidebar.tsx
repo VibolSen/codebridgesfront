@@ -31,6 +31,7 @@ import {
   Settings,
   ExternalLink,
   Lock,
+  Key,
   Globe,
   UserPlus,
 } from 'lucide-react';
@@ -138,6 +139,7 @@ export function SuperAdminSidebar({ sidebarOpen, userRole = 'admin' }: SuperAdmi
         { name: 'User Accounts', href: '/super-admin/security/users', icon: Users },
         { name: 'Dynamic Roles & RBAC', href: '/super-admin/security/roles', icon: ShieldCheck },
         { name: 'Security Audit Logs', href: '/super-admin/security/audit-logs', icon: Lock },
+        { name: 'Developer API Keys', href: '/super-admin/api-keys', icon: Key },
         { name: 'System Settings', href: '/super-admin/security/settings', icon: Settings },
       ],
     },
