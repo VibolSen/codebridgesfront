@@ -1,13 +1,13 @@
 import { apiFetch } from './client';
 
-export async function getInventoryBalancesApi(outletId: number = 1, status?: string, search?: string) {
+export async function getInventoryBalancesApi(outletId: string | number = 1, status?: string, search?: string) {
   let url = `/inventory/balances?outlet_id=${outletId}`;
   if (status) url += `&status=${status}`;
   if (search) url += `&q=${encodeURIComponent(search)}`;
   return await apiFetch(url);
 }
 
-export async function getInventoryMovementsApi(outletId?: number, type?: string, search?: string) {
+export async function getInventoryMovementsApi(outletId?: string | number, type?: string, search?: string) {
   let url = '/inventory/movements';
   const params: string[] = [];
   if (outletId) params.push(`outlet_id=${outletId}`);
@@ -17,7 +17,7 @@ export async function getInventoryMovementsApi(outletId?: number, type?: string,
   return await apiFetch(url);
 }
 
-export async function getExpiredProductsApi(outletId: number = 1, status?: string, search?: string) {
+export async function getExpiredProductsApi(outletId: string | number = 1, status?: string, search?: string) {
   let url = `/inventory/expired?outlet_id=${outletId}`;
   if (status) url += `&status=${status}`;
   if (search) url += `&q=${encodeURIComponent(search)}`;

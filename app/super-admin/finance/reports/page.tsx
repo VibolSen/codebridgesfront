@@ -50,8 +50,8 @@ export default function AdminReportsPage() {
   };
 
   const handleExportCsv = () => {
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : '';
-    const exportUrl = `http://localhost:8080/api/v1/reports/export?type=${activeTab}`;
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:8080');
+    const exportUrl = `${baseUrl}/api/v1/reports/export?type=${activeTab}`;
     
     // Create temporary download anchor
     const a = document.createElement('a');

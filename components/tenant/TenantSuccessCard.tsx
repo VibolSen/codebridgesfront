@@ -32,7 +32,7 @@ export function TenantSuccessCard({
 
         <div className="space-y-2">
           <h2 className="text-2xl font-black text-slate-900 tracking-tight">
-            Workspace Created Successfully! 🎉
+            Workspace Created Successfully
           </h2>
           <p className="text-xs font-medium text-slate-600 leading-relaxed">
             Your <span className="text-orange-600 font-extrabold">{registeredTenant.name}</span> organization has been provisioned. You can now launch all system modules.

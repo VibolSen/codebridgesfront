@@ -9,6 +9,7 @@ import {
   getDepartmentsApi,
   getOutletsApi,
 } from '@/lib/api';
+import { OutletSelector } from '@/components/inventory-suite';
 import { motion, Variants } from 'framer-motion';
 import {
   Briefcase,
@@ -44,7 +45,7 @@ export default function AdminEmployeesPage() {
     email: '',
     phone: '',
     department_id: '',
-    outlet_id: '1',
+    outlet_id: '',
     designation: 'Cashier',
     employment_type: 'Full-time',
     salary: '450',
@@ -98,10 +99,10 @@ export default function AdminEmployeesPage() {
       email: '',
       phone: '',
       department_id: departments[0] ? String(departments[0].id) : '',
-      outlet_id: outlets[0] ? String(outlets[0].id) : '1',
-      designation: 'Cashier',
+      outlet_id: '',
+      designation: 'Staff',
       employment_type: 'Full-time',
-      salary: '450',
+      salary: '',
     });
     setIsModalOpen(true);
   };
@@ -114,7 +115,7 @@ export default function AdminEmployeesPage() {
       email: emp.email || '',
       phone: emp.phone || '',
       department_id: emp.department_id ? String(emp.department_id) : '',
-      outlet_id: emp.outlet_id ? String(emp.outlet_id) : '1',
+      outlet_id: emp.outlet_id ? String(emp.outlet_id) : '',
       designation: emp.designation || 'Staff',
       employment_type: emp.employment_type || 'Full-time',
       salary: String(emp.salary || 0),
@@ -133,8 +134,8 @@ export default function AdminEmployeesPage() {
         last_name: formData.last_name,
         email: formData.email || null,
         phone: formData.phone || null,
-        department_id: formData.department_id ? parseInt(formData.department_id, 10) : null,
-        outlet_id: formData.outlet_id ? parseInt(formData.outlet_id, 10) : null,
+        department_id: formData.department_id || null,
+        outlet_id: formData.outlet_id || null,
         designation: formData.designation,
         employment_type: formData.employment_type,
         salary: parseFloat(formData.salary) || 0,
@@ -515,6 +516,17 @@ export default function AdminEmployeesPage() {
                     className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
                   />
                 </div>
+              </div>
+
+              <div>
+                <label className="block font-bold text-slate-700 mb-1">Assigned Store Outlet</label>
+                <OutletSelector
+                  value={formData.outlet_id}
+                  onChange={(id) => setFormData({ ...formData, outlet_id: id })}
+                  includeAll={true}
+                  allLabel="Primary / All Outlets"
+                  showLabel={false}
+                />
               </div>
 
               <div className="pt-2 flex items-center justify-end gap-2">

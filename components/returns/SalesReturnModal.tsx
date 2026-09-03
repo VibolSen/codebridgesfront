@@ -20,9 +20,15 @@ interface SalesReturnModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSuccess?: () => void;
+  onReturnProcessed?: () => void;
 }
 
-export function SalesReturnModal({ isOpen, onClose, onSuccess }: SalesReturnModalProps) {
+export function SalesReturnModal({
+  isOpen,
+  onClose,
+  onSuccess,
+  onReturnProcessed,
+}: SalesReturnModalProps) {
   const [receiptNumber, setReceiptNumber] = useState('');
   const [loading, setLoading] = useState(false);
   const [quoteData, setQuoteData] = useState<any>(null);
@@ -324,9 +330,9 @@ export function SalesReturnModal({ isOpen, onClose, onSuccess }: SalesReturnModa
                                     disabled={item.quantity <= 0}
                                     className="px-2 py-1 rounded-lg bg-slate-100 border border-slate-200 text-xs font-semibold focus:outline-none disabled:opacity-40"
                                   >
-                                    <option value="restock">➕ Restock into Stock</option>
-                                    <option value="wastage">⚠️ Mark Damaged / Wastage</option>
-                                    <option value="non_returnable">🚫 Discard / No Restock</option>
+                                    <option value="restock">Restock into Inventory</option>
+                                    <option value="wastage">Mark Damaged / Wastage</option>
+                                    <option value="non_returnable">Discard / No Restock</option>
                                   </select>
                                 </td>
                               </tr>

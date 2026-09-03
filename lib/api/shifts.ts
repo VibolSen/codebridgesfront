@@ -1,30 +1,54 @@
 import { apiFetch } from './client';
 
 export async function getActiveShiftApi() {
-  return await apiFetch('/shifts/active');
+  try {
+    return await apiFetch('/shifts/active');
+  } catch (err: any) {
+    console.warn('[Shifts API] Active shift query skipped or unauthenticated:', err?.message);
+    return { success: false, data: null };
+  }
 }
 
-export async function openShiftApi(data: { opening_float: number; outlet_id?: number }) {
+export async function openShiftApi(data: { opening_float: number; outlet_id?: number | string; note?: string }) {
   return await apiFetch('/shifts/open', {
     method: 'POST',
     body: JSON.stringify(data),
   });
 }
 
-export async function recordCashMovementApi(shiftId: number, data: { type: 'in' | 'out'; amount: number; reason: string }) {
-  return await apiFetch(`/shifts/${shiftId}/cash-movement`, {
+export async function recordCashMovementApi(
+  shiftIdOrData: any,
+  maybeData?: { type: 'in' | 'out'; amount: number; reason: string }
+) {
+  if (typeof shiftIdOrData === 'object' && !maybeData) {
+    return await apiFetch('/shifts/cash-movement', {
+      method: 'POST',
+      body: JSON.stringify(shiftIdOrData),
+    });
+  }
+  return await apiFetch(`/shifts/${shiftIdOrData}/cash-movement`, {
     method: 'POST',
-    body: JSON.stringify(data),
+    body: JSON.stringify(maybeData),
   });
 }
 
-export async function closeShiftApi(shiftId: number | string, data: { counted_cash: number; closing_note?: string; supervisor_pin?: string }) {
-  return await apiFetch(`/shifts/${shiftId}/close`, {
+export async function closeShiftApi(
+  shiftIdOrData: any,
+  maybeData?: { counted_cash: number; closing_note?: string; note?: string; supervisor_pin?: string }
+) {
+  if (typeof shiftIdOrData === 'object' && !maybeData) {
+    return await apiFetch('/shifts/close', {
+      method: 'POST',
+      body: JSON.stringify(shiftIdOrData),
+    });
+  }
+  return await apiFetch(`/shifts/${shiftIdOrData}/close`, {
     method: 'POST',
-    body: JSON.stringify(data),
+    body: JSON.stringify(maybeData),
   });
 }
 
-export async function getShiftReportApi() {
-  return await apiFetch('/reports/shifts');
+export async function getShiftReportApi(period?: string) {
+  const query = period ? `?period=${encodeURIComponent(period)}` : '';
+  return await apiFetch(`/reports/shifts${query}`);
 }

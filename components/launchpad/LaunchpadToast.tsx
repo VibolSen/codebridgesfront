@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, X } from 'lucide-react';
+import { CheckCircle2, X } from 'lucide-react';
 
 interface LaunchpadToastProps {
   message: string | null;
@@ -19,7 +19,7 @@ export function LaunchpadToast({ message, onClose }: LaunchpadToastProps) {
           exit={{ opacity: 0, y: -20 }}
           className="fixed top-5 right-5 z-50 bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-slate-700/80 flex items-center gap-3 text-xs font-bold"
         >
-          <Sparkles className="w-4 h-4 text-orange-400 shrink-0 animate-pulse" />
+          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
           <span>{message}</span>
           <button
             onClick={onClose}

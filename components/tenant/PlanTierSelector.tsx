@@ -3,7 +3,9 @@
 import React from 'react';
 import { motion, Variants } from 'framer-motion';
 import {
-  Sparkles,
+  Store,
+  Monitor,
+  Users,
   Check,
   ChevronRight,
   ShieldCheck,
@@ -73,7 +75,7 @@ export function PlanTierSelector({
         className="text-center space-y-4"
       >
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-orange-50 border border-orange-200/80 text-orange-700 text-[10px] font-bold tracking-wider uppercase shadow-xs">
-          <Sparkles className="w-3.5 h-3.5" />
+          <ShieldCheck className="w-3.5 h-3.5 text-orange-600" />
           SaaS Cloud POS — Built for Every Business Size
         </div>
         <h1 className="text-3xl md:text-5xl font-black text-slate-900 leading-tight tracking-tight">
@@ -100,28 +102,31 @@ export function PlanTierSelector({
           return (
             <motion.div
               key={plan.id}
-              custom={i}
               variants={cardVariants}
+              custom={i}
               whileHover={{ y: -4 }}
-              onClick={() => onSelectPlan(plan)}
-              className={`relative rounded-2xl border cursor-pointer transition-all p-6 space-y-5 ${
+              onClick={() => onSelectPlan?.(plan)}
+              className={`relative bg-white rounded-3xl p-6 border-2 transition-all cursor-pointer flex flex-col justify-between space-y-6 ${
                 isSelected
-                  ? 'border-2 border-orange-500 bg-white shadow-xl shadow-orange-500/10'
-                  : 'border border-slate-200/80 bg-white shadow-sm hover:shadow-xl hover:border-orange-300'
+                  ? 'border-orange-500 shadow-xl shadow-orange-500/10'
+                  : 'border-slate-200/90 hover:border-slate-300 shadow-sm'
               }`}
             >
               {plan.badge && (
-                <div
-                  className={`absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[10px] font-bold text-white uppercase tracking-wider bg-gradient-to-r ${plan.gradient} shadow-md`}
-                >
+                <span className="absolute -top-3 right-6 px-3 py-1 bg-gradient-to-r from-orange-500 to-amber-500 text-white text-[10px] font-black uppercase tracking-wider rounded-full shadow-md shadow-orange-500/20">
                   {plan.badge}
-                </div>
+                </span>
               )}
 
-              <div
-                className={`w-10 h-10 rounded-xl bg-gradient-to-br ${plan.gradient} flex items-center justify-center text-white shadow-md shadow-orange-500/15`}
-              >
-                {plan.icon}
+              <div className="flex items-center justify-between">
+                <div className="w-12 h-12 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center">
+                  {plan.icon}
+                </div>
+                {isSelected && (
+                  <div className="w-6 h-6 rounded-full bg-orange-500 text-white flex items-center justify-center">
+                    <Check className="w-4 h-4" />
+                  </div>
+                )}
               </div>
 
               <div>
@@ -138,10 +143,19 @@ export function PlanTierSelector({
                 <span className="text-xs font-medium text-slate-500 pb-0.5">{plan.billing}</span>
               </div>
 
-              <div className="flex gap-3 text-[10px] font-bold tracking-wider uppercase text-slate-600 border-t border-slate-100 pt-3.5 bg-slate-50/70 -mx-6 -mb-1 px-6 py-2.5">
-                <span>🏪 {plan.maxOutlets} Outlets</span>
-                <span>🖥 {plan.maxRegisters} Registers</span>
-                <span>👥 {plan.maxUsers} Users</span>
+              <div className="flex items-center gap-3 text-[10px] font-bold tracking-wider uppercase text-slate-600 border-t border-slate-100 pt-3.5 bg-slate-50/70 -mx-6 -mb-1 px-6 py-2.5">
+                <span className="inline-flex items-center gap-1">
+                  <Store className="w-3 h-3 text-slate-400" />
+                  <span>{plan.maxOutlets} Outlets</span>
+                </span>
+                <span className="inline-flex items-center gap-1">
+                  <Monitor className="w-3 h-3 text-slate-400" />
+                  <span>{plan.maxRegisters} Registers</span>
+                </span>
+                <span className="inline-flex items-center gap-1">
+                  <Users className="w-3 h-3 text-slate-400" />
+                  <span>{plan.maxUsers} Users</span>
+                </span>
               </div>
 
               <ul className="space-y-2">

@@ -5,4 +5,5 @@ export type { TenantFormData } from './TenantRegistrationForm';
 export { TenantSuccessCard } from './TenantSuccessCard';
 export { CreateOrgModal } from './CreateOrgModal';
 export type { CreateOrgModalProps } from './CreateOrgModal';
-
+export { TenantDetailDrawer } from './TenantDetailDrawer';
+export { ImpersonateModal } from './ImpersonateModal';

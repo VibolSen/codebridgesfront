@@ -3,9 +3,10 @@
 import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { getAuthUser, logoutApi } from '@/lib/api';
+import { getAuthUser, getAuthToken, logoutApi } from '@/lib/api';
 import { SuperAdminSidebar } from '@/components/sidebar/SuperAdminSidebar';
 import { SuperAdminHeader } from '@/components/header/SuperAdminHeader';
+import { ImpersonationBanner } from '@/components/header/ImpersonationBanner';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -15,8 +16,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   useEffect(() => {
     const currentUser = getAuthUser();
-    if (!currentUser) {
-      router.push('/login');
+    const token = getAuthToken();
+    if (!currentUser || !token) {
+      router.push(`/login?redirect=${encodeURIComponent(pathname)}`);
       return;
     }
 
@@ -49,25 +51,29 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       return;
     }
 
-    // Tier 2 & 3: Administrators & Outlet Managers
-    const adminRoles = ['administrator', 'tenant_admin', 'admin', 'outlet_manager'];
+    // Tier 2 & 3: Administrators, Tenant Owners, & Outlet Managers
+    const adminRoles = ['super_admin', 'administrator', 'tenant_admin', 'admin', 'outlet_manager', 'user', 'owner'];
     
     // Tier 4: Dynamic Roles with specific sub-portal permissions
     const operationalRoles = ['inventory_clerk', 'accountant', 'supervisor'];
 
-    if (adminRoles.includes(role)) {
+    if (adminRoles.includes(role) || hasOrg) {
       setUser(currentUser);
       return;
     }
 
     if (operationalRoles.includes(role)) {
-      // Dynamic operational roles are allowed in their specific sub-routes
       setUser(currentUser);
       return;
     }
 
-    // Dynamic Roles without administrative privileges (e.g. Cashier, Customer) are redirected to POS terminal
-    router.push('/pos');
+    // Only non-staff frontline roles like cashiers without org admin permissions get routed to POS
+    if (role === 'cashier') {
+      router.push('/pos/terminal');
+      return;
+    }
+
+    setUser(currentUser);
   }, [router, pathname]);
 
   const handleLogout = async () => {
@@ -79,7 +85,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   return (
     <div className="h-screen w-screen overflow-hidden bg-slate-100 text-slate-800 flex flex-col font-sans">
-      
+      {/* Impersonation Security Alert Banner */}
+      <ImpersonationBanner />
+
       {/* Top Header Bar */}
       <SuperAdminHeader
         sidebarOpen={sidebarOpen}

@@ -25,8 +25,10 @@ interface BakongKhqrModalProps {
   currency?: string;
   saleId?: string;
   billNumber?: string;
+  salePayload?: any;
   onClose: () => void;
-  onPaymentApproved: (paymentDetails: any) => void;
+  onPaymentApproved?: (paymentDetails: any) => void;
+  onSuccess?: (paymentDetails: any) => void;
 }
 
 export function BakongKhqrModal({
@@ -35,15 +37,22 @@ export function BakongKhqrModal({
   currency = 'USD',
   saleId,
   billNumber,
+  salePayload,
   onClose,
   onPaymentApproved,
+  onSuccess,
 }: BakongKhqrModalProps) {
   const [loading, setLoading] = useState(true);
   const [khqrData, setKhqrData] = useState<any>(null);
   const [polling, setPolling] = useState(false);
+  const [isSimulating, setIsSimulating] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
-  const [isSimulating, setIsSimulating] = useState(false);
+
+  const notifyApproved = (paymentResult: any) => {
+    onPaymentApproved?.(paymentResult);
+    onSuccess?.(paymentResult);
+  };
 
   useEffect(() => {
     if (isOpen && amount > 0) {
@@ -90,7 +99,7 @@ export function BakongKhqrModal({
       const res = await checkBakongPaymentStatusApi(attemptId);
 
       if (res.paid) {
-        onPaymentApproved(res);
+        notifyApproved(res);
       }
     } catch (err) {
       console.error('Bakong status check error:', err);
@@ -105,7 +114,7 @@ export function BakongKhqrModal({
       setIsSimulating(true);
       const res = await simulateBakongPaymentApi(khqrData.attempt_id);
       if (res.paid) {
-        onPaymentApproved(res);
+        notifyApproved(res);
       }
     } catch (err: any) {
       alert(err.message || 'Simulation failed');

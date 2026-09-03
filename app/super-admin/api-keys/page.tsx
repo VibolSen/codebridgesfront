@@ -118,13 +118,14 @@ export default function ApiKeysManagementPage() {
   };
 
   const sampleKey = newKeyData?.key || 'cb_live_e9a8f7c6b5a4d3e2f1029384756abcdef1234567';
+  const baseApiUrl = typeof window !== 'undefined' ? (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api/v1') : 'http://localhost:8080/api/v1';
 
   const snippets = {
-    curl: `curl -X GET "https://pos-services-ph15.onrender.com/api/v1/products" \\
+    curl: `curl -X GET "${baseApiUrl}/products" \\
   -H "X-API-Key: ${sampleKey}" \\
   -H "Accept: application/json"`,
     js: `// Fetch products using CodeBridges Merchant API Key
-const response = await fetch('https://pos-services-ph15.onrender.com/api/v1/products', {
+const response = await fetch('${baseApiUrl}/products', {
   headers: {
     'X-API-Key': '${sampleKey}',
     'Accept': 'application/json'
@@ -134,7 +135,7 @@ const products = await response.json();
 console.log(products);`,
     python: `import requests
 
-url = "https://pos-services-ph15.onrender.com/api/v1/products"
+url = "${baseApiUrl}/products"
 headers = {
     "X-API-Key": "${sampleKey}",
     "Accept": "application/json"
@@ -145,7 +146,7 @@ print(response.json())`,
     php: `<?php
 $curl = curl_init();
 curl_setopt_array($curl, [
-    CURLOPT_URL => "https://pos-services-ph15.onrender.com/api/v1/products",
+    CURLOPT_URL => "${baseApiUrl}/products",
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_HTTPHEADER => [
         "X-API-Key: ${sampleKey}",

@@ -1,6 +1,15 @@
 import { apiFetch } from './client';
 
-// POS Checkout
+// POS Sales & Checkout
+export async function getSalesListApi(params?: { outlet_id?: string | number; search?: string; status?: string }) {
+  const query = new URLSearchParams();
+  if (params?.outlet_id) query.append('outlet_id', String(params.outlet_id));
+  if (params?.search) query.append('search', params.search);
+  if (params?.status) query.append('status', params.status);
+  const qStr = query.toString();
+  return await apiFetch(`/sales${qStr ? `?${qStr}` : ''}`);
+}
+
 export async function createSaleApi(saleData: any) {
   return await apiFetch('/sales', {
     method: 'POST',

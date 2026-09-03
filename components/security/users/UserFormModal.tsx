@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { X, KeyRound } from 'lucide-react';
+import { OutletSelector } from '@/components/inventory-suite';
 
 export interface UserFormData {
   name: string;
@@ -130,14 +131,13 @@ export function UserFormModal({
           {/* Assigned Outlet */}
           <div>
             <label className="block font-bold text-slate-700 mb-1">Assigned Outlet</label>
-            <select
+            <OutletSelector
               value={formData.outlet_id}
-              onChange={(e) => setFormData({ ...formData, outlet_id: e.target.value })}
-              className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 cursor-pointer"
-            >
-              <option value="1">Phnom Penh Main Outlet</option>
-              <option value="2">Siem Reap Branch</option>
-            </select>
+              onChange={(id) => setFormData({ ...formData, outlet_id: id })}
+              showLabel={false}
+              autoSelectFirst={true}
+              className="w-full [&>div]:w-full [&>div>select]:w-full"
+            />
           </div>
 
           {/* Password */}

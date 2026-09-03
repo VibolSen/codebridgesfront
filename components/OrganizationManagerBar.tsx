@@ -81,35 +81,12 @@ export function OrganizationManagerBar() {
       if (userTenantName || isPlatformOwner) {
         orgList.push({
           id: 'primary-company',
-          name: userTenantName || 'CodeBridges Enterprise',
+          name: userTenantName || 'CodeBridges Platform',
           type: 'Company',
         });
       }
 
-      // 2. Fetch real outlets from backend API
-      try {
-        const outletsRes = await getOutletsApi();
-        const outletsData = Array.isArray(outletsRes)
-          ? outletsRes
-          : outletsRes?.data || [];
-
-        if (outletsData.length > 0) {
-          outletsData.forEach((outlet: any) => {
-            if (!orgList.some((existing) => existing.name.toLowerCase() === (outlet.name || '').toLowerCase())) {
-              orgList.push({
-                id: `outlet-${outlet.id}`,
-                name: outlet.name || `Outlet #${outlet.id}`,
-                type: 'Outlet',
-                code: outlet.code,
-              });
-            }
-          });
-        }
-      } catch (err) {
-        console.warn('[OrganizationManagerBar] Could not load outlets API:', err);
-      }
-
-      // 4. If super_admin, fetch real tenants from backend API
+      // 2. If super_admin, fetch registered tenant organizations from backend API
       if (currentUser.role === 'super_admin') {
         try {
           const tenantsRes = await getSuperAdminTenantsApi();
@@ -118,7 +95,12 @@ export function OrganizationManagerBar() {
             : tenantsRes?.data || [];
 
           tenantsData.forEach((t: any) => {
-            if (!orgList.some((existing) => existing.name.toLowerCase() === (t.name || '').toLowerCase())) {
+            if (
+              !orgList.some(
+                (existing) =>
+                  existing.name.toLowerCase() === (t.name || '').toLowerCase()
+              )
+            ) {
               orgList.push({
                 id: `tenant-${t.id}`,
                 name: t.name,
@@ -135,12 +117,21 @@ export function OrganizationManagerBar() {
 
       // Restore active organization from localStorage if set
       const savedActive = localStorage.getItem('active_org');
-      if (savedActive && orgList.some((o) => o.name === savedActive)) {
+      if (
+        savedActive &&
+        savedActive !== 'No Organization Yet! Please Create' &&
+        orgList.some((o) => o.name === savedActive)
+      ) {
         setActiveOrg(savedActive);
       } else if (orgList.length > 0) {
         setActiveOrg(orgList[0].name);
+        localStorage.setItem('active_org', orgList[0].name);
       } else {
-        setActiveOrg('No Organization Yet! Please Create');
+        const fallback = isPlatformOwner
+          ? 'CodeBridges Platform'
+          : 'No Organization Yet! Please Create';
+        setActiveOrg(fallback);
+        localStorage.setItem('active_org', fallback);
       }
 
       setLoading(false);
@@ -184,52 +175,14 @@ export function OrganizationManagerBar() {
       return [{ id: newOrg.id, name: newOrg.name, type: newOrg.type }, ...prev];
     });
     setActiveOrg(newOrg.name);
-  };
-
-  const getManageButtonLabel = () => {
-
-    if (!user) return 'Sign In to Workspace';
-    const role = user.role || 'cashier';
-    if (['super_admin', 'administrator', 'tenant_admin', 'admin', 'outlet_manager'].includes(role)) {
-      return 'Manage Organization';
-    }
-    if (role === 'inventory_clerk') return 'Inventory Hub';
-    if (role === 'accountant') return 'Finance Hub';
-    return 'POS Terminal';
-  };
-
-  const handleManageClick = () => {
-    if (!user) {
-      router.push('/login');
-      return;
-    }
-    const role = user.role || 'cashier';
-    if (['super_admin', 'administrator', 'tenant_admin', 'admin', 'outlet_manager'].includes(role)) {
-      router.push('/super-admin/dashboard');
-    } else if (role === 'inventory_clerk') {
-      router.push('/super-admin/inventory');
-    } else if (role === 'accountant') {
-      router.push('/super-admin/reconciliation');
-    } else {
-      router.push('/pos');
-    }
+    localStorage.setItem('active_org', newOrg.name);
   };
 
   return (
     <div
-      className="relative inline-flex items-center gap-2 bg-white/90 backdrop-blur-md p-1.5 rounded-2xl border border-slate-200/90 shadow-md text-slate-800"
+      className="relative inline-flex items-center gap-2 z-50"
       ref={dropdownRef}
     >
-      {/* Manage Organization Button */}
-      <motion.button
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.97 }}
-        onClick={handleManageClick}
-        className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-extrabold text-xs px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow-md shadow-orange-500/20 transition-all cursor-pointer"
-      >
-        <Settings className="w-4 h-4 text-white" />
-        <span>{getManageButtonLabel()}</span>
-      </motion.button>
 
       {/* All Organizations Dropdown Button */}
       <div className="relative">
@@ -240,30 +193,26 @@ export function OrganizationManagerBar() {
             setShowOrgDropdown(!showOrgDropdown);
             setShowCreateDropdown(false);
           }}
-          className="bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-bold text-xs px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow-2xs transition-all cursor-pointer"
+          className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 text-xs font-black text-slate-800 transition-all cursor-pointer shadow-2xs"
         >
-          {loading ? (
-            <Loader2 className="w-4 h-4 text-orange-500 animate-spin" />
-          ) : (
-            <Building2 className="w-4 h-4 text-slate-600" />
-          )}
-          <span className="max-w-[150px] truncate">{activeOrg}</span>
-          <ChevronDown className="w-3.5 h-3.5 text-slate-400 ml-0.5 shrink-0" />
+          <Building2 className="w-3.5 h-3.5 text-[#5B4DFB]" />
+          <span className="truncate max-w-[130px] sm:max-w-[180px]">{activeOrg}</span>
+          <ChevronDown className="w-3 h-3 text-slate-400" />
         </motion.button>
 
-        {/* All Organizations List Dropdown */}
+        {/* Dropdown Menu */}
         <AnimatePresence>
           {showOrgDropdown && (
             <motion.div
               initial={{ opacity: 0, y: 8, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 8, scale: 0.95 }}
-              className="absolute right-0 mt-2 w-72 rounded-2xl bg-white border border-slate-200/90 shadow-2xl p-2.5 z-50 text-slate-800 text-xs space-y-1"
+              className="absolute left-0 sm:right-0 sm:left-auto top-full mt-2 w-80 rounded-2xl bg-white border border-slate-200 shadow-2xl p-3 z-50 text-slate-800 text-xs space-y-1.5"
             >
               <div className="px-2 py-1 text-[10px] font-bold tracking-wider text-slate-400 uppercase border-b border-slate-100 mb-1 flex items-center justify-between">
-                <span>Your Workspaces & Outlets</span>
+                <span>Your Workspaces &amp; Outlets</span>
                 {user && (
-                  <span className="text-[9px] bg-orange-100 text-orange-700 px-1.5 py-0.5 rounded font-extrabold">
+                  <span className="text-[9px] bg-purple-50 text-[#5B4DFB] px-1.5 py-0.5 rounded font-extrabold">
                     API SYNCED
                   </span>
                 )}

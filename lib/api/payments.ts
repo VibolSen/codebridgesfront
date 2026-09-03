@@ -44,12 +44,51 @@ export async function getExpensesApi() {
   return await apiFetch('/expenses');
 }
 
+export async function createExpenseApi(payload: {
+  category: string;
+  description: string;
+  amount: number;
+  date_paid: string;
+  expense_ref?: string;
+}) {
+  return await apiFetch('/expenses', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
+}
+
 export async function getIncomesApi() {
   return await apiFetch('/income');
 }
 
+export async function createIncomeApi(payload: {
+  source: string;
+  description: string;
+  amount: number;
+  date_received: string;
+  income_ref?: string;
+}) {
+  return await apiFetch('/income', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
+}
+
 export async function getBankAccountsApi() {
   return await apiFetch('/bank-accounts');
+}
+
+export async function createBankAccountApi(payload: {
+  bank_name: string;
+  account_name: string;
+  account_number: string;
+  currency?: string;
+  status?: string;
+}) {
+  return await apiFetch('/bank-accounts', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
 }
 
 // Gift Cards

@@ -13,7 +13,7 @@ import {
   DollarSign,
   ShoppingBag,
   ShieldCheck,
-  Sparkles,
+  Briefcase,
   ChevronRight,
   ExternalLink,
 } from 'lucide-react';
@@ -33,72 +33,118 @@ interface ModuleItem {
 export const MODULES_LIST: ModuleItem[] = [
   {
     id: 'pos-management',
-    name: 'POS Management',
-    category: 'Core POS Suite',
-    description: 'Unified Cashier POS, KDS, Customer Display, Inventory Engine & Order Fulfillment',
-    href: '/super-admin/dashboard',
+    name: 'Point of Sale (POS)',
+    category: 'Sales & Terminal',
+    description: 'Fast-touch register, dual-currency split tender, shift till auditing, and KDS routing.',
+    href: '/pos',
     icon: Monitor,
-    color: 'text-orange-500',
+    color: 'text-orange-600',
     bgLight: 'bg-orange-500/10 hover:bg-orange-500/20 border-orange-500/20',
-    badge: 'Core Suite',
+    badge: 'Active',
+  },
+  {
+    id: 'inventory',
+    name: 'Inventory & Warehouse',
+    category: 'Supply Chain',
+    description: 'Multi-warehouse stock levels, inter-warehouse transfers, PO 3-way matching, and FIFO valuation.',
+    href: '/inventory',
+    icon: Boxes,
+    color: 'text-amber-600',
+    bgLight: 'bg-amber-500/10 hover:bg-amber-500/20 border-amber-500/20',
+  },
+  {
+    id: 'crm',
+    name: 'CRM & Sales Pipeline',
+    category: 'Customer Growth',
+    description: 'Deals pipeline Kanban, scored inbound leads, customer activity timeline, and sales forecasting.',
+    href: '/crm',
+    icon: Briefcase,
+    color: 'text-purple-600',
+    bgLight: 'bg-purple-500/10 hover:bg-purple-500/20 border-purple-500/20',
   },
   {
     id: 'hr',
     name: 'HR & Workforce Hub',
-    category: 'Management',
-    description: 'Employee profiles, department structure, roles & attendance',
-    href: '/super-admin/hrm/employees',
+    category: 'Human Capital',
+    description: 'Staff employee roster, biometric timesheets, shift PIN security, and payroll studio.',
+    href: '/hrm',
     icon: Users,
-    color: 'text-blue-500',
+    color: 'text-blue-600',
     bgLight: 'bg-blue-500/10 hover:bg-blue-500/20 border-blue-500/20',
   },
   {
     id: 'finance',
-    name: 'Finance & Reconciliation',
-    category: 'Accounts',
-    description: 'KHQR payments, ABA settlement reconciliation & expenses',
-    href: '/super-admin/reconciliation',
+    name: 'Accounting & Finance Ledgers',
+    category: 'Financial Operations',
+    description: 'Double-entry Chart of Accounts, Accounts Receivable, Accounts Payable, and cash flow.',
+    href: '/accounting',
     icon: DollarSign,
-    color: 'text-purple-500',
-    bgLight: 'bg-purple-500/10 hover:bg-purple-500/20 border-purple-500/20',
-  },
-  {
-    id: 'shop',
-    name: 'E-Commerce Storefront',
-    category: 'Digital Commerce',
-    description: 'Customer online ordering, digital catalog & pickup management',
-    href: '/shop',
-    icon: ShoppingBag,
-    color: 'text-pink-500',
-    bgLight: 'bg-pink-500/10 hover:bg-pink-500/20 border-pink-500/20',
+    color: 'text-emerald-600',
+    bgLight: 'bg-emerald-500/10 hover:bg-emerald-500/20 border-emerald-500/20',
   },
   {
     id: 'admin',
-    name: 'Super Admin Platform Hub',
-    category: 'Central Control Hub',
-    description: 'Central control hub to manage all modules, products, inventory, HR, finance & audit logs',
+    name: 'Platform Super Admin Hub',
+    category: 'Platform Operations',
+    description: 'Internal platform console to oversee multi-tenant workspaces, licenses, and system health.',
     href: '/super-admin/dashboard',
     icon: ShieldCheck,
-    color: 'text-indigo-500',
+    color: 'text-indigo-600',
     bgLight: 'bg-indigo-500/10 hover:bg-indigo-500/20 border-indigo-500/20',
-    badge: 'Central',
+    badge: 'Admin',
   },
 ];
 
+import { getAuthUser } from '@/lib/api';
+import { getEnabledModulesForOrg } from '@/lib/modules';
+
 export function AppLauncher() {
   const [isOpen, setIsOpen] = useState(false);
+  const [enabledModules, setEnabledModules] = useState<string[]>([]);
   const pathname = usePathname();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const user = getAuthUser();
+    const activeOrg = localStorage.getItem('active_org') || user?.tenant_name || user?.company || '';
+    if (user?.role === 'super_admin') {
+      setEnabledModules(['pos-management', 'inventory', 'crm', 'hr', 'finance', 'admin']);
+    } else {
+      const cached = getEnabledModulesForOrg(activeOrg);
+      setEnabledModules(cached.length > 0 ? cached : ['pos-management', 'pos']);
+    }
+
+    const handleOrgChange = (e: any) => {
+      const org = e.detail?.orgName || localStorage.getItem('active_org') || '';
+      if (user?.role === 'super_admin') {
+        setEnabledModules(['pos-management', 'inventory', 'crm', 'hr', 'finance', 'admin']);
+      } else {
+        const updated = getEnabledModulesForOrg(org);
+        setEnabledModules(updated.length > 0 ? updated : ['pos-management', 'pos']);
+      }
+    };
+
+    window.addEventListener('cb_org_changed', handleOrgChange);
+    window.addEventListener('cb_modules_changed', handleOrgChange);
+
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    return () => {
+      window.removeEventListener('cb_org_changed', handleOrgChange);
+      window.removeEventListener('cb_modules_changed', handleOrgChange);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
+
+  const visibleList = MODULES_LIST.filter((mod) => {
+    const user = getAuthUser();
+    if (mod.id === 'admin') return user?.role === 'super_admin';
+    return true;
+  });
 
   return (
     <div className="relative inline-block text-left" ref={dropdownRef}>
@@ -124,9 +170,9 @@ export function AppLauncher() {
             {/* Popover Header */}
             <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-3 px-1">
               <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-orange-500" />
+                <Grid className="w-4 h-4 text-orange-500" />
                 <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-900">
-                  Enterprise Modules Launcher
+                  CodeBridges POS Apps
                 </h4>
               </div>
               <Link
@@ -141,7 +187,7 @@ export function AppLauncher() {
 
             {/* Grid of Modules */}
             <div className="grid grid-cols-2 gap-2 max-h-[380px] overflow-y-auto pr-1">
-              {MODULES_LIST.map((mod) => {
+              {visibleList.map((mod) => {
                 const Icon = mod.icon;
                 const isActive = pathname === mod.href || (mod.href !== '/' && pathname.startsWith(mod.href));
 

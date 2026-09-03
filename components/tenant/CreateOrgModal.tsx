@@ -103,7 +103,7 @@ export function CreateOrgModal({
           ...currentUserObj,
           tenant_name: createdOrgData.name,
           company_name: createdOrgData.name,
-          role: currentUserObj.role || 'administrator',
+          role: currentUserObj.role === 'super_admin' ? 'super_admin' : 'administrator',
         };
         localStorage.setItem('pos_user', JSON.stringify(updatedUser));
         localStorage.setItem('active_org', createdOrgData.name);

@@ -75,6 +75,9 @@ export default function RegisterUserPage() {
       });
 
       if (res.status === 'success' || res.token) {
+        if (typeof window !== 'undefined') {
+          localStorage.removeItem('active_org');
+        }
         setSuccess(true);
         setTimeout(() => {
           router.push('/');

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { getExpiredProductsApi, adjustStockApi } from '@/lib/api';
+import { OutletSelector } from '@/components/inventory-suite';
 import { motion, Variants } from 'framer-motion';
 import {
   Clock,
@@ -20,7 +21,7 @@ import {
 export default function AdminExpiredProductsPage() {
   const [items, setItems] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [outletId, setOutletId] = useState(1);
+  const [outletId, setOutletId] = useState<string>('');
   const [statusFilter, setStatusFilter] = useState('');
   const [search, setSearch] = useState('');
 
@@ -180,18 +181,11 @@ export default function AdminExpiredProductsPage() {
         </form>
 
         <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-500">
-            <Building2 className="w-4 h-4 text-slate-400" />
-            Outlet:
-          </div>
-          <select
+          <OutletSelector
             value={outletId}
-            onChange={(e) => setOutletId(parseInt(e.target.value, 10))}
-            className="px-3 py-2 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-700 focus:outline-none"
-          >
-            <option value={1}>Phnom Penh Main Outlet</option>
-            <option value={2}>Siem Reap Branch</option>
-          </select>
+            onChange={setOutletId}
+            autoSelectFirst={true}
+          />
 
           <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 ml-2">
             <Filter className="w-4 h-4 text-slate-400" />

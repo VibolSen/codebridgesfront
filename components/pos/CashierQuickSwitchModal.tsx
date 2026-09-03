@@ -8,8 +8,9 @@ import { quickSwitchApi } from '@/lib/api/auth';
 interface CashierQuickSwitchModalProps {
   isOpen: boolean;
   onClose: () => void;
-  currentUser: any;
-  onSwitchSuccess: (newUser: any) => void;
+  currentUser?: any;
+  onSwitchSuccess?: (newUser: any) => void;
+  onSuccess?: (newUser: any) => void;
 }
 
 export function CashierQuickSwitchModal({
@@ -17,6 +18,7 @@ export function CashierQuickSwitchModal({
   onClose,
   currentUser,
   onSwitchSuccess,
+  onSuccess,
 }: CashierQuickSwitchModalProps) {
   const [pin, setPin] = useState('');
   const [loading, setLoading] = useState(false);
@@ -55,7 +57,8 @@ export function CashierQuickSwitchModal({
       if (res.status === 'success' && res.user) {
         setSuccessUser(res.user);
         setTimeout(() => {
-          onSwitchSuccess(res.user);
+          onSwitchSuccess?.(res.user);
+          onSuccess?.(res.user);
           setSuccessUser(null);
           setPin('');
           onClose();

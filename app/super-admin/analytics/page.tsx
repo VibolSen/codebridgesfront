@@ -1,0 +1,147 @@
+'use client';
+
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import {
+  BarChart3,
+  TrendingUp,
+  Users,
+  Activity,
+  DollarSign,
+  ShoppingCart,
+  Layers,
+  Sparkles,
+  ArrowUpRight,
+  Globe2,
+  Calendar,
+} from 'lucide-react';
+
+export default function SuperAdminAnalyticsPage() {
+  const [timeRange, setTimeRange] = useState<'7d' | '30d' | '90d'>('30d');
+
+  return (
+    <div className="space-y-6 max-w-7xl mx-auto font-sans pb-12">
+      {/* Header */}
+      <div className="bg-white p-6 rounded-3xl border border-slate-200/90 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex items-center gap-3.5">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-orange-500 via-amber-500 to-yellow-400 p-0.5 shadow-md shadow-orange-500/15 flex items-center justify-center">
+            <div className="w-full h-full bg-white rounded-[14px] flex items-center justify-center">
+              <BarChart3 className="w-6 h-6 text-orange-500" />
+            </div>
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <h1 className="text-xl font-black text-slate-900 tracking-tight">
+                Cross-Tenant Analytics &amp; Platform Telemetry
+              </h1>
+              <span className="px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 text-[10px] font-extrabold border border-blue-200 uppercase">
+                Live Insights
+              </span>
+            </div>
+            <p className="text-xs text-slate-500 font-medium mt-0.5">
+              Real-time platform adoption metrics, gross merchant volume (GMV), active sessions, and module engagement heatmaps.
+            </p>
+          </div>
+        </div>
+
+        {/* Time Selector */}
+        <div className="flex bg-slate-100 p-1 rounded-2xl border border-slate-200 text-xs font-black">
+          {(['7d', '30d', '90d'] as const).map((r) => (
+            <button
+              key={r}
+              type="button"
+              onClick={() => setTimeRange(r)}
+              className={`px-4 py-2 rounded-xl transition-all cursor-pointer uppercase ${
+                timeRange === r
+                  ? 'bg-white text-orange-600 shadow-xs'
+                  : 'text-slate-500 hover:text-slate-800'
+              }`}
+            >
+              Last {r}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* KPI Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="bg-white p-5 rounded-3xl border border-slate-200/90 shadow-sm space-y-2">
+          <div className="flex items-center justify-between text-slate-500">
+            <span className="text-[11px] font-black uppercase tracking-wider">Gross Platform GMV</span>
+            <DollarSign className="w-4 h-4 text-emerald-600" />
+          </div>
+          <p className="text-2xl font-black text-slate-900 font-mono">$184,920.00</p>
+          <div className="flex items-center gap-1 text-[11px] font-bold text-emerald-600">
+            <ArrowUpRight className="w-3.5 h-3.5" />
+            <span>+18.4% vs previous month</span>
+          </div>
+        </div>
+
+        <div className="bg-white p-5 rounded-3xl border border-slate-200/90 shadow-sm space-y-2">
+          <div className="flex items-center justify-between text-slate-500">
+            <span className="text-[11px] font-black uppercase tracking-wider">Active Daily Merchants</span>
+            <Users className="w-4 h-4 text-blue-600" />
+          </div>
+          <p className="text-2xl font-black text-slate-900 font-mono">60 Tenants</p>
+          <div className="flex items-center gap-1 text-[11px] font-bold text-blue-600">
+            <ArrowUpRight className="w-3.5 h-3.5" />
+            <span>98.2% 30-day retention</span>
+          </div>
+        </div>
+
+        <div className="bg-white p-5 rounded-3xl border border-slate-200/90 shadow-sm space-y-2">
+          <div className="flex items-center justify-between text-slate-500">
+            <span className="text-[11px] font-black uppercase tracking-wider">POS Ring Orders</span>
+            <ShoppingCart className="w-4 h-4 text-orange-500" />
+          </div>
+          <p className="text-2xl font-black text-slate-900 font-mono">14,892</p>
+          <div className="flex items-center gap-1 text-[11px] font-bold text-orange-600">
+            <ArrowUpRight className="w-3.5 h-3.5" />
+            <span>+24.1% transaction velocity</span>
+          </div>
+        </div>
+
+        <div className="bg-white p-5 rounded-3xl border border-slate-200/90 shadow-sm space-y-2">
+          <div className="flex items-center justify-between text-slate-500">
+            <span className="text-[11px] font-black uppercase tracking-wider">Gateway API Requests</span>
+            <Activity className="w-4 h-4 text-purple-600" />
+          </div>
+          <p className="text-2xl font-black text-slate-900 font-mono">1.24M / mo</p>
+          <div className="flex items-center gap-1 text-[11px] font-bold text-emerald-600">
+            <span>Avg 18ms latency</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Module Adoption Heatmap */}
+      <div className="bg-white p-6 rounded-3xl border border-slate-200/90 shadow-sm space-y-4">
+        <h3 className="font-black text-sm text-slate-900 flex items-center gap-2">
+          <Layers className="w-4 h-4 text-orange-500" />
+          <span>Ecosystem Module Adoption Breakdown</span>
+        </h3>
+        <div className="space-y-3">
+          {[
+            { name: 'POS Register & Shift Terminal', adoption: 100, color: 'bg-orange-500', count: '60 / 60 Orgs' },
+            { name: 'Multi-Warehouse & Stock Ledger', adoption: 88, color: 'bg-amber-500', count: '53 / 60 Orgs' },
+            { name: 'Staff Roster & Payroll HRM', adoption: 75, color: 'bg-blue-500', count: '45 / 60 Orgs' },
+            { name: 'Customer Loyalty & CRM', adoption: 68, color: 'bg-purple-500', count: '41 / 60 Orgs' },
+            { name: 'Double-Entry Accounting & Ledger', adoption: 55, color: 'bg-emerald-500', count: '33 / 60 Orgs' },
+          ].map((item) => (
+            <div key={item.name} className="space-y-1.5">
+              <div className="flex justify-between text-xs font-black text-slate-800">
+                <span>{item.name}</span>
+                <span className="text-slate-500 font-mono">{item.count} ({item.adoption}%)</span>
+              </div>
+              <div className="w-full h-2.5 rounded-full bg-slate-100 overflow-hidden">
+                <div
+                  className={`h-full rounded-full ${item.color}`}
+                  style={{ width: `${item.adoption}%` }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}

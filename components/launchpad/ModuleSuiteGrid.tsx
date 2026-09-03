@@ -1,16 +1,25 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { motion, Variants } from 'framer-motion';
 import {
+  LayoutGrid,
   Lock,
   Sliders,
   CheckCircle2,
-  Sparkles,
-  PackageCheck,
-  PlusCircle,
+  Monitor,
+  Boxes,
+  DollarSign,
+  Users,
+  Briefcase,
+  ChefHat,
+  Tv,
+  Store,
+  ChevronRight,
+  ExternalLink,
 } from 'lucide-react';
-import { SystemModule, MODULES_SUITE } from './types';
+import { SystemModule, MODULES_SUITE, POS_INTEGRATED_SERVICES } from './types';
 import { ModuleCard } from './ModuleCard';
 
 interface ModuleSuiteGridProps {
@@ -36,44 +45,50 @@ export function ModuleSuiteGrid({
   onOpenManageModal,
   cardVariants,
 }: ModuleSuiteGridProps) {
-  // Separate modules into Enabled and Not Yet Enabled lists
-  const enabledList = MODULES_SUITE.filter((mod) => enabledModules.includes(mod.id));
-  const disabledList = MODULES_SUITE.filter((mod) => !enabledModules.includes(mod.id));
-
   return (
-    <div className="space-y-10">
-      {/* Top Action & Status Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 sm:p-5 rounded-3xl border border-slate-200/90 shadow-sm">
-        <div>
-          <h3 className="text-base sm:text-lg font-black text-slate-900 flex items-center gap-2">
-            <span>Modular Application Suite</span>
-            <span className="text-xs bg-slate-100 text-slate-600 font-extrabold px-2.5 py-0.5 rounded-full border border-slate-200">
-              {MODULES_SUITE.length} Total
-            </span>
-          </h3>
-          {activeOrg ? (
-            <p className="text-xs text-slate-500 font-medium mt-0.5">
-              Current Organization: <span className="font-extrabold text-orange-600">{activeOrg}</span> •{' '}
-              <span className="font-bold text-emerald-600">{enabledList.length} Active</span>,{' '}
-              <span className="font-bold text-slate-500">{disabledList.length} Available to Enable</span>
-            </p>
-          ) : (
-            <p className="text-xs text-slate-500 font-medium mt-0.5">
-              Select or create an organization to manage active applications.
-            </p>
-          )}
+    <div className="space-y-8 font-sans">
+      {/* ========================================================================= */}
+      {/* SECTION HEADER: POS Operating System */}
+      {/* ========================================================================= */}
+      <div className="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200/90 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        {/* Left Info */}
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-orange-500 to-amber-500 text-white flex items-center justify-center font-bold shadow-md shadow-orange-500/15">
+            <LayoutGrid className="w-5 h-5" />
+          </div>
+          <div>
+            <h3 className="text-lg font-black text-slate-900 flex items-center gap-2">
+              <span>Point of Sale Management</span>
+              <span className="text-xs bg-emerald-50 text-emerald-700 font-extrabold px-2.5 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
+                <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                <span>Active System</span>
+              </span>
+            </h3>
+            {activeOrg && activeOrg !== 'No Organization Yet! Please Create' ? (
+              <p className="text-xs text-slate-500 font-medium">
+                Workspace:{' '}
+                <span className="font-extrabold text-orange-600">{activeOrg}</span> •{' '}
+                <span className="font-bold text-emerald-600">8 Integrated Services Ready</span>
+              </p>
+            ) : (
+              <p className="text-xs text-slate-500 font-medium">
+                Select or create a store organization to launch your POS system.
+              </p>
+            )}
+          </div>
         </div>
 
-        <div className="flex items-center gap-2 shrink-0">
+        {/* Right Status / Actions */}
+        <div>
           {!isAuthenticated ? (
-            <p className="text-xs text-amber-700 flex items-center gap-1.5 font-semibold bg-amber-50 px-3.5 py-1.5 rounded-xl border border-amber-200">
+            <p className="text-xs text-amber-700 flex items-center gap-1.5 font-semibold bg-amber-50 px-3.5 py-2 rounded-xl border border-amber-200">
               <Lock className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-              <span>Sign in required for protected modules</span>
+              <span>Sign in required</span>
             </p>
           ) : !hasValidOrg ? (
-            <p className="text-xs text-orange-700 flex items-center gap-1.5 font-bold bg-orange-50 px-3.5 py-1.5 rounded-xl border border-orange-200">
+            <p className="text-xs text-orange-700 flex items-center gap-1.5 font-bold bg-orange-50 px-3.5 py-2 rounded-xl border border-orange-200">
               <Lock className="w-3.5 h-3.5 text-orange-600 shrink-0" />
-              <span>Modules locked — Organization required</span>
+              <span>Org Required</span>
             </p>
           ) : (
             <button
@@ -82,129 +97,115 @@ export function ModuleSuiteGrid({
               className="text-xs font-extrabold text-orange-600 hover:text-orange-700 bg-orange-50 hover:bg-orange-100 border border-orange-200 px-4 py-2 rounded-xl transition-all flex items-center gap-2 shadow-xs cursor-pointer"
             >
               <Sliders className="w-3.5 h-3.5 text-orange-500" />
-              <span>Configure All Modules</span>
+              <span>Configure Services</span>
             </button>
           )}
         </div>
       </div>
 
       {/* ========================================================================= */}
-      {/* SECTION 1: Active & Enabled Modules */}
+      {/* POS MANAGEMENT SYSTEM CARD (Single Master Card) */}
       {/* ========================================================================= */}
-      <section className="space-y-4">
-        <div className="flex items-center justify-between border-b border-slate-200/80 pb-3">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center shadow-xs">
-              <CheckCircle2 className="w-4 h-4" />
-            </div>
-            <div>
-              <h4 className="text-base font-black text-slate-900 tracking-tight flex items-center gap-2">
-                <span>Active & Enabled Modules</span>
-                <span className="text-xs font-black bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-0.5 rounded-full">
-                  {enabledList.length} Active
-                </span>
-              </h4>
-              <p className="text-xs text-slate-500 font-medium">
-                Applications enabled and ready for staff to launch in this workspace.
-              </p>
-            </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {MODULES_SUITE.map((mod, idx) => {
+          const isEnabled =
+            enabledModules.includes(mod.id) ||
+            enabledModules.includes('pos-management') ||
+            enabledModules.includes('pos');
+          const isLocked = Boolean(user && !hasValidOrg);
+          return (
+            <ModuleCard
+              key={mod.id}
+              module={mod}
+              index={idx}
+              isEnabled={isEnabled}
+              isLocked={isLocked}
+              activeOrg={activeOrg}
+              onAction={onCardAction}
+              onDisableDirectly={onDisableDirectly}
+              cardVariants={cardVariants}
+            />
+          );
+        })}
+      </div>
+
+      {/* ========================================================================= */}
+      {/* INTEGRATED POS SERVICES QUICK-ACCESS MATRIX */}
+      {/* ========================================================================= */}
+      <div className="bg-white p-6 sm:p-7 rounded-3xl border border-slate-200/90 shadow-sm space-y-4">
+        <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div>
+            <h4 className="text-sm font-extrabold text-slate-900 flex items-center gap-2">
+              <span>Integrated POS Ecosystem Services</span>
+              <span className="text-[10px] font-extrabold text-orange-700 bg-orange-50 px-2 py-0.5 rounded-full border border-orange-200">
+                {POS_INTEGRATED_SERVICES.length} Built-In
+              </span>
+            </h4>
+            <p className="text-xs text-slate-500 font-medium mt-0.5">
+              Instant operational shortcuts into your synchronized POS services.
+            </p>
           </div>
         </div>
 
-        {enabledList.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {enabledList.map((mod, idx) => {
-              const isLocked = user && !hasValidOrg;
-              return (
-                <ModuleCard
-                  key={mod.id}
-                  module={mod}
-                  index={idx}
-                  isEnabled={true}
-                  isLocked={isLocked}
-                  activeOrg={activeOrg}
-                  onAction={onCardAction}
-                  onDisableDirectly={onDisableDirectly}
-                  cardVariants={cardVariants}
-                />
-              );
-            })}
-          </div>
-        ) : (
-          /* Empty State for Enabled Modules */
-          <div className="bg-white rounded-3xl border-2 border-dashed border-slate-200 p-8 text-center space-y-3">
-            <div className="w-12 h-12 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto">
-              <PackageCheck className="w-6 h-6" />
-            </div>
-            <div>
-              <p className="text-sm font-bold text-slate-700">No active modules enabled yet</p>
-              <p className="text-xs text-slate-500 font-medium mt-1 max-w-md mx-auto">
-                Explore available applications below and click &ldquo;Enable Module&rdquo; to activate POS,
-                Inventory, KDS, or Finance for <span className="font-bold text-slate-700">{activeOrg || 'your workspace'}</span>.
-              </p>
-            </div>
-          </div>
-        )}
-      </section>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+          {POS_INTEGRATED_SERVICES.map((service, sIdx) => {
+            const IconComp = service.icon;
+            const isExternalTarget =
+              service.href.includes('/terminal') ||
+              service.href.includes('/customer-display') ||
+              service.href.includes('/kds');
 
-      {/* ========================================================================= */}
-      {/* SECTION 2: Available to Enable (Not Yet Enabled) */}
-      {/* ========================================================================= */}
-      <section className="space-y-4 pt-2">
-        <div className="flex items-center justify-between border-b border-slate-200/80 pb-3">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center shadow-xs">
-              <Sparkles className="w-4 h-4" />
-            </div>
-            <div>
-              <h4 className="text-base font-black text-slate-900 tracking-tight flex items-center gap-2">
-                <span>Available Applications to Enable</span>
-                <span className="text-xs font-black bg-slate-100 text-slate-600 border border-slate-200 px-2.5 py-0.5 rounded-full">
-                  {disabledList.length} Available
-                </span>
-              </h4>
-              <p className="text-xs text-slate-500 font-medium">
-                Click &ldquo;Enable Module&rdquo; on any application to unlock and activate it for this workspace.
-              </p>
-            </div>
-          </div>
+            return (
+              <motion.div
+                key={service.id}
+                custom={sIdx}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: sIdx * 0.03, duration: 0.25 }}
+                whileHover={{ y: -2 }}
+              >
+                <Link
+                  href={service.href}
+                  target={isExternalTarget ? '_blank' : undefined}
+                  rel="noopener noreferrer"
+                  className="group p-3.5 rounded-2xl border border-slate-200/80 bg-slate-50/60 hover:bg-white hover:border-orange-300 hover:shadow-md hover:shadow-orange-500/5 transition-all flex flex-col justify-between h-full cursor-pointer"
+                >
+                  <div className="space-y-2.5">
+                    <div className="flex items-center justify-between">
+                      <div className={`w-9 h-9 rounded-xl ${service.bgColor} ${service.color} flex items-center justify-center font-bold group-hover:scale-105 transition-transform`}>
+                        <IconComp className="w-4 h-4" />
+                      </div>
+                      {service.badge && (
+                        <span className="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-slate-200/80 text-slate-700">
+                          {service.badge}
+                        </span>
+                      )}
+                    </div>
+
+                    <div>
+                      <h5 className="font-extrabold text-xs text-slate-900 group-hover:text-orange-600 transition-colors">
+                        {service.name}
+                      </h5>
+                      <p className="text-[11px] text-slate-500 font-medium leading-snug mt-0.5 line-clamp-2">
+                        {service.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="mt-3 pt-2.5 border-t border-slate-200/50 flex items-center justify-between text-[11px] font-bold text-orange-600 group-hover:text-orange-700">
+                    <span>Launch</span>
+                    {isExternalTarget ? (
+                      <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                    ) : (
+                      <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                    )}
+                  </div>
+                </Link>
+              </motion.div>
+            );
+          })}
         </div>
-
-        {disabledList.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {disabledList.map((mod, idx) => {
-              const isLocked = user && !hasValidOrg;
-              return (
-                <ModuleCard
-                  key={mod.id}
-                  module={mod}
-                  index={idx}
-                  isEnabled={false}
-                  isLocked={isLocked}
-                  activeOrg={activeOrg}
-                  onAction={onCardAction}
-                  onDisableDirectly={onDisableDirectly}
-                  cardVariants={cardVariants}
-                />
-              );
-            })}
-          </div>
-        ) : (
-          /* All Modules Enabled Celebration State */
-          <div className="bg-emerald-50/60 rounded-3xl border border-emerald-200/80 p-8 text-center space-y-2">
-            <div className="w-12 h-12 rounded-2xl bg-emerald-500 text-white flex items-center justify-center mx-auto shadow-md shadow-emerald-500/20">
-              <CheckCircle2 className="w-6 h-6" />
-            </div>
-            <p className="text-sm font-black text-emerald-900">
-              All Enterprise Applications are Active!
-            </p>
-            <p className="text-xs text-emerald-700 font-medium max-w-md mx-auto">
-              Every module in the CodeBridges Enterprise Suite is currently enabled and unlocked for{' '}
-              <span className="font-bold">{activeOrg}</span>.
-            </p>
-          </div>
-        )}
-      </section>
+      </div>
     </div>
   );
 }

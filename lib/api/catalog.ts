@@ -1,19 +1,22 @@
 import { apiFetch } from './client';
 
 export async function getProductsApi(
-  outletId: number = 1,
+  outletId?: string | number,
   categoryId?: string,
   search?: string,
   stockStatus?: string,
   sortBy?: string,
   sortOrder?: string
 ) {
-  let url = `/products?outlet_id=${outletId}`;
-  if (categoryId) url += `&category_id=${categoryId}`;
-  if (search) url += `&q=${encodeURIComponent(search)}`;
-  if (stockStatus) url += `&stock_status=${stockStatus}`;
-  if (sortBy) url += `&sort_by=${sortBy}`;
-  if (sortOrder) url += `&sort_order=${sortOrder}`;
+  let url = `/products`;
+  const params: string[] = [];
+  if (outletId) params.push(`outlet_id=${outletId}`);
+  if (categoryId) params.push(`category_id=${categoryId}`);
+  if (search) params.push(`q=${encodeURIComponent(search)}`);
+  if (stockStatus) params.push(`stock_status=${stockStatus}`);
+  if (sortBy) params.push(`sort_by=${sortBy}`);
+  if (sortOrder) params.push(`sort_order=${sortOrder}`);
+  if (params.length > 0) url += `?${params.join('&')}`;
   return await apiFetch(url);
 }
 

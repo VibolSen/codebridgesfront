@@ -161,35 +161,53 @@ export function ManageModulesModal({
                   </div>
                 </div>
 
-                <div className="space-y-1.5 max-h-56 overflow-y-auto pr-1">
+                <div className="space-y-1.5 max-h-60 overflow-y-auto pr-1">
                   {MODULES_SUITE.map((mod) => {
-                    const isChecked = modalSelectedModuleIds.includes(mod.id);
+                    const isCore = Boolean(mod.isCore);
+                    const isChecked = isCore || modalSelectedModuleIds.includes(mod.id);
                     const Icon = mod.icon;
 
                     return (
                       <div
                         key={mod.id}
-                        onClick={() => onToggleModalModule(mod.id)}
-                        className={`flex items-center justify-between p-2.5 rounded-xl border transition-all cursor-pointer ${
-                          isChecked
-                            ? 'border-emerald-300 bg-emerald-50/50'
-                            : 'border-slate-200 bg-slate-50/50 hover:bg-slate-100/60'
+                        onClick={() => {
+                          if (!isCore) {
+                            onToggleModalModule(mod.id);
+                          }
+                        }}
+                        className={`flex items-center justify-between p-3 rounded-2xl border transition-all ${
+                          isCore
+                            ? 'border-orange-200 bg-orange-50/50 cursor-default'
+                            : isChecked
+                            ? 'border-emerald-300 bg-emerald-50/50 cursor-pointer hover:bg-emerald-50/80'
+                            : 'border-slate-200 bg-slate-50/50 hover:bg-slate-100/70 cursor-pointer'
                         }`}
                       >
-                        <div className="flex items-center gap-2.5 min-w-0">
+                        <div className="flex items-center gap-3 min-w-0">
                           <div
-                            className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${
-                              isChecked ? 'bg-emerald-500 text-white' : 'bg-slate-200 text-slate-600'
+                            className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
+                              isCore
+                                ? 'bg-orange-500 text-white shadow-xs'
+                                : isChecked
+                                ? 'bg-emerald-500 text-white shadow-xs'
+                                : 'bg-slate-200 text-slate-600'
                             }`}
                           >
                             <Icon className="w-4 h-4" />
                           </div>
                           <div className="min-w-0">
-                            <p className="text-xs font-bold text-slate-900 truncate">
-                              {mod.title}
-                            </p>
+                            <div className="flex items-center gap-1.5">
+                              <p className="text-xs font-bold text-slate-900 truncate">
+                                {mod.title}
+                              </p>
+                              {isCore && (
+                                <span className="text-[9px] font-black px-1.5 py-0.2 rounded bg-orange-100 text-orange-700">
+                                  CORE
+                                </span>
+                              )}
+                            </div>
                             <p className="text-[10px] text-slate-500 truncate">
-                              {mod.badge}
+                              {isCore ? 'Includes Terminal, Catalog, Shifts, Orders, CFD, KDS' : mod.badge}
                             </p>
                           </div>
                         </div>
@@ -197,16 +215,20 @@ export function ManageModulesModal({
                         <div className="flex items-center gap-2 shrink-0">
                           <span
                             className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full ${
-                              isChecked
+                              isCore
+                                ? 'bg-orange-100 text-orange-800'
+                                : isChecked
                                 ? 'bg-emerald-100 text-emerald-700'
                                 : 'bg-slate-200 text-slate-500'
                             }`}
                           >
-                            {isChecked ? 'ENABLED' : 'DISABLED'}
+                            {isCore ? 'STANDARD INCLUDED' : isChecked ? 'ENABLED' : 'DISABLED'}
                           </span>
                           <div
                             className={`w-5 h-5 rounded-md border flex items-center justify-center ${
-                              isChecked
+                              isCore
+                                ? 'border-orange-500 bg-orange-500 text-white'
+                                : isChecked
                                 ? 'border-emerald-500 bg-emerald-500 text-white'
                                 : 'border-slate-300 bg-white'
                             }`}

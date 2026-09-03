@@ -10,11 +10,43 @@ export async function getSuperAdminTenantsApi() {
   }
 }
 
+export async function getSubscriptionPlansApi() {
+  try {
+    return await apiFetch('/super-admin/subscription-plans');
+  } catch (err) {
+    console.warn('[Tenants API] Unable to fetch subscription plans:', err);
+    return { success: false, data: [] };
+  }
+}
+
 export async function registerTenantApi(data: any) {
   return await apiFetch('/tenants/register', {
     method: 'POST',
     body: JSON.stringify(data),
   });
+}
+
+export async function getTenantModulesApi(orgName?: string) {
+  try {
+    let url = '/tenants/modules';
+    if (orgName) url += `?org_name=${encodeURIComponent(orgName)}`;
+    return await apiFetch(url);
+  } catch (err) {
+    console.warn('[Tenants API] Could not fetch tenant modules from cloud DB:', err);
+    return null;
+  }
+}
+
+export async function updateTenantModulesApi(modules: string[], orgName?: string) {
+  try {
+    return await apiFetch('/tenants/modules', {
+      method: 'PUT',
+      body: JSON.stringify({ modules, org_name: orgName }),
+    });
+  } catch (err) {
+    console.warn('[Tenants API] Could not update tenant modules in cloud DB:', err);
+    return null;
+  }
 }
 
 // Customers & Loyalty
@@ -90,9 +122,14 @@ export async function deleteSupplierApi(id: number | string) {
 
 // Outlets / Stores
 export async function getOutletsApi(search?: string) {
-  let url = '/outlets';
-  if (search) url += `?q=${encodeURIComponent(search)}`;
-  return await apiFetch(url);
+  try {
+    let url = '/outlets';
+    if (search) url += `?q=${encodeURIComponent(search)}`;
+    return await apiFetch(url);
+  } catch (err) {
+    console.warn('[Outlets API] Failed to fetch outlets:', err);
+    return { status: 'success', data: [] };
+  }
 }
 
 export async function createOutletApi(data: any) {
@@ -117,10 +154,16 @@ export async function deleteOutletApi(id: number | string) {
 
 // HRM Departments
 export async function getDepartmentsApi(search?: string) {
-  let url = '/departments';
-  if (search) url += `?q=${encodeURIComponent(search)}`;
-  return await apiFetch(url);
+  try {
+    let url = '/departments';
+    if (search) url += `?q=${encodeURIComponent(search)}`;
+    return await apiFetch(url);
+  } catch (err) {
+    console.warn('[Departments API] Failed to fetch departments:', err);
+    return { status: 'success', data: [] };
+  }
 }
+
 
 export async function createDepartmentApi(data: any) {
   return await apiFetch('/departments', {

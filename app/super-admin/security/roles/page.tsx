@@ -72,7 +72,10 @@ export default function RolesManagementPage() {
       setLoading(true);
       const [rolesRes, permsRes] = await Promise.all([getRolesApi(), getPermissionsApi()]);
       
-      if (rolesRes.success && rolesRes.data) {
+      const isSuccessRoles = Boolean(rolesRes?.success || rolesRes?.status === 'success');
+      const isSuccessPerms = Boolean(permsRes?.success || permsRes?.status === 'success');
+
+      if (isSuccessRoles && rolesRes?.data) {
         setRoles(rolesRes.data);
         if (rolesRes.data.length > 0 && !selectedRole) {
           setSelectedRole(rolesRes.data[0]);
@@ -82,7 +85,7 @@ export default function RolesManagementPage() {
         }
       }
 
-      if (permsRes.success) {
+      if (isSuccessPerms) {
         setPermissions(permsRes.data || []);
         setGroupedPermissions(permsRes.grouped || {});
       }

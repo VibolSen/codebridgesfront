@@ -39,15 +39,24 @@ function LoginContent() {
 
     try {
       const res = await loginApi(identifier, password);
+      const user = res?.user;
       
       if (redirectUrl) {
         router.push(redirectUrl);
+      } else if (user?.role === 'cashier') {
+        router.push('/pos/terminal');
+      } else if (user?.role === 'super_admin') {
+        router.push('/super-admin/dashboard');
       } else {
         router.push('/');
       }
     } catch (err: any) {
       console.error('Login Error:', err);
-      setError(err.message || 'Login failed. Please check your credentials.');
+      if (err?.message === 'Failed to fetch' || err?.name === 'TypeError') {
+        setError('Backend cloud server is connecting or waking up from standby. Please try again in a few seconds.');
+      } else {
+        setError(err?.message || 'Login failed. Please check your credentials.');
+      }
     } finally {
       setLoading(false);
     }
@@ -59,23 +68,23 @@ function LoginContent() {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-slate-50 text-slate-900 p-4 font-sans selection:bg-orange-500 selection:text-white">
+    <div className="min-h-screen w-full flex items-center justify-center bg-[#F0F4F8] text-slate-900 p-4 font-sans selection:bg-[#5B4DFB] selection:text-white">
       <motion.div
         initial={{ opacity: 0, y: 20, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.35, ease: 'easeOut' }}
-        className="w-full max-w-md bg-white border border-slate-200/80 rounded-3xl p-8 shadow-2xl shadow-orange-500/5 space-y-6 relative overflow-hidden"
+        className="w-full max-w-md bg-white border border-slate-200/80 rounded-3xl p-8 shadow-2xl shadow-[#5B4DFB]/5 space-y-6 relative overflow-hidden"
       >
         {/* Top Back Link */}
         <div className="flex items-center justify-between">
           <Link
             href="/"
-            className="text-xs font-bold text-slate-500 hover:text-orange-600 flex items-center gap-1.5 transition-colors"
+            className="text-xs font-bold text-slate-500 hover:text-[#5B4DFB] flex items-center gap-1.5 transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             Back to Onboarding Hub
           </Link>
-          <span className="text-[10px] font-extrabold text-orange-600 bg-orange-50 px-2 py-0.5 rounded-full border border-orange-200 uppercase tracking-widest">
+          <span className="text-[10px] font-extrabold text-[#5B4DFB] bg-purple-50 px-2 py-0.5 rounded-full border border-purple-200 uppercase tracking-widest">
             SSO Auth
           </span>
         </div>
@@ -86,16 +95,14 @@ function LoginContent() {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.15, type: 'spring', stiffness: 200 }}
-            className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-tr from-orange-500 via-amber-500 to-yellow-400 p-0.5 shadow-lg shadow-orange-500/20 mb-1"
+            className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white p-1.5 shadow-md shadow-[#5B4DFB]/20 mb-1 border border-slate-200/80 overflow-hidden"
           >
-            <div className="w-full h-full bg-white rounded-[14px] flex items-center justify-center">
-              <Store className="w-7 h-7 text-orange-500" />
-            </div>
+            <img src="/logo/Codebridge.png" alt="CodeBridges Logo" className="w-full h-full object-contain" />
           </motion.div>
           <h1 className="text-2xl font-black tracking-tight text-slate-900">
-            Dreams Enterprise <span className="text-orange-500">Suite</span>
+            CodeBridges Enterprise <span className="text-[#5B4DFB]">Suite</span>
           </h1>
-          <p className="text-xs text-slate-500 font-medium">Single Sign-On authentication for POS, Inventory, HR & Finance</p>
+          <p className="text-xs text-slate-500 font-medium">Single Sign-On authentication for POS, Inventory, HR &amp; Finance</p>
         </div>
 
         {/* Redirect Target Banner */}
@@ -130,7 +137,7 @@ function LoginContent() {
               type="button"
               onClick={() => setLoginMethod('email')}
               className={`flex-1 py-1.5 rounded-lg flex items-center justify-center gap-1.5 transition-all ${
-                loginMethod === 'email' ? 'bg-white text-orange-600 shadow-xs font-extrabold' : 'text-slate-500 hover:text-slate-800'
+                loginMethod === 'email' ? 'bg-white text-[#5B4DFB] shadow-xs font-extrabold' : 'text-slate-500 hover:text-slate-800'
               }`}
             >
               <Mail className="w-3.5 h-3.5" /> Sign In with Email
@@ -139,7 +146,7 @@ function LoginContent() {
               type="button"
               onClick={() => setLoginMethod('phone')}
               className={`flex-1 py-1.5 rounded-lg flex items-center justify-center gap-1.5 transition-all ${
-                loginMethod === 'phone' ? 'bg-white text-orange-600 shadow-xs font-extrabold' : 'text-slate-500 hover:text-slate-800'
+                loginMethod === 'phone' ? 'bg-white text-[#5B4DFB] shadow-xs font-extrabold' : 'text-slate-500 hover:text-slate-800'
               }`}
             >
               <Phone className="w-3.5 h-3.5" /> Sign In with Phone
@@ -156,8 +163,8 @@ function LoginContent() {
               required
               value={identifier}
               onChange={(e) => setIdentifier(e.target.value)}
-              placeholder={loginMethod === 'email' ? 'user@dreams-pos.com' : '+855 12 345 678'}
-              className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all text-xs font-medium"
+              placeholder={loginMethod === 'email' ? 'user@codebridges.com' : '+855 12 345 678'}
+              className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] focus:border-transparent transition-all text-xs font-medium"
             />
           </div>
 
@@ -167,7 +174,7 @@ function LoginContent() {
                 <Lock className="w-3.5 h-3.5 text-slate-400" />
                 Password
               </label>
-              <span className="text-[11px] text-orange-600 font-bold hover:underline cursor-pointer">
+              <span className="text-[11px] text-[#5B4DFB] font-bold hover:underline cursor-pointer">
                 Forgot password?
               </span>
             </div>
@@ -178,7 +185,7 @@ function LoginContent() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full px-4 py-3 pr-11 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all text-xs font-medium"
+                className="w-full px-4 py-3 pr-11 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] focus:border-transparent transition-all text-xs font-medium"
               />
               <button
                 type="button"
@@ -201,7 +208,7 @@ function LoginContent() {
                 type="checkbox"
                 checked={rememberMe}
                 onChange={(e) => setRememberMe(e.target.checked)}
-                className="w-4 h-4 rounded-md text-orange-500 focus:ring-orange-500 border-slate-300"
+                className="w-4 h-4 rounded-md text-[#5B4DFB] focus:ring-[#5B4DFB] border-slate-300"
               />
               <span>Remember session</span>
             </label>
@@ -212,7 +219,7 @@ function LoginContent() {
             whileTap={{ scale: 0.98 }}
             type="submit"
             disabled={loading}
-            className="w-full py-3.5 px-4 rounded-xl bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white font-bold text-xs shadow-md shadow-orange-500/20 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+            className="w-full py-3.5 px-4 rounded-xl bg-[#5B4DFB] hover:bg-[#4E3FE3] active:bg-[#3D30D2] text-white font-bold text-xs shadow-md shadow-[#5B4DFB]/20 transition-all disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
           >
             {loading ? (
               <>
@@ -292,11 +299,11 @@ function LoginContent() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.97 }}
                 type="button"
-                onClick={() => handleQuickFill('radysen2002@gmail.com', 'Vibol2020')}
+                onClick={() => handleQuickFill('customer@pos.com', 'password')}
                 className="px-2 py-1.5 text-xs font-bold rounded-xl bg-teal-50 hover:bg-teal-100 text-teal-700 border border-teal-200 transition-colors text-center shadow-2xs flex items-center justify-center gap-1 cursor-pointer"
               >
                 <UserCheck className="w-3.5 h-3.5 text-teal-600" />
-                User Test
+                Customer
               </motion.button>
             </div>
           </div>

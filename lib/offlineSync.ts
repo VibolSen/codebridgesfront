@@ -42,25 +42,42 @@ export function getNextOfflineReceiptNumber(): string {
   }
 }
 
-export function saveOfflineSale(cart: any[], tenders: any[]): OfflineSale {
+export function saveOfflineSale(cartOrPayload: any, maybeTenders?: any[]): OfflineSale {
   const receiptNo = getNextOfflineReceiptNumber();
   const offlineId = `OFFLINE-TX-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
 
-  const saleData: OfflineSale = {
-    offline_id: offlineId,
-    receipt_number: receiptNo,
-    items: cart.map((item) => ({
+  let items: any[] = [];
+  let tenders: any[] = [];
+
+  if (Array.isArray(cartOrPayload)) {
+    items = cartOrPayload.map((item) => ({
       id: item.product.id,
       name: item.product.name,
       quantity: item.quantity,
       price: item.product.price,
-    })),
-    tenders: tenders.length > 0 ? tenders : [{ tender_type: 'cash', amount: 0 }],
+    }));
+    tenders = maybeTenders || [{ tender_type: 'cash', amount: 0 }];
+  } else if (cartOrPayload && typeof cartOrPayload === 'object') {
+    items = cartOrPayload.items || [];
+    tenders = cartOrPayload.tenders || [
+      {
+        tender_type: cartOrPayload.tender_type || 'cash',
+        amount: cartOrPayload.cash_tendered || cartOrPayload.grand_total || 0,
+      },
+    ];
+  }
+
+  const saleData: OfflineSale = {
+    offline_id: offlineId,
+    receipt_number: receiptNo,
+    items,
+    tenders,
     created_at: new Date().toISOString(),
   };
 
   const queue = getOfflineQueue();
   queue.push(saleData);
+
   if (typeof window !== 'undefined') {
     localStorage.setItem(QUEUE_KEY, JSON.stringify(queue));
   }

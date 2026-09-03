@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { Printer, X, CheckCircle2, AlertTriangle, ShieldCheck } from 'lucide-react';
 
 interface ThermalReceiptModalProps {
-  receiptData: {
+  receiptData?: {
     sale: any;
     lines: any[];
     outlet: any;
@@ -16,15 +16,58 @@ interface ThermalReceiptModalProps {
     print_count?: number;
     print_badge?: string;
   };
+  saleData?: any;
+  isOpen?: boolean;
   onClose: () => void;
 }
 
-export function ThermalReceiptModal({ receiptData, onClose }: ThermalReceiptModalProps) {
-  const { sale, lines, outlet, cashier, register, payments, is_reprint, print_count, print_badge } = receiptData;
+export function ThermalReceiptModal({
+  receiptData,
+  saleData,
+  isOpen = true,
+  onClose,
+}: ThermalReceiptModalProps) {
+  if (!isOpen) return null;
+
+  const data = receiptData || {
+    sale: saleData?.sale || saleData,
+    lines: saleData?.lines || saleData?.items || [],
+    outlet: saleData?.outlet || {
+      name: 'CodeBridges Store',
+      address: 'Main Commercial Ave, Phnom Penh',
+      phone: '+855 23 888 999',
+    },
+    cashier: saleData?.cashier || { name: 'Cashier Staff' },
+    register: saleData?.register || { name: 'Terminal #01' },
+    payments: saleData?.payments || [
+      {
+        tender_type: saleData?.tender_type || saleData?.payment_method || 'cash',
+        amount: saleData?.grand_total || saleData?.total_amount || saleData?.total || 0,
+      },
+    ],
+    is_reprint: saleData?.is_reprint || false,
+    print_count: saleData?.print_count || 1,
+    print_badge: saleData?.print_badge,
+  };
+
+  const { sale, lines, outlet, cashier, register, payments, is_reprint, print_count, print_badge } = data;
 
   const handlePrint = () => {
     window.print();
   };
+
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        handlePrint();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
 
   const formattedDate = sale?.created_at
     ? new Date(sale.created_at).toLocaleString('en-US', {
@@ -95,12 +138,22 @@ export function ThermalReceiptModal({ receiptData, onClose }: ThermalReceiptModa
               <p className="text-[11px] text-orange-700">Receipt ready for 80mm thermal printing</p>
             </div>
           </div>
-          <button
-            onClick={handlePrint}
-            className="px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs shadow-md shadow-orange-600/30 transition-all flex items-center gap-1.5 shrink-0"
-          >
-            <Printer className="w-4 h-4" /> Print Receipt
-          </button>
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 font-bold text-xs transition-colors cursor-pointer"
+            >
+              Don't Print
+            </button>
+            <button
+              type="button"
+              onClick={handlePrint}
+              className="px-4 py-1.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-extrabold text-xs shadow-md shadow-orange-600/30 transition-all flex items-center gap-1.5 cursor-pointer"
+            >
+              <Printer className="w-4 h-4" /> Print Receipt
+            </button>
+          </div>
         </div>
 
         {/* --- THERMAL RECEIPT CONTENT AREA (80mm) --- */}
@@ -265,13 +318,23 @@ export function ThermalReceiptModal({ receiptData, onClose }: ThermalReceiptModa
 
         </div>
 
-        {/* Modal Bottom Actions (Screen Only) */}
-        <div className="p-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between no-print shrink-0">
+        {/* Modal Bottom Actions: 2 Clear Options (Print or Don't Print) */}
+        <div className="p-4 bg-white border-t border-slate-200 flex items-center gap-3 no-print shrink-0">
           <button
+            type="button"
             onClick={onClose}
-            className="w-full py-2.5 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs transition-colors"
+            className="flex-1 py-3 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all flex items-center justify-center gap-1.5 border border-slate-200 cursor-pointer"
           >
-            Close & Continue POS
+            <X className="w-4 h-4 text-slate-400" />
+            <span>Don't Print (Skip)</span>
+          </button>
+          <button
+            type="button"
+            onClick={handlePrint}
+            className="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-extrabold text-xs shadow-md shadow-orange-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <Printer className="w-4 h-4" />
+            <span>Print Customer Receipt</span>
           </button>
         </div>
 

@@ -1,16 +1,23 @@
 export interface Product {
-  id: number;
+  id: string | number;
   name: string;
-  sku: string;
+  sku?: string;
   price: number;
-  category: string;
-  stock_on_hand: number;
+  category?: string;
+  stock_on_hand?: number;
+  stock?: number;
+  barcode?: string;
+  image?: string;
 }
 
 export interface CartItem {
-  product: Product;
-  quantity: number;
-  subtotal: number;
+  product_id?: string | number;
+  name: string;
+  price: number;
+  qty: number;
+  quantity?: number;
+  product?: Product;
+  subtotal?: number;
 }
 
 export interface ShiftInfo {

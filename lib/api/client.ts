@@ -25,6 +25,7 @@ export function removeAuthToken() {
   if (typeof window !== 'undefined') {
     localStorage.removeItem('pos_token');
     localStorage.removeItem('pos_user');
+    localStorage.removeItem('active_org');
   }
 }
 
@@ -62,25 +63,56 @@ export async function apiFetch(endpoint: string, options: RequestInit = {}) {
 
   // Inject active organization/tenant context header if available
   if (typeof window !== 'undefined') {
+    const user = getAuthUser();
+    const tenantId = user?.tenant_id || user?.tenant?.id || localStorage.getItem('active_tenant_id');
+    if (tenantId) {
+      headers['X-Tenant-Id'] = tenantId;
+    }
+
     const activeOrg = localStorage.getItem('active_org');
     if (activeOrg && activeOrg !== 'No Organization Yet! Please Create') {
       headers['X-Tenant-Workspace'] = activeOrg;
     }
   }
 
-  const response = await fetch(`${baseUrl}${endpoint}`, {
-    ...options,
-    headers,
-  });
+  let response: Response;
+  try {
+    response = await fetch(`${baseUrl}${endpoint}`, {
+      ...options,
+      headers,
+    });
+  } catch (netErr: any) {
+    throw new Error(netErr?.message || 'Network request failed. Please ensure the backend server is reachable.');
+  }
 
-  const data = await response.json();
+  let data: any = null;
+  const contentType = response.headers.get('content-type') || '';
+  if (contentType.includes('application/json')) {
+    try {
+      data = await response.json();
+    } catch {
+      data = null;
+    }
+  } else {
+    try {
+      const text = await response.text();
+      data = text ? { message: text } : null;
+    } catch {
+      data = null;
+    }
+  }
 
   if (!response.ok) {
-    if (response.status === 401 && typeof window !== 'undefined' && !endpoint.includes('/auth/login')) {
+    if (
+      response.status === 401 &&
+      typeof window !== 'undefined' &&
+      (endpoint === '/me' || endpoint === '/auth/me')
+    ) {
       removeAuthToken();
       window.location.href = '/login';
     }
-    throw new Error(data.message || `Request failed with status ${response.status}`);
+    const errMsg = data?.message || data?.error || (data?.errors ? Object.values(data.errors).flat().join(', ') : `Request failed with status ${response.status}`);
+    throw new Error(errMsg);
   }
 
   return data;

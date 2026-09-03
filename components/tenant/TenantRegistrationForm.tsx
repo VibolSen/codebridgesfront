@@ -227,11 +227,11 @@ export function TenantRegistrationForm({
                     onChange={(e) => setFormData({ ...formData, industry: e.target.value })}
                     className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 transition-all"
                   >
-                    <option value="retail">🛍️ Retail Store / Boutique</option>
-                    <option value="cafe_restaurant">☕ Cafe & Restaurant / Food</option>
-                    <option value="wholesale">📦 Wholesale & Mart</option>
-                    <option value="service">🛠️ Services / Clinic / Salon</option>
-                    <option value="solopreneur">👤 Solopreneur / Pop-up</option>
+                    <option value="retail">Retail Store & Boutique</option>
+                    <option value="cafe_restaurant">Cafe & Restaurant / F&B</option>
+                    <option value="wholesale">Wholesale & Supermarket</option>
+                    <option value="service">Services, Healthcare & Beauty</option>
+                    <option value="solopreneur">Solopreneur & Pop-up Shop</option>
                   </select>
                 </div>
               </div>

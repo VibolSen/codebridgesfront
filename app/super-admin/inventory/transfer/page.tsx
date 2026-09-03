@@ -7,6 +7,7 @@ import {
   createTransferApi,
   receiveTransferApi,
   getProductsApi,
+  getOutletsApi,
 } from '@/lib/api';
 import { motion, Variants } from 'framer-motion';
 import {
@@ -30,6 +31,7 @@ import {
 export default function AdminStockTransferPage() {
   const [transfers, setTransfers] = useState<any[]>([]);
   const [products, setProducts] = useState<any[]>([]);
+  const [outlets, setOutlets] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState('');
   const [search, setSearch] = useState('');
@@ -37,8 +39,8 @@ export default function AdminStockTransferPage() {
   // New Transfer Modal State
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [createForm, setCreateForm] = useState({
-    from_outlet_id: '1',
-    to_outlet_id: '2',
+    from_outlet_id: '',
+    to_outlet_id: '',
     notes: '',
     items: [{ product_id: '', quantity: '10' }],
   });
@@ -54,6 +56,7 @@ export default function AdminStockTransferPage() {
   useEffect(() => {
     loadTransfers();
     loadProductsList();
+    loadOutletsList();
   }, [statusFilter]);
 
   const loadTransfers = async () => {
@@ -74,6 +77,29 @@ export default function AdminStockTransferPage() {
       setProducts(res.data || []);
     } catch (err: any) {
       console.error('Failed to load products list:', err);
+    }
+  };
+
+  const loadOutletsList = async () => {
+    try {
+      const res = await getOutletsApi();
+      const list = Array.isArray(res) ? res : res?.data || [];
+      setOutlets(list);
+      if (list.length >= 2) {
+        setCreateForm((prev) => ({
+          ...prev,
+          from_outlet_id: String(list[0].id),
+          to_outlet_id: String(list[1].id),
+        }));
+      } else if (list.length === 1) {
+        setCreateForm((prev) => ({
+          ...prev,
+          from_outlet_id: String(list[0].id),
+          to_outlet_id: String(list[0].id),
+        }));
+      }
+    } catch (err: any) {
+      console.error('Failed to load outlets list:', err);
     }
   };
 
@@ -121,8 +147,8 @@ export default function AdminStockTransferPage() {
       }
 
       const res = await createTransferApi({
-        from_outlet_id: parseInt(createForm.from_outlet_id, 10),
-        to_outlet_id: parseInt(createForm.to_outlet_id, 10),
+        from_outlet_id: createForm.from_outlet_id,
+        to_outlet_id: createForm.to_outlet_id,
         notes: createForm.notes,
         items: validItems,
       });
@@ -134,8 +160,8 @@ export default function AdminStockTransferPage() {
 
       setIsCreateModalOpen(false);
       setCreateForm({
-        from_outlet_id: '1',
-        to_outlet_id: '2',
+        from_outlet_id: outlets[0]?.id ? String(outlets[0].id) : '',
+        to_outlet_id: outlets[1]?.id ? String(outlets[1].id) : (outlets[0]?.id ? String(outlets[0].id) : ''),
         notes: '',
         items: [{ product_id: '', quantity: '10' }],
       });
@@ -422,8 +448,12 @@ export default function AdminStockTransferPage() {
                     onChange={(e) => setCreateForm({ ...createForm, from_outlet_id: e.target.value })}
                     className="w-full px-3 py-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-900 focus:outline-none"
                   >
-                    <option value="1">Phnom Penh Main Outlet</option>
-                    <option value="2">Siem Reap Branch</option>
+                    {outlets.length === 0 && <option value="">No outlets found</option>}
+                    {outlets.map((o) => (
+                      <option key={o.id} value={o.id}>
+                        {o.name} {o.code ? `(${o.code})` : ''}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
@@ -434,8 +464,12 @@ export default function AdminStockTransferPage() {
                     onChange={(e) => setCreateForm({ ...createForm, to_outlet_id: e.target.value })}
                     className="w-full px-3 py-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-900 focus:outline-none"
                   >
-                    <option value="2">Siem Reap Branch</option>
-                    <option value="1">Phnom Penh Main Outlet</option>
+                    {outlets.length === 0 && <option value="">No outlets found</option>}
+                    {outlets.map((o) => (
+                      <option key={o.id} value={o.id}>
+                        {o.name} {o.code ? `(${o.code})` : ''}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>

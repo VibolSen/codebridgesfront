@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { getInventoryMovementsApi } from '@/lib/api';
+import { OutletSelector } from '@/components/inventory-suite';
 import { motion, Variants } from 'framer-motion';
 import {
   FileText,
@@ -32,7 +33,7 @@ export default function AdminInventoryLedgerPage() {
     try {
       setLoading(true);
       const res = await getInventoryMovementsApi(
-        outletId ? parseInt(outletId, 10) : undefined,
+        outletId || undefined,
         typeFilter || undefined,
         search || undefined
       );
@@ -179,19 +180,12 @@ export default function AdminInventoryLedgerPage() {
         </form>
 
         <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-500">
-            <Building2 className="w-4 h-4 text-slate-400" />
-            Outlet:
-          </div>
-          <select
+          <OutletSelector
             value={outletId}
-            onChange={(e) => setOutletId(e.target.value)}
-            className="px-3 py-2 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-700 focus:outline-none"
-          >
-            <option value="">All Outlets</option>
-            <option value="1">Phnom Penh Main Outlet</option>
-            <option value="2">Siem Reap Branch</option>
-          </select>
+            onChange={setOutletId}
+            includeAll={true}
+            allLabel="All Outlets"
+          />
 
           <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 ml-2">
             <Filter className="w-4 h-4 text-slate-400" />
