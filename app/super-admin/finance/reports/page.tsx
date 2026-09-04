@@ -15,7 +15,7 @@ import {
   CheckCircle2,
   AlertTriangle,
 } from 'lucide-react';
-import { getSalesReportApi, getShiftReportApi, getTaxReportApi } from '@/lib/api';
+import { getSalesReportApi, getShiftReportApi, getTaxReportApi, getApiUrl } from '@/lib/api';
 
 export default function AdminReportsPage() {
   const [activeTab, setActiveTab] = useState<'sales' | 'shifts' | 'tax'>('sales');
@@ -50,8 +50,8 @@ export default function AdminReportsPage() {
   };
 
   const handleExportCsv = () => {
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:8080');
-    const exportUrl = `${baseUrl}/api/v1/reports/export?type=${activeTab}`;
+    const baseUrl = getApiUrl().replace(/\/+$/, '');
+    const exportUrl = `${baseUrl}/reports/export?type=${activeTab}`;
     
     // Create temporary download anchor
     const a = document.createElement('a');
