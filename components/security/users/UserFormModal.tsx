@@ -43,7 +43,7 @@ export function UserFormModal({
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl space-y-5 border border-slate-100"
+        className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.15)] space-y-5 border border-slate-200/80"
       >
         <div className="flex items-center justify-between border-b border-slate-100 pb-3">
           <h3 className="font-extrabold text-slate-900 text-lg">
@@ -51,7 +51,7 @@ export function UserFormModal({
           </h3>
           <button
             onClick={onClose}
-            className="text-slate-400 hover:text-slate-600 cursor-pointer"
+            className="text-slate-400 hover:text-slate-600 cursor-pointer transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -67,7 +67,7 @@ export function UserFormModal({
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               placeholder="e.g. Sokha Chan"
-              className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] focus:bg-white transition-all"
             />
           </div>
 
@@ -80,7 +80,7 @@ export function UserFormModal({
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               placeholder="sokha@pos.com"
-              className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] focus:bg-white transition-all"
             />
           </div>
 
@@ -91,7 +91,7 @@ export function UserFormModal({
               <select
                 value={formData.role}
                 onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 capitalize cursor-pointer"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] focus:bg-white capitalize cursor-pointer transition-all"
               >
                 {dynamicRoles.length > 0 ? (
                   dynamicRoles.map((r) => (
@@ -123,7 +123,7 @@ export function UserFormModal({
                 value={formData.pin_code}
                 onChange={(e) => setFormData({ ...formData, pin_code: e.target.value })}
                 placeholder="e.g. 1234"
-                className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 font-mono"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] focus:bg-white font-mono transition-all"
               />
             </div>
           </div>
@@ -153,7 +153,7 @@ export function UserFormModal({
               value={formData.password}
               onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               placeholder={editingUser ? '••••••••' : 'Minimum 6 characters'}
-              className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 font-mono"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] focus:bg-white font-mono transition-all"
             />
           </div>
 
@@ -162,14 +162,14 @@ export function UserFormModal({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs cursor-pointer"
+              className="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs cursor-pointer transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={saving}
-              className="px-5 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs shadow-md shadow-orange-500/20 cursor-pointer transition-all"
+              className="px-5 py-2.5 rounded-xl bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white font-bold text-xs shadow-md shadow-[#5B4DFB]/20 cursor-pointer transition-all"
             >
               {saving ? 'Saving...' : editingUser ? 'Update Account' : 'Create User Account'}
             </button>

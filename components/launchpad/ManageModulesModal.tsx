@@ -12,7 +12,7 @@ import {
   PowerOff,
   Sparkles,
 } from 'lucide-react';
-import { SystemModule, MODULES_SUITE } from './types';
+import { SystemModule, MODULES_SUITE, CATALOG_MODULES } from './types';
 import { OrgItem, getEnabledModulesForOrg } from '@/lib/api';
 
 interface ManageModulesModalProps {
@@ -127,7 +127,7 @@ export function ManageModulesModal({
                         </div>
                       </div>
                       <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 shrink-0 ml-1">
-                        {orgCount}/{MODULES_SUITE.length}
+                        {orgCount}/{CATALOG_MODULES.length}
                       </span>
                     </button>
                   );
@@ -162,33 +162,24 @@ export function ManageModulesModal({
                 </div>
 
                 <div className="space-y-1.5 max-h-60 overflow-y-auto pr-1">
-                  {MODULES_SUITE.map((mod) => {
-                    const isCore = Boolean(mod.isCore);
-                    const isChecked = isCore || modalSelectedModuleIds.includes(mod.id);
+                  {CATALOG_MODULES.map((mod) => {
+                    const isChecked = modalSelectedModuleIds.includes(mod.id);
                     const Icon = mod.icon;
 
                     return (
                       <div
                         key={mod.id}
-                        onClick={() => {
-                          if (!isCore) {
-                            onToggleModalModule(mod.id);
-                          }
-                        }}
-                        className={`flex items-center justify-between p-3 rounded-2xl border transition-all ${
-                          isCore
-                            ? 'border-orange-200 bg-orange-50/50 cursor-default'
-                            : isChecked
-                            ? 'border-emerald-300 bg-emerald-50/50 cursor-pointer hover:bg-emerald-50/80'
-                            : 'border-slate-200 bg-slate-50/50 hover:bg-slate-100/70 cursor-pointer'
+                        onClick={() => onToggleModalModule(mod.id)}
+                        className={`flex items-center justify-between p-3 rounded-2xl border transition-all cursor-pointer ${
+                          isChecked
+                            ? 'border-emerald-300 bg-emerald-50/50 hover:bg-emerald-50/80'
+                            : 'border-slate-200 bg-slate-50/50 hover:bg-slate-100/70'
                         }`}
                       >
                         <div className="flex items-center gap-3 min-w-0">
                           <div
                             className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
-                              isCore
-                                ? 'bg-orange-500 text-white shadow-xs'
-                                : isChecked
+                              isChecked
                                 ? 'bg-emerald-500 text-white shadow-xs'
                                 : 'bg-slate-200 text-slate-600'
                             }`}
@@ -198,16 +189,11 @@ export function ManageModulesModal({
                           <div className="min-w-0">
                             <div className="flex items-center gap-1.5">
                               <p className="text-xs font-bold text-slate-900 truncate">
-                                {mod.title}
+                                {mod.name}
                               </p>
-                              {isCore && (
-                                <span className="text-[9px] font-black px-1.5 py-0.2 rounded bg-orange-100 text-orange-700">
-                                  CORE
-                                </span>
-                              )}
                             </div>
                             <p className="text-[10px] text-slate-500 truncate">
-                              {isCore ? 'Includes Terminal, Catalog, Shifts, Orders, CFD, KDS' : mod.badge}
+                              {mod.description}
                             </p>
                           </div>
                         </div>
@@ -215,20 +201,16 @@ export function ManageModulesModal({
                         <div className="flex items-center gap-2 shrink-0">
                           <span
                             className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full ${
-                              isCore
-                                ? 'bg-orange-100 text-orange-800'
-                                : isChecked
+                              isChecked
                                 ? 'bg-emerald-100 text-emerald-700'
                                 : 'bg-slate-200 text-slate-500'
                             }`}
                           >
-                            {isCore ? 'STANDARD INCLUDED' : isChecked ? 'ENABLED' : 'DISABLED'}
+                            {isChecked ? 'ENABLED' : 'DISABLED'}
                           </span>
                           <div
                             className={`w-5 h-5 rounded-md border flex items-center justify-center ${
-                              isCore
-                                ? 'border-orange-500 bg-orange-500 text-white'
-                                : isChecked
+                              isChecked
                                 ? 'border-emerald-500 bg-emerald-500 text-white'
                                 : 'border-slate-300 bg-white'
                             }`}

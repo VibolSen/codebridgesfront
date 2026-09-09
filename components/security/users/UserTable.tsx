@@ -30,29 +30,31 @@ export function UserTable({
   const getRoleBadgeStyle = (role: string) => {
     switch (role) {
       case 'super_admin':
-        return 'bg-amber-500/15 text-amber-700 border-amber-300';
+        return 'bg-[#F5F3FF] text-[#5B4DFB] border-[#DDD6FE]';
       case 'admin':
       case 'administrator':
-        return 'bg-orange-500/15 text-orange-700 border-orange-300';
+      case 'owner':
+        return 'bg-[#F5F3FF] text-[#7C3AED] border-[#DDD6FE]';
       case 'outlet_manager':
-        return 'bg-indigo-500/15 text-indigo-700 border-indigo-300';
+      case 'manager':
+        return 'bg-blue-50 text-blue-700 border-blue-200';
       case 'supervisor':
-        return 'bg-purple-500/15 text-purple-700 border-purple-300';
+        return 'bg-purple-50 text-purple-700 border-purple-200';
       case 'cashier':
-        return 'bg-emerald-500/15 text-emerald-700 border-emerald-300';
+        return 'bg-emerald-50 text-emerald-700 border-emerald-200';
       case 'inventory_clerk':
-        return 'bg-cyan-500/15 text-cyan-700 border-cyan-300';
+        return 'bg-amber-50 text-amber-700 border-amber-200';
       case 'accountant':
-        return 'bg-blue-500/15 text-blue-700 border-blue-300';
+        return 'bg-sky-50 text-sky-700 border-sky-200';
       case 'user':
-        return 'bg-teal-500/15 text-teal-700 border-teal-300';
+        return 'bg-slate-50 text-slate-700 border-slate-200';
       default:
-        return 'bg-slate-100 text-slate-700 border-slate-300';
+        return 'bg-slate-50 text-slate-700 border-slate-200';
     }
   };
 
   const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 15 },
+    hidden: { opacity: 0, y: 12 },
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
@@ -61,20 +63,23 @@ export function UserTable({
   };
 
   return (
-    <div className="rounded-2xl bg-white border border-slate-200 shadow-xs overflow-hidden">
+    <div className="rounded-2xl bg-white border border-slate-200/80 shadow-[0_2px_12px_rgba(15,23,42,0.03)] overflow-hidden">
       {loading ? (
         <div className="p-12 text-center text-xs text-slate-400 font-medium">
           Loading user profiles...
         </div>
       ) : users.length === 0 ? (
         <div className="p-12 text-center space-y-3">
-          <Users className="w-10 h-10 text-slate-300 mx-auto" />
-          <p className="text-xs text-slate-500 font-semibold">No user accounts found</p>
+          <div className="w-12 h-12 rounded-2xl bg-[#F5F3FF] text-[#5B4DFB] flex items-center justify-center mx-auto mb-1">
+            <Users className="w-6 h-6" />
+          </div>
+          <p className="text-sm text-slate-900 font-extrabold">No user accounts found</p>
+          <p className="text-xs text-slate-500 font-medium">Configure and register team members to populate RBAC staff accounts.</p>
         </div>
       ) : (
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 border-b border-slate-200 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+            <thead className="bg-slate-50/80 border-b border-slate-200/80 text-[10px] font-bold uppercase tracking-wider text-slate-400">
               <tr>
                 <th className="py-3.5 px-4">User Name</th>
                 <th className="py-3.5 px-4">Email</th>
@@ -93,16 +98,16 @@ export function UserTable({
                   initial="hidden"
                   animate="visible"
                   variants={cardVariants}
-                  className="hover:bg-orange-50/50 transition-colors"
+                  className="hover:bg-[#F5F3FF]/40 transition-colors"
                 >
                   {/* Name + Avatar */}
                   <td className="py-3.5 px-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-orange-500 to-amber-400 text-white font-bold flex items-center justify-center text-xs shrink-0 shadow-xs uppercase">
+                      <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#5B4DFB] to-[#7C3AED] text-white font-bold flex items-center justify-center text-xs shrink-0 shadow-xs uppercase">
                         {user.name ? user.name.substring(0, 2) : 'US'}
                       </div>
                       <div>
-                        <p className="font-bold text-slate-900 text-xs">{user.name}</p>
+                        <p className="font-extrabold text-slate-900 text-xs">{user.name}</p>
                         <p className="text-[10px] text-slate-400 font-mono">ID #{user.id}</p>
                       </div>
                     </div>
@@ -116,12 +121,12 @@ export function UserTable({
                   {/* Role Badge */}
                   <td className="py-3.5 px-4">
                     <span
-                      className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase border tracking-wider ${getRoleBadgeStyle(
+                      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase border tracking-wider ${getRoleBadgeStyle(
                         user.role
                       )}`}
                     >
                       <Shield className="w-3 h-3" />
-                      {(user.role || 'user').replace('_', ' ')}
+                      {(user.role || 'user').replace(/_/g, ' ')}
                     </span>
                   </td>
 
@@ -129,31 +134,35 @@ export function UserTable({
                   <td className="py-3.5 px-4 font-mono text-xs">
                     {user.pin_code ? (
                       <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-bold text-[10px]">
-                        <Lock className="w-3 h-3 text-orange-500" />
+                        <Lock className="w-3 h-3 text-[#5B4DFB]" />
                         PIN Set
                       </span>
                     ) : (
-                      <span className="text-[10px] text-slate-400">No PIN</span>
+                      <span className="text-[10px] text-slate-400 font-medium">No PIN</span>
                     )}
                   </td>
 
                   {/* Outlet */}
                   <td className="py-3.5 px-4 text-slate-600">
-                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-slate-700">
+                    <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-700">
                       <Building2 className="w-3.5 h-3.5 text-slate-400" />
-                      {user.outlet_name || 'Phnom Penh Main'}
+                      {user.outlet_name || 'All Outlets'}
                     </span>
                   </td>
 
                   {/* Active Status */}
                   <td className="py-3.5 px-4">
-                    <span
-                      className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
-                        user.is_active ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-600'
-                      }`}
-                    >
-                      {user.is_active ? 'Active' : 'Inactive'}
-                    </span>
+                    {user.is_active ? (
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        Active
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200">
+                        <span className="w-1.5 h-1.5 rounded-full bg-rose-400" />
+                        Inactive
+                      </span>
+                    )}
                   </td>
 
                   {/* Action Buttons */}
@@ -161,14 +170,14 @@ export function UserTable({
                     <div className="flex items-center justify-end gap-1.5">
                       <button
                         onClick={() => onResetPassword(user)}
-                        className="p-1.5 rounded-lg text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-colors cursor-pointer"
+                        className="p-1.5 rounded-lg text-slate-400 hover:text-[#5B4DFB] hover:bg-[#F5F3FF] transition-colors cursor-pointer"
                         title="Reset Password"
                       >
                         <KeyRound className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => onEditUser(user)}
-                        className="p-1.5 rounded-lg text-slate-500 hover:text-orange-600 hover:bg-orange-100 transition-colors cursor-pointer"
+                        className="p-1.5 rounded-lg text-slate-400 hover:text-[#5B4DFB] hover:bg-[#F5F3FF] transition-colors cursor-pointer"
                         title="Edit User Role / Details / PIN"
                       >
                         <Edit3 className="w-4 h-4" />
@@ -176,7 +185,7 @@ export function UserTable({
                       {user.is_active && (
                         <button
                           onClick={() => onDeactivateUser(user.id, user.name)}
-                          className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-100 transition-colors cursor-pointer"
+                          className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
                           title="Deactivate Account"
                         >
                           <UserX className="w-4 h-4" />

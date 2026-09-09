@@ -32,7 +32,7 @@ export async function getReconciliationExceptionsApi(status?: string, type?: str
   return await apiFetch(`/reconciliation/exceptions?${params.toString()}`);
 }
 
-export async function resolveReconciliationExceptionApi(id: string, payload: { status: 'resolved' | 'ignored'; notes: string }) {
+export async function resolveReconciliationExceptionApi(id: string | number, payload: { status: 'resolved' | 'ignored'; notes: string }) {
   return await apiFetch(`/reconciliation/exceptions/${id}/resolve`, {
     method: 'POST',
     body: JSON.stringify(payload),

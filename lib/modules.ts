@@ -13,7 +13,7 @@ export const DEFAULT_ENTERPRISE_MODULES: string[] = ['pos', 'pos-management'];
 
 /**
  * Read enabled modules from local fast cache or default set.
- * By default, every organization starts with the Core POS Ecosystem enabled.
+ * By default, every organization starts with the Core POS Management System enabled.
  */
 export function getEnabledModulesForOrg(orgName: string): string[] {
   if (typeof window === 'undefined' || !orgName || orgName === 'No Organization Yet! Please Create') {
@@ -25,16 +25,14 @@ export function getEnabledModulesForOrg(orgName: string): string[] {
       return ['pos', 'pos-management'];
     }
     const parsed = JSON.parse(raw);
-    const list = Array.isArray(parsed) ? parsed : [];
-    if (!list.includes('pos') && !list.includes('pos-management')) {
-      return ['pos', 'pos-management', ...list];
-    }
-    return list;
+    return Array.isArray(parsed) ? parsed : [];
   } catch (e) {
     console.warn('[modules] Failed to read enabled modules from cache:', e);
     return ['pos', 'pos-management'];
   }
 }
+
+const inFlightModuleSync: Record<string, Promise<string[]>> = {};
 
 /**
  * Fetch enabled modules directly from backend Cloud Database (Source of Truth)
@@ -42,24 +40,52 @@ export function getEnabledModulesForOrg(orgName: string): string[] {
  */
 export async function fetchAndSyncModulesForOrg(orgName: string): Promise<string[]> {
   if (!orgName || orgName === 'No Organization Yet! Please Create') return [];
-  try {
-    const res = await getTenantModulesApi(orgName);
-    if (res?.success && Array.isArray(res.modules)) {
-      if (typeof window !== 'undefined') {
-        localStorage.setItem(`${STORAGE_KEY_PREFIX}${orgName}`, JSON.stringify(res.modules));
-        window.dispatchEvent(new CustomEvent('cb_modules_changed', { detail: { orgName, updated: res.modules } }));
-      }
-      return res.modules;
-    }
-  } catch (err) {
-    console.warn('[modules] Could not sync with cloud DB, using local cache:', err);
+
+  const existing = inFlightModuleSync[orgName];
+  if (existing) {
+    return existing;
   }
-  return getEnabledModulesForOrg(orgName);
+
+  inFlightModuleSync[orgName] = (async () => {
+    try {
+      const res = await getTenantModulesApi(orgName);
+      if (res?.success && Array.isArray(res.modules)) {
+        if (typeof window !== 'undefined') {
+          localStorage.setItem(`${STORAGE_KEY_PREFIX}${orgName}`, JSON.stringify(res.modules));
+          window.dispatchEvent(new CustomEvent('cb_modules_changed', { detail: { orgName, updated: res.modules } }));
+        }
+        return res.modules;
+      }
+    } catch (err) {
+      console.warn('[modules] Could not sync with cloud DB, using local cache:', err);
+    } finally {
+      delete inFlightModuleSync[orgName];
+    }
+    return getEnabledModulesForOrg(orgName);
+  })();
+
+  return inFlightModuleSync[orgName];
 }
 
 export function isModuleEnabledForOrg(orgName: string, moduleId: string): boolean {
   if (!orgName || orgName === 'No Organization Yet! Please Create') return false;
   const enabled = getEnabledModulesForOrg(orgName);
+  if (
+    moduleId === 'inventory-suite' ||
+    moduleId === 'inventory' ||
+    moduleId === 'kds-kitchen' ||
+    moduleId === 'kds' ||
+    moduleId === 'cfd-display' ||
+    moduleId === 'cfd'
+  ) {
+    return (
+      enabled.includes('pos-management') ||
+      enabled.includes('pos') ||
+      enabled.includes('inventory-suite') ||
+      enabled.includes('kds-kitchen') ||
+      enabled.includes('cfd-display')
+    );
+  }
   return enabled.includes(moduleId);
 }
 
@@ -70,7 +96,11 @@ export function enableModuleForOrg(orgName: string, moduleId: string): string[] 
   if (typeof window === 'undefined' || !orgName || orgName === 'No Organization Yet! Please Create') return [];
   const current = getEnabledModulesForOrg(orgName);
   if (!current.includes(moduleId)) {
-    const updated = [...current, moduleId];
+    const toAdd =
+      moduleId === 'pos-management'
+        ? ['pos-management', 'pos', 'inventory-suite', 'kds-kitchen', 'cfd-display']
+        : [moduleId];
+    const updated = Array.from(new Set([...current, ...toAdd]));
     localStorage.setItem(`${STORAGE_KEY_PREFIX}${orgName}`, JSON.stringify(updated));
     window.dispatchEvent(new CustomEvent('cb_modules_changed', { detail: { orgName, updated } }));
 
@@ -90,7 +120,11 @@ export function enableModuleForOrg(orgName: string, moduleId: string): string[] 
 export function disableModuleForOrg(orgName: string, moduleId: string): string[] {
   if (typeof window === 'undefined' || !orgName) return [];
   const current = getEnabledModulesForOrg(orgName);
-  const updated = current.filter((id) => id !== moduleId);
+  const toRemove =
+    moduleId === 'pos-management'
+      ? ['pos-management', 'pos', 'inventory-suite', 'kds-kitchen', 'cfd-display']
+      : [moduleId];
+  const updated = current.filter((id) => !toRemove.includes(id));
   localStorage.setItem(`${STORAGE_KEY_PREFIX}${orgName}`, JSON.stringify(updated));
   window.dispatchEvent(new CustomEvent('cb_modules_changed', { detail: { orgName, updated } }));
 

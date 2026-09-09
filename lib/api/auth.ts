@@ -163,51 +163,33 @@ export async function toggleApiKeyApi(id: string) {
 export async function getUsersApi(role?: string, search?: string) {
   try {
     const params = new URLSearchParams();
-    if (role) params.append('role', role);
+    if (role && role !== 'all') params.append('role', role);
     if (search) params.append('search', search);
     const query = params.toString() ? `?${params.toString()}` : '';
     return await apiFetch(`/users${query}`);
   } catch (err) {
-    console.warn('[Users API] Fallback users used:', err);
-    return {
-      status: 'success',
-      data: [
-        { id: 'u-1', name: 'Vibol', email: 'vibolsen2002@gmail.com', role: 'super_admin', is_active: true, created_at: '2026-08-24' },
-        { id: 'u-2', name: 'Outlet Manager', email: 'manager@pos.com', role: 'outlet_manager', is_active: true, created_at: '2026-08-24' },
-        { id: 'u-3', name: 'Store Supervisor', email: 'supervisor@pos.com', role: 'supervisor', is_active: true, created_at: '2026-08-24' },
-        { id: 'u-4', name: 'John Cashier', email: 'cashier@pos.com', role: 'cashier', is_active: true, created_at: '2026-08-24' },
-        { id: 'u-5', name: 'Stock Clerk', email: 'inventory@pos.com', role: 'inventory_clerk', is_active: true, created_at: '2026-08-24' },
-        { id: 'u-6', name: 'Finance Accountant', email: 'accountant@pos.com', role: 'accountant', is_active: true, created_at: '2026-08-24' },
-      ],
-    };
+    console.warn('[Users API] Error fetching users:', err);
+    return { status: 'success', data: [] };
   }
 }
 
 export async function createUserApi(data: any) {
-  return await apiFetch('/users', {
-    method: 'POST',
-    body: JSON.stringify(data),
-  });
+  return await apiFetch('/users', { method: 'POST', body: JSON.stringify(data) });
 }
 
 export async function updateUserApi(id: number | string, data: any) {
-  return await apiFetch(`/users/${id}`, {
-    method: 'PUT',
-    body: JSON.stringify(data),
-  });
+  return await apiFetch(`/users/${id}`, { method: 'PUT', body: JSON.stringify(data) });
 }
 
 export async function resetUserPasswordApi(id: number | string, password: string) {
   return await apiFetch(`/users/${id}/reset-password`, {
     method: 'POST',
-    body: JSON.stringify({ password }),
+    body: JSON.stringify({ password, new_password: password }),
   });
 }
 
 export async function deleteUserApi(id: number | string) {
-  return await apiFetch(`/users/${id}`, {
-    method: 'DELETE',
-  });
+  return await apiFetch(`/users/${id}`, { method: 'DELETE' });
 }
 
 export async function getRolesApi() {
@@ -219,10 +201,7 @@ export async function getPermissionsApi() {
 }
 
 export async function createRoleApi(data: { name: string; description?: string; permission_ids?: string[]; company_id?: string }) {
-  return await apiFetch('/roles', {
-    method: 'POST',
-    body: JSON.stringify(data),
-  });
+  return await apiFetch('/roles', { method: 'POST', body: JSON.stringify(data) });
 }
 
 export async function getRoleByIdApi(id: string) {
@@ -230,16 +209,11 @@ export async function getRoleByIdApi(id: string) {
 }
 
 export async function updateRoleApi(id: string, data: { name?: string; description?: string; permission_ids?: string[] }) {
-  return await apiFetch(`/roles/${id}`, {
-    method: 'PUT',
-    body: JSON.stringify(data),
-  });
+  return await apiFetch(`/roles/${id}`, { method: 'PUT', body: JSON.stringify(data) });
 }
 
 export async function deleteRoleApi(id: string) {
-  return await apiFetch(`/roles/${id}`, {
-    method: 'DELETE',
-  });
+  return await apiFetch(`/roles/${id}`, { method: 'DELETE' });
 }
 
 export async function getRolePermissionsApi() {
@@ -251,74 +225,35 @@ export async function getRoleDetailApi(id: string) {
 }
 
 export async function getAuditLogsApi(module?: string) {
-  let url = '/audit-logs';
-  if (module && module !== 'all') {
-    url += `?module=${encodeURIComponent(module)}`;
-  }
+  const url = module && module !== 'all' ? `/audit-logs?module=${encodeURIComponent(module)}` : '/audit-logs';
   return await apiFetch(url);
 }
 
 /**
- * Dynamically resolves and formats the real-time display title for any user role or custom database RBAC role.
- * Automatically adapts when an organization is created or active workspace is switched.
+ * Dynamically resolves and formats real-time display title for any role or custom RBAC role.
  */
-export function getRoleDisplayName(user?: any, activeOrgName?: string): string {
-  if (!user) return 'Guest';
+export function getRoleDisplayName(userOrRole?: any, activeOrgName?: string): string {
+  if (!userOrRole) return 'Organization Owner';
+  const userObj = typeof userOrRole === 'object' ? userOrRole : null;
+  const roleSlug = (typeof userOrRole === 'string' ? userOrRole : userOrRole?.role || '').toLowerCase();
 
-  const roleSlug = (user.role || '').toLowerCase();
-
-  // 1. Platform Super Admin
-  if (roleSlug === 'super_admin') {
-    return 'Platform Super Admin';
-  }
-
-  // 2. Organization Owner (Admin/Administrator/Owner of tenant workspace)
+  if (roleSlug === 'super_admin') return 'Platform Super Admin';
+  const nonOwnerRoles = ['cashier', 'inventory_clerk', 'accountant', 'supervisor'];
   if (
-    roleSlug === 'admin' ||
-    roleSlug === 'administrator' ||
-    roleSlug === 'owner' ||
-    (user.tenant_name && activeOrgName && user.tenant_name.toLowerCase() === activeOrgName.toLowerCase() && !['cashier', 'inventory_clerk', 'accountant'].includes(roleSlug))
+    ['admin', 'administrator', 'owner', 'organization_owner', 'tenant_admin'].includes(roleSlug) ||
+    Boolean(userObj?.tenant_id && !nonOwnerRoles.includes(roleSlug)) ||
+    (userObj?.tenant_name && activeOrgName && userObj.tenant_name.toLowerCase() === activeOrgName.toLowerCase() && !nonOwnerRoles.includes(roleSlug))
   ) {
     return 'Organization Owner';
   }
+  if (roleSlug === 'outlet_manager' || roleSlug === 'manager') return 'Store Manager';
+  if (roleSlug === 'supervisor') return 'Shift Supervisor';
+  if (roleSlug === 'cashier') return 'Cashier';
+  if (roleSlug === 'inventory_clerk') return 'Inventory Clerk';
+  if (roleSlug === 'accountant') return 'Accountant';
+  if (roleSlug === 'user') return 'User Account';
+  if (userObj?.role_name) return userObj.role_name;
 
-  // 3. Store / Outlet Manager
-  if (roleSlug === 'outlet_manager' || roleSlug === 'manager') {
-    return 'Store Manager';
-  }
-
-  // 4. Shift Supervisor
-  if (roleSlug === 'supervisor') {
-    return 'Shift Supervisor';
-  }
-
-  // 5. Cashier
-  if (roleSlug === 'cashier') {
-    return 'Cashier';
-  }
-
-  // 6. Inventory Clerk
-  if (roleSlug === 'inventory_clerk') {
-    return 'Inventory Clerk';
-  }
-
-  // 7. Accountant
-  if (roleSlug === 'accountant') {
-    return 'Accountant';
-  }
-
-  // 8. Base User (CodeBridge ID - no organization created yet)
-  if (roleSlug === 'user') {
-    return 'User Account';
-  }
-
-  // 9. Dynamic Custom Roles (from database roles table, e.g. "head_barista" -> "Head Barista")
-  if (user.role_name) {
-    return user.role_name;
-  }
-
-  return roleSlug
-    .replace(/_/g, ' ')
-    .replace(/\b\w/g, (c: string) => c.toUpperCase()) || 'Staff';
+  return roleSlug.replace(/_/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase()) || 'Staff';
 }
 

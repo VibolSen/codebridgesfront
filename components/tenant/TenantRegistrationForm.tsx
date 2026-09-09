@@ -52,7 +52,7 @@ export function TenantRegistrationForm({
         <button
           type="button"
           onClick={onBackToPlans}
-          className="text-xs font-bold text-slate-500 hover:text-orange-600 flex items-center gap-1.5 transition-colors cursor-pointer bg-white border border-slate-200 px-3.5 py-1.5 rounded-xl shadow-2xs"
+          className="text-xs font-bold text-slate-500 hover:text-[#5B4DFB] flex items-center gap-1.5 transition-colors cursor-pointer bg-white border border-slate-200 px-3.5 py-1.5 rounded-xl shadow-2xs"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>Back to Plans Selection</span>
@@ -66,7 +66,7 @@ export function TenantRegistrationForm({
       </div>
 
       {/* Main Form Container */}
-      <div className="bg-white rounded-3xl border border-slate-200/80 shadow-2xl shadow-orange-500/5 p-6 sm:p-8 space-y-6">
+      <div className="bg-white rounded-3xl border border-slate-200/80 shadow-2xl shadow-[#5B4DFB]/5 p-6 sm:p-8 space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
@@ -80,7 +80,7 @@ export function TenantRegistrationForm({
               </h2>
             </div>
             <p className="text-xs font-medium text-slate-500">
-              Selected Plan: <span className="text-orange-600 font-extrabold">{selectedPlan.label}</span> (14-Day Trial Included)
+              Selected Plan: <span className="text-[#5B4DFB] font-extrabold">{selectedPlan.label}</span> (14-Day Trial Included)
             </p>
           </div>
 
@@ -91,7 +91,7 @@ export function TenantRegistrationForm({
               onClick={() => onSelectPlanType('personal')}
               className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer ${
                 formData.workspaceType === 'personal'
-                  ? 'bg-white text-orange-600 shadow-sm font-black'
+                  ? 'bg-white text-[#5B4DFB] shadow-sm font-black'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -103,7 +103,7 @@ export function TenantRegistrationForm({
               onClick={() => onSelectPlanType('company')}
               className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer ${
                 formData.workspaceType === 'company'
-                  ? 'bg-white text-orange-600 shadow-sm font-black'
+                  ? 'bg-white text-[#5B4DFB] shadow-sm font-black'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -143,7 +143,7 @@ export function TenantRegistrationForm({
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                   placeholder="e.g. Sokha Chan"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 transition-all"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:ring-2 focus:ring-[#5B4DFB]/30 focus:border-[#5B4DFB] transition-all"
                 />
               </div>
 
@@ -155,7 +155,7 @@ export function TenantRegistrationForm({
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="sokha@company.com"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 transition-all"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:ring-2 focus:ring-[#5B4DFB]/30 focus:border-[#5B4DFB] transition-all"
                 />
               </div>
             </div>
@@ -168,7 +168,7 @@ export function TenantRegistrationForm({
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   placeholder="012 345 678"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 transition-all"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:ring-2 focus:ring-[#5B4DFB]/30 focus:border-[#5B4DFB] transition-all"
                 />
               </div>
 
@@ -177,7 +177,7 @@ export function TenantRegistrationForm({
                 <select
                   value={formData.country}
                   onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 transition-all"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-[#5B4DFB]/30 focus:border-[#5B4DFB] transition-all"
                 >
                   <option value="KH">🇰🇭 Cambodia (USD $ & KHR ៛)</option>
                   <option value="TH">🇹🇭 Thailand (THB ฿)</option>
@@ -204,7 +204,7 @@ export function TenantRegistrationForm({
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder={formData.workspaceType === 'personal' ? 'e.g. Sokha Coffee Cart' : 'e.g. Dreams Retail Co., Ltd'}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 transition-all"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:ring-2 focus:ring-[#5B4DFB]/30 focus:border-[#5B4DFB] transition-all"
               />
             </div>
 
@@ -217,7 +217,7 @@ export function TenantRegistrationForm({
                     value={formData.taxId}
                     onChange={(e) => setFormData({ ...formData, taxId: e.target.value })}
                     placeholder="e.g. K001-902102938"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 transition-all font-mono"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:ring-2 focus:ring-[#5B4DFB]/30 focus:border-[#5B4DFB] transition-all font-mono"
                   />
                 </div>
                 <div>
@@ -225,7 +225,7 @@ export function TenantRegistrationForm({
                   <select
                     value={formData.industry}
                     onChange={(e) => setFormData({ ...formData, industry: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 transition-all"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-[#5B4DFB]/30 focus:border-[#5B4DFB] transition-all"
                   >
                     <option value="retail">Retail Store & Boutique</option>
                     <option value="cafe_restaurant">Cafe & Restaurant / F&B</option>
@@ -244,7 +244,7 @@ export function TenantRegistrationForm({
                 value={formData.address}
                 onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                 placeholder="Street No, Sangkat/District, Phnom Penh, Cambodia"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 transition-all"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:ring-2 focus:ring-[#5B4DFB]/30 focus:border-[#5B4DFB] transition-all"
               />
             </div>
           </div>
@@ -254,7 +254,7 @@ export function TenantRegistrationForm({
             whileTap={{ scale: 0.98 }}
             type="submit"
             disabled={loading}
-            className={`w-full py-3.5 rounded-2xl font-black text-xs text-white shadow-xl shadow-orange-500/20 bg-gradient-to-r ${selectedPlan.gradient} hover:opacity-95 transition-all flex items-center justify-center gap-2 cursor-pointer`}
+            className={`w-full py-3.5 rounded-2xl font-black text-xs text-white shadow-xl shadow-[#5B4DFB]/20 bg-gradient-to-r ${selectedPlan.gradient} hover:opacity-95 transition-all flex items-center justify-center gap-2 cursor-pointer`}
           >
             {loading ? (
               <>Provisioning Cloud Workspace...</>

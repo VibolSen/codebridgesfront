@@ -25,37 +25,40 @@ export function UserStatsHeader({
     <div className="space-y-6">
       {/* Top Header Bar */}
       <motion.div
-        initial={{ opacity: 0, x: -15 }}
+        initial={{ opacity: 0, x: -10 }}
         animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3 }}
         className="flex flex-col sm:flex-row sm:items-center justify-between gap-4"
       >
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-2.5">
-            <ShieldCheck className="w-6 h-6 text-orange-500" />
+          <h1 className="text-2xl font-black text-slate-900 flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-xl bg-[#F5F3FF] text-[#5B4DFB] flex items-center justify-center">
+              <ShieldCheck className="w-5 h-5" />
+            </div>
             Users & Staff Management (RBAC)
           </h1>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs font-medium text-slate-500 mt-1">
             Manage operational staff accounts, access credentials, and role permission boundaries
           </p>
         </div>
 
         <div className="flex items-center gap-2 self-start sm:self-auto flex-wrap">
           <motion.button
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={onOpenPermissionsModal}
-            className="px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-700 font-semibold text-xs shadow-xs flex items-center gap-1.5 cursor-pointer"
+            className="px-3.5 py-2.5 rounded-xl bg-white border border-slate-200/80 text-slate-700 font-semibold text-xs shadow-[0_2px_12px_rgba(15,23,42,0.03)] hover:border-slate-300 flex items-center gap-1.5 cursor-pointer transition-colors"
           >
-            <Grid className="w-4 h-4 text-orange-500" />
+            <Grid className="w-4 h-4 text-[#5B4DFB]" />
             Permissions Matrix
           </motion.button>
 
           {onOpenInviteModal && (
             <motion.button
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               onClick={onOpenInviteModal}
-              className="px-3.5 py-2.5 rounded-xl bg-orange-50 hover:bg-orange-100 border border-orange-200 text-orange-700 font-bold text-xs shadow-xs flex items-center gap-1.5 cursor-pointer"
+              className="px-3.5 py-2.5 rounded-xl bg-[#F5F3FF] hover:bg-[#EDE9FE] border border-[#DDD6FE] text-[#5B4DFB] font-bold text-xs shadow-xs flex items-center gap-1.5 cursor-pointer transition-colors"
             >
               <UserPlus className="w-4 h-4" />
               Invite Link
@@ -63,10 +66,10 @@ export function UserStatsHeader({
           )}
 
           <motion.button
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={onOpenCreateModal}
-            className="px-4 py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs shadow-md shadow-orange-500/20 transition-all flex items-center gap-2 cursor-pointer"
+            className="px-4 py-2.5 rounded-xl bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white font-bold text-xs shadow-md shadow-[#5B4DFB]/20 transition-all flex items-center gap-2 cursor-pointer"
           >
             <UserPlus className="w-4 h-4" />
             Add New User
@@ -77,40 +80,40 @@ export function UserStatsHeader({
       {/* Summary KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <motion.div
-          whileHover={{ scale: 1.02 }}
-          className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs flex items-center justify-between"
+          whileHover={{ y: -3 }}
+          className="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-[0_2px_12px_rgba(15,23,42,0.03)] flex items-center justify-between"
         >
           <div>
-            <h4 className="text-xl font-extrabold text-slate-900">{totalUsers}</h4>
-            <p className="text-xs text-slate-500 font-medium">Total Staff Registered</p>
+            <h4 className="text-2xl font-black text-slate-900">{totalUsers}</h4>
+            <p className="text-xs text-slate-500 font-medium mt-0.5">Total Staff Registered</p>
           </div>
-          <div className="w-10 h-10 rounded-xl bg-orange-500/10 text-orange-500 flex items-center justify-center font-bold">
+          <div className="w-11 h-11 rounded-2xl bg-[#F5F3FF] text-[#5B4DFB] flex items-center justify-center font-bold">
             <Users className="w-5 h-5" />
           </div>
         </motion.div>
 
         <motion.div
-          whileHover={{ scale: 1.02 }}
-          className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs flex items-center justify-between"
+          whileHover={{ y: -3 }}
+          className="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-[0_2px_12px_rgba(15,23,42,0.03)] flex items-center justify-between"
         >
           <div>
-            <h4 className="text-xl font-extrabold text-slate-900">{activeUsersCount}</h4>
-            <p className="text-xs text-slate-500 font-medium">Active User Accounts</p>
+            <h4 className="text-2xl font-black text-slate-900">{activeUsersCount}</h4>
+            <p className="text-xs text-slate-500 font-medium mt-0.5">Active User Accounts</p>
           </div>
-          <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center font-bold">
+          <div className="w-11 h-11 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
             <CheckCircle2 className="w-5 h-5" />
           </div>
         </motion.div>
 
         <motion.div
-          whileHover={{ scale: 1.02 }}
-          className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs flex items-center justify-between"
+          whileHover={{ y: -3 }}
+          className="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-[0_2px_12px_rgba(15,23,42,0.03)] flex items-center justify-between"
         >
           <div>
-            <h4 className="text-xl font-extrabold text-slate-900">{superAdminsCount}</h4>
-            <p className="text-xs text-slate-500 font-medium">Admins & Super Admins</p>
+            <h4 className="text-2xl font-black text-slate-900">{superAdminsCount}</h4>
+            <p className="text-xs text-slate-500 font-medium mt-0.5">Admins & Super Admins</p>
           </div>
-          <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center font-bold">
+          <div className="w-11 h-11 rounded-2xl bg-violet-50 text-violet-600 flex items-center justify-center font-bold">
             <Shield className="w-5 h-5" />
           </div>
         </motion.div>

@@ -5,25 +5,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   X,
   Building2,
-  Crown,
-  Store,
-  User,
-  ShieldCheck,
+  Users,
   CheckCircle2,
-  AlertCircle,
-  Phone,
-  Mail,
-  Calendar,
-  Layers,
   Monitor,
   Boxes,
   Briefcase,
   DollarSign,
   ShoppingBag,
   ExternalLink,
-  Sliders,
-  Sparkles,
-  Lock,
+  LogIn,
 } from 'lucide-react';
 
 interface TenantDetailDrawerProps {
@@ -36,12 +26,12 @@ interface TenantDetailDrawerProps {
 }
 
 const AVAILABLE_MODULES = [
-  { id: 'pos', name: 'Point of Sale (POS)', icon: Monitor, color: 'text-orange-500 bg-orange-50' },
-  { id: 'inventory', name: 'Stock & Inventory', icon: Boxes, color: 'text-amber-500 bg-amber-50' },
-  { id: 'finance', name: 'Finance & Accounts', icon: DollarSign, color: 'text-emerald-500 bg-emerald-50' },
-  { id: 'hrm', name: 'HR & Workforce', icon: Briefcase, color: 'text-blue-500 bg-blue-50' },
-  { id: 'crm', name: 'CRM & Pipeline', icon: User, color: 'text-purple-500 bg-purple-50' },
-  { id: 'shop', name: 'E-Commerce Storefront', icon: ShoppingBag, color: 'text-rose-500 bg-rose-50' },
+  { id: 'pos', name: 'Point of Sale (POS)', icon: Monitor, color: 'bg-[#F5F3FF] text-[#7C3AED]' },
+  { id: 'inventory', name: 'Stock & Inventory', icon: Boxes, color: 'bg-[#FFFBEB] text-[#D97706]' },
+  { id: 'finance', name: 'Finance & Accounts', icon: DollarSign, color: 'bg-[#ECFDF5] text-[#059669]' },
+  { id: 'hrm', name: 'HR & Workforce', icon: Briefcase, color: 'bg-[#FFF1F2] text-[#E11D48]' },
+  { id: 'crm', name: 'CRM & Pipeline', icon: Users, color: 'bg-[#EFF6FF] text-[#2563EB]' },
+  { id: 'shop', name: 'E-Commerce Storefront', icon: ShoppingBag, color: 'bg-rose-50 text-rose-600' },
 ];
 
 export function TenantDetailDrawer({
@@ -87,15 +77,15 @@ export function TenantDetailDrawer({
           className="relative w-full max-w-xl bg-white h-full shadow-2xl border-l border-slate-200 flex flex-col z-10 overflow-y-auto"
         >
           {/* Drawer Header */}
-          <div className="p-6 border-b border-slate-100 bg-gradient-to-r from-orange-50 to-amber-50 flex items-center justify-between">
+          <div className="p-6 border-b border-slate-100 bg-gradient-to-r from-[#F5F3FF] via-white to-slate-50 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-2xl bg-orange-500 text-white flex items-center justify-center shadow-md shadow-orange-500/20 font-black">
+              <div className="w-11 h-11 rounded-2xl bg-[#5B4DFB] text-white flex items-center justify-center shadow-md shadow-[#5B4DFB]/20 font-black">
                 <Building2 className="w-6 h-6" />
               </div>
               <div>
                 <div className="flex items-center gap-2">
                   <h2 className="text-base font-extrabold text-slate-900">{tenant.name}</h2>
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 uppercase">
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 uppercase">
                     {tenant.status || 'Active'}
                   </span>
                 </div>
@@ -105,7 +95,7 @@ export function TenantDetailDrawer({
 
             <button
               onClick={onClose}
-              className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-white/80 transition-colors"
+              className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-white/80 transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -114,19 +104,19 @@ export function TenantDetailDrawer({
           {/* Drawer Body */}
           <div className="p-6 space-y-6 flex-1">
             {/* Action Bar: Impersonation Trigger */}
-            <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-between">
+            <div className="p-4 rounded-2xl bg-[#F5F3FF] border border-[#DDD6FE] flex items-center justify-between">
               <div className="space-y-0.5">
-                <div className="flex items-center gap-1.5 font-extrabold text-xs text-amber-900">
-                  <Lock className="w-4 h-4 text-amber-600" />
+                <div className="flex items-center gap-1.5 font-extrabold text-xs text-[#5B4DFB]">
+                  <LogIn className="w-4 h-4 text-[#5B4DFB]" />
                   <span>Audited Account Impersonation</span>
                 </div>
-                <p className="text-[11px] text-amber-800 font-medium leading-relaxed">
+                <p className="text-[11px] text-slate-600 font-medium leading-relaxed">
                   Log in directly as this tenant to troubleshoot settings or view registers.
                 </p>
               </div>
               <button
                 onClick={() => onImpersonate(tenant)}
-                className="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-extrabold text-xs shadow-md shadow-amber-600/20 transition-all shrink-0"
+                className="px-4 py-2 rounded-xl bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white font-extrabold text-xs shadow-md shadow-[#5B4DFB]/20 transition-all shrink-0 cursor-pointer"
               >
                 Login as Tenant →
               </button>
@@ -164,7 +154,7 @@ export function TenantDetailDrawer({
                 {onEditQuotas && (
                   <button
                     onClick={() => onEditQuotas(tenant)}
-                    className="text-[11px] font-bold text-orange-600 hover:text-orange-700"
+                    className="text-[11px] font-bold text-[#5B4DFB] hover:text-[#4E3FE3] cursor-pointer"
                   >
                     Adjust Limits
                   </button>
@@ -201,14 +191,14 @@ export function TenantDetailDrawer({
                       key={mod.id}
                       type="button"
                       onClick={() => handleModuleClick(mod.id)}
-                      className={`p-3 rounded-xl border text-left transition-all flex items-center justify-between ${
+                      className={`p-3 rounded-xl border text-left transition-all flex items-center justify-between cursor-pointer ${
                         isEnabled
-                          ? 'border-orange-300 bg-orange-50/60 shadow-xs'
+                          ? 'border-[#DDD6FE] bg-[#F5F3FF]/70 shadow-xs ring-1 ring-[#5B4DFB]/30'
                           : 'border-slate-200 bg-slate-50/50 hover:bg-slate-50 opacity-70'
                       }`}
                     >
-                      <div className="flex items-center gap-2 min-w-0">
-                        <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${mod.color}`}>
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 font-bold ${mod.color}`}>
                           <IconComp className="w-4 h-4" />
                         </div>
                         <span className="font-bold text-xs text-slate-800 truncate">{mod.name}</span>
@@ -216,7 +206,7 @@ export function TenantDetailDrawer({
                       <div
                         className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ${
                           isEnabled
-                            ? 'bg-orange-500 border-orange-500 text-white'
+                            ? 'bg-[#5B4DFB] border-[#5B4DFB] text-white'
                             : 'border-slate-300 bg-white'
                         }`}
                       >
@@ -233,13 +223,13 @@ export function TenantDetailDrawer({
           <div className="p-4 border-t border-slate-100 bg-slate-50 flex items-center justify-between">
             <button
               onClick={onClose}
-              className="px-4 py-2 rounded-xl bg-white border border-slate-200 font-bold text-xs text-slate-700 hover:bg-slate-100 transition-colors"
+              className="px-4 py-2 rounded-xl bg-white border border-slate-200 font-bold text-xs text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
             >
               Close Drawer
             </button>
             <button
               onClick={() => onImpersonate(tenant)}
-              className="px-5 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-extrabold text-xs shadow-md shadow-orange-600/20 transition-all flex items-center gap-1.5"
+              className="px-5 py-2 rounded-xl bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white font-extrabold text-xs shadow-md shadow-[#5B4DFB]/20 transition-all flex items-center gap-1.5 cursor-pointer"
             >
               <span>Impersonate Tenant</span>
               <ExternalLink className="w-3.5 h-3.5" />

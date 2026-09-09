@@ -1,0 +1,1 @@
+export { SuperAdminPurchasesView } from './SuperAdminPurchasesView';

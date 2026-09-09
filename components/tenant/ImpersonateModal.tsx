@@ -3,11 +3,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Lock,
+  LogIn,
   X,
   ShieldCheck,
-  AlertTriangle,
-  ExternalLink,
   Loader2,
   Building2,
 } from 'lucide-react';
@@ -59,19 +57,19 @@ export function ImpersonateModal({
           className="bg-white rounded-3xl shadow-2xl border border-slate-200 w-full max-w-lg overflow-hidden"
         >
           {/* Header */}
-          <div className="bg-gradient-to-r from-amber-500 to-orange-500 p-6 text-white flex items-center justify-between">
+          <div className="bg-gradient-to-r from-[#5B4DFB] to-[#6355D8] p-6 text-white flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
-                <Lock className="w-5 h-5" />
+                <LogIn className="w-5 h-5" />
               </div>
               <div>
                 <h3 className="font-extrabold text-base">Audited Tenant Impersonation</h3>
-                <p className="text-xs text-amber-100">Super Admin Access to Merchant Workspace</p>
+                <p className="text-xs text-purple-100">Super Admin Access to Merchant Workspace</p>
               </div>
             </div>
             <button
               onClick={onClose}
-              className="p-1.5 rounded-xl text-amber-100 hover:text-white hover:bg-white/10 transition-colors"
+              className="p-1.5 rounded-xl text-purple-100 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -91,7 +89,7 @@ export function ImpersonateModal({
             {/* Warning Note */}
             <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1 text-xs text-slate-600">
               <div className="flex items-center gap-1.5 font-bold text-slate-800">
-                <ShieldCheck className="w-4 h-4 text-orange-600" />
+                <ShieldCheck className="w-4 h-4 text-[#5B4DFB]" />
                 <span>Mandatory Security Audit Notice</span>
               </div>
               <p className="text-[11px] leading-relaxed">
@@ -110,7 +108,7 @@ export function ImpersonateModal({
                 placeholder="e.g. Ticket #4829 - Resolving POS receipt template issue"
                 value={reason}
                 onChange={(e) => setReason(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB]"
               />
             </div>
 
@@ -125,16 +123,16 @@ export function ImpersonateModal({
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 font-bold text-xs text-slate-700 transition-colors"
+                className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 font-bold text-xs text-slate-700 transition-colors cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={loading}
-                className="px-5 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-extrabold text-xs shadow-md shadow-amber-600/20 transition-all flex items-center gap-2 disabled:opacity-50"
+                className="px-5 py-2.5 rounded-xl bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white font-extrabold text-xs shadow-md shadow-[#5B4DFB]/25 transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
               >
-                {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Lock className="w-4 h-4" />}
+                {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <LogIn className="w-4 h-4" />}
                 <span>Start Impersonation Session</span>
               </button>
             </div>

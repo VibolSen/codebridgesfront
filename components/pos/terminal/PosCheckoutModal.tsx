@@ -3,16 +3,16 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Banknote,
-  QrCode,
-  CreditCard,
   CheckCircle2,
   X,
   Sparkles,
   DollarSign,
   Printer,
+  QrCode,
+  CreditCard,
 } from 'lucide-react';
 import { CartItem } from '../types';
+import { PosCheckoutTenderSelector } from './PosCheckoutTenderSelector';
 
 interface PosCheckoutModalProps {
   isOpen: boolean;
@@ -146,46 +146,10 @@ export function PosCheckoutModal({
             </div>
 
             {/* Tender Type Selector */}
-            <div className="grid grid-cols-3 gap-2">
-              <button
-                type="button"
-                onClick={() => setTenderType('cash')}
-                className={`p-2.5 rounded-xl border text-xs font-black flex flex-col items-center gap-1 transition-all cursor-pointer ${
-                  tenderType === 'cash'
-                    ? 'bg-emerald-50 text-emerald-800 border-emerald-300 shadow-xs'
-                    : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
-                }`}
-              >
-                <Banknote className="w-4 h-4 text-emerald-600" />
-                <span>Cash</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setTenderType('khqr')}
-                className={`p-2.5 rounded-xl border text-xs font-black flex flex-col items-center gap-1 transition-all cursor-pointer ${
-                  tenderType === 'khqr'
-                    ? 'bg-orange-50 text-orange-800 border-orange-300 shadow-xs'
-                    : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
-                }`}
-              >
-                <QrCode className="w-4 h-4 text-orange-600" />
-                <span>ABA KHQR</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setTenderType('card')}
-                className={`p-2.5 rounded-xl border text-xs font-black flex flex-col items-center gap-1 transition-all cursor-pointer ${
-                  tenderType === 'card'
-                    ? 'bg-blue-50 text-blue-800 border-blue-300 shadow-xs'
-                    : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
-                }`}
-              >
-                <CreditCard className="w-4 h-4 text-blue-600" />
-                <span>Card</span>
-              </button>
-            </div>
+            <PosCheckoutTenderSelector
+              tenderType={tenderType}
+              onSelectTender={setTenderType}
+            />
 
             {/* Cash Tender Details & Change Due Calculator */}
             {tenderType === 'cash' && (

@@ -5,3 +5,5 @@ export * from './PosCartPanel';
 export * from './PosCheckoutModal';
 export * from './PosHoldCartModal';
 export * from './PosOfflineBanner';
+export * from './PosTerminalView';
+export * from './usePosTerminalState';

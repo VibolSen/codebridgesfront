@@ -11,6 +11,9 @@ import {
   Briefcase,
   Store,
   Tv,
+  Activity,
+  Zap,
+  TrendingUp,
 } from 'lucide-react';
 
 export interface PosServiceItem {
@@ -75,10 +78,10 @@ export const POS_INTEGRATED_SERVICES: PosServiceItem[] = [
   },
   {
     id: 'finance-service',
-    name: 'Finance & Bank Settlement',
-    category: 'Accounting',
+    name: 'Financial & Bank Settlement',
+    category: 'Financial Operations',
     description: 'Double-entry General Ledger, daily ABA/NBC Bakong reconciliation, AR invoices & AP supplier bills.',
-    href: '/accounting',
+    href: '/financial',
     icon: DollarSign,
     color: 'text-teal-600',
     bgColor: 'bg-teal-100',
@@ -133,18 +136,95 @@ export const POS_INTEGRATED_SERVICES: PosServiceItem[] = [
 export const MODULES_SUITE: SystemModule[] = [
   {
     id: 'pos-management',
-    title: 'POS Management System',
+    title: 'POS Management',
     category: 'core',
-    description: 'Unified Cashier Register, Real-Time Inventory, Shifts, Double-Entry Finance & Kitchen Orders.',
-    href: '/pos',
+    description: 'Unified Cashier Register, Shifts, Multi-Warehouse Stock Logistics, Inter-Warehouse Transfers & Purchase Orders.',
+    href: '/pos/dashboard',
     icon: Monitor,
     gradient: 'from-orange-500 via-amber-500 to-yellow-500',
     badge: 'Core Suite',
     features: [
-      'Cashier Fast-Touch Terminal & Barcodes',
-      'Inventory, Shifts & Finance Ledgers',
-      'Kitchen Display (KDS) & Customer Display',
+      'Cashier Fast-Touch Terminal & Barcode Scanner',
+      'Multi-Warehouse Inventory & Inter-Warehouse Transfers',
+      'Till Shifts, Z-Reports & Supplier Purchase Orders',
     ],
     roleRequired: 'Cashier / Manager / Administrator',
   },
 ];
+
+export interface CatalogModule {
+  id: string;
+  name: string;
+  monogram: string;
+  category: string;
+  description: string;
+  bgPill: string;
+  icon: any;
+  href: string;
+  isCore?: boolean;
+}
+
+export const CATALOG_MODULES: CatalogModule[] = [
+  {
+    id: 'pos-management',
+    name: 'POS Management',
+    monogram: 'POS',
+    category: 'Core Commerce & Operations',
+    description: 'Unified Cashier Terminal, Till Shifts & Float Auditing, Multi-Warehouse Stock, Kitchen Display (KDS) & Customer Display (CFD).',
+    bgPill: 'bg-purple-50 text-[#5B4DFB]',
+    icon: Store,
+    href: '/pos/dashboard',
+    isCore: false,
+  },
+  {
+    id: 'staff-hrm',
+    name: 'HRM, Staff & Payroll',
+    monogram: 'HR',
+    category: 'Workforce Management',
+    description: 'Staff headcount directory, 4-digit POS register PIN quick-switch, timesheets, and payroll.',
+    bgPill: 'bg-rose-50 text-rose-600',
+    icon: Users,
+    href: '/hrm',
+  },
+  {
+    id: 'crm-loyalty',
+    name: 'Customer CRM & Loyalty',
+    monogram: 'CR',
+    category: 'Customer Growth',
+    description: 'Customer contact directory, wholesale B2B contracts, VIP loyalty points, and purchase history.',
+    bgPill: 'bg-blue-50 text-blue-600',
+    icon: Briefcase,
+    href: '/crm',
+  },
+  {
+    id: 'financial-management',
+    name: 'Financial & Accounting',
+    monogram: 'FN',
+    category: 'Financial Operations & Ledgers',
+    description: 'General Ledger, Chart of Accounts (COA), Accounts Receivable (AR), Accounts Payable (AP), bank reconciliations, and P&L.',
+    bgPill: 'bg-emerald-50 text-emerald-700',
+    icon: DollarSign,
+    href: '/financial',
+  },
+  {
+    id: 'bill-subscription',
+    name: 'Bill & SaaS Subscription',
+    monogram: 'BS',
+    category: 'Finance & Billing',
+    description: 'Automate recurring customer invoices, subscription quotas, and failed payment retry webhooks.',
+    bgPill: 'bg-slate-100 text-slate-900',
+    icon: Zap,
+    href: '/super-admin/finance/billing',
+  },
+  {
+    id: 'telemetry-hub',
+    name: 'Platform Infrastructure Hub',
+    monogram: 'TM',
+    category: 'Platform Operations',
+    description: 'Real-time microservices latency monitoring, connection pools, RabbitMQ, and Redis cache telemetry.',
+    bgPill: 'bg-indigo-50 text-indigo-700',
+    icon: Activity,
+    href: '/super-admin/infrastructure',
+  },
+];
+

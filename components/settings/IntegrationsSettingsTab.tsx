@@ -1,0 +1,115 @@
+'use client';
+
+import React from 'react';
+import { QrCode, Smartphone } from 'lucide-react';
+
+interface IntegrationsSettingsTabProps {
+  bakongMerchantId: string;
+  setBakongMerchantId: (val: string) => void;
+  bakongBankName: string;
+  setBakongBankName: (val: string) => void;
+  bakongSecret: string;
+  setBakongSecret: (val: string) => void;
+  smsGatewayProvider: string;
+  setSmsGatewayProvider: (val: string) => void;
+  smsApiKey: string;
+  setSmsApiKey: (val: string) => void;
+}
+
+export function IntegrationsSettingsTab({
+  bakongMerchantId,
+  setBakongMerchantId,
+  bakongBankName,
+  setBakongBankName,
+  bakongSecret,
+  setBakongSecret,
+  smsGatewayProvider,
+  setSmsGatewayProvider,
+  smsApiKey,
+  setSmsApiKey,
+}: IntegrationsSettingsTabProps) {
+  return (
+    <div className="space-y-6">
+      <div className="p-4 rounded-2xl bg-orange-50/60 border border-orange-200/80 flex items-start gap-3">
+        <QrCode className="w-5 h-5 text-orange-600 shrink-0 mt-0.5" />
+        <div>
+          <p className="text-xs font-black text-orange-950">
+            National Bank of Cambodia (NBC) Bakong KHQR Master Gateway
+          </p>
+          <p className="text-[11px] text-orange-800 mt-0.5">
+            Platform-wide master credentials used to sign dynamic KHQR payloads across all merchant registers.
+          </p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-xs font-bold text-slate-700 mb-1">
+            Bakong Master Merchant ID
+          </label>
+          <input
+            type="text"
+            value={bakongMerchantId}
+            onChange={(e) => setBakongMerchantId(e.target.value)}
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono font-medium focus:outline-none focus:ring-2 focus:ring-orange-500/30"
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-bold text-slate-700 mb-1">
+            Acquiring Settlement Bank
+          </label>
+          <input
+            type="text"
+            value={bakongBankName}
+            onChange={(e) => setBakongBankName(e.target.value)}
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-orange-500/30"
+          />
+        </div>
+        <div className="sm:col-span-2">
+          <label className="block text-xs font-bold text-slate-700 mb-1">
+            Bakong EMVCo HMAC Secret Key
+          </label>
+          <input
+            type="password"
+            value={bakongSecret}
+            onChange={(e) => setBakongSecret(e.target.value)}
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono font-medium focus:outline-none focus:ring-2 focus:ring-orange-500/30"
+          />
+        </div>
+      </div>
+
+      <hr className="border-slate-100 my-4" />
+
+      <h3 className="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-2">
+        <Smartphone className="w-4 h-4 text-slate-500" />
+        <span>SMS OTP Gateway (Staff 2FA &amp; Receipts)</span>
+      </h3>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-xs font-bold text-slate-700 mb-1">
+            SMS Gateway Provider
+          </label>
+          <select
+            value={smsGatewayProvider}
+            onChange={(e) => setSmsGatewayProvider(e.target.value)}
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-700 cursor-pointer"
+          >
+            <option value="plasgate">Plasgate (Cambodia Direct Route)</option>
+            <option value="twilio">Twilio Global SMS</option>
+          </select>
+        </div>
+        <div>
+          <label className="block text-xs font-bold text-slate-700 mb-1">
+            Master SMS API Token
+          </label>
+          <input
+            type="password"
+            value={smsApiKey}
+            onChange={(e) => setSmsApiKey(e.target.value)}
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono font-medium"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}

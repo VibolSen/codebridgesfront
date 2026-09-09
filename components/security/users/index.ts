@@ -5,3 +5,4 @@ export { UserFormModal } from './UserFormModal';
 export type { UserFormData } from './UserFormModal';
 export { ResetPasswordModal } from './ResetPasswordModal';
 export { PermissionsMatrixModal } from './PermissionsMatrixModal';
+export { SuperAdminUsersView } from './SuperAdminUsersView';

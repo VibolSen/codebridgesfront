@@ -56,7 +56,7 @@ export function PosSuiteHeader({
 
   const handleLogout = async () => {
     await logoutApi();
-    router.push('/login');
+    router.push('/CodeBridgesOnboardingLaunchpad');
   };
 
   const userRole = (user?.role || '').toLowerCase();
@@ -103,7 +103,7 @@ export function PosSuiteHeader({
       <div className="h-16 px-4 sm:px-6 flex items-center justify-between gap-3">
         {/* Zone 1: Branding & Register Identity */}
         <div className="flex items-center gap-3 shrink-0">
-          <Link href="/pos" className="flex items-center gap-2.5 group">
+          <Link href="/pos/dashboard" className="flex items-center gap-2.5 group">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center font-extrabold text-white shadow-md shadow-orange-500/20 group-hover:scale-105 transition-transform">
               <Monitor className="w-5 h-5" />
             </div>

@@ -20,44 +20,46 @@ export function PermissionsMatrixModal({
   const getRoleBadgeStyle = (role: string) => {
     switch (role) {
       case 'super_admin':
-        return 'bg-amber-500/15 text-amber-700 border-amber-300';
+        return 'bg-[#F5F3FF] text-[#5B4DFB] border-[#DDD6FE]';
       case 'admin':
       case 'administrator':
-        return 'bg-orange-500/15 text-orange-700 border-orange-300';
+      case 'owner':
+        return 'bg-[#F5F3FF] text-[#7C3AED] border-[#DDD6FE]';
       case 'outlet_manager':
-        return 'bg-indigo-500/15 text-indigo-700 border-indigo-300';
+      case 'manager':
+        return 'bg-blue-50 text-blue-700 border-blue-200';
       case 'supervisor':
-        return 'bg-purple-500/15 text-purple-700 border-purple-300';
+        return 'bg-purple-50 text-purple-700 border-purple-200';
       case 'cashier':
-        return 'bg-emerald-500/15 text-emerald-700 border-emerald-300';
+        return 'bg-emerald-50 text-emerald-700 border-emerald-200';
       case 'inventory_clerk':
-        return 'bg-cyan-500/15 text-cyan-700 border-cyan-300';
+        return 'bg-amber-50 text-amber-700 border-amber-200';
       case 'accountant':
-        return 'bg-blue-500/15 text-blue-700 border-blue-300';
+        return 'bg-sky-50 text-sky-700 border-sky-200';
       case 'user':
-        return 'bg-teal-500/15 text-teal-700 border-teal-300';
+        return 'bg-slate-50 text-slate-700 border-slate-200';
       default:
-        return 'bg-slate-100 text-slate-700 border-slate-300';
+        return 'bg-slate-50 text-slate-700 border-slate-200';
     }
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center p-4">
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="w-full max-w-3xl rounded-2xl bg-white p-6 shadow-2xl space-y-5 border border-slate-100 max-h-[85vh] overflow-y-auto"
+        className="w-full max-w-3xl rounded-2xl bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.15)] space-y-5 border border-slate-200/80 max-h-[85vh] overflow-y-auto"
       >
         <div className="flex items-center justify-between border-b border-slate-100 pb-3">
           <div>
             <h3 className="font-extrabold text-slate-900 text-lg flex items-center gap-2">
-              <Grid className="w-5 h-5 text-orange-500" />
+              <Grid className="w-5 h-5 text-[#5B4DFB]" />
               Role Capabilities & Permissions Matrix
             </h3>
-            <p className="text-xs text-slate-400">Predefined system roles and capability boundaries</p>
+            <p className="text-xs text-slate-500 font-medium">Predefined system roles and capability boundaries</p>
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-slate-600 cursor-pointer">
+          <button onClick={onClose} className="text-slate-400 hover:text-slate-600 cursor-pointer transition-colors">
             <X className="w-5 h-5" />
           </button>
         </div>

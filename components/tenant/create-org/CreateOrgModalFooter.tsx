@@ -26,7 +26,7 @@ export function CreateOrgModalFooter({
       <button
         type="submit"
         disabled={loading || success}
-        className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-extrabold text-xs shadow-md shadow-orange-500/25 flex items-center gap-2 transition-all cursor-pointer disabled:opacity-50"
+        className="px-5 py-2.5 rounded-xl bg-[#5B4DFB] hover:bg-[#4E3FE3] active:scale-98 text-white font-extrabold text-xs shadow-md shadow-[#5B4DFB]/25 flex items-center gap-2 transition-all cursor-pointer disabled:opacity-50"
       >
         {loading ? (
           <>

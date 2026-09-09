@@ -99,19 +99,27 @@ export function CreateOrgModal({
       if (typeof window !== 'undefined') {
         const currentUserStr = localStorage.getItem('pos_user');
         const currentUserObj = currentUserStr ? JSON.parse(currentUserStr) : {};
+        const updatedRole = currentUserObj.role === 'super_admin' ? 'super_admin' : 'administrator';
         const updatedUser = {
           ...currentUserObj,
+          tenant_id: createdOrgData.id || currentUserObj.tenant_id,
           tenant_name: createdOrgData.name,
           company_name: createdOrgData.name,
-          role: currentUserObj.role === 'super_admin' ? 'super_admin' : 'administrator',
+          outlet_id: createdOrgData.outlet_id || currentUserObj.outlet_id,
+          role: updatedRole,
         };
         localStorage.setItem('pos_user', JSON.stringify(updatedUser));
         localStorage.setItem('active_org', createdOrgData.name);
 
-        // Dispatch global sync event to notify all components
+        // Dispatch global sync events to notify all components in real time
         window.dispatchEvent(
           new CustomEvent('cb_org_changed', {
             detail: { orgName: createdOrgData.name },
+          })
+        );
+        window.dispatchEvent(
+          new CustomEvent('cb_user_updated', {
+            detail: { user: updatedUser },
           })
         );
       }

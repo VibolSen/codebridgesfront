@@ -7,3 +7,4 @@ export { CreateOrgModal } from './CreateOrgModal';
 export type { CreateOrgModalProps } from './CreateOrgModal';
 export { TenantDetailDrawer } from './TenantDetailDrawer';
 export { ImpersonateModal } from './ImpersonateModal';
+export { SuperAdminTenantsView } from './SuperAdminTenantsView';

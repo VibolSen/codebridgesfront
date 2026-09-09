@@ -29,18 +29,18 @@ export function ResetPasswordModal({
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl space-y-4 border border-slate-100"
+        className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-[0_20px_50px_rgba(15,23,42,0.15)] space-y-4 border border-slate-200/80"
       >
         <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-          <h3 className="font-bold text-slate-900 text-base flex items-center gap-2">
-            <KeyRound className="w-4 h-4 text-indigo-500" /> Reset Staff Password
+          <h3 className="font-extrabold text-slate-900 text-base flex items-center gap-2">
+            <KeyRound className="w-4 h-4 text-[#5B4DFB]" /> Reset Staff Password
           </h3>
-          <button onClick={onClose} className="text-slate-400 hover:text-slate-600 cursor-pointer">
+          <button onClick={onClose} className="text-slate-400 hover:text-slate-600 cursor-pointer transition-colors">
             <X className="w-4 h-4" />
           </button>
         </div>
 
-        <p className="text-xs text-slate-500">
+        <p className="text-xs text-slate-500 font-medium">
           Enter a new password for <strong className="text-slate-900">{user.name}</strong> ({user.email}).
         </p>
 
@@ -54,22 +54,22 @@ export function ResetPasswordModal({
               value={newPasswordInput}
               onChange={(e) => onPasswordChange(e.target.value)}
               placeholder="Minimum 6 characters"
-              className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 font-mono"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] focus:bg-white font-mono transition-all"
             />
           </div>
 
-          <div className="flex items-center justify-end gap-2">
+          <div className="flex items-center justify-end gap-2 pt-1">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs cursor-pointer"
+              className="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs cursor-pointer transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={saving}
-              className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-xs cursor-pointer transition-all"
+              className="px-4 py-2.5 rounded-xl bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white font-bold text-xs shadow-md shadow-[#5B4DFB]/20 cursor-pointer transition-all"
             >
               {saving ? 'Resetting...' : 'Reset Password'}
             </button>

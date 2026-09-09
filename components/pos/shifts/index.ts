@@ -6,3 +6,4 @@ export * from './PosShiftCloseModal';
 export * from './DualCurrencyDenominationModal';
 export * from './PosThermalReportModal';
 export * from './PosSafeDropModal';
+export * from './PosShiftsManagementView';

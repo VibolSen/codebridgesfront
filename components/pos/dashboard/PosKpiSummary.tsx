@@ -37,7 +37,7 @@ export function PosKpiSummary({ kpis }: PosKpiSummaryProps) {
       icon: DollarSign,
       gradient: 'bg-gradient-to-br from-amber-500 to-orange-500',
       shadow: 'shadow-lg shadow-orange-500/20',
-      badge: '+18% vs Yesterday',
+      badge: 'Live Sales',
       badgeColor: 'text-white bg-white/20 border-white/30',
       textColor: 'text-white',
       subTextColor: 'text-orange-100',
