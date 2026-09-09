@@ -5,8 +5,17 @@ import {
   Briefcase,
   Users,
   ShoppingBag,
+  UtensilsCrossed,
+  Tv,
   LucideIcon,
 } from 'lucide-react';
+
+export interface TenantOption {
+  id: string;
+  name: string;
+  client_tier: string;
+  company_code: string;
+}
 
 export interface PlatformModule {
   id: string;
@@ -96,6 +105,32 @@ export const MASTER_MODULES: PlatformModule[] = [
     status: 'Beta',
     version: 'v2.1.0-beta',
     adoptionCount: 52,
+    isDefault: false,
+  },
+  {
+    id: 'kds',
+    name: 'Kitchen Display (KDS)',
+    category: 'Kitchen & Production',
+    description: 'Real-time kitchen order tickets, cook prep timers, course staging, and station completion alerts.',
+    icon: UtensilsCrossed,
+    color: 'text-[#EA580C]',
+    bgColor: 'bg-[#FFF7ED]',
+    status: 'GA / Stable',
+    version: 'v2.4.0',
+    adoptionCount: 45,
+    isDefault: false,
+  },
+  {
+    id: 'cfd',
+    name: 'Customer Display (CFD)',
+    category: 'Terminal & Peripherals',
+    description: 'Secondary counter screen live items rendering, customer total, and dynamic NBC Bakong KHQR.',
+    icon: Tv,
+    color: 'text-[#0284C7]',
+    bgColor: 'bg-[#F0F9FF]',
+    status: 'GA / Stable',
+    version: 'v2.4.0',
+    adoptionCount: 62,
     isDefault: false,
   },
   {
