@@ -65,7 +65,7 @@ export const ShopCartDrawer: React.FC<ShopCartDrawerProps> = ({
             {/* Drawer Header */}
             <div className="p-5 border-b border-slate-800 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <ShoppingBag className="w-5 h-5 text-orange-400" />
+                <ShoppingBag className="w-5 h-5 text-brand" />
                 <h2 className="font-bold text-sm text-white">Your Shopping Cart</h2>
               </div>
               <button
@@ -133,7 +133,7 @@ export const ShopCartDrawer: React.FC<ShopCartDrawerProps> = ({
                         onClick={() => setDeliveryType('pickup')}
                         className={`py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-all ${
                           deliveryType === 'pickup'
-                            ? 'bg-orange-500 text-white shadow-xs'
+                            ? 'bg-brand text-white shadow-xs shadow-brand/20'
                             : 'text-slate-400 hover:text-white'
                         }`}
                       >
@@ -144,7 +144,7 @@ export const ShopCartDrawer: React.FC<ShopCartDrawerProps> = ({
                         onClick={() => setDeliveryType('delivery')}
                         className={`py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-all ${
                           deliveryType === 'delivery'
-                            ? 'bg-orange-500 text-white shadow-xs'
+                            ? 'bg-brand text-white shadow-xs shadow-brand/20'
                             : 'text-slate-400 hover:text-white'
                         }`}
                       >
@@ -163,7 +163,7 @@ export const ShopCartDrawer: React.FC<ShopCartDrawerProps> = ({
                       placeholder="Enter full name..."
                       value={customerName}
                       onChange={(e) => setCustomerName(e.target.value)}
-                      className="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-xs font-semibold text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+                      className="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-xs font-semibold text-white focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
                     />
                   </div>
 
@@ -177,7 +177,7 @@ export const ShopCartDrawer: React.FC<ShopCartDrawerProps> = ({
                       placeholder="012 345 6789..."
                       value={customerPhone}
                       onChange={(e) => setCustomerPhone(e.target.value)}
-                      className="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-xs font-semibold text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+                      className="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-xs font-semibold text-white focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
                     />
                   </div>
 
@@ -192,7 +192,7 @@ export const ShopCartDrawer: React.FC<ShopCartDrawerProps> = ({
                         placeholder="Street, House No, Phnom Penh..."
                         value={deliveryAddress}
                         onChange={(e) => setDeliveryAddress(e.target.value)}
-                        className="w-full p-3 rounded-xl bg-slate-800 border border-slate-700 text-xs font-semibold text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        className="w-full p-3 rounded-xl bg-slate-800 border border-slate-700 text-xs font-semibold text-white focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
                       />
                     </div>
                   )}
@@ -213,14 +213,14 @@ export const ShopCartDrawer: React.FC<ShopCartDrawerProps> = ({
                     </div>
                     <div className="border-t border-slate-800 pt-1.5 flex justify-between font-extrabold text-sm text-white">
                       <span>Total Due:</span>
-                      <span className="text-orange-400">${grandTotal.toFixed(2)}</span>
+                      <span className="text-brand">${grandTotal.toFixed(2)}</span>
                     </div>
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-extrabold text-xs shadow-lg shadow-orange-500/30 transition-all flex items-center justify-center gap-2"
+                    className="w-full py-3.5 rounded-xl bg-brand hover:bg-brand-hover text-white font-extrabold text-xs shadow-lg shadow-brand/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
                   >
                     <QrCode className="w-4 h-4" />
                     Pay ${grandTotal.toFixed(2)} via Bakong KHQR

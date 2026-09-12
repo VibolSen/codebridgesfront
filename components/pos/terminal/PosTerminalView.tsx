@@ -198,7 +198,7 @@ export function PosTerminalView() {
       fallback={
         <div className="h-screen w-screen flex items-center justify-center bg-slate-900 text-white font-sans">
           <div className="flex items-center gap-3 text-xs font-bold">
-            <Loader2 className="w-5 h-5 animate-spin text-orange-500" />
+            <Loader2 className="w-5 h-5 animate-spin text-brand" />
             <span>Initializing POS Terminal Interface...</span>
           </div>
         </div>
@@ -208,3 +208,6 @@ export function PosTerminalView() {
     </Suspense>
   );
 }
+
+export const PosTerminal = PosTerminalView;
+export default PosTerminalView;

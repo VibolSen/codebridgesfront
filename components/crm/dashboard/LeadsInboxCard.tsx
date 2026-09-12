@@ -85,8 +85,8 @@ export function LeadsInboxCard() {
 
       <div className="flex items-center justify-between pb-3 border-b border-slate-100">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center">
-            <Flame className="w-4 h-4 text-orange-500" />
+          <div className="w-8 h-8 rounded-xl bg-brand-subtle text-brand border border-brand/20 flex items-center justify-center">
+            <Flame className="w-4 h-4 text-brand" />
           </div>
           <div>
             <h3 className="font-extrabold text-sm text-slate-900">Inbound Leads Inbox</h3>
@@ -94,12 +94,12 @@ export function LeadsInboxCard() {
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-purple-100 text-purple-700">
+          <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-brand-subtle text-brand border border-brand/20">
             {leads.length} Received
           </span>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="p-1 rounded-lg bg-purple-50 hover:bg-purple-100 text-purple-700 transition-colors cursor-pointer"
+            className="p-1 rounded-lg bg-brand-subtle hover:bg-brand-subtle/80 text-brand transition-colors cursor-pointer"
             title="Add Lead"
           >
             <Plus className="w-4 h-4" />
@@ -109,7 +109,7 @@ export function LeadsInboxCard() {
 
       {loading ? (
         <div className="py-12 text-center text-xs text-slate-400 font-medium flex items-center justify-center gap-1.5">
-          <Loader2 className="w-4 h-4 animate-spin text-purple-600" />
+          <Loader2 className="w-4 h-4 animate-spin text-brand" />
           <span>Loading inbound leads...</span>
         </div>
       ) : leads.length === 0 ? (
@@ -157,7 +157,7 @@ export function LeadsInboxCard() {
           <div className="bg-white rounded-3xl p-6 w-full max-w-md shadow-2xl border border-slate-200 space-y-4">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <h3 className="font-black text-base text-slate-900 flex items-center gap-2">
-                <Flame className="w-5 h-5 text-orange-500" />
+                <Flame className="w-5 h-5 text-brand" />
                 <span>Capture Inbound Lead</span>
               </h3>
               <button
@@ -177,7 +177,7 @@ export function LeadsInboxCard() {
                   placeholder="e.g. Vannak Heng"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                  className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium focus:ring-2 focus:ring-brand/30 focus:border-brand focus:outline-none"
                 />
               </div>
 
@@ -188,7 +188,7 @@ export function LeadsInboxCard() {
                   placeholder="e.g. Battambang Organic Produce"
                   value={formData.company}
                   onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                  className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium focus:ring-2 focus:ring-brand/30 focus:border-brand focus:outline-none"
                 />
               </div>
 
@@ -200,7 +200,7 @@ export function LeadsInboxCard() {
                     placeholder="+855 12 884 921"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium focus:ring-2 focus:ring-purple-500 focus:outline-none font-mono"
+                    className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium focus:ring-2 focus:ring-brand/30 focus:border-brand focus:outline-none font-mono"
                   />
                 </div>
                 <div>
@@ -210,7 +210,7 @@ export function LeadsInboxCard() {
                     placeholder="lead@company.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                    className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium focus:ring-2 focus:ring-brand/30 focus:border-brand focus:outline-none"
                   />
                 </div>
               </div>
@@ -221,7 +221,7 @@ export function LeadsInboxCard() {
                   <select
                     value={formData.score}
                     onChange={(e) => setFormData({ ...formData, score: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                    className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium focus:ring-2 focus:ring-brand/30 focus:border-brand focus:outline-none"
                   >
                     <option value="Hot (95)">Hot (95) - High Urgency</option>
                     <option value="Warm (70)">Warm (70) - Qualified Interest</option>
@@ -233,7 +233,7 @@ export function LeadsInboxCard() {
                   <select
                     value={formData.source}
                     onChange={(e) => setFormData({ ...formData, source: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                    className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium focus:ring-2 focus:ring-brand/30 focus:border-brand focus:outline-none"
                   >
                     <option value="Web Form">Web Form</option>
                     <option value="Referral">Customer Referral</option>
@@ -254,7 +254,7 @@ export function LeadsInboxCard() {
                 <button
                   type="submit"
                   disabled={saving}
-                  className="px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-extrabold shadow-sm flex items-center gap-1.5"
+                  className="px-5 py-2 rounded-xl bg-brand hover:bg-brand-hover active:bg-brand-active text-white font-extrabold shadow-md shadow-brand/20 flex items-center gap-1.5"
                 >
                   {saving && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                   <span>Save Lead</span>

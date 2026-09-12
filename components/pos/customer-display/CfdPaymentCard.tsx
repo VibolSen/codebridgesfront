@@ -33,7 +33,7 @@ export function CfdPaymentCard({ subtotal, tax, grandTotal }: CfdPaymentCardProp
           <span>VAT Tax (10%):</span>
           <span className="font-bold font-mono">${tax.toFixed(2)}</span>
         </div>
-        <div className="flex justify-between text-xl font-black text-orange-600 border-t border-slate-200 pt-3">
+        <div className="flex justify-between text-xl font-black text-brand border-t border-slate-200 pt-3">
           <span>Total Due:</span>
           <span className="font-mono">${grandTotal.toFixed(2)}</span>
         </div>

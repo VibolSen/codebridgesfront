@@ -204,12 +204,12 @@ export function useSuperAdminDashboard() {
 
       // 3. Compute Dynamic Module Adoption
       const modDefs = [
-        { id: 'pos', name: 'Point of Sale (POS)', key: 'pos', color: 'bg-[#5B4DFB]', bgColor: 'bg-[#F5F3FF]', textColor: 'text-[#7C3AED]' },
-        { id: 'inventory', name: 'Inventory & Stock', key: 'inventory', color: 'bg-amber-500', bgColor: 'bg-[#FFFBEB]', textColor: 'text-[#D97706]' },
-        { id: 'finance', name: 'Finance & Accounting', key: 'finance', color: 'bg-emerald-500', bgColor: 'bg-[#ECFDF5]', textColor: 'text-[#059669]' },
-        { id: 'hrm', name: 'Staff & HRM', key: 'hrm', color: 'bg-rose-500', bgColor: 'bg-[#FFF1F2]', textColor: 'text-[#E11D48]' },
-        { id: 'crm', name: 'CRM & Customer Loyalty', key: 'crm', color: 'bg-blue-500', bgColor: 'bg-[#EFF6FF]', textColor: 'text-[#2563EB]' },
-        { id: 'kds', name: 'Kitchen Display (KDS)', key: 'kds', color: 'bg-orange-500', bgColor: 'bg-[#FFF7ED]', textColor: 'text-[#EA580C]' },
+        { id: 'pos', name: 'Point of Sale (POS)', key: 'pos', color: 'bg-brand', bgColor: 'bg-brand-subtle', textColor: 'text-brand' },
+        { id: 'inventory', name: 'Inventory & Stock', key: 'inventory', color: 'bg-amber-500', bgColor: 'bg-amber-50', textColor: 'text-amber-600' },
+        { id: 'finance', name: 'Finance & Accounting', key: 'finance', color: 'bg-emerald-500', bgColor: 'bg-emerald-50', textColor: 'text-emerald-600' },
+        { id: 'hrm', name: 'Staff & HRM', key: 'hrm', color: 'bg-rose-500', bgColor: 'bg-rose-50', textColor: 'text-rose-600' },
+        { id: 'crm', name: 'CRM & Customer Loyalty', key: 'crm', color: 'bg-blue-500', bgColor: 'bg-blue-50', textColor: 'text-blue-600' },
+        { id: 'kds', name: 'Kitchen Display (KDS)', key: 'kds', color: 'bg-indigo-500', bgColor: 'bg-indigo-50', textColor: 'text-indigo-600' },
       ];
 
       const calculatedModules: ModuleAdoptionMetric[] = modDefs.map((m) => {

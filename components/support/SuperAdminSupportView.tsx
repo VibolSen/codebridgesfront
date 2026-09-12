@@ -27,9 +27,9 @@ export function SuperAdminSupportView() {
       {/* Header */}
       <div className="bg-white p-6 rounded-3xl border border-slate-200/90 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3.5">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-orange-500 via-amber-500 to-yellow-400 p-0.5 shadow-md shadow-orange-500/15 flex items-center justify-center">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand to-brand-hover p-0.5 shadow-md shadow-brand/15 flex items-center justify-center">
             <div className="w-full h-full bg-white rounded-[14px] flex items-center justify-center">
-              <LifeBuoy className="w-6 h-6 text-orange-500" />
+              <LifeBuoy className="w-6 h-6 text-brand" />
             </div>
           </div>
           <div>
@@ -37,7 +37,7 @@ export function SuperAdminSupportView() {
               <h1 className="text-xl font-black text-slate-900 tracking-tight">
                 Merchant Support Desk &amp; Error Stream
               </h1>
-              <span className="px-2.5 py-0.5 rounded-full bg-orange-50 text-orange-700 text-[10px] font-extrabold border border-orange-200 uppercase">
+              <span className="px-2.5 py-0.5 rounded-full bg-brand-subtle text-brand text-[10px] font-extrabold border border-brand/20 uppercase">
                 Merchant Care
               </span>
             </div>
@@ -55,7 +55,7 @@ export function SuperAdminSupportView() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search tickets..."
-            className="pl-8 pr-3 py-1.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-orange-500"
+            className="pl-8 pr-3 py-1.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-brand"
           />
         </div>
       </div>
@@ -64,7 +64,7 @@ export function SuperAdminSupportView() {
       <div className="bg-white p-6 rounded-3xl border border-slate-200/90 shadow-sm space-y-4">
         <div className="flex items-center justify-between border-b border-slate-100 pb-3">
           <h3 className="font-black text-sm text-slate-900 flex items-center gap-2">
-            <MessageSquare className="w-4 h-4 text-orange-500" />
+            <MessageSquare className="w-4 h-4 text-brand" />
             <span>Active Merchant Tickets ({filteredTickets.length})</span>
           </h3>
 
@@ -137,7 +137,7 @@ export function SuperAdminSupportView() {
                     </span>
                   </td>
                   <td className="px-4 py-3 text-right">
-                    <button className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-orange-100 hover:text-orange-700 font-extrabold text-xs transition-colors cursor-pointer">
+                    <button className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-brand-subtle hover:text-brand font-extrabold text-xs transition-colors cursor-pointer">
                       Reply
                     </button>
                   </td>

@@ -57,20 +57,25 @@ export const platformNavGroups: NavGroup[] = [
     ],
   },
   {
-    id: 'organizations',
-    title: 'Organizations & Tenancy',
+    id: 'users-organizations',
+    title: 'User and Organization',
     items: [
       { name: 'Client Tenants', href: '/super-admin/platform/tenants', icon: Building2 },
+      { name: 'Cross-Tenant Users', href: '/super-admin/platform/users', icon: Users },
+      { name: 'Staff & Users', href: '/super-admin/security/users', icon: ShieldCheck },
+      { name: 'Roles & Permissions', href: '/super-admin/security/roles', icon: Sliders },
+      { name: 'Stores & Outlets', href: '/super-admin/security/stores', icon: Store },
       { name: 'Modules & Feature Flags', href: '/super-admin/platform/modules', icon: Layers },
       { name: 'Platform Orders', href: '/super-admin/platform/orders', icon: ShoppingCart },
-      { name: 'Cross-Tenant Users', href: '/super-admin/platform/users', icon: Users },
+      { name: 'Security Settings', href: '/super-admin/security/settings', icon: ShieldAlert },
+      { name: 'Admin Profile', href: '/super-admin/security/profile', icon: UserCheck },
     ],
   },
   {
     id: 'finance-billing',
     title: 'Finance & SaaS Billing',
     items: [
-      { name: 'Subscription Billing', href: '/super-admin/finance/billing', icon: CreditCard },
+      { name: 'Subscription Management', href: '/super-admin/finance/billing', icon: CreditCard },
       { name: 'Financial Reports', href: '/super-admin/finance/reports', icon: BarChart3 },
       { name: 'Payment Reconciliation', href: '/super-admin/finance/reconciliation', icon: Receipt },
       { name: 'Operating Expenses', href: '/super-admin/finance/expenses', icon: DollarSign },
@@ -79,23 +84,12 @@ export const platformNavGroups: NavGroup[] = [
     ],
   },
   {
-    id: 'catalog',
-    title: 'Catalog & Products',
+    id: 'inventory-management',
+    title: 'Inventory Management',
     items: [
       { name: 'Products Catalog', href: '/super-admin/catalog/products', icon: Package },
       { name: 'Categories', href: '/super-admin/catalog/categories', icon: Tag },
       { name: 'Brands', href: '/super-admin/catalog/brands', icon: Tag },
-      { name: 'Promotional Coupons', href: '/super-admin/catalog/coupons', icon: Tag },
-      { name: 'Discounts & Offers', href: '/super-admin/catalog/discounts', icon: Tag },
-      { name: 'Barcode Studio', href: '/super-admin/catalog/barcodes', icon: QrCode },
-      { name: 'KHQR Codes', href: '/super-admin/catalog/qrcodes', icon: QrCode },
-      { name: 'Restaurant Tables', href: '/super-admin/catalog/tables', icon: UtensilsCrossed },
-    ],
-  },
-  {
-    id: 'inventory',
-    title: 'Inventory & Stock',
-    items: [
       { name: 'Stock Inventory', href: '/super-admin/inventory', icon: Boxes },
       { name: 'Stock Transfers', href: '/super-admin/inventory/transfer', icon: Boxes },
       { name: 'Stocktake', href: '/super-admin/inventory/stocktake', icon: FileSpreadsheet },
@@ -103,6 +97,11 @@ export const platformNavGroups: NavGroup[] = [
       { name: 'Stock Purchases', href: '/super-admin/inventory/purchases', icon: Package },
       { name: 'Stock Movement Ledger', href: '/super-admin/inventory/ledger', icon: Boxes },
       { name: 'Expired Products', href: '/super-admin/inventory/expired', icon: Tag },
+      { name: 'Promotional Coupons', href: '/super-admin/catalog/coupons', icon: Tag },
+      { name: 'Discounts & Offers', href: '/super-admin/catalog/discounts', icon: Tag },
+      { name: 'Barcode Studio', href: '/super-admin/catalog/barcodes', icon: QrCode },
+      { name: 'KHQR Codes', href: '/super-admin/catalog/qrcodes', icon: QrCode },
+      { name: 'Restaurant Tables', href: '/super-admin/catalog/tables', icon: UtensilsCrossed },
     ],
   },
   {
@@ -123,14 +122,6 @@ export const platformNavGroups: NavGroup[] = [
     ],
   },
   {
-    id: 'system-infra',
-    title: 'Telemetry & Infrastructure',
-    items: [
-      { name: 'Cross-Tenant Analytics', href: '/super-admin/analytics', icon: BarChart3 },
-      { name: 'System Infrastructure', href: '/super-admin/infrastructure', icon: Server, badge: 'Live' },
-    ],
-  },
-  {
     id: 'support-ops',
     title: 'Support & Operations',
     items: [
@@ -140,20 +131,11 @@ export const platformNavGroups: NavGroup[] = [
     ],
   },
   {
-    id: 'security-access',
-    title: 'Security & Access (RBAC)',
+    id: 'system-infra',
+    title: 'Infrastructure & Platform Settings',
     items: [
-      { name: 'Staff & Users', href: '/super-admin/security/users', icon: ShieldCheck },
-      { name: 'Roles & Permissions', href: '/super-admin/security/roles', icon: Sliders },
-      { name: 'Stores & Outlets', href: '/super-admin/security/stores', icon: Store },
-      { name: 'Security Settings', href: '/super-admin/security/settings', icon: ShieldAlert },
-      { name: 'Admin Profile', href: '/super-admin/security/profile', icon: UserCheck },
-    ],
-  },
-  {
-    id: 'platform-settings',
-    title: 'Platform Settings & API',
-    items: [
+      { name: 'System Infrastructure', href: '/super-admin/infrastructure', icon: Server, badge: 'Live' },
+      { name: 'Cross-Tenant Analytics', href: '/super-admin/analytics', icon: BarChart3 },
       { name: 'Platform Settings', href: '/super-admin/settings', icon: Sliders },
       { name: 'API Keys', href: '/super-admin/api-keys', icon: Key },
     ],

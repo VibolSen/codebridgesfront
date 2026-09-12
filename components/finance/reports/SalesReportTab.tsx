@@ -39,7 +39,7 @@ export function SalesReportTab({ salesData }: SalesReportTabProps) {
 
         <div className="p-5 bg-white border border-slate-200 rounded-2xl shadow-xs space-y-1">
           <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Profit Margin</span>
-          <p className="text-2xl font-black text-orange-600 font-mono">
+          <p className="text-2xl font-black text-brand font-mono">
             {salesData.summary?.gross_margin_pct ?? 0}%
           </p>
           <p className="text-[10px] text-slate-500">Average net margin %</p>
@@ -63,7 +63,7 @@ export function SalesReportTab({ salesData }: SalesReportTabProps) {
               <tr key={idx} className="hover:bg-slate-50/50">
                 <td className="py-2.5 px-3 font-bold text-slate-900">{tp.product_name}</td>
                 <td className="py-2.5 px-3 text-center font-bold text-slate-700">{Number(tp.total_quantity)}</td>
-                <td className="py-2.5 px-3 text-right font-mono font-bold text-orange-600">
+                <td className="py-2.5 px-3 text-right font-mono font-bold text-brand">
                   ${Number(tp.total_revenue).toFixed(2)}
                 </td>
               </tr>

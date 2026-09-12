@@ -23,13 +23,13 @@ export function ProductCatalogStats({
         onClick={() => onSelectStatus('all')}
         className={`p-3 rounded-2xl border text-left transition-all cursor-pointer ${
           currentStatus === 'all'
-            ? 'bg-purple-50/80 border-purple-300 ring-2 ring-[#5B4DFB]/20'
+            ? 'bg-brand-subtle/80 border-brand/30 ring-2 ring-brand/20'
             : 'bg-slate-50/60 border-slate-200/80 hover:bg-slate-100/70'
         }`}
       >
         <div className="flex items-center justify-between">
           <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Total SKUs</span>
-          <Boxes className={`w-3.5 h-3.5 ${currentStatus === 'all' ? 'text-[#5B4DFB]' : 'text-slate-400'}`} />
+          <Boxes className={`w-3.5 h-3.5 ${currentStatus === 'all' ? 'text-brand' : 'text-slate-400'}`} />
         </div>
         <div className="text-lg font-black text-slate-900 mt-0.5">{stats.total}</div>
       </button>

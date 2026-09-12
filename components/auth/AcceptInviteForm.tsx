@@ -93,7 +93,7 @@ export function AcceptInviteForm() {
       if (res.status === 'success') {
         const userRole = (res.user?.role || '').toLowerCase();
         if (['cashier', 'clerk'].includes(userRole)) {
-          router.push('/pos/terminal');
+          router.push('/pos/pos-terminal');
         } else if (['supervisor', 'outlet_manager'].includes(userRole)) {
           router.push('/pos');
         } else {
@@ -110,7 +110,7 @@ export function AcceptInviteForm() {
   if (loading || verifying) {
     return (
       <div className="text-center space-y-3 p-8">
-        <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto" />
+        <div className="w-12 h-12 border-4 border-brand border-t-transparent rounded-full animate-spin mx-auto" />
         <p className="text-xs font-extrabold text-slate-600">Verifying secure staff invitation...</p>
       </div>
     );
@@ -147,19 +147,19 @@ export function AcceptInviteForm() {
       className="bg-white rounded-3xl border border-slate-200 shadow-2xl max-w-lg w-full overflow-hidden"
     >
       {/* Header */}
-      <div className="bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 p-8 text-white">
+      <div className="bg-gradient-to-r from-brand via-brand-hover to-indigo-700 p-8 text-white">
         <div className="flex items-center gap-3 mb-2">
           <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center shadow-inner">
             <UserPlus className="w-6 h-6 text-white" />
           </div>
           <div>
-            <span className="text-[10px] font-extrabold uppercase tracking-widest text-orange-100 bg-white/20 px-2 py-0.5 rounded">
+            <span className="text-[10px] font-extrabold uppercase tracking-widest text-purple-100 bg-white/20 px-2 py-0.5 rounded">
               Staff Onboarding
             </span>
             <h1 className="text-2xl font-black tracking-tight">Join Your Team</h1>
           </div>
         </div>
-        <p className="text-xs text-orange-100 font-medium">
+        <p className="text-xs text-purple-100 font-medium">
           You've been invited to join <span className="font-extrabold text-white">{inviteData?.tenant_name || 'Store Workspace'}</span> as an authorized <span className="font-extrabold text-white capitalize">{inviteData?.role?.replace('_', ' ') || 'Staff'}</span>.
         </p>
       </div>
@@ -188,7 +188,7 @@ export function AcceptInviteForm() {
               placeholder="e.g. Sokha Chan"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:bg-white"
+              className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand focus:bg-white"
             />
           </div>
         </div>
@@ -204,7 +204,7 @@ export function AcceptInviteForm() {
               placeholder="e.g. 012 345 678"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:bg-white"
+              className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand focus:bg-white"
             />
           </div>
         </div>
@@ -222,7 +222,7 @@ export function AcceptInviteForm() {
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:bg-white"
+                className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand focus:bg-white"
               />
             </div>
           </div>
@@ -239,7 +239,7 @@ export function AcceptInviteForm() {
                 placeholder="••••••••"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:bg-white"
+                className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand focus:bg-white"
               />
             </div>
           </div>
@@ -250,7 +250,7 @@ export function AcceptInviteForm() {
             <label className="text-xs font-bold text-slate-700">
               4-Digit POS Register PIN Code
             </label>
-            <span className="text-[10px] text-orange-600 font-extrabold">For Touch Register Quick-Switch</span>
+            <span className="text-[10px] text-brand font-extrabold">For Touch Register Quick-Switch</span>
           </div>
           <div className="relative">
             <KeyRound className="w-4 h-4 absolute left-3.5 top-3.5 text-slate-400" />
@@ -260,7 +260,7 @@ export function AcceptInviteForm() {
               placeholder="e.g. 1234"
               value={pinCode}
               onChange={(e) => setPinCode(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono font-bold text-slate-900 tracking-widest focus:outline-none focus:ring-2 focus:ring-orange-500 focus:bg-white"
+              className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono font-bold text-slate-900 tracking-widest focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand focus:bg-white"
             />
           </div>
         </div>
@@ -269,7 +269,7 @@ export function AcceptInviteForm() {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full py-3.5 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-extrabold text-xs rounded-xl shadow-lg shadow-orange-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+            className="w-full py-3.5 bg-brand hover:bg-brand-hover text-white font-extrabold text-xs rounded-xl shadow-md shadow-brand/20 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
           >
             {submitting ? (
               <>

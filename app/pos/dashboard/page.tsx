@@ -1,5 +1,5 @@
-import { OrganizationDashboard } from '@/components/dashboards/OrganizationDashboard';
+import { POSDashboard } from '@/components/dashboards/POSDashboard';
 
 export default function PosDashboardPage() {
-  return <OrganizationDashboard />;
+  return <POSDashboard />;
 }

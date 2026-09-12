@@ -121,9 +121,9 @@ export const SuperAdminStocktakeView: React.FC = () => {
       {/* Header */}
       <div className="bg-white p-6 rounded-3xl border border-slate-200/90 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-center gap-3.5">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-500 via-orange-500 to-amber-600 p-0.5 shadow-md shadow-amber-500/15 flex items-center justify-center">
+          <div className="w-12 h-12 rounded-2xl bg-brand p-0.5 shadow-md shadow-brand/20 flex items-center justify-center">
             <div className="w-full h-full bg-white rounded-[14px] flex items-center justify-center">
-              <ClipboardCheck className="w-6 h-6 text-amber-600" />
+              <ClipboardCheck className="w-6 h-6 text-brand" />
             </div>
           </div>
           <div>
@@ -131,7 +131,7 @@ export const SuperAdminStocktakeView: React.FC = () => {
               <h1 className="text-xl font-black text-slate-900 tracking-tight">
                 Physical Stocktake &amp; Cycle Counting
               </h1>
-              <span className="px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-700 text-[10px] font-extrabold border border-amber-200 uppercase">
+              <span className="px-2.5 py-0.5 rounded-full bg-brand-subtle text-brand text-[10px] font-extrabold border border-brand/20 uppercase">
                 Active Audit Session
               </span>
             </div>
@@ -153,7 +153,7 @@ export const SuperAdminStocktakeView: React.FC = () => {
             type="button"
             disabled={submitting || loading}
             onClick={handlePostVariance}
-            className="px-5 py-2.5 rounded-2xl bg-orange-500 hover:bg-orange-600 active:bg-orange-700 disabled:opacity-50 text-white font-black text-xs shadow-md shadow-orange-500/20 flex items-center gap-2 transition-all cursor-pointer"
+            className="px-5 py-2.5 rounded-2xl bg-brand hover:bg-brand-hover active:bg-brand-strong disabled:opacity-50 text-white font-black text-xs shadow-md shadow-brand/20 flex items-center gap-2 transition-all cursor-pointer"
           >
             {submitting ? (
               <Loader2 className="w-4 h-4 animate-spin" />

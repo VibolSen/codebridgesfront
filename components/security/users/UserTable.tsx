@@ -30,11 +30,11 @@ export function UserTable({
   const getRoleBadgeStyle = (role: string) => {
     switch (role) {
       case 'super_admin':
-        return 'bg-[#F5F3FF] text-[#5B4DFB] border-[#DDD6FE]';
+        return 'bg-brand-subtle text-brand border-brand/20';
       case 'admin':
       case 'administrator':
       case 'owner':
-        return 'bg-[#F5F3FF] text-[#7C3AED] border-[#DDD6FE]';
+        return 'bg-brand-subtle text-brand border-brand/20';
       case 'outlet_manager':
       case 'manager':
         return 'bg-blue-50 text-blue-700 border-blue-200';
@@ -70,7 +70,7 @@ export function UserTable({
         </div>
       ) : users.length === 0 ? (
         <div className="p-12 text-center space-y-3">
-          <div className="w-12 h-12 rounded-2xl bg-[#F5F3FF] text-[#5B4DFB] flex items-center justify-center mx-auto mb-1">
+          <div className="w-12 h-12 rounded-2xl bg-brand-subtle text-brand flex items-center justify-center mx-auto mb-1">
             <Users className="w-6 h-6" />
           </div>
           <p className="text-sm text-slate-900 font-extrabold">No user accounts found</p>
@@ -98,12 +98,12 @@ export function UserTable({
                   initial="hidden"
                   animate="visible"
                   variants={cardVariants}
-                  className="hover:bg-[#F5F3FF]/40 transition-colors"
+                  className="hover:bg-brand-subtle/40 transition-colors"
                 >
                   {/* Name + Avatar */}
                   <td className="py-3.5 px-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#5B4DFB] to-[#7C3AED] text-white font-bold flex items-center justify-center text-xs shrink-0 shadow-xs uppercase">
+                      <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand to-brand-hover text-white font-bold flex items-center justify-center text-xs shrink-0 shadow-xs uppercase">
                         {user.name ? user.name.substring(0, 2) : 'US'}
                       </div>
                       <div>
@@ -134,7 +134,7 @@ export function UserTable({
                   <td className="py-3.5 px-4 font-mono text-xs">
                     {user.pin_code ? (
                       <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-bold text-[10px]">
-                        <Lock className="w-3 h-3 text-[#5B4DFB]" />
+                        <Lock className="w-3 h-3 text-brand" />
                         PIN Set
                       </span>
                     ) : (
@@ -170,14 +170,14 @@ export function UserTable({
                     <div className="flex items-center justify-end gap-1.5">
                       <button
                         onClick={() => onResetPassword(user)}
-                        className="p-1.5 rounded-lg text-slate-400 hover:text-[#5B4DFB] hover:bg-[#F5F3FF] transition-colors cursor-pointer"
+                        className="p-1.5 rounded-lg text-slate-400 hover:text-brand hover:bg-brand-subtle transition-colors cursor-pointer"
                         title="Reset Password"
                       >
                         <KeyRound className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => onEditUser(user)}
-                        className="p-1.5 rounded-lg text-slate-400 hover:text-[#5B4DFB] hover:bg-[#F5F3FF] transition-colors cursor-pointer"
+                        className="p-1.5 rounded-lg text-slate-400 hover:text-brand hover:bg-brand-subtle transition-colors cursor-pointer"
                         title="Edit User Role / Details / PIN"
                       >
                         <Edit3 className="w-4 h-4" />

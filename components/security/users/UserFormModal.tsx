@@ -67,7 +67,7 @@ export function UserFormModal({
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               placeholder="e.g. Sokha Chan"
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] focus:bg-white transition-all"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand focus:bg-white transition-all"
             />
           </div>
 
@@ -80,7 +80,7 @@ export function UserFormModal({
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               placeholder="sokha@pos.com"
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] focus:bg-white transition-all"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand focus:bg-white transition-all"
             />
           </div>
 
@@ -91,7 +91,7 @@ export function UserFormModal({
               <select
                 value={formData.role}
                 onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] focus:bg-white capitalize cursor-pointer transition-all"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand focus:bg-white capitalize cursor-pointer transition-all"
               >
                 {dynamicRoles.length > 0 ? (
                   dynamicRoles.map((r) => (
@@ -123,7 +123,7 @@ export function UserFormModal({
                 value={formData.pin_code}
                 onChange={(e) => setFormData({ ...formData, pin_code: e.target.value })}
                 placeholder="e.g. 1234"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] focus:bg-white font-mono transition-all"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand focus:bg-white font-mono transition-all"
               />
             </div>
           </div>
@@ -153,7 +153,7 @@ export function UserFormModal({
               value={formData.password}
               onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               placeholder={editingUser ? '••••••••' : 'Minimum 6 characters'}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] focus:bg-white font-mono transition-all"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand focus:bg-white font-mono transition-all"
             />
           </div>
 
@@ -169,7 +169,7 @@ export function UserFormModal({
             <button
               type="submit"
               disabled={saving}
-              className="px-5 py-2.5 rounded-xl bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white font-bold text-xs shadow-md shadow-[#5B4DFB]/20 cursor-pointer transition-all"
+              className="px-5 py-2.5 rounded-xl bg-brand hover:bg-brand-hover active:bg-brand-active text-white font-bold text-xs shadow-md shadow-brand/20 cursor-pointer transition-all"
             >
               {saving ? 'Saving...' : editingUser ? 'Update Account' : 'Create User Account'}
             </button>

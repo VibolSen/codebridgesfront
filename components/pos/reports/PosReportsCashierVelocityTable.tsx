@@ -21,7 +21,7 @@ export function PosReportsCashierVelocityTable({ cashiers = [] }: PosReportsCash
     <div className="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-[0_2px_12px_rgba(15,23,42,0.03)] space-y-4">
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-black text-slate-900 tracking-tight flex items-center gap-2">
-          <Users className="w-4 h-4 text-[#5B4DFB]" />
+          <Users className="w-4 h-4 text-brand" />
           <span>Cashier Sales Velocity</span>
         </h3>
         <span className="text-[10px] font-bold text-slate-400">By Transactions</span>

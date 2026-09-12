@@ -48,7 +48,7 @@ export function TenantTable({
               <tr>
                 <td colSpan={7} className="px-6 py-12 text-center text-slate-400 font-bold">
                   <div className="flex items-center justify-center gap-2">
-                    <div className="w-4 h-4 border-2 border-[#5B4DFB] border-t-transparent rounded-full animate-spin" />
+                    <div className="w-4 h-4 border-2 border-brand border-t-transparent rounded-full animate-spin" />
                     <span>Loading tenant records from database...</span>
                   </div>
                 </td>
@@ -57,17 +57,17 @@ export function TenantTable({
               <tr>
                 <td colSpan={7} className="px-6 py-16 text-center">
                   <div className="max-w-sm mx-auto space-y-3">
-                    <div className="w-12 h-12 rounded-2xl bg-[#F5F3FF] text-[#5B4DFB] flex items-center justify-center mx-auto">
+                    <div className="w-12 h-12 rounded-2xl bg-brand-subtle text-brand flex items-center justify-center mx-auto">
                       <Building2 className="w-6 h-6" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-bold text-slate-800">No organizations found</h3>
+                       <h3 className="text-sm font-bold text-slate-800">No organizations found</h3>
                       <p className="text-xs text-slate-500 mt-0.5">Try adjusting your filters or register a new client.</p>
                     </div>
                     <button
                       type="button"
                       onClick={onOpenCreateModal}
-                      className="px-4 py-2 rounded-xl bg-[#5B4DFB] text-white font-extrabold text-xs hover:bg-[#4E3FE3] shadow-md shadow-[#5B4DFB]/25 transition-all inline-flex items-center gap-1.5 cursor-pointer"
+                      className="px-4 py-2 rounded-xl bg-brand text-white font-extrabold text-xs hover:bg-brand-hover shadow-md shadow-brand/25 transition-all inline-flex items-center gap-1.5 cursor-pointer"
                     >
                       <Plus className="w-3.5 h-3.5" />
                       <span>Create First Tenant</span>

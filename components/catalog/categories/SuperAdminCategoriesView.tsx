@@ -134,7 +134,7 @@ function CategoriesContent() {
       >
         <div>
           <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-2.5">
-            <Tag className="w-6 h-6 text-orange-500" />
+            <Tag className="w-6 h-6 text-brand" />
             Categories &amp; Sub-Categories Management
           </h1>
           <p className="text-xs text-slate-500">Organize catalog items into main categories and nested sub-categories</p>
@@ -147,7 +147,7 @@ function CategoriesContent() {
             onClick={() => handleOpenCreateModal(true)}
             className="px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-700 font-semibold text-xs shadow-xs flex items-center gap-1.5 cursor-pointer"
           >
-            <Layers className="w-4 h-4 text-orange-500" />
+            <Layers className="w-4 h-4 text-brand" />
             Add Sub-Category
           </motion.button>
 
@@ -155,7 +155,7 @@ function CategoriesContent() {
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             onClick={() => handleOpenCreateModal(false)}
-            className="px-4 py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs shadow-md shadow-orange-500/20 transition-all flex items-center gap-2 cursor-pointer"
+            className="px-4 py-2.5 rounded-xl bg-brand hover:bg-brand-hover active:bg-brand-active text-white font-bold text-xs shadow-md shadow-brand/20 transition-all flex items-center gap-2 cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             Add Main Category
@@ -170,7 +170,7 @@ function CategoriesContent() {
             <h4 className="text-xl font-extrabold text-slate-900">{mainCatCount}</h4>
             <p className="text-xs text-slate-500 font-medium">Main Categories</p>
           </div>
-          <div className="w-10 h-10 rounded-xl bg-orange-500/10 text-orange-500 flex items-center justify-center font-bold">
+          <div className="w-10 h-10 rounded-xl bg-brand-subtle text-brand flex items-center justify-center font-bold">
             <Tag className="w-5 h-5" />
           </div>
         </motion.div>
@@ -222,7 +222,7 @@ function CategoriesContent() {
             placeholder="Search category name..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 text-xs rounded-xl bg-slate-100 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            className="w-full pl-9 pr-4 py-2 text-xs rounded-xl bg-slate-100 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
           />
         </form>
 

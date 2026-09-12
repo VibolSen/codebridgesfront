@@ -88,14 +88,14 @@ export const StoreCardGrid: React.FC<StoreCardGridProps> = ({
 
             <div className="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100 text-xs">
               <div className="flex items-center gap-2 bg-slate-50 p-2 rounded-xl">
-                <Monitor className="w-4 h-4 text-indigo-500" />
+                <Monitor className="w-4 h-4 text-brand" />
                 <div>
                   <p className="text-[10px] text-slate-400 font-bold uppercase">Registers</p>
                   <p className="font-mono font-bold text-slate-800">{st.registers_count || 0}</p>
                 </div>
               </div>
               <div className="flex items-center gap-2 bg-slate-50 p-2 rounded-xl">
-                <Users className="w-4 h-4 text-orange-500" />
+                <Users className="w-4 h-4 text-brand" />
                 <div>
                   <p className="text-[10px] text-slate-400 font-bold uppercase">Staff</p>
                   <p className="font-mono font-bold text-slate-800">{st.staff_count || 0}</p>

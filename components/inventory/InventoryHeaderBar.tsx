@@ -30,7 +30,7 @@ export const InventoryHeaderBar: React.FC<InventoryHeaderBarProps> = ({
             </>
           ) : (
             <>
-              <Boxes className="w-6 h-6 text-orange-500" />
+              <Boxes className="w-6 h-6 text-brand" />
               Inventory Operations &amp; Stock Levels
             </>
           )}
@@ -57,7 +57,7 @@ export const InventoryHeaderBar: React.FC<InventoryHeaderBarProps> = ({
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
           onClick={onOpenReceiveModal}
-          className="px-4 py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs shadow-md shadow-orange-500/20 transition-all flex items-center gap-2"
+          className="px-4 py-2.5 rounded-xl bg-brand hover:bg-brand-hover text-white font-bold text-xs shadow-md shadow-brand/20 transition-all flex items-center gap-2"
         >
           <Plus className="w-4 h-4" />
           Receive Stock Shipment

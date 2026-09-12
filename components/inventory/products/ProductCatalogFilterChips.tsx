@@ -34,12 +34,12 @@ export function ProductCatalogFilterChips({
       <span className="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider">Active Filters:</span>
 
       {search.trim() && (
-        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-purple-50 text-[#5B4DFB] border border-purple-200 text-[11px] font-bold">
+        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-brand-subtle text-brand border border-brand/20 text-[11px] font-bold">
           <span>Search: &quot;{search}&quot;</span>
           <button
             type="button"
             onClick={onClearSearch}
-            className="hover:text-purple-900 cursor-pointer"
+            className="hover:text-brand-strong cursor-pointer"
           >
             <X className="w-3 h-3" />
           </button>
@@ -47,12 +47,12 @@ export function ProductCatalogFilterChips({
       )}
 
       {selectedCategory !== 'all' && (
-        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-purple-50 text-[#5B4DFB] border border-purple-200 text-[11px] font-bold">
+        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-brand-subtle text-brand border border-brand/20 text-[11px] font-bold">
           <span>Category: {selectedCategory}</span>
           <button
             type="button"
             onClick={onClearCategory}
-            className="hover:text-purple-900 cursor-pointer"
+            className="hover:text-brand-strong cursor-pointer"
           >
             <X className="w-3 h-3" />
           </button>
@@ -60,7 +60,7 @@ export function ProductCatalogFilterChips({
       )}
 
       {stockStatus !== 'all' && (
-        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-purple-50 text-[#5B4DFB] border border-purple-200 text-[11px] font-bold">
+        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-brand-subtle text-brand border border-brand/20 text-[11px] font-bold">
           <span>
             Status:{' '}
             {stockStatus === 'in_stock'
@@ -72,7 +72,7 @@ export function ProductCatalogFilterChips({
           <button
             type="button"
             onClick={onClearStockStatus}
-            className="hover:text-purple-900 cursor-pointer"
+            className="hover:text-brand-strong cursor-pointer"
           >
             <X className="w-3 h-3" />
           </button>

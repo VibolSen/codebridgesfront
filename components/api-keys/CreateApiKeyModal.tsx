@@ -40,7 +40,7 @@ export function CreateApiKeyModal({
       >
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-10 h-10 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-2xl bg-brand-subtle text-brand flex items-center justify-center">
               <Key className="w-5 h-5" />
             </div>
             <h3 className="text-lg font-black text-slate-900">Generate Merchant API Key</h3>
@@ -62,7 +62,7 @@ export function CreateApiKeyModal({
               placeholder="e.g. WooCommerce Sync, External Inventory Bot"
               value={keyName}
               onChange={(e) => setKeyName(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand"
             />
           </div>
 
@@ -71,7 +71,7 @@ export function CreateApiKeyModal({
             <select
               value={expiryDays}
               onChange={(e) => setExpiryDays(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 cursor-pointer"
+              className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand cursor-pointer"
             >
               <option value="30">30 Days</option>
               <option value="90">90 Days (Recommended)</option>
@@ -88,7 +88,7 @@ export function CreateApiKeyModal({
                   type="checkbox"
                   checked={selectedPermissions.includes('*')}
                   onChange={(e) => setSelectedPermissions(e.target.checked ? ['*'] : [])}
-                  className="rounded text-orange-500 focus:ring-orange-500 cursor-pointer"
+                  className="rounded text-brand focus:ring-brand cursor-pointer"
                 />
                 <span>Full Access (All Microservices &amp; Endpoints)</span>
               </label>
@@ -106,7 +106,7 @@ export function CreateApiKeyModal({
             <button
               type="submit"
               disabled={creating}
-              className="flex-1 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-extrabold text-xs shadow-md transition-all cursor-pointer disabled:opacity-50"
+              className="flex-1 py-3 rounded-xl bg-brand hover:bg-brand-hover text-white font-extrabold text-xs shadow-md shadow-brand/20 transition-all cursor-pointer disabled:opacity-50"
             >
               {creating ? 'Generating...' : 'Generate API Key'}
             </button>

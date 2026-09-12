@@ -38,7 +38,7 @@ export function BarcodePreviewGrid({
                 </div>
                 <div className="flex justify-between w-full text-[9px] text-slate-600 font-bold px-1">
                   {showSku && <span>{item.sku || 'SKU-001'}</span>}
-                  {showPrice && <span className="text-orange-600">${Number(item.price).toFixed(2)}</span>}
+                  {showPrice && <span className="text-brand">${Number(item.price).toFixed(2)}</span>}
                 </div>
               </div>
             ))

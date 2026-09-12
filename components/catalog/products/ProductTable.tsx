@@ -21,7 +21,7 @@ export function ProductTable({
       {loading ? (
         <div className="p-12 text-center text-xs text-slate-400 font-bold">
           <div className="flex items-center justify-center gap-2">
-            <div className="w-4 h-4 border-2 border-orange-500 border-t-transparent rounded-full animate-spin" />
+            <div className="w-4 h-4 border-2 border-brand border-t-transparent rounded-full animate-spin" />
             <span>Loading catalog items...</span>
           </div>
         </div>
@@ -46,7 +46,7 @@ export function ProductTable({
             </thead>
             <tbody className="divide-y divide-slate-100 font-medium text-slate-700">
               {products.map((prod) => (
-                <tr key={prod.id} className="hover:bg-orange-50/40 transition-colors">
+                <tr key={prod.id} className="hover:bg-brand-subtle/40 transition-colors">
                   <td className="py-3.5 px-4">
                     <div className="flex items-center gap-3">
                       <div className="w-9 h-9 rounded-xl bg-slate-100 border border-slate-200 overflow-hidden flex items-center justify-center shrink-0">
@@ -101,7 +101,7 @@ export function ProductTable({
                       <button
                         type="button"
                         onClick={() => onEdit(prod)}
-                        className="p-1.5 rounded-lg text-slate-500 hover:text-orange-600 hover:bg-orange-100 transition-colors cursor-pointer"
+                        className="p-1.5 rounded-lg text-slate-500 hover:text-brand hover:bg-brand-subtle transition-colors cursor-pointer"
                         title="Edit Product"
                       >
                         <Edit3 className="w-4 h-4" />

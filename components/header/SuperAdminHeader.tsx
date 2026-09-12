@@ -2,19 +2,9 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import {
-  Menu,
-  Search,
-  Bell,
-  LogOut,
-  User,
-  Settings,
-  ShieldCheck,
-  ChevronDown,
-  Layers,
-  FileText,
-  Compass,
-} from 'lucide-react';
+import { Menu, User, Settings, FileText } from 'lucide-react';
+import { AppIcons } from '@/components/ui/icons';
+import { badgeStyles, inputStyles } from '@/lib/theme';
 
 interface SuperAdminHeaderProps {
   sidebarOpen: boolean;
@@ -44,7 +34,6 @@ export function SuperAdminHeader({
 
   return (
     <header className="h-16 border-b border-slate-200/80 bg-white/95 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30 shadow-2xs">
-      
       {/* Left Header Elements */}
       <div className="flex items-center gap-3 sm:gap-4">
         {/* Sidebar Toggle Button */}
@@ -63,7 +52,7 @@ export function SuperAdminHeader({
           </div>
           <div className="hidden sm:block leading-tight">
             <span className="font-extrabold text-base tracking-tight text-slate-900 block">
-              Code<span className="text-[#5B4DFB]">Bridges</span>
+              Code<span className="text-brand">Bridges</span>
             </span>
             <span className="text-[9px] font-extrabold uppercase text-slate-400 tracking-wider block">
               {user?.role === 'super_admin' ? 'Enterprise Super Admin' : 'Admin Control Hub'}
@@ -73,22 +62,21 @@ export function SuperAdminHeader({
 
         {/* Global Search Input */}
         <div className="relative hidden md:block w-64 lg:w-80 ml-2">
-          <Search className="w-4 h-4 absolute left-3 top-2.5 text-slate-400" />
+          <AppIcons.Search className="w-4 h-4 absolute left-3 top-2.5 text-slate-400" />
           <input
             type="text"
             placeholder="Search modules, catalog, orders... ⌘ K"
-            className="w-full pl-9 pr-4 py-2 text-xs rounded-xl bg-slate-100/80 border border-slate-200/80 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB]/30 focus:border-[#5B4DFB] transition-all"
+            className={inputStyles.search}
           />
         </div>
       </div>
 
       {/* Right Header Actions */}
       <div className="flex items-center gap-3">
-        
         {/* Notifications Bell */}
         <button className="p-2 rounded-xl text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors relative cursor-pointer">
-          <Bell className="w-5 h-5" />
-          <span className="w-2 h-2 rounded-full bg-[#5B4DFB] absolute top-2 right-2 border-2 border-white animate-pulse"></span>
+          <AppIcons.Bell className="w-5 h-5" />
+          <span className="w-2 h-2 rounded-full bg-brand absolute top-2 right-2 border-2 border-white animate-pulse" />
         </button>
 
         {/* Interactive Profile Dropdown Container */}
@@ -97,15 +85,15 @@ export function SuperAdminHeader({
             onClick={() => setShowProfileDropdown(!showProfileDropdown)}
             className="flex items-center gap-2 p-1.5 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer text-left"
           >
-            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#5B4DFB] to-[#7C3AED] text-white font-black flex items-center justify-center text-xs shadow-xs">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-brand to-brand-hover text-white font-black flex items-center justify-center text-xs shadow-xs">
               {user?.name ? user.name.substring(0, 2).toUpperCase() : 'VB'}
             </div>
             <div className="hidden md:block">
               <p className="text-xs font-bold leading-tight text-slate-900 flex items-center gap-1">
                 {user?.name || 'Vibol'}
-                <ChevronDown className={`w-3 h-3 text-slate-400 transition-transform ${showProfileDropdown ? 'rotate-180' : ''}`} />
+                <AppIcons.Dropdown className={`w-3 h-3 text-slate-400 transition-transform ${showProfileDropdown ? 'rotate-180' : ''}`} />
               </p>
-              <p className="text-[10px] text-[#5B4DFB] font-bold capitalize">
+              <p className="text-[10px] text-brand font-bold capitalize">
                 {user?.role ? user.role.replace('_', ' ') : 'super admin'}
               </p>
             </div>
@@ -114,12 +102,11 @@ export function SuperAdminHeader({
           {/* Profile Dropdown Menu */}
           {showProfileDropdown && (
             <div className="absolute right-0 mt-2 w-64 bg-white border border-slate-200 rounded-2xl shadow-xl py-2 z-50 divide-y divide-slate-100 font-sans text-slate-800 animate-in fade-in zoom-in-95 duration-100">
-              
               {/* Profile Card Header */}
               <div className="px-4 py-3 bg-slate-50/70">
                 <p className="text-xs font-bold text-slate-900">{user?.name || 'Vibol'}</p>
                 <p className="text-[11px] text-slate-500 truncate">{user?.email || 'vibolsen2002@gmail.com'}</p>
-                <span className="inline-block mt-1.5 px-2 py-0.5 rounded-full text-[9px] font-extrabold uppercase bg-purple-50 text-[#5B4DFB] border border-purple-200">
+                <span className={`inline-block mt-1.5 ${badgeStyles.brand}`}>
                   {user?.role ? user.role.replace('_', ' ') : 'Super Admin'}
                 </span>
               </div>
@@ -127,11 +114,11 @@ export function SuperAdminHeader({
               {/* Switch to Onboarding Launchpad Action */}
               <div className="p-1.5">
                 <Link
-                  href="/CodeBridgesOnboardingLaunchpad"
+                  href="/launchpad"
                   onClick={() => setShowProfileDropdown(false)}
-                  className="w-full px-3 py-2 rounded-xl bg-purple-50 hover:bg-purple-100 text-[#5B4DFB] border border-purple-200/80 flex items-center gap-2.5 font-bold text-xs transition-colors"
+                  className="w-full px-3 py-2 rounded-xl bg-brand-subtle hover:bg-purple-100 text-brand border border-brand-border flex items-center gap-2.5 font-bold text-xs transition-colors"
                 >
-                  <Compass className="w-4 h-4 text-[#5B4DFB]" />
+                  <AppIcons.Compass className="w-4 h-4 text-brand" />
                   <span>Onboarding Launchpad</span>
                 </Link>
               </div>
@@ -141,28 +128,28 @@ export function SuperAdminHeader({
                 <Link
                   href="/super-admin/security/profile"
                   onClick={() => setShowProfileDropdown(false)}
-                  className="px-4 py-2.5 hover:bg-slate-50 flex items-center gap-2.5 font-bold text-slate-700 hover:text-orange-600 transition-colors"
+                  className="px-4 py-2.5 hover:bg-slate-50 flex items-center gap-2.5 font-bold text-slate-700 hover:text-brand transition-colors"
                 >
                   <User className="w-4 h-4 text-slate-400" /> My Profile
                 </Link>
                 <Link
                   href="/super-admin/security/settings"
                   onClick={() => setShowProfileDropdown(false)}
-                  className="px-4 py-2.5 hover:bg-slate-50 flex items-center gap-2.5 font-bold text-slate-700 hover:text-orange-600 transition-colors"
+                  className="px-4 py-2.5 hover:bg-slate-50 flex items-center gap-2.5 font-bold text-slate-700 hover:text-brand transition-colors"
                 >
                   <Settings className="w-4 h-4 text-slate-400" /> Platform Settings
                 </Link>
                 <Link
                   href="/super-admin/security/roles"
                   onClick={() => setShowProfileDropdown(false)}
-                  className="px-4 py-2.5 hover:bg-slate-50 flex items-center gap-2.5 font-bold text-slate-700 hover:text-orange-600 transition-colors"
+                  className="px-4 py-2.5 hover:bg-slate-50 flex items-center gap-2.5 font-bold text-slate-700 hover:text-brand transition-colors"
                 >
-                  <ShieldCheck className="w-4 h-4 text-slate-400" /> Dynamic Roles & RBAC
+                  <AppIcons.Security className="w-4 h-4 text-slate-400" /> Dynamic Roles &amp; RBAC
                 </Link>
                 <Link
                   href="/super-admin/security/audit-logs"
                   onClick={() => setShowProfileDropdown(false)}
-                  className="px-4 py-2.5 hover:bg-slate-50 flex items-center gap-2.5 font-bold text-slate-700 hover:text-orange-600 transition-colors"
+                  className="px-4 py-2.5 hover:bg-slate-50 flex items-center gap-2.5 font-bold text-slate-700 hover:text-brand transition-colors"
                 >
                   <FileText className="w-4 h-4 text-slate-400" /> Security Audit Logs
                 </Link>
@@ -177,16 +164,13 @@ export function SuperAdminHeader({
                   }}
                   className="w-full px-4 py-2.5 text-left text-xs font-bold text-rose-600 hover:bg-rose-50 flex items-center gap-2.5 transition-colors cursor-pointer"
                 >
-                  <LogOut className="w-4 h-4" /> Sign Out (SSO)
+                  <AppIcons.LogOut className="w-4 h-4" /> Sign Out (SSO)
                 </button>
               </div>
-
             </div>
           )}
         </div>
-
       </div>
-
     </header>
   );
 }

@@ -23,10 +23,7 @@ export const SuperAdminRolesView: React.FC = () => {
   const [search, setSearch] = useState('');
   const [selectedRole, setSelectedRole] = useState<RoleItem | null>(null);
   const [activeTab, setActiveTab] = useState<string>('all');
-  const [notification, setNotification] = useState<{
-    type: 'success' | 'error';
-    message: string;
-  } | null>(null);
+  const [notification, setNotification] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -48,27 +45,22 @@ export const SuperAdminRolesView: React.FC = () => {
     try {
       setLoading(true);
       const [rolesRes, permsRes] = await Promise.all([getRolesApi(), getPermissionsApi()]);
-
-      const isSuccessRoles = Boolean(rolesRes?.success || rolesRes?.status === 'success');
-      const isSuccessPerms = Boolean(permsRes?.success || permsRes?.status === 'success');
-
-      if (isSuccessRoles && rolesRes?.data) {
+      if ((rolesRes?.success || rolesRes?.status === 'success') && rolesRes?.data) {
         setRoles(rolesRes.data);
         if (rolesRes.data.length > 0 && !selectedRole) {
           setSelectedRole(rolesRes.data[0]);
         } else if (selectedRole) {
-          const updatedSelected = rolesRes.data.find((r: RoleItem) => r.id === selectedRole.id);
-          if (updatedSelected) setSelectedRole(updatedSelected);
+          const updated = rolesRes.data.find((r: RoleItem) => r.id === selectedRole.id);
+          if (updated) setSelectedRole(updated);
         }
       }
-
-      if (isSuccessPerms) {
+      if (permsRes?.success || permsRes?.status === 'success') {
         setPermissions(permsRes.data || []);
         setGroupedPermissions(permsRes.grouped || {});
       }
     } catch (err) {
-      console.error('Failed to load roles and permissions data:', err);
-      showNotification('error', 'Failed to load roles and permissions matrix from server.');
+      console.error('Failed to load roles/permissions:', err);
+      showNotification('error', 'Failed to load roles and permissions matrix.');
     } finally {
       setLoading(false);
     }
@@ -76,10 +68,8 @@ export const SuperAdminRolesView: React.FC = () => {
 
   const handleTogglePermission = (permId: string) => {
     if (!selectedRole) return;
-
     const currentPerms = selectedRole.permission_ids || [];
     const isAssigned = currentPerms.includes(permId);
-
     const updatedPermIds = isAssigned
       ? currentPerms.filter((id) => id !== permId)
       : [...currentPerms, permId];
@@ -95,21 +85,15 @@ export const SuperAdminRolesView: React.FC = () => {
     if (!selectedRole) return;
     try {
       setSaving(true);
-      const res = await updateRoleApi(selectedRole.id, {
-        permission_ids: selectedRole.permission_ids,
-      });
-
+      const res = await updateRoleApi(selectedRole.id, { permission_ids: selectedRole.permission_ids });
       if (res.success) {
-        showNotification(
-          'success',
-          `Permissions updated successfully for role "${selectedRole.name}".`
-        );
+        showNotification('success', `Permissions updated for role "${selectedRole.name}".`);
         loadData();
       } else {
         showNotification('error', res.message || 'Failed to update role permissions.');
       }
     } catch (err) {
-      console.error('Error updating role permissions:', err);
+      console.error('Error updating permissions:', err);
       showNotification('error', 'An error occurred while saving role permissions.');
     } finally {
       setSaving(false);
@@ -144,41 +128,24 @@ export const SuperAdminRolesView: React.FC = () => {
       showNotification('error', 'Please enter a valid role name.');
       return;
     }
-
     try {
       setSaving(true);
-      if (editingRoleId) {
-        const res = await updateRoleApi(editingRoleId, {
-          name: modalRoleName,
-          description: modalDescription,
-          permission_ids: modalSelectedPerms,
-        });
-
-        if (res.success) {
-          showNotification('success', 'Custom role updated successfully.');
-          setIsModalOpen(false);
-          loadData();
-        } else {
-          showNotification('error', res.message || 'Failed to update role.');
-        }
+      const payload = {
+        name: modalRoleName,
+        description: modalDescription,
+        permission_ids: modalSelectedPerms,
+      };
+      const res = editingRoleId ? await updateRoleApi(editingRoleId, payload) : await createRoleApi(payload);
+      if (res.success) {
+        showNotification('success', editingRoleId ? 'Role updated.' : 'New role created.');
+        setIsModalOpen(false);
+        loadData();
       } else {
-        const res = await createRoleApi({
-          name: modalRoleName,
-          description: modalDescription,
-          permission_ids: modalSelectedPerms,
-        });
-
-        if (res.success) {
-          showNotification('success', 'New custom role created successfully.');
-          setIsModalOpen(false);
-          loadData();
-        } else {
-          showNotification('error', res.message || 'Failed to create custom role.');
-        }
+        showNotification('error', res.message || 'Failed to save role.');
       }
     } catch (err) {
       console.error('Error saving role:', err);
-      showNotification('error', 'An error occurred while saving custom role.');
+      showNotification('error', 'An error occurred while saving role.');
     } finally {
       setSaving(false);
     }
@@ -189,34 +156,27 @@ export const SuperAdminRolesView: React.FC = () => {
       showNotification('error', 'System default roles cannot be deleted.');
       return;
     }
-
-    if (!confirm(`Are you sure you want to delete custom role "${role.name}"?`)) {
-      return;
-    }
-
+    if (!confirm(`Are you sure you want to delete custom role "${role.name}"?`)) return;
     try {
       setSaving(true);
       const res = await deleteRoleApi(role.id);
       if (res.success) {
-        showNotification('success', `Role "${role.name}" deleted successfully.`);
-        if (selectedRole?.id === role.id) {
-          setSelectedRole(null);
-        }
+        showNotification('success', `Role "${role.name}" deleted.`);
+        if (selectedRole?.id === role.id) setSelectedRole(null);
         loadData();
       } else {
-        showNotification('error', res.message || 'Failed to delete custom role.');
+        showNotification('error', res.message || 'Failed to delete role.');
       }
     } catch (err) {
       console.error('Error deleting role:', err);
-      showNotification('error', 'An error occurred while deleting custom role.');
+      showNotification('error', 'An error occurred while deleting role.');
     } finally {
       setSaving(false);
     }
   };
 
   return (
-    <div className="max-w-7xl mx-auto space-y-6">
-      {/* Toast Notification */}
+    <div className="max-w-7xl mx-auto space-y-6 font-sans">
       <AnimatePresence>
         {notification && (
           <motion.div
@@ -237,44 +197,39 @@ export const SuperAdminRolesView: React.FC = () => {
               )}
               <span>{notification.message}</span>
             </div>
-            <button
-              onClick={() => setNotification(null)}
-              className="text-slate-400 hover:text-slate-600"
-            >
+            <button onClick={() => setNotification(null)} className="text-slate-400 hover:text-slate-600">
               <X className="w-4 h-4" />
             </button>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Page Header Bar */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-6 rounded-3xl border border-slate-200 shadow-2xs">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="p-2 rounded-xl bg-orange-500/10 text-orange-600">
+            <span className="p-2 rounded-xl bg-brand-subtle text-brand">
               <ShieldCheck className="w-5 h-5" />
             </span>
             <h1 className="text-xl font-extrabold text-slate-900">
-              Dynamic Roles & Custom Permissions Matrix
+              Dynamic Roles &amp; Custom Permissions Matrix
             </h1>
           </div>
           <p className="text-xs text-slate-500 font-medium">
-            Define custom roles and toggle dynamic database-backed permissions across all enterprise modules without touching code.
+            Define custom roles and toggle dynamic database-backed permissions across all enterprise modules.
           </p>
         </div>
 
         <div className="flex items-center gap-3">
           <button
             onClick={loadData}
-            className="p-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-600 shadow-xs"
+            className="p-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-600 shadow-xs cursor-pointer"
             title="Reload permissions schema"
           >
-            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin text-orange-500' : ''}`} />
+            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin text-brand' : ''}`} />
           </button>
         </div>
       </div>
 
-      {/* Main Dual-Column Panel */}
       <div className="flex flex-col lg:flex-row items-start gap-6">
         <RolesListSidebar
           roles={roles}

@@ -20,11 +20,11 @@ export function PermissionsMatrixModal({
   const getRoleBadgeStyle = (role: string) => {
     switch (role) {
       case 'super_admin':
-        return 'bg-[#F5F3FF] text-[#5B4DFB] border-[#DDD6FE]';
+        return 'bg-brand-subtle text-brand border-brand/30';
       case 'admin':
       case 'administrator':
       case 'owner':
-        return 'bg-[#F5F3FF] text-[#7C3AED] border-[#DDD6FE]';
+        return 'bg-brand-subtle text-brand-dark border-brand/30';
       case 'outlet_manager':
       case 'manager':
         return 'bg-blue-50 text-blue-700 border-blue-200';
@@ -54,7 +54,7 @@ export function PermissionsMatrixModal({
         <div className="flex items-center justify-between border-b border-slate-100 pb-3">
           <div>
             <h3 className="font-extrabold text-slate-900 text-lg flex items-center gap-2">
-              <Grid className="w-5 h-5 text-[#5B4DFB]" />
+              <Grid className="w-5 h-5 text-brand" />
               Role Capabilities & Permissions Matrix
             </h3>
             <p className="text-xs text-slate-500 font-medium">Predefined system roles and capability boundaries</p>

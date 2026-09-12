@@ -56,7 +56,7 @@ export function PosSuiteHeader({
 
   const handleLogout = async () => {
     await logoutApi();
-    router.push('/CodeBridgesOnboardingLaunchpad');
+    router.push('/launchpad');
   };
 
   const userRole = (user?.role || '').toLowerCase();
@@ -72,7 +72,7 @@ export function PosSuiteHeader({
 
   const navLinks = [
     ...(isManagerial ? [{ label: 'POS Dashboard', href: '/pos', icon: LayoutDashboard }] : []),
-    { label: 'Checkout Terminal', href: '/pos/terminal', icon: Monitor },
+    { label: 'POS Terminal', href: '/pos/pos-terminal', icon: Monitor },
     ...(isManagerial ? [{ label: 'Orders & Receipts', href: '/pos/orders', icon: Receipt }] : []),
     ...(isManagerial ? [{ label: 'Shifts & Till Float', href: '/pos/shifts', icon: Clock }] : []),
     { label: 'Customer CFD', href: '/pos/customer-display', icon: Tv, target: '_blank', isExternal: true },
@@ -104,15 +104,15 @@ export function PosSuiteHeader({
         {/* Zone 1: Branding & Register Identity */}
         <div className="flex items-center gap-3 shrink-0">
           <Link href="/pos/dashboard" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center font-extrabold text-white shadow-md shadow-orange-500/20 group-hover:scale-105 transition-transform">
+            <div className="w-9 h-9 rounded-xl bg-brand flex items-center justify-center font-extrabold text-white shadow-md shadow-brand/20 group-hover:scale-105 transition-transform">
               <Monitor className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <span className="font-black text-sm text-slate-900 tracking-tight group-hover:text-orange-600 transition-colors">
+                <span className="font-black text-sm text-slate-900 tracking-tight group-hover:text-brand transition-colors">
                   POS Suite
                 </span>
-                <span className="text-[10px] font-mono font-extrabold text-orange-700 bg-orange-50 px-1.5 py-0.5 rounded-md border border-orange-200/70 shadow-2xs">
+                <span className="text-[10px] font-mono font-extrabold text-brand bg-brand-subtle px-1.5 py-0.5 rounded-md border border-brand/20 shadow-2xs">
                   {terminalCode}
                 </span>
               </div>
@@ -197,7 +197,7 @@ export function PosSuiteHeader({
                 className="px-2.5 py-1 rounded-xl hover:bg-slate-200 text-slate-700 text-[11px] font-extrabold flex items-center gap-1.5 cursor-pointer transition-colors"
                 title="Customer Sales Returns & Refunds"
               >
-                <RotateCcw className="w-3.5 h-3.5 text-orange-500" />
+                <RotateCcw className="w-3.5 h-3.5 text-brand" />
                 <span>Return</span>
               </button>
             </>
@@ -209,14 +209,14 @@ export function PosSuiteHeader({
           {/* Cashier Identity & Fast PIN Switcher */}
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-orange-500 to-amber-500 text-white font-black text-[11px] flex items-center justify-center shadow-xs">
+              <div className="w-8 h-8 rounded-full bg-brand text-white font-black text-[11px] flex items-center justify-center shadow-xs shadow-brand/20">
                 {cashierInitials}
               </div>
               <div className="text-left hidden lg:block">
                 <p className="text-xs font-black text-slate-900 truncate max-w-[110px] leading-tight">
                   {cashierName}
                 </p>
-                <p className="text-[10px] text-orange-600 font-extrabold capitalize">
+                <p className="text-[10px] text-brand font-extrabold capitalize">
                   {getRoleDisplayName(user)}
                 </p>
               </div>
@@ -226,7 +226,7 @@ export function PosSuiteHeader({
               <button
                 onClick={onOpenQuickSwitchModal}
                 title="Quick-Switch Staff (Enter PIN)"
-                className="px-2.5 py-1.5 rounded-xl bg-orange-50 hover:bg-orange-100 border border-orange-200/80 text-orange-700 text-xs font-extrabold flex items-center gap-1 shadow-2xs transition-all cursor-pointer"
+                className="px-2.5 py-1.5 rounded-xl bg-brand-subtle hover:bg-brand/10 border border-brand/20 text-brand text-xs font-extrabold flex items-center gap-1 shadow-2xs transition-all cursor-pointer"
               >
                 <KeyRound className="w-3.5 h-3.5" />
                 <span className="hidden xl:inline">Switch</span>
@@ -258,7 +258,7 @@ export function PosSuiteHeader({
                 target={link.target}
                 className={`px-3 py-1 rounded-xl text-xs font-extrabold flex items-center gap-1.5 whitespace-nowrap transition-all ${
                   isActive
-                    ? 'bg-orange-500 text-white shadow-xs'
+                    ? 'bg-brand text-white shadow-xs shadow-brand/20'
                     : 'text-slate-600 hover:text-slate-900 hover:bg-white'
                 }`}
               >

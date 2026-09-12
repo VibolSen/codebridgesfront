@@ -1,13 +1,17 @@
-'use client';
-
 import React from 'react';
-import Link from 'next/link';
+import { Edit3, Trash2 } from 'lucide-react';
 
 interface ProductCatalogTableRowProps {
   product: any;
+  onEdit?: (product: any) => void;
+  onDelete?: (product: any) => void;
 }
 
-export function ProductCatalogTableRow({ product: p }: ProductCatalogTableRowProps) {
+export function ProductCatalogTableRow({
+  product: p,
+  onEdit,
+  onDelete,
+}: ProductCatalogTableRowProps) {
   const stock = parseFloat(p.stock_on_hand || '0');
   const minBuffer = parseInt(p.min_reorder_point || '5', 10);
   const isOutOfStock = stock <= 0;
@@ -74,12 +78,25 @@ export function ProductCatalogTableRow({ product: p }: ProductCatalogTableRowPro
 
       {/* Action */}
       <td className="px-4 py-3.5 text-right">
-        <Link
-          href={`/super-admin/catalog/products?action=edit&id=${p.id}`}
-          className="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-purple-50 text-slate-700 hover:text-[#5B4DFB] font-bold text-[11px] transition-colors inline-block cursor-pointer"
-        >
-          Edit
-        </Link>
+        <div className="flex items-center justify-end gap-1.5">
+          <button
+            type="button"
+            onClick={() => onEdit?.(p)}
+            className="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-brand-subtle text-slate-700 hover:text-brand font-bold text-[11px] transition-colors inline-flex items-center gap-1 cursor-pointer"
+            title="Edit SKU Details"
+          >
+            <Edit3 className="w-3.5 h-3.5" />
+            <span>Edit</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => onDelete?.(p)}
+            className="p-1.5 rounded-lg bg-slate-100 hover:bg-rose-50 text-slate-400 hover:text-rose-600 transition-colors inline-flex items-center cursor-pointer"
+            title="Delete Product SKU"
+          >
+            <Trash2 className="w-3.5 h-3.5" />
+          </button>
+        </div>
       </td>
     </tr>
   );

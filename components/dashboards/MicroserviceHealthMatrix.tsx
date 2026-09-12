@@ -62,7 +62,7 @@ export function MicroserviceHealthMatrix({
             disabled={isPinging || isLoading}
             className="px-3 py-1.5 rounded-xl border border-slate-200/80 text-xs font-bold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-all flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
           >
-            <RefreshCw className={`w-3.5 h-3.5 ${isPinging || isLoading ? 'animate-spin text-[#5B4DFB]' : ''}`} />
+            <RefreshCw className={`w-3.5 h-3.5 ${isPinging || isLoading ? 'animate-spin text-brand' : ''}`} />
             <span>Ping Services</span>
           </button>
         </div>
@@ -73,7 +73,7 @@ export function MicroserviceHealthMatrix({
         {telemetry.map((svc) => (
           <div
             key={svc.name}
-            className="p-4 rounded-2xl border border-slate-100 bg-[#f8fafc]/80 hover:bg-white hover:border-[#5B4DFB]/30 hover:shadow-xs transition-all flex items-center justify-between group"
+            className="p-4 rounded-2xl border border-slate-100 bg-slate-50/80 hover:bg-white hover:border-brand/30 hover:shadow-xs transition-all flex items-center justify-between group"
           >
             <div className="space-y-1 min-w-0">
               <div className="flex items-center gap-1.5">
@@ -99,12 +99,12 @@ export function MicroserviceHealthMatrix({
 
       {/* Unified Telemetry Bar */}
       <div className="mt-4 pt-3 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-        <div className="p-3.5 rounded-2xl bg-[#F5F3FF]/70 border border-[#DDD6FE]/60 flex items-center justify-between">
+        <div className="p-3.5 rounded-2xl bg-brand-subtle/70 border border-brand-border/60 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Globe className="w-4 h-4 text-[#5B4DFB]" />
+            <Globe className="w-4 h-4 text-brand" />
             <span className="font-bold text-slate-700">API Gateway (Nginx)</span>
           </div>
-          <span className="font-mono font-black text-[#5B4DFB]">Port :8080</span>
+          <span className="font-mono font-black text-brand">Port :8080</span>
         </div>
 
         <div className="p-3.5 rounded-2xl bg-emerald-50/70 border border-emerald-100 flex items-center justify-between">

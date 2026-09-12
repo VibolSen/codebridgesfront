@@ -43,14 +43,14 @@ export function StocktakeAdjustmentsCard() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
         <div>
           <h3 className="font-extrabold text-base text-slate-900 flex items-center gap-2">
-            <SlidersHorizontal className="w-4 h-4 text-[#5B4DFB]" />
+            <SlidersHorizontal className="w-4 h-4 text-brand" />
             <span>Stocktake &amp; Adjustments</span>
           </h3>
           <p className="text-xs text-slate-500 font-medium">Cycle counts, damage write-offs, and discrepancy reconciliation</p>
         </div>
         <Link
           href="/super-admin/inventory/stocktake"
-          className="px-4 py-2 bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white rounded-xl font-black text-xs shadow-md shadow-[#5B4DFB]/20 transition-all flex items-center gap-1.5"
+          className="px-4 py-2 bg-brand hover:bg-brand-hover text-white rounded-xl font-black text-xs shadow-md shadow-brand/20 transition-all flex items-center gap-1.5 cursor-pointer"
         >
           <Plus className="w-4 h-4" />
           <span>Launch Stocktake Audit</span>
@@ -59,7 +59,7 @@ export function StocktakeAdjustmentsCard() {
 
       {/* Quick Dynamic Metrics */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="p-4 rounded-2xl bg-purple-50 border border-purple-100">
+        <div className="p-4 rounded-2xl bg-brand-subtle border border-brand/20">
           <span className="text-[11px] font-bold text-slate-500">Catalog SKUs Monitored</span>
           <p className="text-lg font-black text-slate-900 font-mono">
             {loading ? '...' : `${skuCount} SKUs`}

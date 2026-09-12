@@ -72,9 +72,9 @@ export function SuperAdminPlatformSettingsView() {
       {/* Header */}
       <div className="bg-white p-6 rounded-3xl border border-slate-200/90 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3.5">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-orange-500 via-amber-500 to-yellow-400 p-0.5 shadow-md shadow-orange-500/15 flex items-center justify-center">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand to-brand-hover p-0.5 shadow-md shadow-brand/15 flex items-center justify-center">
             <div className="w-full h-full bg-white rounded-[14px] flex items-center justify-center">
-              <Sliders className="w-6 h-6 text-orange-500" />
+              <Sliders className="w-6 h-6 text-brand" />
             </div>
           </div>
           <div>
@@ -82,7 +82,7 @@ export function SuperAdminPlatformSettingsView() {
               <h1 className="text-xl font-black text-slate-900 tracking-tight">
                 Global Platform Settings
               </h1>
-              <span className="px-2.5 py-0.5 rounded-full bg-orange-50 text-orange-700 text-[10px] font-extrabold border border-orange-200 uppercase">
+              <span className="px-2.5 py-0.5 rounded-full bg-brand-subtle text-brand text-[10px] font-extrabold border border-brand/20 uppercase">
                 Platform Config
               </span>
             </div>
@@ -96,7 +96,7 @@ export function SuperAdminPlatformSettingsView() {
           type="button"
           onClick={handleSave}
           disabled={saving}
-          className="px-5 py-2.5 rounded-2xl bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white font-extrabold text-xs shadow-md shadow-orange-500/20 flex items-center gap-2 transition-all cursor-pointer disabled:opacity-50"
+          className="px-5 py-2.5 rounded-xl bg-brand hover:bg-brand-hover active:scale-98 text-white font-extrabold text-xs shadow-md shadow-brand/20 flex items-center gap-2 transition-all cursor-pointer disabled:opacity-50"
         >
           <Save className="w-3.5 h-3.5" />
           <span>{saving ? 'Saving...' : 'Save Settings'}</span>

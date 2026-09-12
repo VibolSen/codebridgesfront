@@ -53,7 +53,7 @@ export function InventoryRbacCard() {
           <h3 className="font-extrabold text-base text-slate-900">Inventory Access &amp; RBAC</h3>
           <p className="text-xs text-slate-500 font-medium">Domain-scoped RBAC permissions (module_name = &apos;inventory&apos;)</p>
         </div>
-        <span className="px-2.5 py-1 rounded-full text-[10px] font-black bg-purple-100 text-[#5B4DFB]">
+        <span className="px-2.5 py-1 rounded-full text-[10px] font-black bg-brand-subtle text-brand border border-brand/20">
           Module Scoped
         </span>
       </div>
@@ -62,7 +62,7 @@ export function InventoryRbacCard() {
         <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
           <h4 className="font-extrabold text-sm text-slate-900">Inventory Director / Admin</h4>
           <p className="text-xs text-slate-500">Approve POs, adjust FIFO valuation rules, and configure safety buffers.</p>
-          <span className="inline-block px-2 py-0.5 rounded bg-purple-100 text-[#5B4DFB] text-[10px] font-bold">
+          <span className="inline-block px-2 py-0.5 rounded bg-brand-subtle text-brand border border-brand/20 text-[10px] font-bold">
             {loading ? '...' : `${staffCounts.admin} Assigned`}
           </span>
         </div>

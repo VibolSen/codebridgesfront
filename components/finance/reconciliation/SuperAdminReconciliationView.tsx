@@ -98,7 +98,7 @@ export function SuperAdminReconciliationView() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2.5">
-            <FileCheck2 className="w-7 h-7 text-orange-500" />
+            <FileCheck2 className="w-7 h-7 text-brand" />
             Payment Reconciliation &amp; Settlement Audit
           </h1>
           <p className="text-xs text-slate-500 mt-1">
@@ -109,7 +109,7 @@ export function SuperAdminReconciliationView() {
         <button
           onClick={handleRunBatchAudit}
           disabled={runningBatch}
-          className="px-5 py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs shadow-md shadow-orange-500/30 transition-all flex items-center gap-2 disabled:opacity-50 cursor-pointer"
+          className="px-5 py-2.5 rounded-xl bg-brand hover:bg-brand-hover active:bg-brand-active text-white font-bold text-xs shadow-md shadow-brand/25 transition-all flex items-center gap-2 disabled:opacity-50 cursor-pointer"
         >
           <Zap className={`w-4 h-4 ${runningBatch ? 'animate-spin' : ''}`} />
           {runningBatch ? 'Running Audit...' : 'Run Batch Reconciliation Audit'}
@@ -175,7 +175,7 @@ export function SuperAdminReconciliationView() {
               placeholder="Search reference or batch code..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-orange-500"
+              className="w-full pl-9 pr-4 py-2 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
             />
           </div>
         </div>
@@ -213,7 +213,7 @@ export function SuperAdminReconciliationView() {
                 filteredExceptions.map((ex) => (
                   <tr key={ex.id} className="hover:bg-slate-50/50">
                     <td className="py-3.5 px-4 font-mono font-bold text-slate-900">{ex.batch_code}</td>
-                    <td className="py-3.5 px-4 font-mono font-bold text-orange-600">{ex.merchant_reference}</td>
+                    <td className="py-3.5 px-4 font-mono font-bold text-brand">{ex.merchant_reference}</td>
                     <td className="py-3.5 px-4 font-semibold text-slate-700">${Number(ex.expected_amount).toFixed(2)}</td>
                     <td className="py-3.5 px-4 font-semibold text-slate-700">${Number(ex.actual_amount).toFixed(2)}</td>
                     <td className="py-3.5 px-4 font-extrabold text-rose-600">

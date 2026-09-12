@@ -27,7 +27,7 @@ export function CrossTenantUsersTable({
   if (loading) {
     return (
       <div className="py-20 flex flex-col items-center justify-center space-y-3">
-        <Loader2 className="w-8 h-8 text-orange-500 animate-spin" />
+        <Loader2 className="w-8 h-8 text-brand animate-spin" />
         <p className="text-xs font-bold text-slate-500">Querying live users from `auth-service` API...</p>
       </div>
     );
@@ -60,7 +60,7 @@ export function CrossTenantUsersTable({
             <tr key={u.id} className="hover:bg-slate-50/80 transition-colors">
               <td className="px-6 py-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-xl bg-orange-500 text-white flex items-center justify-center font-black text-[11px]">
+                  <div className="w-8 h-8 rounded-xl bg-brand-subtle text-brand border border-brand-border/60 flex items-center justify-center font-black text-xs shadow-2xs">
                     {u.name ? u.name[0]?.toUpperCase() : 'U'}
                   </div>
                   <div>
@@ -81,7 +81,7 @@ export function CrossTenantUsersTable({
               <td className="px-6 py-4">
                 <div>
                   <p className="font-extrabold text-slate-900 flex items-center gap-1.5">
-                    <Building2 className="w-3.5 h-3.5 text-orange-500" />
+                    <Building2 className="w-3.5 h-3.5 text-brand" />
                     <span>{u.tenant_name || 'CodeBridges Platform'}</span>
                   </p>
                   {u.outlet_name && (

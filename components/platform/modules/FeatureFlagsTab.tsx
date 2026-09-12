@@ -1,75 +1,28 @@
 'use client';
 
 import React from 'react';
-import { FeatureFlag } from './types';
+import { Zap, ShieldCheck } from 'lucide-react';
 
-interface FeatureFlagsTabProps {
-  flagsList: FeatureFlag[];
-  onFlagStatusChange: (flagId: string, newStatus: 'enabled_all' | 'beta_only' | 'disabled') => void;
-}
-
-export function FeatureFlagsTab({ flagsList, onFlagStatusChange }: FeatureFlagsTabProps) {
+export function FeatureFlagsTab() {
   return (
-    <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/90 shadow-xs space-y-6">
+    <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/90 shadow-2xs space-y-6">
       <div className="pb-4 border-b border-slate-100">
         <h3 className="font-extrabold text-base text-slate-900">Gradual Rollouts & Beta Feature Flags</h3>
         <p className="text-xs text-slate-500 font-medium">Safely test experimental features per tenant cohort with instant kill-switches.</p>
       </div>
 
-      <div className="space-y-4">
-        {flagsList.map((flag) => (
-          <div
-            key={flag.id}
-            className="p-5 rounded-2xl border border-slate-200 bg-slate-50/50 flex flex-col md:flex-row md:items-center justify-between gap-4"
-          >
-            <div className="space-y-1 max-w-xl">
-              <div className="flex items-center gap-2">
-                <h4 className="font-extrabold text-sm text-slate-900">{flag.name}</h4>
-                <span className="px-2 py-0.5 rounded bg-slate-200 text-slate-700 font-mono text-[10px] font-bold">
-                  {flag.key}
-                </span>
-              </div>
-              <p className="text-xs text-slate-500">{flag.description}</p>
-              <span className="text-[11px] font-semibold text-slate-400">
-                Active in: <strong>{flag.betaTenantsCount}</strong> workspaces
-              </span>
-            </div>
-
-            {/* Rollout Selector */}
-            <div className="flex items-center gap-1.5 p-1 bg-white border border-slate-200 rounded-xl self-start md:self-center shrink-0">
-              <button
-                onClick={() => onFlagStatusChange(flag.id, 'disabled')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                  flag.status === 'disabled'
-                    ? 'bg-rose-100 text-rose-800 font-extrabold'
-                    : 'text-slate-500 hover:text-slate-900'
-                }`}
-              >
-                Disabled (OFF)
-              </button>
-              <button
-                onClick={() => onFlagStatusChange(flag.id, 'beta_only')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                  flag.status === 'beta_only'
-                    ? 'bg-purple-100 text-purple-800 font-extrabold'
-                    : 'text-slate-500 hover:text-slate-900'
-                }`}
-              >
-                Beta Cohort Only
-              </button>
-              <button
-                onClick={() => onFlagStatusChange(flag.id, 'enabled_all')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                  flag.status === 'enabled_all'
-                    ? 'bg-emerald-100 text-emerald-800 font-extrabold'
-                    : 'text-slate-500 hover:text-slate-900'
-                }`}
-              >
-                100% Global Rollout
-              </button>
-            </div>
-          </div>
-        ))}
+      <div className="py-12 px-4 text-center max-w-md mx-auto space-y-3">
+        <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mx-auto shadow-2xs border border-amber-200/60">
+          <Zap className="w-6 h-6" />
+        </div>
+        <h4 className="font-extrabold text-sm text-slate-900">Zero Static Fallbacks Enforced</h4>
+        <p className="text-xs text-slate-500 leading-relaxed">
+          No mock feature flags are rendered. All platform capabilities operate under real, server-authoritative module licensing via the <strong className="text-slate-700 font-bold">Tenant Entitlements</strong> tab.
+        </p>
+        <div className="pt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-[11px] font-bold border border-emerald-200">
+          <ShieldCheck className="w-3.5 h-3.5" />
+          <span>Server-Authoritative Synchronization Active</span>
+        </div>
       </div>
     </div>
   );

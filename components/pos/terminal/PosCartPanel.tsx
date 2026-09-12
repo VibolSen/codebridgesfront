@@ -71,7 +71,7 @@ export function PosCartPanel({
       {/* Cart Header */}
       <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0 bg-slate-50/50">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-xl bg-orange-500 text-white flex items-center justify-center font-bold shadow-xs shadow-orange-500/20">
+          <div className="w-8 h-8 rounded-xl bg-brand text-white flex items-center justify-center font-bold shadow-xs shadow-brand/20">
             <ShoppingBag className="w-4 h-4" />
           </div>
           <div>
@@ -208,7 +208,7 @@ export function PosCartPanel({
                   placeholder="Coupon code..."
                   value={couponInput}
                   onChange={(e) => setCouponInput(e.target.value.toUpperCase())}
-                  className="w-full pl-8 pr-2 py-1.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-orange-500 font-mono"
+                  className="w-full pl-8 pr-2 py-1.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-brand font-mono"
                 />
               </div>
               <button
@@ -244,7 +244,7 @@ export function PosCartPanel({
             </div>
             <div className="flex justify-between text-base font-black text-slate-900 pt-1.5 border-t border-slate-200">
               <span>Grand Total</span>
-              <span className="text-orange-600 font-mono">
+              <span className="text-brand font-mono">
                 ${grandTotal.toFixed(2)}
               </span>
             </div>
@@ -263,9 +263,9 @@ export function PosCartPanel({
             <button
               type="button"
               onClick={() => onOpenCheckout('khqr')}
-              className="py-2 rounded-xl bg-orange-50 hover:bg-orange-100 border border-orange-200 text-orange-800 text-xs font-black flex items-center justify-center gap-1 transition-all cursor-pointer"
+              className="py-2 rounded-xl bg-brand-subtle hover:bg-brand/10 border border-brand/20 text-brand text-xs font-black flex items-center justify-center gap-1 transition-all cursor-pointer"
             >
-              <QrCode className="w-3.5 h-3.5 text-orange-600" />
+              <QrCode className="w-3.5 h-3.5 text-brand" />
               <span>KHQR</span>
             </button>
             <button
@@ -285,7 +285,7 @@ export function PosCartPanel({
             type="button"
             disabled={isProcessing}
             onClick={() => onOpenCheckout('cash')}
-            className="w-full py-3 rounded-2xl bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 hover:from-orange-600 hover:to-amber-600 text-white font-black text-sm shadow-md shadow-orange-500/20 flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-50"
+            className="w-full py-3 rounded-2xl bg-brand hover:bg-brand-hover text-white font-black text-sm shadow-md shadow-brand/20 flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-50"
           >
             <span>Charge ${grandTotal.toFixed(2)}</span>
             <ArrowRight className="w-4 h-4" />

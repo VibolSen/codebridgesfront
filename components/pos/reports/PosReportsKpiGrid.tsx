@@ -27,7 +27,7 @@ export function PosReportsKpiGrid({ metrics }: PosReportsKpiGridProps) {
       <div className="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-[0_2px_12px_rgba(15,23,42,0.03)] space-y-2">
         <div className="flex items-center justify-between text-slate-400 text-xs font-bold">
           <span className="flex items-center gap-1.5">
-            <DollarSign className="w-3.5 h-3.5 text-[#5B4DFB]" />
+            <DollarSign className="w-3.5 h-3.5 text-brand" />
             Gross Revenue
           </span>
           <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-black">Settled</span>

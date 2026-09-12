@@ -32,11 +32,11 @@ export function PosCheckoutTenderSelector({
         onClick={() => onSelectTender('khqr')}
         className={`p-2.5 rounded-xl border text-xs font-black flex flex-col items-center gap-1 transition-all cursor-pointer ${
           tenderType === 'khqr'
-            ? 'bg-orange-50 text-orange-800 border-orange-300 shadow-xs'
+            ? 'bg-brand-subtle text-brand border-brand/40 shadow-xs'
             : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
         }`}
       >
-        <QrCode className="w-4 h-4 text-orange-600" />
+        <QrCode className="w-4 h-4 text-brand" />
         <span>ABA KHQR</span>
       </button>
 

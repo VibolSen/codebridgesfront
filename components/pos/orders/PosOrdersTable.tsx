@@ -38,7 +38,7 @@ export function PosOrdersTable({
     <div className="p-6 rounded-3xl bg-white border border-slate-200/90 shadow-xs space-y-4">
       <div className="flex items-center justify-between border-b border-slate-100 pb-3">
         <h3 className="font-extrabold text-sm text-slate-900 flex items-center gap-2">
-          <Receipt className="w-4 h-4 text-orange-500" />
+          <Receipt className="w-4 h-4 text-brand" />
           <span>Transactions & Receipts Log</span>
         </h3>
         <span className="text-xs font-bold text-slate-400">
@@ -86,7 +86,7 @@ export function PosOrdersTable({
                       <span
                         className={`px-2 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider flex items-center gap-1 w-fit ${
                           tender === 'khqr'
-                            ? 'bg-orange-50 text-orange-700 border border-orange-200'
+                            ? 'bg-brand-subtle text-brand border border-brand/20'
                             : tender === 'card'
                             ? 'bg-blue-50 text-blue-700 border border-blue-200'
                             : 'bg-emerald-50 text-emerald-700 border border-emerald-200'
@@ -112,7 +112,7 @@ export function PosOrdersTable({
                       <button
                         type="button"
                         onClick={() => onReprintReceipt(tx)}
-                        className="px-2.5 py-1 rounded-lg bg-orange-50 hover:bg-orange-500 text-orange-600 hover:text-white border border-orange-200 text-xs font-bold transition-all flex items-center gap-1 mx-auto cursor-pointer shadow-2xs"
+                        className="px-2.5 py-1 rounded-lg bg-brand-subtle hover:bg-brand text-brand hover:text-white border border-brand/20 text-xs font-bold transition-all flex items-center gap-1 mx-auto cursor-pointer shadow-2xs"
                       >
                         <Printer className="w-3 h-3" />
                         <span>Print</span>

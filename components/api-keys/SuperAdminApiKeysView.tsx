@@ -121,7 +121,7 @@ export function SuperAdminApiKeysView() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2.5">
-            <Key className="w-7 h-7 text-orange-500" />
+            <Key className="w-7 h-7 text-brand" />
             Developer &amp; Merchant API Keys
           </h1>
           <p className="text-xs text-slate-500 mt-1">
@@ -131,7 +131,7 @@ export function SuperAdminApiKeysView() {
 
         <button
           onClick={() => setShowCreateModal(true)}
-          className="px-5 py-3 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-black text-xs shadow-lg shadow-orange-500/25 flex items-center gap-2 cursor-pointer transition-all active:scale-95"
+          className="px-5 py-3 rounded-2xl bg-brand hover:bg-brand-hover text-white font-black text-xs shadow-lg shadow-brand/25 flex items-center gap-2 cursor-pointer transition-all active:scale-95"
         >
           <Plus className="w-4 h-4" />
           <span>+ Generate New API Key</span>
@@ -158,7 +158,7 @@ export function SuperAdminApiKeysView() {
           <div className="p-12 text-center text-xs text-slate-400 font-bold">Loading Merchant API Keys...</div>
         ) : keys.length === 0 ? (
           <div className="p-12 text-center space-y-3">
-            <div className="w-12 h-12 rounded-2xl bg-orange-50 text-orange-500 flex items-center justify-center mx-auto">
+            <div className="w-12 h-12 rounded-2xl bg-brand-subtle text-brand flex items-center justify-center mx-auto">
               <Key className="w-6 h-6" />
             </div>
             <p className="text-xs font-bold text-slate-700">No Merchant API Keys Generated Yet</p>

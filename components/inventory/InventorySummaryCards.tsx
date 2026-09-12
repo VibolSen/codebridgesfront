@@ -27,7 +27,7 @@ export const InventorySummaryCards: React.FC<InventorySummaryCardsProps> = ({
           <h4 className="text-xl font-extrabold text-slate-900">{totalSKUs}</h4>
           <p className="text-xs text-slate-500 font-medium">Total Active SKUs</p>
         </div>
-        <div className="w-10 h-10 rounded-xl bg-orange-500/10 text-orange-500 flex items-center justify-center font-bold">
+        <div className="w-10 h-10 rounded-xl bg-brand-subtle text-brand flex items-center justify-center font-bold">
           <Package className="w-5 h-5" />
         </div>
       </motion.div>
@@ -68,7 +68,7 @@ export const InventorySummaryCards: React.FC<InventorySummaryCardsProps> = ({
           </h4>
           <p className="text-xs text-slate-500 font-medium">Retail Valuation</p>
         </div>
-        <div className="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-500 flex items-center justify-center font-bold">
+        <div className="w-10 h-10 rounded-xl bg-brand-subtle text-brand flex items-center justify-center font-bold">
           <TrendingUp className="w-5 h-5" />
         </div>
       </motion.div>

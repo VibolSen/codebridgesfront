@@ -16,7 +16,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
-  brand: 'bg-[#5B4DFB] hover:bg-[#4d3fe3] text-white shadow-sm shadow-[#5B4DFB]/25 focus-visible:ring-[#5B4DFB]',
+  brand: 'bg-brand hover:bg-brand-hover text-white shadow-sm shadow-brand/25 focus-visible:ring-brand',
   secondary: 'bg-slate-100 hover:bg-slate-200 text-slate-700 focus-visible:ring-slate-400',
   outline: 'border border-slate-200/90 bg-white hover:bg-slate-50 text-slate-700 shadow-xs focus-visible:ring-slate-400',
   ghost: 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus-visible:ring-slate-400',

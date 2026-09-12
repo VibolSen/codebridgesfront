@@ -35,7 +35,7 @@ export function PosPolicySettingsTab({
               type="text"
               value={settings.terminalName}
               onChange={(e) => onChange('terminalName', e.target.value)}
-              className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB]"
+              className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
             />
           </div>
 
@@ -58,7 +58,7 @@ export function PosPolicySettingsTab({
                 onChange('outletId', e.target.value);
                 if (sel) onChange('outletName', sel.name);
               }}
-              className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB]"
+              className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
             >
               {outlets.length === 0 ? (
                 <option value="">Default Branch</option>
@@ -92,7 +92,7 @@ export function PosPolicySettingsTab({
             <select
               value={settings.baseCurrency}
               onChange={(e) => onChange('baseCurrency', e.target.value)}
-              className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB]"
+              className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
             >
               <option value="USD">USD ($ - US Dollar)</option>
               <option value="KHR">KHR (៛ - Khmer Riel)</option>
@@ -106,7 +106,7 @@ export function PosPolicySettingsTab({
               step="10"
               value={settings.exchangeRate}
               onChange={(e) => onChange('exchangeRate', Number(e.target.value))}
-              className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB]"
+              className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
             />
           </div>
 
@@ -115,7 +115,7 @@ export function PosPolicySettingsTab({
             <select
               value={settings.khrRounding}
               onChange={(e) => onChange('khrRounding', e.target.value)}
-              className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB]"
+              className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
             >
               <option value="100">Round to 100 Riels (Common)</option>
               <option value="500">Round to 500 Riels</option>

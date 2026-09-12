@@ -48,10 +48,10 @@ export const StoreMetricsCards: React.FC<StoreMetricsCardsProps> = ({
         className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs flex items-center justify-between"
       >
         <div>
-          <h4 className="text-xl font-extrabold text-indigo-600">{totalRegisters}</h4>
+          <h4 className="text-xl font-extrabold text-brand">{totalRegisters}</h4>
           <p className="text-xs text-slate-500 font-medium">POS Registers Deployed</p>
         </div>
-        <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">
+        <div className="w-10 h-10 rounded-xl bg-brand-subtle text-brand flex items-center justify-center font-bold">
           <Monitor className="w-5 h-5" />
         </div>
       </motion.div>

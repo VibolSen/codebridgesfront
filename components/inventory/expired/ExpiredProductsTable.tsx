@@ -64,7 +64,7 @@ export const ExpiredProductsTable: React.FC<ExpiredProductsTableProps> = ({
                     initial="hidden"
                     animate="visible"
                     variants={cardVariants}
-                    className="hover:bg-orange-50/50 transition-colors"
+                    className="hover:bg-brand-subtle/50 transition-colors"
                   >
                     <td className="py-3.5 px-4">
                       <div className="flex items-center gap-3">

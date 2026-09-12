@@ -66,7 +66,7 @@ export const ActiveSessionsCard: React.FC<ActiveSessionsCardProps> = ({
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center text-slate-600">
                   {s.device_name?.includes('iPhone') || s.device_name?.includes('Android') ? (
-                    <Smartphone className="w-4 h-4 text-orange-500" />
+                    <Smartphone className="w-4 h-4 text-brand" />
                   ) : (
                     <Monitor className="w-4 h-4 text-blue-500" />
                   )}

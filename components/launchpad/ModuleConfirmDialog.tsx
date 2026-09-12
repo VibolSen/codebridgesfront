@@ -4,13 +4,13 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   AlertTriangle,
-  CheckCircle2,
   PowerOff,
   Sparkles,
-  X,
-  Building2,
 } from 'lucide-react';
 import { SystemModule } from './types';
+import { AppIcons } from '@/components/ui/icons';
+import { modalBackdrop, modalContent } from '@/lib/animations';
+import { buttonStyles, cardStyles } from '@/lib/theme';
 
 export interface ConfirmDialogState {
   isOpen: boolean;
@@ -39,24 +39,26 @@ export function ModuleConfirmDialog({
   return (
     <AnimatePresence>
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
+        variants={modalBackdrop}
+        initial="hidden"
+        animate="visible"
+        exit="hidden"
         className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4"
       >
         <motion.div
-          initial={{ scale: 0.95, opacity: 0, y: 10 }}
-          animate={{ scale: 1, opacity: 1, y: 0 }}
-          exit={{ scale: 0.95, opacity: 0, y: 10 }}
-          className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-2xl border border-slate-200 text-slate-800 space-y-5 relative overflow-hidden"
+          variants={modalContent}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          className={`${cardStyles.base} max-w-md w-full p-6 sm:p-7 shadow-2xl text-slate-800 space-y-5 relative overflow-hidden`}
         >
           {/* Close Button */}
           <button
             type="button"
             onClick={onClose}
-            className="absolute top-5 right-5 p-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-400 hover:text-slate-700 transition-colors cursor-pointer"
+            className={`absolute top-5 right-5 ${buttonStyles.icon}`}
           >
-            <X className="w-4 h-4" />
+            <AppIcons.Close className="w-4 h-4" />
           </button>
 
           {/* Dialog Header Icon & Title */}
@@ -71,7 +73,7 @@ export function ModuleConfirmDialog({
               {isDisable ? (
                 <PowerOff className="w-6 h-6" />
               ) : (
-                <CheckCircle2 className="w-6 h-6" />
+                <AppIcons.Check className="w-6 h-6" />
               )}
             </div>
             <div>
@@ -85,9 +87,9 @@ export function ModuleConfirmDialog({
                   : `Enable "${mod?.title}"?`}
               </h3>
               <div className="flex items-center gap-1.5 mt-1 text-xs text-slate-500 font-medium">
-                <Building2 className="w-3.5 h-3.5 text-slate-400" />
+                <AppIcons.Organization className="w-3.5 h-3.5 text-slate-400" />
                 <span>Target:</span>
-                <span className="font-bold text-orange-600 truncate max-w-[200px]">
+                <span className="font-bold text-brand truncate max-w-[200px]">
                   {orgName}
                 </span>
               </div>
@@ -106,7 +108,7 @@ export function ModuleConfirmDialog({
               {isDisable ? (
                 <AlertTriangle className="w-4 h-4 text-rose-600 shrink-0" />
               ) : (
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <AppIcons.Check className="w-4 h-4 text-emerald-600 shrink-0" />
               )}
               <span>
                 {isDisable
@@ -130,7 +132,7 @@ export function ModuleConfirmDialog({
             <button
               type="button"
               onClick={onClose}
-              className="w-full sm:flex-1 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-600 font-bold text-xs transition-colors cursor-pointer text-center"
+              className={`w-full sm:flex-1 ${buttonStyles.secondary}`}
             >
               Cancel
             </button>

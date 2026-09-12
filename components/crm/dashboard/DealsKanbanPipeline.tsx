@@ -22,6 +22,7 @@ import {
   deleteCrmDealApi,
   Deal,
 } from '@/lib/api';
+import { CreateDealModal } from './CreateDealModal';
 
 const STAGES = [
   { key: 'lead', label: 'Lead In', color: 'border-slate-300 text-slate-700 bg-slate-50' },
@@ -134,7 +135,7 @@ export function DealsKanbanPipeline() {
         </div>
         <button
           onClick={() => setIsModalOpen(true)}
-          className="px-3.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-extrabold text-xs shadow-xs transition-colors flex items-center gap-1.5 cursor-pointer"
+          className="px-3.5 py-1.5 rounded-xl bg-brand hover:bg-brand-hover text-white font-extrabold text-xs shadow-xs transition-colors flex items-center gap-1.5 cursor-pointer"
         >
           <Plus className="w-3.5 h-3.5" />
           <span>New Opportunity</span>
@@ -143,7 +144,7 @@ export function DealsKanbanPipeline() {
 
       {loading ? (
         <div className="py-16 text-center text-xs text-slate-400 font-medium flex items-center justify-center gap-1.5">
-          <Loader2 className="w-4 h-4 animate-spin text-purple-600" />
+          <Loader2 className="w-4 h-4 animate-spin text-brand" />
           <span>Loading deals pipeline...</span>
         </div>
       ) : (
@@ -199,7 +200,7 @@ export function DealsKanbanPipeline() {
                         )}
 
                         <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
-                          <span className="font-mono font-black text-purple-700">
+                          <span className="font-mono font-black text-brand">
                             ${parseFloat(String(deal.value || 0)).toLocaleString('en-US', { minimumFractionDigits: 0 })}
                           </span>
                           <span className="text-[10px] font-bold text-slate-400">
@@ -233,119 +234,15 @@ export function DealsKanbanPipeline() {
       )}
 
       {/* Create Deal Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl p-6 w-full max-w-md shadow-2xl border border-slate-200 space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <h3 className="font-black text-base text-slate-900 flex items-center gap-2">
-                <Briefcase className="w-5 h-5 text-purple-600" />
-                <span>New Sales Opportunity Deal</span>
-              </h3>
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="p-1 rounded-lg text-slate-400 hover:text-slate-700"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <form onSubmit={handleCreateDeal} className="space-y-3.5 text-xs">
-              <div>
-                <label className="block font-bold text-slate-700 mb-1">Deal Title *</label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. POS Hardware Bundle & Annual License"
-                  value={formData.title}
-                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium focus:ring-2 focus:ring-purple-500 focus:outline-none"
-                />
-              </div>
-
-              <div>
-                <label className="block font-bold text-slate-700 mb-1">Company / Organization</label>
-                <input
-                  type="text"
-                  placeholder="e.g. Angkor Gourmet Bistro Group"
-                  value={formData.company}
-                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium focus:ring-2 focus:ring-purple-500 focus:outline-none"
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block font-bold text-slate-700 mb-1">Deal Value ($) *</label>
-                  <input
-                    type="number"
-                    step="0.01"
-                    required
-                    placeholder="8400.00"
-                    value={formData.value}
-                    onChange={(e) => setFormData({ ...formData, value: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-mono font-bold focus:ring-2 focus:ring-purple-500 focus:outline-none"
-                  />
-                </div>
-                <div>
-                  <label className="block font-bold text-slate-700 mb-1">Win Probability (%)</label>
-                  <input
-                    type="number"
-                    min="0"
-                    max="100"
-                    value={formData.probability}
-                    onChange={(e) => setFormData({ ...formData, probability: Number(e.target.value) })}
-                    className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-mono font-bold focus:ring-2 focus:ring-purple-500 focus:outline-none"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block font-bold text-slate-700 mb-1">Pipeline Stage</label>
-                  <select
-                    value={formData.stage}
-                    onChange={(e) => setFormData({ ...formData, stage: e.target.value as Deal['stage'] })}
-                    className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium focus:ring-2 focus:ring-purple-500 focus:outline-none"
-                  >
-                    {STAGES.map((s) => (
-                      <option key={s.key} value={s.key}>
-                        {s.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label className="block font-bold text-slate-700 mb-1">Owner / Rep</label>
-                  <input
-                    type="text"
-                    value={formData.owner_name}
-                    onChange={(e) => setFormData({ ...formData, owner_name: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium focus:ring-2 focus:ring-purple-500 focus:outline-none"
-                  />
-                </div>
-              </div>
-
-              <div className="pt-3 flex items-center justify-end gap-2 border-t border-slate-100">
-                <button
-                  type="button"
-                  onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={saving}
-                  className="px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-extrabold shadow-sm flex items-center gap-1.5"
-                >
-                  {saving && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
-                  <span>Save Deal</span>
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+      <CreateDealModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleCreateDeal}
+        saving={saving}
+        stages={STAGES}
+        formData={formData}
+        setFormData={setFormData}
+      />
     </div>
   );
 }

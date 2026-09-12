@@ -88,7 +88,7 @@ export function CashierQuickSwitchModal({
           className="bg-white rounded-3xl shadow-2xl border border-slate-200/80 w-full max-w-sm overflow-hidden"
         >
           {/* Header */}
-          <div className="bg-gradient-to-r from-orange-500 to-amber-500 p-6 text-white relative">
+          <div className="bg-brand p-6 text-white relative">
             <button
               onClick={onClose}
               disabled={loading}
@@ -104,7 +104,7 @@ export function CashierQuickSwitchModal({
                 <h3 className="text-lg font-black tracking-tight flex items-center gap-1.5">
                   Fast Cashier Quick-Switch
                 </h3>
-                <p className="text-xs text-orange-100 font-medium">
+                <p className="text-xs text-brand-subtle font-medium">
                   Current: <span className="font-bold underline">{currentUser?.name || 'Cashier'}</span>
                 </p>
               </div>
@@ -121,11 +121,11 @@ export function CashierQuickSwitchModal({
                     key={idx}
                     animate={{
                       scale: pin.length === idx ? [1, 1.15, 1] : 1,
-                      backgroundColor: idx < pin.length ? '#f97316' : '#f1f5f9',
-                      borderColor: idx < pin.length ? '#ea580c' : '#cbd5e1',
+                      backgroundColor: idx < pin.length ? 'var(--color-brand)' : 'var(--color-surface-subtle)',
+                      borderColor: idx < pin.length ? 'var(--color-brand-hover)' : 'var(--color-card-border)',
                     }}
                     className={`w-5 h-5 rounded-full border-2 transition-all ${
-                      idx < pin.length ? 'bg-orange-500 border-orange-600 shadow-xs shadow-orange-500/40' : 'bg-slate-100 border-slate-300'
+                      idx < pin.length ? 'bg-brand border-brand shadow-xs shadow-brand/40' : 'bg-slate-100 border-slate-300'
                     }`}
                   />
                 ))}
@@ -166,7 +166,7 @@ export function CashierQuickSwitchModal({
                   type="button"
                   onClick={() => handleDigitClick(num)}
                   disabled={loading}
-                  className="h-14 rounded-2xl bg-slate-50 hover:bg-orange-50 active:bg-orange-100 border border-slate-200 hover:border-orange-300 text-xl font-black text-slate-800 hover:text-orange-600 transition-all shadow-xs active:scale-95 disabled:opacity-40"
+                  className="h-14 rounded-2xl bg-slate-50 hover:bg-brand-subtle active:bg-brand/10 border border-slate-200 hover:border-brand/40 text-xl font-black text-slate-800 hover:text-brand transition-all shadow-xs active:scale-95 disabled:opacity-40"
                 >
                   {num}
                 </button>
@@ -185,7 +185,7 @@ export function CashierQuickSwitchModal({
                 type="button"
                 onClick={() => handleDigitClick('0')}
                 disabled={loading}
-                className="h-14 rounded-2xl bg-slate-50 hover:bg-orange-50 active:bg-orange-100 border border-slate-200 hover:border-orange-300 text-xl font-black text-slate-800 hover:text-orange-600 transition-all shadow-xs active:scale-95 disabled:opacity-40"
+                className="h-14 rounded-2xl bg-slate-50 hover:bg-brand-subtle active:bg-brand/10 border border-slate-200 hover:border-brand/40 text-xl font-black text-slate-800 hover:text-brand transition-all shadow-xs active:scale-95 disabled:opacity-40"
               >
                 0
               </button>

@@ -23,7 +23,7 @@ export function PosReportsTenderSettlement({
     <div className="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-[0_2px_12px_rgba(15,23,42,0.03)] space-y-5">
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-black text-slate-900 tracking-tight flex items-center gap-2">
-          <Banknote className="w-4 h-4 text-[#5B4DFB]" />
+          <Banknote className="w-4 h-4 text-brand" />
           <span>Tender Settlement Ratio</span>
         </h3>
         <span className="text-[10px] font-bold text-slate-400">Total ${totalTender.toFixed(2)}</span>

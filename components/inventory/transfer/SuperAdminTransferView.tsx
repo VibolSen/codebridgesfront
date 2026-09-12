@@ -187,7 +187,7 @@ export const SuperAdminTransferView: React.FC = () => {
       >
         <div>
           <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-2.5">
-            <ArrowRightLeft className="w-6 h-6 text-orange-500" />
+            <ArrowRightLeft className="w-6 h-6 text-brand" />
             Inter-Store Stock Transfers
           </h1>
           <p className="text-xs text-slate-500">
@@ -199,7 +199,7 @@ export const SuperAdminTransferView: React.FC = () => {
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
           onClick={() => setIsCreateModalOpen(true)}
-          className="px-4 py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs shadow-md shadow-orange-500/20 transition-all flex items-center gap-2 self-start sm:self-auto"
+          className="px-4 py-2.5 rounded-xl bg-brand hover:bg-brand-hover text-white font-bold text-xs shadow-md shadow-brand/20 transition-all flex items-center gap-2 self-start sm:self-auto cursor-pointer"
         >
           <Plus className="w-4 h-4" />
           New Stock Transfer
@@ -245,7 +245,7 @@ export const SuperAdminTransferView: React.FC = () => {
             placeholder="Search transfer # or notes..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 text-xs rounded-xl bg-slate-100 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500 font-medium"
+            className="w-full pl-9 pr-4 py-2 text-xs rounded-xl bg-slate-100 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand font-medium"
           />
         </form>
 
@@ -257,7 +257,7 @@ export const SuperAdminTransferView: React.FC = () => {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-3 py-2 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-700 focus:outline-none"
+            className="px-3 py-2 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
           >
             <option value="">All Statuses</option>
             <option value="dispatched">In Transit (Dispatched)</option>

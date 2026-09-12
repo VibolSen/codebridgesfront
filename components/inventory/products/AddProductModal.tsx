@@ -86,7 +86,7 @@ export function AddProductModal({
       <div className="bg-white w-full max-w-lg rounded-3xl p-6 shadow-2xl border border-slate-200 space-y-5 relative max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between pb-3 border-b border-slate-100">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-2xl bg-purple-100 text-[#5B4DFB] flex items-center justify-center">
+            <div className="w-9 h-9 rounded-2xl bg-brand-subtle text-brand flex items-center justify-center">
               <Package className="w-5 h-5" />
             </div>
             <div>
@@ -121,7 +121,7 @@ export function AddProductModal({
               placeholder="e.g. Iced Caramel Macchiato"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] bg-slate-50 focus:bg-white"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand bg-slate-50 focus:bg-white"
             />
           </div>
 
@@ -135,7 +135,7 @@ export function AddProductModal({
                 placeholder="e.g. BEV-MAC-001"
                 value={formData.sku}
                 onChange={(e) => setFormData({ ...formData, sku: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-mono font-semibold focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] bg-slate-50 focus:bg-white"
+                className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-mono font-semibold focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand bg-slate-50 focus:bg-white"
               />
             </div>
 
@@ -144,7 +144,7 @@ export function AddProductModal({
               <select
                 value={formData.category_id}
                 onChange={(e) => setFormData({ ...formData, category_id: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] bg-slate-50 focus:bg-white"
+                className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand bg-slate-50 focus:bg-white"
               >
                 {categories.map((c: any) => (
                   <option key={c.id} value={c.id}>
@@ -166,7 +166,7 @@ export function AddProductModal({
                 placeholder="0.00"
                 value={formData.cost_price}
                 onChange={(e) => setFormData({ ...formData, cost_price: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-mono font-bold focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] bg-slate-50 focus:bg-white"
+                className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-mono font-bold focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand bg-slate-50 focus:bg-white"
               />
             </div>
 
@@ -182,7 +182,7 @@ export function AddProductModal({
                 placeholder="0.00"
                 value={formData.selling_price}
                 onChange={(e) => setFormData({ ...formData, selling_price: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-mono font-bold focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] bg-slate-50 focus:bg-white"
+                className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-mono font-bold focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand bg-slate-50 focus:bg-white"
               />
             </div>
 
@@ -193,7 +193,7 @@ export function AddProductModal({
                 min="1"
                 value={formData.min_reorder_point}
                 onChange={(e) => setFormData({ ...formData, min_reorder_point: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-mono font-semibold focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] bg-slate-50 focus:bg-white"
+                className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-mono font-semibold focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand bg-slate-50 focus:bg-white"
               />
             </div>
           </div>
@@ -205,7 +205,7 @@ export function AddProductModal({
               placeholder="Optional ingredients, storage instructions or notes..."
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] bg-slate-50 focus:bg-white"
+              className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand bg-slate-50 focus:bg-white"
             />
           </div>
 
@@ -220,7 +220,7 @@ export function AddProductModal({
             <button
               type="submit"
               disabled={saving}
-              className="px-5 py-2 bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white rounded-xl font-black text-xs shadow-md shadow-[#5B4DFB]/20 transition-all flex items-center gap-1.5 disabled:opacity-50 cursor-pointer"
+              className="px-5 py-2 bg-brand hover:bg-brand-hover text-white rounded-xl font-black text-xs shadow-md shadow-brand/20 transition-all flex items-center gap-1.5 disabled:opacity-50 cursor-pointer"
             >
               {saving ? (
                 <>

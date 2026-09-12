@@ -42,7 +42,7 @@ export const SupplierModal: React.FC<SupplierModalProps> = ({
       >
         <div className="flex items-center justify-between border-b border-slate-100 pb-3">
           <h3 className="font-extrabold text-slate-900 text-base flex items-center gap-2">
-            <UserCheck className="w-5 h-5 text-orange-500" />
+            <UserCheck className="w-5 h-5 text-brand" />
             {editingSupplier ? 'Edit Vendor / Supplier Profile' : 'Onboard New Vendor / Supplier'}
           </h3>
           <button onClick={onClose} className="text-slate-400 hover:text-slate-600">
@@ -59,7 +59,7 @@ export const SupplierModal: React.FC<SupplierModalProps> = ({
               placeholder="e.g. Angkor Beverage Distribution Ltd"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
             />
           </div>
 
@@ -70,7 +70,7 @@ export const SupplierModal: React.FC<SupplierModalProps> = ({
               placeholder="e.g. Bunreth Heng (Sales Manager)"
               value={formData.contact_name}
               onChange={(e) => setFormData({ ...formData, contact_name: e.target.value })}
-              className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
             />
           </div>
 
@@ -82,7 +82,7 @@ export const SupplierModal: React.FC<SupplierModalProps> = ({
                 placeholder="e.g. 023 888 999"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
               />
             </div>
             <div>
@@ -92,7 +92,7 @@ export const SupplierModal: React.FC<SupplierModalProps> = ({
                 placeholder="orders@angkorbev.com"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
               />
             </div>
           </div>
@@ -104,7 +104,7 @@ export const SupplierModal: React.FC<SupplierModalProps> = ({
               placeholder="Warehouse #14, National Road 4, Phnom Penh..."
               value={formData.address}
               onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-              className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
             />
           </div>
 
@@ -119,7 +119,7 @@ export const SupplierModal: React.FC<SupplierModalProps> = ({
             <button
               type="submit"
               disabled={saving}
-              className="px-5 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold shadow-md shadow-orange-500/20"
+              className="px-5 py-2 rounded-xl bg-brand hover:bg-brand-hover active:bg-brand-active text-white font-bold shadow-md shadow-brand/20"
             >
               {saving ? 'Saving...' : editingSupplier ? 'Update Vendor' : 'Onboard Vendor'}
             </button>

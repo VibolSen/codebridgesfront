@@ -47,7 +47,7 @@ export const SuperAdminAuditLogsView: React.FC = () => {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2.5">
-            <ShieldCheck className="w-7 h-7 text-indigo-600" />
+            <ShieldCheck className="w-7 h-7 text-brand" />
             System Audit Trail Observer
           </h1>
           <p className="text-xs text-slate-500 mt-1">
@@ -58,7 +58,7 @@ export const SuperAdminAuditLogsView: React.FC = () => {
         <button
           onClick={loadAuditLogs}
           disabled={loading}
-          className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all flex items-center gap-2"
+          className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all flex items-center gap-2 cursor-pointer"
         >
           <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
           Refresh Audit Trail
@@ -73,7 +73,7 @@ export const SuperAdminAuditLogsView: React.FC = () => {
             <button
               key={m}
               onClick={() => setModuleFilter(m)}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold capitalize transition-all whitespace-nowrap ${
+              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold capitalize transition-all whitespace-nowrap cursor-pointer ${
                 moduleFilter === m
                   ? 'bg-white text-slate-900 shadow-xs'
                   : 'text-slate-500 hover:text-slate-900'
@@ -92,7 +92,7 @@ export const SuperAdminAuditLogsView: React.FC = () => {
             placeholder="Search action, user, or IP..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full pl-9 pr-4 py-2 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand"
           />
         </div>
       </div>
@@ -114,7 +114,7 @@ export const SuperAdminAuditLogsView: React.FC = () => {
             {loading ? (
               <tr>
                 <td colSpan={6} className="py-12 text-center text-slate-400">
-                  <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2 text-indigo-500" />
+                  <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2 text-brand" />
                   Fetching security audit logs...
                 </td>
               </tr>
@@ -139,7 +139,7 @@ export const SuperAdminAuditLogsView: React.FC = () => {
                       {log.action}
                     </span>
                   </td>
-                  <td className="py-3 px-4 uppercase font-bold text-[10px] text-indigo-600">
+                  <td className="py-3 px-4 uppercase font-bold text-[10px] text-brand">
                     {log.module}
                   </td>
                   <td className="py-3 px-4 font-mono text-slate-500">
@@ -149,7 +149,7 @@ export const SuperAdminAuditLogsView: React.FC = () => {
                     {log.payload ? (
                       <button
                         onClick={() => setSelectedPayload(log.payload)}
-                        className="px-2.5 py-1 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-[10px] transition-colors"
+                        className="px-2.5 py-1 rounded-lg bg-brand-subtle hover:bg-brand-subtle/80 text-brand font-bold text-[10px] transition-colors cursor-pointer"
                       >
                         Inspect Payload
                       </button>
@@ -169,12 +169,12 @@ export const SuperAdminAuditLogsView: React.FC = () => {
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
           <div className="w-full max-w-lg bg-slate-900 text-slate-100 rounded-2xl p-6 shadow-2xl space-y-3 font-mono text-xs border border-slate-800">
             <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-              <h3 className="font-bold text-orange-400 flex items-center gap-2">
+              <h3 className="font-bold text-brand flex items-center gap-2">
                 <Terminal className="w-4 h-4" /> Audit Payload Inspection
               </h3>
               <button
                 onClick={() => setSelectedPayload(null)}
-                className="text-slate-400 hover:text-white"
+                className="text-slate-400 hover:text-white cursor-pointer"
               >
                 ✕
               </button>
@@ -186,7 +186,7 @@ export const SuperAdminAuditLogsView: React.FC = () => {
             </pre>
             <button
               onClick={() => setSelectedPayload(null)}
-              className="w-full py-2 bg-slate-800 hover:bg-slate-700 font-sans font-bold text-xs text-white rounded-xl"
+              className="w-full py-2 bg-slate-800 hover:bg-slate-700 font-sans font-bold text-xs text-white rounded-xl cursor-pointer"
             >
               Close Inspector
             </button>

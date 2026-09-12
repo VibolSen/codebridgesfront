@@ -14,7 +14,7 @@ export function AccountingDashboard() {
   return (
     <div className="space-y-6 max-w-7xl mx-auto font-sans pb-16 text-slate-900">
       {/* 1. Header Banner */}
-      <div className="bg-gradient-to-r from-emerald-700 via-teal-700 to-[#5B4DFB] rounded-3xl p-6 sm:p-8 text-white shadow-xl shadow-emerald-900/10 flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
+      <div className="bg-gradient-to-r from-emerald-800 via-teal-800 to-brand rounded-3xl p-6 sm:p-8 text-white shadow-xl shadow-emerald-900/10 flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
         <div className="space-y-2 relative z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-[11px] font-extrabold uppercase tracking-wider text-emerald-100">
             <Sparkles className="w-3.5 h-3.5 text-emerald-200" />
@@ -31,9 +31,9 @@ export function AccountingDashboard() {
         <div className="flex items-center gap-3 relative z-10">
           <Link
             href="/super-admin/finance/expenses"
-            className="px-4 py-2.5 rounded-xl bg-white text-[#5B4DFB] font-extrabold text-xs shadow-sm hover:bg-emerald-50 transition-colors flex items-center gap-2"
+            className="px-4 py-2.5 rounded-xl bg-white text-brand font-extrabold text-xs shadow-sm hover:bg-emerald-50 transition-colors flex items-center gap-2"
           >
-            <Plus className="w-4 h-4 text-[#5B4DFB]" />
+            <Plus className="w-4 h-4 text-brand" />
             <span>Record Expense</span>
           </Link>
           <Link

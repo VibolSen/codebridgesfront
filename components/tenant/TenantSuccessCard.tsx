@@ -35,14 +35,14 @@ export function TenantSuccessCard({
             Workspace Created Successfully
           </h2>
           <p className="text-xs font-medium text-slate-600 leading-relaxed">
-            Your <span className="text-[#5B4DFB] font-extrabold">{registeredTenant.name}</span> organization has been provisioned. You can now launch all system modules.
+            Your <span className="text-brand font-extrabold">{registeredTenant.name}</span> organization has been provisioned. You can now launch all system modules.
           </p>
         </div>
 
         <div className="bg-slate-50 rounded-2xl border border-slate-200 p-5 text-left space-y-3 text-xs shadow-inner">
           <div className="flex justify-between items-center">
             <span className="text-[10px] font-bold tracking-wider uppercase text-slate-500">Company Code</span>
-            <span className="font-mono font-black text-[#5B4DFB] bg-[#F5F3FF] px-2 py-1 rounded border border-[#DDD6FE]">
+            <span className="font-mono font-black text-brand bg-brand-subtle px-2 py-1 rounded border border-brand/20">
               {registeredTenant.company_code}
             </span>
           </div>
@@ -63,7 +63,7 @@ export function TenantSuccessCard({
         <div className="space-y-2 pt-2">
           <button
             onClick={onLaunchHub}
-            className="w-full py-3.5 rounded-2xl bg-[#5B4DFB] hover:bg-[#4E3FE3] active:scale-98 text-white font-black text-xs shadow-lg shadow-[#5B4DFB]/25 transition-all flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full py-3.5 rounded-2xl bg-brand hover:bg-brand-hover active:scale-98 text-white font-black text-xs shadow-lg shadow-brand/25 transition-all flex items-center justify-center gap-2 cursor-pointer"
           >
             <span>Enable Modules for {registeredTenant.name}</span>
             <ArrowRight className="w-4 h-4" />

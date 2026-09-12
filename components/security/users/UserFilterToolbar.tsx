@@ -30,7 +30,7 @@ export function UserFilterToolbar({
           placeholder="Search user by name or email..."
           value={search}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="w-full pl-9 pr-4 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] focus:border-transparent focus:bg-white transition-all"
+          className="w-full pl-9 pr-4 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand focus:bg-white transition-all"
         />
       </form>
 
@@ -43,7 +43,7 @@ export function UserFilterToolbar({
         <select
           value={selectedRole}
           onChange={(e) => onRoleChange(e.target.value)}
-          className="px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200/90 text-xs font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] focus:bg-white w-full sm:w-48 capitalize cursor-pointer transition-all"
+          className="px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200/90 text-xs font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand focus:bg-white w-full sm:w-48 capitalize cursor-pointer transition-all"
         >
           <option value="all">All Roles</option>
           {dynamicRoles.length > 0 ? (

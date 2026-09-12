@@ -23,7 +23,7 @@ export function InventorySettingsCard() {
       <div className="flex items-center justify-between pb-4 border-b border-slate-100">
         <div>
           <h3 className="font-extrabold text-base text-slate-900 flex items-center gap-2">
-            <Settings className="w-4 h-4 text-[#5B4DFB]" />
+            <Settings className="w-4 h-4 text-brand" />
             <span>Inventory Settings</span>
           </h3>
           <p className="text-xs text-slate-500 font-medium">Configure replenishment triggers, valuation models, and automated reorder alerts</p>
@@ -42,7 +42,7 @@ export function InventorySettingsCard() {
           <select
             value={invSettings.valuationMethod}
             onChange={(e) => setInvSettings({ ...invSettings, valuationMethod: e.target.value })}
-            className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] bg-slate-50"
+            className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand bg-slate-50"
           >
             <option value="FIFO">First-In First-Out (FIFO) - Recommended</option>
             <option value="AVCO">Weighted Average Cost (AVCO)</option>
@@ -56,7 +56,7 @@ export function InventorySettingsCard() {
             type="number"
             value={invSettings.autoReorderThreshold}
             onChange={(e) => setInvSettings({ ...invSettings, autoReorderThreshold: e.target.value })}
-            className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] bg-slate-50"
+            className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand bg-slate-50"
           />
         </div>
       </div>
@@ -65,7 +65,7 @@ export function InventorySettingsCard() {
         <button
           type="button"
           onClick={handleSave}
-          className="px-5 py-2.5 rounded-xl bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white font-black text-xs shadow-md shadow-[#5B4DFB]/20 transition-all flex items-center gap-1.5 cursor-pointer"
+          className="px-5 py-2.5 rounded-xl bg-brand hover:bg-brand-hover text-white font-black text-xs shadow-md shadow-brand/20 transition-all flex items-center gap-1.5 cursor-pointer"
         >
           <Save className="w-4 h-4" />
           <span>Save Settings</span>

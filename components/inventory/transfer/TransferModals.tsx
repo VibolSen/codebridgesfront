@@ -75,9 +75,9 @@ export const TransferModals: React.FC<TransferModalsProps> = ({
           >
             <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
               <h3 className="font-bold text-sm text-slate-900 flex items-center gap-2">
-                <ArrowRightLeft className="w-4 h-4 text-orange-500" /> Dispatch New Stock Transfer
+                <ArrowRightLeft className="w-4 h-4 text-brand" /> Dispatch New Stock Transfer
               </h3>
-              <button onClick={onCloseCreateModal} className="text-slate-400 hover:text-slate-600">
+              <button onClick={onCloseCreateModal} className="text-slate-400 hover:text-slate-600 cursor-pointer">
                 <X className="w-4 h-4" />
               </button>
             </div>
@@ -89,7 +89,7 @@ export const TransferModals: React.FC<TransferModalsProps> = ({
                   <select
                     value={createForm.from_outlet_id}
                     onChange={(e) => setCreateForm({ ...createForm, from_outlet_id: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-900 focus:outline-none"
+                    className="w-full px-3 py-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
                   >
                     {outlets.map((o) => (
                       <option key={o.id} value={o.id}>{o.name}</option>
@@ -102,7 +102,7 @@ export const TransferModals: React.FC<TransferModalsProps> = ({
                   <select
                     value={createForm.to_outlet_id}
                     onChange={(e) => setCreateForm({ ...createForm, to_outlet_id: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-900 focus:outline-none"
+                    className="w-full px-3 py-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
                   >
                     {outlets.map((o) => (
                       <option key={o.id} value={o.id}>{o.name}</option>
@@ -118,7 +118,7 @@ export const TransferModals: React.FC<TransferModalsProps> = ({
                   placeholder="e.g. Weekly stock rebalancing or emergency replenishment..."
                   value={createForm.notes}
                   onChange={(e) => setCreateForm({ ...createForm, notes: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-900 focus:outline-none"
+                  className="w-full px-3 py-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
                 />
               </div>
 
@@ -130,7 +130,7 @@ export const TransferModals: React.FC<TransferModalsProps> = ({
                   <button
                     type="button"
                     onClick={handleAddItemRow}
-                    className="text-orange-500 font-bold hover:underline flex items-center gap-1 text-[11px]"
+                    className="text-brand hover:text-brand-hover font-bold hover:underline flex items-center gap-1 text-[11px] cursor-pointer"
                   >
                     <Plus className="w-3.5 h-3.5" /> Add Product
                   </button>
@@ -142,7 +142,7 @@ export const TransferModals: React.FC<TransferModalsProps> = ({
                       <select
                         value={item.product_id}
                         onChange={(e) => handleItemChange(idx, 'product_id', e.target.value)}
-                        className="w-full px-2.5 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-900 focus:outline-none"
+                        className="w-full px-2.5 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
                       >
                         {products.map((p) => (
                           <option key={p.id} value={p.id}>{p.name} ({p.sku})</option>
@@ -157,7 +157,7 @@ export const TransferModals: React.FC<TransferModalsProps> = ({
                         placeholder="Qty"
                         value={item.quantity}
                         onChange={(e) => handleItemChange(idx, 'quantity', e.target.value)}
-                        className="w-full px-2.5 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-900 focus:outline-none text-center font-bold"
+                        className="w-full px-2.5 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand text-center font-bold"
                       />
                     </div>
 
@@ -165,7 +165,7 @@ export const TransferModals: React.FC<TransferModalsProps> = ({
                       type="button"
                       onClick={() => handleRemoveItemRow(idx)}
                       disabled={createForm.items.length <= 1}
-                      className="p-1.5 rounded-lg text-slate-400 hover:text-rose-500 disabled:opacity-30"
+                      className="p-1.5 rounded-lg text-slate-400 hover:text-rose-500 disabled:opacity-30 cursor-pointer"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -177,14 +177,14 @@ export const TransferModals: React.FC<TransferModalsProps> = ({
                 <button
                   type="button"
                   onClick={onCloseCreateModal}
-                  className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold"
+                  className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="px-5 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold shadow-md shadow-orange-500/20"
+                  className="px-5 py-2 rounded-xl bg-brand hover:bg-brand-hover text-white font-bold shadow-md shadow-brand/20 cursor-pointer disabled:opacity-50"
                 >
                   {submitting ? 'Dispatching...' : 'Dispatch Transfer'}
                 </button>
@@ -204,9 +204,9 @@ export const TransferModals: React.FC<TransferModalsProps> = ({
           >
             <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
               <h3 className="font-bold text-sm text-slate-900 flex items-center gap-2">
-                <Package className="w-4 h-4 text-orange-500" /> Transfer Details #{selectedTransfer?.transfer_number}
+                <Package className="w-4 h-4 text-brand" /> Transfer Details #{selectedTransfer?.transfer_number}
               </h3>
-              <button onClick={onCloseDetailModal} className="text-slate-400 hover:text-slate-600">
+              <button onClick={onCloseDetailModal} className="text-slate-400 hover:text-slate-600 cursor-pointer">
                 <X className="w-4 h-4" />
               </button>
             </div>
@@ -220,7 +220,7 @@ export const TransferModals: React.FC<TransferModalsProps> = ({
                     <div>
                       <p className="text-[10px] text-slate-400 font-bold uppercase">Route</p>
                       <p className="font-bold text-slate-800 flex items-center gap-2 mt-0.5">
-                        {selectedTransfer.from_outlet_name} <ArrowRight className="w-3.5 h-3.5 text-orange-500" /> {selectedTransfer.to_outlet_name}
+                        {selectedTransfer.from_outlet_name} <ArrowRight className="w-3.5 h-3.5 text-brand" /> {selectedTransfer.to_outlet_name}
                       </p>
                     </div>
                     <div className="text-right">

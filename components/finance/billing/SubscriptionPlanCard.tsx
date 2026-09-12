@@ -24,14 +24,14 @@ export function SubscriptionPlanCard({
       whileHover={{ y: -4 }}
       className={`p-6 sm:p-8 rounded-3xl border-2 transition-all flex flex-col justify-between relative shadow-sm ${
         plan.popular
-          ? 'border-orange-500 bg-white ring-2 ring-orange-500/15'
-          : 'border-slate-200 bg-white'
+          ? 'border-brand bg-white ring-2 ring-brand/15'
+          : 'border-slate-200/90 bg-white hover:border-slate-300'
       }`}
     >
       {plan.popular && (
-        <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 text-white text-[10px] font-black uppercase tracking-wider shadow-sm flex items-center gap-1">
+        <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-brand text-white text-[10px] font-black uppercase tracking-wider shadow-xs flex items-center gap-1">
           <Sparkles className="w-3 h-3" />
-          <span>Most Popular Tier</span>
+          <span>Most Popular Plan</span>
         </span>
       )}
 
@@ -87,8 +87,8 @@ export function SubscriptionPlanCard({
           onClick={() => onConfigure(plan.name)}
           className={`w-full py-3 rounded-2xl font-black text-xs transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
             plan.popular
-              ? 'bg-orange-500 hover:bg-orange-600 text-white shadow-md shadow-orange-500/20'
-              : 'bg-slate-100 hover:bg-slate-200 text-slate-800'
+              ? 'bg-brand hover:bg-brand-hover active:bg-brand-active text-white shadow-md shadow-brand/20'
+              : 'bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold'
           }`}
         >
           <Sliders className="w-3.5 h-3.5" />

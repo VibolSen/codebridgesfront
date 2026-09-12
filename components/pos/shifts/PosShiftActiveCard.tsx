@@ -54,7 +54,7 @@ export function PosShiftActiveCard({
         <button
           type="button"
           onClick={onOpenShift}
-          className="px-5 py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-extrabold text-xs shadow-md shadow-orange-500/20 transition-all flex items-center gap-1.5 cursor-pointer shrink-0"
+          className="px-5 py-2.5 rounded-xl bg-brand hover:bg-brand-hover text-white font-extrabold text-xs shadow-md shadow-brand/20 transition-all flex items-center gap-1.5 cursor-pointer shrink-0"
         >
           <Plus className="w-4 h-4" />
           <span>Open New Shift</span>
@@ -99,7 +99,7 @@ export function PosShiftActiveCard({
               onClick={onDenominations}
               className="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-colors flex items-center gap-1.5 cursor-pointer"
             >
-              <Calculator className="w-3.5 h-3.5 text-orange-500" />
+              <Calculator className="w-3.5 h-3.5 text-brand" />
               <span>Count Bills</span>
             </button>
           )}
@@ -175,9 +175,9 @@ export function PosShiftActiveCard({
           </p>
         </div>
 
-        <div className="p-4 rounded-2xl bg-orange-50/60 border border-orange-200">
-          <p className="text-[11px] font-black text-orange-700 uppercase tracking-wider">Expected Drawer</p>
-          <p className="text-xl font-black text-orange-600 mt-1 font-mono">${expectedCash.toFixed(2)}</p>
+        <div className="p-4 rounded-2xl bg-brand-subtle border border-brand/20">
+          <p className="text-[11px] font-black text-brand uppercase tracking-wider">Expected Drawer</p>
+          <p className="text-xl font-black text-brand mt-1 font-mono">${expectedCash.toFixed(2)}</p>
         </div>
       </div>
     </div>

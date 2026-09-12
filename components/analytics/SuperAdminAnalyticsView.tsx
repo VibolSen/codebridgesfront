@@ -13,7 +13,7 @@ import {
 import { AnalyticsTimeRange, ModuleAdoptionMetric } from './types';
 
 export const MODULE_ADOPTION_METRICS: ModuleAdoptionMetric[] = [
-  { name: 'POS Terminal & Register Core', count: '100% tenants', adoption: 100, color: 'bg-orange-500' },
+  { name: 'POS Terminal & Register Core', count: '100% tenants', adoption: 100, color: 'bg-brand' },
   { name: 'Inventory & Stock Control Suite', count: '84% tenants', adoption: 84, color: 'bg-emerald-500' },
   { name: 'Accounting & Ledger Engine', count: '62% tenants', adoption: 62, color: 'bg-blue-500' },
   { name: 'HRM & Payroll Operations', count: '45% tenants', adoption: 45, color: 'bg-indigo-500' },
@@ -28,9 +28,9 @@ export function SuperAdminAnalyticsView() {
       {/* Header */}
       <div className="bg-white p-6 rounded-3xl border border-slate-200/90 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3.5">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-orange-500 via-amber-500 to-yellow-400 p-0.5 shadow-md shadow-orange-500/15 flex items-center justify-center">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand to-brand-hover p-0.5 shadow-md shadow-brand/15 flex items-center justify-center">
             <div className="w-full h-full bg-white rounded-[14px] flex items-center justify-center">
-              <BarChart3 className="w-6 h-6 text-orange-500" />
+              <BarChart3 className="w-6 h-6 text-brand" />
             </div>
           </div>
           <div>
@@ -38,7 +38,7 @@ export function SuperAdminAnalyticsView() {
               <h1 className="text-xl font-black text-slate-900 tracking-tight">
                 Cross-Tenant Analytics &amp; Platform Telemetry
               </h1>
-              <span className="px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 text-[10px] font-extrabold border border-blue-200 uppercase">
+              <span className="px-2.5 py-0.5 rounded-full bg-brand-subtle text-brand text-[10px] font-extrabold border border-brand/20 uppercase">
                 Live Insights
               </span>
             </div>
@@ -57,7 +57,7 @@ export function SuperAdminAnalyticsView() {
               onClick={() => setTimeRange(r)}
               className={`px-4 py-2 rounded-xl transition-all cursor-pointer uppercase ${
                 timeRange === r
-                  ? 'bg-white text-orange-600 shadow-xs'
+                  ? 'bg-white text-brand shadow-xs'
                   : 'text-slate-500 hover:text-slate-800'
               }`}
             >
@@ -96,10 +96,10 @@ export function SuperAdminAnalyticsView() {
         <div className="bg-white p-5 rounded-3xl border border-slate-200/90 shadow-sm space-y-2">
           <div className="flex items-center justify-between text-slate-500">
             <span className="text-[11px] font-black uppercase tracking-wider">POS Ring Orders</span>
-            <ShoppingCart className="w-4 h-4 text-orange-500" />
+            <ShoppingCart className="w-4 h-4 text-brand" />
           </div>
           <p className="text-2xl font-black text-slate-900 font-mono">14,892</p>
-          <div className="flex items-center gap-1 text-[11px] font-bold text-orange-600">
+          <div className="flex items-center gap-1 text-[11px] font-bold text-brand">
             <ArrowUpRight className="w-3.5 h-3.5" />
             <span>+24.1% transaction velocity</span>
           </div>
@@ -120,7 +120,7 @@ export function SuperAdminAnalyticsView() {
       {/* Module Adoption Heatmap */}
       <div className="bg-white p-6 rounded-3xl border border-slate-200/90 shadow-sm space-y-4">
         <h3 className="font-black text-sm text-slate-900 flex items-center gap-2">
-          <Layers className="w-4 h-4 text-orange-500" />
+          <Layers className="w-4 h-4 text-brand" />
           <span>Ecosystem Module Adoption Breakdown</span>
         </h3>
         <div className="space-y-3">

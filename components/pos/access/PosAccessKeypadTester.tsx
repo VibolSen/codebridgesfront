@@ -26,7 +26,7 @@ export function PosAccessKeypadTester({
     <div className="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-[0_2px_12px_rgba(15,23,42,0.03)] space-y-5 flex flex-col justify-between">
       <div>
         <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100">
-          <div className="w-9 h-9 rounded-xl bg-purple-50 text-[#5B4DFB] border border-purple-100 flex items-center justify-center">
+          <div className="w-9 h-9 rounded-xl bg-brand-subtle text-brand border border-brand/20 flex items-center justify-center">
             <KeyRound className="w-5 h-5" />
           </div>
           <div>
@@ -44,7 +44,7 @@ export function PosAccessKeypadTester({
                 <div
                   key={idx}
                   className={`w-4 h-4 rounded-full transition-all ${
-                    isFilled ? 'bg-[#5B4DFB] scale-110 shadow-xs' : 'bg-slate-200'
+                    isFilled ? 'bg-brand scale-110 shadow-xs shadow-brand/30' : 'bg-slate-200'
                   }`}
                 />
               );
@@ -95,7 +95,7 @@ export function PosAccessKeypadTester({
                   type="button"
                   onClick={onVerify}
                   disabled={testPinInput.length !== 4 || isVerifying}
-                  className="py-3 rounded-2xl bg-[#5B4DFB] hover:bg-[#4E3FE3] disabled:opacity-40 text-white font-black text-xs shadow-md shadow-[#5B4DFB]/20 transition-all active:scale-95 flex items-center justify-center cursor-pointer"
+                  className="py-3 rounded-2xl bg-brand hover:bg-brand-hover disabled:opacity-40 text-white font-black text-xs shadow-md shadow-brand/20 transition-all active:scale-95 flex items-center justify-center cursor-pointer"
                 >
                   {isVerifying ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : 'Enter'}
                 </button>

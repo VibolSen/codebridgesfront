@@ -40,7 +40,7 @@ export function FifoValuationCard() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
         <div>
           <h3 className="font-extrabold text-base text-slate-900 flex items-center gap-2">
-            <BarChart3 className="w-4 h-4 text-[#5B4DFB]" />
+            <BarChart3 className="w-4 h-4 text-brand" />
             <span>FIFO Valuation Reports</span>
           </h3>
           <p className="text-xs text-slate-500 font-medium">Batch cost allocation, inventory turns, and asset balance history</p>
@@ -71,7 +71,7 @@ export function FifoValuationCard() {
 
         <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
           <span className="text-xs font-bold text-slate-500">Inventory Status</span>
-          <p className="text-2xl font-black text-[#5B4DFB] font-mono">
+          <p className="text-2xl font-black text-brand font-mono">
             {totalItems > 0 ? 'Active Stock' : 'Zero Stock'}
           </p>
           <p className="text-[11px] text-slate-400">

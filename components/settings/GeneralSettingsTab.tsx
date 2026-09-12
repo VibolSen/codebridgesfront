@@ -41,7 +41,7 @@ export function GeneralSettingsTab({
             type="text"
             value={platformName}
             onChange={(e) => setPlatformName(e.target.value)}
-            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-orange-500/30"
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-brand/30"
           />
         </div>
         <div>
@@ -52,7 +52,7 @@ export function GeneralSettingsTab({
             type="email"
             value={supportEmail}
             onChange={(e) => setSupportEmail(e.target.value)}
-            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-orange-500/30"
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-brand/30"
           />
         </div>
         <div>
@@ -62,7 +62,7 @@ export function GeneralSettingsTab({
           <select
             value={defaultCurrency}
             onChange={(e) => setDefaultCurrency(e.target.value)}
-            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-orange-500/30 cursor-pointer"
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand/30 cursor-pointer"
           >
             <option value="USD">USD ($) - United States Dollar (Dual-currency KHR active)</option>
             <option value="KHR">KHR (៛) - Khmer Riel</option>
@@ -76,7 +76,7 @@ export function GeneralSettingsTab({
             type="number"
             value={defaultTrialDays}
             onChange={(e) => setDefaultTrialDays(e.target.value)}
-            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-orange-500/30"
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-brand/30"
           />
         </div>
         <div>
@@ -87,7 +87,7 @@ export function GeneralSettingsTab({
             type="number"
             value={defaultTaxRate}
             onChange={(e) => setDefaultTaxRate(e.target.value)}
-            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-orange-500/30"
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-brand/30"
           />
         </div>
       </div>

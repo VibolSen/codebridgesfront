@@ -42,7 +42,7 @@ export function TenantActivityFeed({ auditLogs, isLoading = false }: TenantActiv
       <div>
         <div className="flex items-center justify-between pb-3 border-b border-slate-100">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
               <Activity className="w-4 h-4" />
             </div>
             <div>
@@ -52,7 +52,7 @@ export function TenantActivityFeed({ auditLogs, isLoading = false }: TenantActiv
           </div>
           <Link
             href="/super-admin/security/audit-logs"
-            className="text-xs font-extrabold text-[#5B4DFB] hover:text-[#4E3FE3] transition-colors"
+            className="text-xs font-extrabold text-brand hover:text-brand-hover transition-colors"
           >
             Audit Logs →
           </Link>
@@ -72,7 +72,7 @@ export function TenantActivityFeed({ auditLogs, isLoading = false }: TenantActiv
           <div className="mt-4 divide-y divide-slate-100">
             {auditLogs.slice(0, 5).map((act) => (
               <div key={act.id} className="py-3 first:pt-0 last:pb-0 flex items-start gap-3">
-                <div className="w-8 h-8 rounded-xl bg-[#F5F3FF] text-[#5B4DFB] flex items-center justify-center shrink-0 mt-0.5 border border-[#DDD6FE]/60">
+                <div className="w-8 h-8 rounded-xl bg-brand-subtle text-brand flex items-center justify-center shrink-0 mt-0.5 border border-brand-border/60">
                   <Terminal className="w-4 h-4" />
                 </div>
 

@@ -1,5 +1,5 @@
 import { PosAccessManagementView } from '@/components/pos';
 
-export default function PosAccessPage() {
+export default function PosSecurityPage() {
   return <PosAccessManagementView />;
 }

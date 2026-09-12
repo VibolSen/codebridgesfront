@@ -75,7 +75,7 @@ export function DualCurrencyDenominationModal({
               <strong className="text-amber-700 font-bold">{totalKhr.toLocaleString()} ៛</strong>
             </div>
             <p className="text-sm font-black text-slate-900">
-              Blended Cash Total: <span className="text-[#5B4DFB]">${blendedUsdTotal.toFixed(2)}</span>
+              Blended Cash Total: <span className="text-brand">${blendedUsdTotal.toFixed(2)}</span>
             </p>
           </div>
 
@@ -166,12 +166,12 @@ export function DualCurrencyDenominationModal({
                       onChange={(e) =>
                         handleUpdateCount(denom, parseInt(e.target.value) || 0, 'USD')
                       }
-                      className="w-full text-center py-1 rounded-xl bg-white border border-slate-200 text-xs font-black text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB]"
+                      className="w-full text-center py-1 rounded-xl bg-white border border-slate-200 text-xs font-black text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
                     />
                     <button
                       type="button"
                       onClick={() => handleUpdateCount(denom, count + 1, 'USD')}
-                      className="w-8 h-8 rounded-xl bg-purple-50 hover:bg-purple-100 text-[#5B4DFB] font-black border border-purple-200 text-xs flex items-center justify-center cursor-pointer active:scale-95"
+                      className="w-8 h-8 rounded-xl bg-brand-subtle hover:bg-brand/10 text-brand font-black border border-brand/20 text-xs flex items-center justify-center cursor-pointer active:scale-95"
                     >
                       +
                     </button>

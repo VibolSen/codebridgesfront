@@ -83,7 +83,7 @@ export function StaffRosterTable() {
               placeholder="Search staff, code, or department..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-8 pr-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-purple-500 text-slate-800 placeholder-slate-400"
+              className="w-full pl-8 pr-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand text-slate-800 placeholder-slate-400"
             />
           </div>
         </div>
@@ -91,7 +91,7 @@ export function StaffRosterTable() {
 
       {loading ? (
         <div className="py-16 text-center text-xs text-slate-400 font-medium flex items-center justify-center gap-1.5">
-          <Loader2 className="w-4 h-4 animate-spin text-[#5B4DFB]" />
+          <Loader2 className="w-4 h-4 animate-spin text-brand" />
           <span>Loading staff directory...</span>
         </div>
       ) : filteredEmployees.length === 0 ? (
@@ -117,7 +117,7 @@ export function StaffRosterTable() {
                 <tr key={emp.id} className="hover:bg-slate-50/60 transition-colors">
                   <td className="py-3 px-4">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-xl bg-purple-100 text-[#5B4DFB] flex items-center justify-center font-black text-xs">
+                      <div className="w-8 h-8 rounded-xl bg-brand-subtle text-brand border border-brand/20 flex items-center justify-center font-black text-xs">
                         {emp.name.substring(0, 2).toUpperCase()}
                       </div>
                       <div>

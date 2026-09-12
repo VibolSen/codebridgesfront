@@ -31,7 +31,7 @@ export function ProductCatalogPagination({
         <select
           value={pageSize}
           onChange={(e) => onPageSizeChange(Number(e.target.value))}
-          className="py-1 px-2 rounded-lg bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] cursor-pointer"
+          className="py-1 px-2 rounded-lg bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand cursor-pointer"
         >
           <option value={10}>10</option>
           <option value={25}>25</option>

@@ -41,9 +41,9 @@ export const TIER_CONFIG = {
   enterprise_org: {
     label: 'Enterprise',
     icon: Crown,
-    color: 'bg-[#F5F3FF] text-[#5B4DFB] border-[#DDD6FE]',
-    badgeColor: 'bg-[#F5F3FF] text-[#5B4DFB]',
-    dotColor: 'bg-[#5B4DFB]',
+    color: 'bg-brand-subtle text-brand border-brand/20',
+    badgeColor: 'bg-brand-subtle text-brand',
+    dotColor: 'bg-brand',
   },
   business_runner: {
     label: 'Business Runner',
@@ -63,7 +63,7 @@ export const TIER_CONFIG = {
 
 export const STATUS_CONFIG = {
   active: { label: 'Active', color: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
-  trial: { label: 'Trial', color: 'bg-[#F5F3FF] text-[#5B4DFB] border-[#DDD6FE]' },
+  trial: { label: 'Trial', color: 'bg-brand-subtle text-brand border-brand/20' },
   suspended: { label: 'Suspended', color: 'bg-rose-50 text-rose-700 border-rose-200' },
   expired: { label: 'Expired', color: 'bg-amber-50 text-amber-800 border-amber-200' },
 };

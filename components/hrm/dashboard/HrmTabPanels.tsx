@@ -85,7 +85,7 @@ export function HrmTabPanels({
           </div>
           <Link
             href="/super-admin/hrm/employees"
-            className="px-3.5 py-1.5 bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white rounded-xl font-bold text-xs shadow-xs transition-colors flex items-center gap-1.5"
+            className="px-3.5 py-1.5 bg-brand hover:bg-brand-hover active:bg-brand-active text-white rounded-xl font-bold text-xs shadow-xs transition-colors flex items-center gap-1.5"
           >
             <span>Manage Compensation</span>
           </Link>
@@ -99,10 +99,10 @@ export function HrmTabPanels({
           </div>
           <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-1">
             <span className="text-[10px] font-bold uppercase text-slate-500">Net Estimated Disbursement</span>
-            <p className="text-xl font-black text-[#5B4DFB] font-mono">
+            <p className="text-xl font-black text-brand font-mono">
               {loadingMetrics ? '...' : `$${grossPayroll.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
             </p>
-            <p className="text-[10px] text-purple-600 font-medium">Bank transfer batch ready</p>
+            <p className="text-[10px] text-brand font-medium">Bank transfer batch ready</p>
           </div>
         </div>
       </div>
@@ -115,14 +115,14 @@ export function HrmTabPanels({
         <div className="pb-4 border-b border-slate-100 flex items-center justify-between">
           <div>
             <h3 className="font-extrabold text-base text-slate-900 flex items-center gap-2">
-              <FileText className="w-4 h-4 text-[#5B4DFB]" />
+              <FileText className="w-4 h-4 text-brand" />
               <span>Documents &amp; Contracts</span>
             </h3>
             <p className="text-xs text-slate-500 font-medium">Employment agreements, labor compliance attachments, and identification files</p>
           </div>
           <Link
             href="/super-admin/hrm/employees"
-            className="px-3.5 py-1.5 bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white rounded-xl font-bold text-xs shadow-xs transition-colors flex items-center gap-1.5"
+            className="px-3.5 py-1.5 bg-brand hover:bg-brand-hover active:bg-brand-active text-white rounded-xl font-bold text-xs shadow-xs transition-colors flex items-center gap-1.5"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Add Staff Contract</span>
@@ -151,7 +151,7 @@ export function HrmTabPanels({
         <div className="pb-4 border-b border-slate-100 flex items-center justify-between">
           <div>
             <h3 className="font-extrabold text-base text-slate-900 flex items-center gap-2">
-              <BarChart3 className="w-4 h-4 text-[#5B4DFB]" />
+              <BarChart3 className="w-4 h-4 text-brand" />
               <span>HR Reports</span>
             </h3>
             <p className="text-xs text-slate-500 font-medium">Headcount turnover rate, overtime spend trends, and attendance punctuality</p>
@@ -170,7 +170,7 @@ export function HrmTabPanels({
             <h3 className="font-extrabold text-base text-slate-900">HR Access &amp; RBAC</h3>
             <p className="text-xs text-slate-500 font-medium">Domain-scoped RBAC permissions (module_name = 'hrm')</p>
           </div>
-          <span className="px-2.5 py-1 rounded-full text-[10px] font-black bg-purple-100 text-[#5B4DFB]">
+          <span className="px-2.5 py-1 rounded-full text-[10px] font-black bg-brand-subtle text-brand border border-brand/20">
             Module Scoped
           </span>
         </div>
@@ -179,7 +179,7 @@ export function HrmTabPanels({
           <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
             <h4 className="font-extrabold text-sm text-slate-900">HR Director / Admin</h4>
             <p className="text-xs text-slate-500">Full access to salary ledgers, contract attachments, and employee terminations.</p>
-            <span className="inline-block px-2.5 py-0.5 rounded-full bg-purple-100 text-[#5B4DFB] text-[10px] font-bold">
+            <span className="inline-block px-2.5 py-0.5 rounded-full bg-brand-subtle text-brand text-[10px] font-bold border border-brand/20">
               {loadingMetrics ? '...' : `${rolesCount.directors} Assigned`}
             </span>
           </div>
@@ -208,7 +208,7 @@ export function HrmTabPanels({
         <div className="flex items-center justify-between pb-4 border-b border-slate-100">
           <div>
             <h3 className="font-extrabold text-base text-slate-900 flex items-center gap-2">
-              <Settings className="w-4 h-4 text-[#5B4DFB]" />
+              <Settings className="w-4 h-4 text-brand" />
               <span>HR Settings</span>
             </h3>
             <p className="text-xs text-slate-500 font-medium">Standard working hours, overtime multiplier, and leave allowance policies</p>
@@ -246,7 +246,7 @@ export function HrmTabPanels({
               setSettingsSaved(true);
               setTimeout(() => setSettingsSaved(false), 2500);
             }}
-            className="px-5 py-2.5 rounded-xl bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white font-black text-xs shadow-md shadow-[#5B4DFB]/20 transition-all flex items-center gap-1.5 cursor-pointer"
+            className="px-5 py-2.5 rounded-xl bg-brand hover:bg-brand-hover active:bg-brand-active text-white font-black text-xs shadow-md shadow-brand/20 transition-all flex items-center gap-1.5 cursor-pointer"
           >
             <Save className="w-4 h-4" />
             <span>Save Settings</span>

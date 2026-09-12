@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { getInventoryMovementsApi } from '@/lib/api';
 import { OutletSelector } from '@/components/inventory-suite';
+import { LedgerSummaryCards } from './LedgerSummaryCards';
 
 export const SuperAdminLedgerView: React.FC = () => {
   const [movements, setMovements] = useState<any[]>([]);
@@ -71,7 +72,7 @@ export const SuperAdminLedgerView: React.FC = () => {
       case 'transfer':
         return {
           label: 'Outlet Transfer',
-          style: 'bg-purple-50 text-purple-700 border-purple-300',
+          style: 'bg-brand-subtle text-brand border-brand/30',
           icon: History,
         };
       case 'return':
@@ -104,7 +105,7 @@ export const SuperAdminLedgerView: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 max-w-7xl mx-auto">
+    <div className="space-y-6 max-w-7xl mx-auto font-sans">
       {/* Header Bar */}
       <motion.div
         initial={{ opacity: 0, x: -15 }}
@@ -113,7 +114,7 @@ export const SuperAdminLedgerView: React.FC = () => {
       >
         <div>
           <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-2.5">
-            <History className="w-6 h-6 text-orange-500" />
+            <History className="w-6 h-6 text-brand" />
             Append-Only Stock Movement Ledger
           </h1>
           <p className="text-xs text-slate-500">
@@ -123,59 +124,12 @@ export const SuperAdminLedgerView: React.FC = () => {
       </motion.div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-        <motion.div
-          whileHover={{ scale: 1.02 }}
-          className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs flex items-center justify-between"
-        >
-          <div>
-            <h4 className="text-xl font-extrabold text-slate-900">{totalLogs}</h4>
-            <p className="text-xs text-slate-500 font-medium">Ledger Audit Entries</p>
-          </div>
-          <div className="w-10 h-10 rounded-xl bg-orange-500/10 text-orange-500 flex items-center justify-center font-bold">
-            <FileText className="w-5 h-5" />
-          </div>
-        </motion.div>
-
-        <motion.div
-          whileHover={{ scale: 1.02 }}
-          className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs flex items-center justify-between"
-        >
-          <div>
-            <h4 className="text-xl font-extrabold text-slate-900">{receiveCount}</h4>
-            <p className="text-xs text-slate-500 font-medium">Stock Shipment Receives</p>
-          </div>
-          <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center font-bold">
-            <ArrowUpRight className="w-5 h-5" />
-          </div>
-        </motion.div>
-
-        <motion.div
-          whileHover={{ scale: 1.02 }}
-          className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs flex items-center justify-between"
-        >
-          <div>
-            <h4 className="text-xl font-extrabold text-slate-900">{salesCount}</h4>
-            <p className="text-xs text-slate-500 font-medium">Checkout Deductions</p>
-          </div>
-          <div className="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center font-bold">
-            <ArrowDownRight className="w-5 h-5" />
-          </div>
-        </motion.div>
-
-        <motion.div
-          whileHover={{ scale: 1.02 }}
-          className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs flex items-center justify-between"
-        >
-          <div>
-            <h4 className="text-xl font-extrabold text-slate-900">{adjustmentCount}</h4>
-            <p className="text-xs text-slate-500 font-medium">Manual Adjustments</p>
-          </div>
-          <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center font-bold">
-            <RefreshCw className="w-5 h-5" />
-          </div>
-        </motion.div>
-      </div>
+      <LedgerSummaryCards
+        totalLogs={totalLogs}
+        receiveCount={receiveCount}
+        salesCount={salesCount}
+        adjustmentCount={adjustmentCount}
+      />
 
       {/* Search & Movement Type Filters Bar */}
       <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -186,7 +140,7 @@ export const SuperAdminLedgerView: React.FC = () => {
             placeholder="Search product, SKU, PO # or reference..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 text-xs rounded-xl bg-slate-100 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            className="w-full pl-9 pr-4 py-2 text-xs rounded-xl bg-slate-100 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
           />
         </form>
 
@@ -205,7 +159,7 @@ export const SuperAdminLedgerView: React.FC = () => {
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="px-3 py-2 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-700 focus:outline-none"
+            className="px-3 py-2 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
           >
             <option value="">All Movement Types</option>
             <option value="receive">Stock Receives</option>
@@ -256,7 +210,7 @@ export const SuperAdminLedgerView: React.FC = () => {
                       initial="hidden"
                       animate="visible"
                       variants={cardVariants}
-                      className="hover:bg-orange-50/50 transition-colors"
+                      className="hover:bg-brand-subtle/50 transition-colors"
                     >
                       <td className="py-3.5 px-4 font-mono text-[11px] text-slate-500 shrink-0">
                         {log.created_at ? new Date(log.created_at).toLocaleString() : '—'}

@@ -24,7 +24,7 @@ export function WorkspaceTypeSelector({
           onClick={() => onSelectType('personal')}
           className={`p-3.5 rounded-2xl border-2 transition-all text-left flex flex-col justify-between cursor-pointer ${
             workspaceType === 'personal'
-              ? 'border-[#5B4DFB] bg-[#F5F3FF] shadow-xs ring-2 ring-[#5B4DFB]/20'
+              ? 'border-brand bg-brand-subtle shadow-xs ring-2 ring-brand/20'
               : 'border-slate-200 hover:border-slate-300 bg-white'
           }`}
         >
@@ -32,14 +32,14 @@ export function WorkspaceTypeSelector({
             <div
               className={`w-8 h-8 rounded-xl flex items-center justify-center ${
                 workspaceType === 'personal'
-                  ? 'bg-[#5B4DFB] text-white shadow-xs'
+                  ? 'bg-brand text-white shadow-xs'
                   : 'bg-slate-100 text-slate-600'
               }`}
             >
               <User className="w-4 h-4" />
             </div>
             {workspaceType === 'personal' && (
-              <span className="w-2.5 h-2.5 rounded-full bg-[#5B4DFB]" />
+              <span className="w-2.5 h-2.5 rounded-full bg-brand" />
             )}
           </div>
           <div className="mt-2.5">
@@ -56,7 +56,7 @@ export function WorkspaceTypeSelector({
           onClick={() => onSelectType('company')}
           className={`p-3.5 rounded-2xl border-2 transition-all text-left flex flex-col justify-between cursor-pointer ${
             workspaceType === 'company'
-              ? 'border-[#5B4DFB] bg-[#F5F3FF] shadow-xs ring-2 ring-[#5B4DFB]/20'
+              ? 'border-brand bg-brand-subtle shadow-xs ring-2 ring-brand/20'
               : 'border-slate-200 hover:border-slate-300 bg-white'
           }`}
         >
@@ -64,14 +64,14 @@ export function WorkspaceTypeSelector({
             <div
               className={`w-8 h-8 rounded-xl flex items-center justify-center ${
                 workspaceType === 'company'
-                  ? 'bg-[#5B4DFB] text-white shadow-xs'
+                  ? 'bg-brand text-white shadow-xs'
                   : 'bg-slate-100 text-slate-600'
               }`}
             >
               <Building2 className="w-4 h-4" />
             </div>
             {workspaceType === 'company' && (
-              <span className="w-2.5 h-2.5 rounded-full bg-[#5B4DFB]" />
+              <span className="w-2.5 h-2.5 rounded-full bg-brand" />
             )}
           </div>
           <div className="mt-2.5">

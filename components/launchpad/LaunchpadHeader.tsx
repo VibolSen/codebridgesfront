@@ -2,8 +2,9 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ShieldCheck, Bell, ChevronDown, LogOut } from 'lucide-react';
-import { OrganizationManagerBar } from '@/components/OrganizationManagerBar';
+import { AppIcons } from '@/components/ui/icons';
+import { badgeStyles, buttonStyles } from '@/lib/theme';
+import { OrganizationManagerBar } from './OrganizationManagerBar';
 
 interface LaunchpadHeaderProps {
   mounted: boolean;
@@ -33,7 +34,7 @@ export function LaunchpadHeader({
             <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center p-1 shadow-sm border border-slate-200/80 overflow-hidden">
               <img src="/logo/Codebridge.png" alt="CodeBridges Logo" className="w-full h-full object-contain" />
             </div>
-            <span className="font-black text-sm tracking-tight text-slate-900 group-hover:text-[#5B4DFB] transition-colors">
+            <span className="font-black text-sm tracking-tight text-slate-900 group-hover:text-brand transition-colors">
               CodeBridges Platform
             </span>
           </Link>
@@ -47,9 +48,9 @@ export function LaunchpadHeader({
             ) : (
               <Link
                 href="/super-admin/dashboard"
-                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-50 hover:bg-purple-100 border border-purple-200 text-xs font-black text-[#5B4DFB] transition-colors shadow-2xs"
+                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-brand-subtle hover:bg-purple-100 border border-brand-border text-xs font-black text-brand transition-colors shadow-2xs"
               >
-                <ShieldCheck className="w-3.5 h-3.5" />
+                <AppIcons.Security className="w-3.5 h-3.5" />
                 <span>Super Admin Control Hub</span>
               </Link>
             )
@@ -60,8 +61,8 @@ export function LaunchpadHeader({
         <div className="flex items-center gap-3">
           {/* Header Role Status Badge Pill */}
           {mounted && isAuthenticated && user && (
-            <div className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-50/90 border border-purple-200/90 text-[#5B4DFB] shadow-2xs">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#5B4DFB]" />
+            <div className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-brand-subtle border border-brand-border text-brand shadow-2xs">
+              <AppIcons.Security className="w-3.5 h-3.5 text-brand" />
               <span className="text-xs font-black tracking-wide uppercase">{roleTitle}</span>
             </div>
           )}
@@ -70,7 +71,7 @@ export function LaunchpadHeader({
             type="button"
             className="w-9 h-9 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-500 hover:text-slate-900 flex items-center justify-center transition-colors relative cursor-pointer"
           >
-            <Bell className="w-4 h-4" />
+            <AppIcons.Bell className="w-4 h-4" />
             <span className="w-2 h-2 rounded-full bg-rose-500 absolute top-2 right-2 ring-2 ring-white" />
           </button>
 
@@ -82,23 +83,23 @@ export function LaunchpadHeader({
                 onClick={() => setShowUserMenu(!showUserMenu)}
                 className="flex items-center gap-2.5 p-1.5 pr-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 transition-colors cursor-pointer"
               >
-                <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-[#5B4DFB] to-[#7B6EFB] text-white flex items-center justify-center text-xs font-black shadow-xs">
+                <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-brand to-brand-hover text-white flex items-center justify-center text-xs font-black shadow-xs">
                   {(user.name || 'U').slice(0, 2).toUpperCase()}
                 </div>
                 <div className="text-left hidden sm:block">
                   <p className="text-xs font-black text-slate-900 leading-none truncate max-w-[120px]">
                     {user.name || 'User'}
                   </p>
-                  <p className="text-[10px] text-[#5B4DFB] font-extrabold uppercase tracking-wider mt-0.5">
+                  <p className="text-[10px] text-brand font-extrabold uppercase tracking-wider mt-0.5">
                     {roleTitle}
                   </p>
                 </div>
-                <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+                <AppIcons.Dropdown className="w-3.5 h-3.5 text-slate-400" />
               </button>
             ) : mounted ? (
               <Link
                 href="/login"
-                className="px-4 py-2 rounded-xl bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white text-xs font-black shadow-sm transition-all"
+                className={buttonStyles.primary}
               >
                 Sign In
               </Link>
@@ -110,7 +111,7 @@ export function LaunchpadHeader({
                 <div className="p-2.5 border-b border-slate-100">
                   <p className="text-xs font-extrabold text-slate-900">{user.name}</p>
                   <p className="text-[10px] text-slate-400 truncate">{user.email}</p>
-                  <span className="inline-block mt-1 px-2 py-0.5 rounded-full text-[9px] font-black bg-purple-50 text-[#5B4DFB] border border-purple-100">
+                  <span className={`inline-block mt-1 ${badgeStyles.brand}`}>
                     {roleTitle}
                   </span>
                 </div>
@@ -119,9 +120,9 @@ export function LaunchpadHeader({
                   <Link
                     href="/super-admin/dashboard"
                     onClick={() => setShowUserMenu(false)}
-                    className="w-full text-left px-3 py-2 rounded-xl text-xs font-bold text-purple-700 hover:bg-purple-50 flex items-center gap-2"
+                    className="w-full text-left px-3 py-2 rounded-xl text-xs font-bold text-brand hover:bg-brand-subtle flex items-center gap-2 transition-colors"
                   >
-                    <ShieldCheck className="w-3.5 h-3.5" />
+                    <AppIcons.Security className="w-3.5 h-3.5" />
                     <span>Super Admin Hub</span>
                   </Link>
                 )}
@@ -129,9 +130,9 @@ export function LaunchpadHeader({
                 <button
                   type="button"
                   onClick={onLogout}
-                  className="w-full text-left px-3 py-2 rounded-xl text-xs font-bold text-rose-600 hover:bg-rose-50 flex items-center gap-2 cursor-pointer"
+                  className="w-full text-left px-3 py-2 rounded-xl text-xs font-bold text-rose-600 hover:bg-rose-50 flex items-center gap-2 cursor-pointer transition-colors"
                 >
-                  <LogOut className="w-3.5 h-3.5" />
+                  <AppIcons.LogOut className="w-3.5 h-3.5" />
                   <span>Sign Out</span>
                 </button>
               </div>

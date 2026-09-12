@@ -32,7 +32,7 @@ export function UserStatsHeader({
       >
         <div>
           <h1 className="text-2xl font-black text-slate-900 flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-[#F5F3FF] text-[#5B4DFB] flex items-center justify-center">
+            <div className="w-9 h-9 rounded-xl bg-brand-subtle text-brand border border-brand/20 flex items-center justify-center">
               <ShieldCheck className="w-5 h-5" />
             </div>
             Users & Staff Management (RBAC)
@@ -49,7 +49,7 @@ export function UserStatsHeader({
             onClick={onOpenPermissionsModal}
             className="px-3.5 py-2.5 rounded-xl bg-white border border-slate-200/80 text-slate-700 font-semibold text-xs shadow-[0_2px_12px_rgba(15,23,42,0.03)] hover:border-slate-300 flex items-center gap-1.5 cursor-pointer transition-colors"
           >
-            <Grid className="w-4 h-4 text-[#5B4DFB]" />
+            <Grid className="w-4 h-4 text-brand" />
             Permissions Matrix
           </motion.button>
 
@@ -58,7 +58,7 @@ export function UserStatsHeader({
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={onOpenInviteModal}
-              className="px-3.5 py-2.5 rounded-xl bg-[#F5F3FF] hover:bg-[#EDE9FE] border border-[#DDD6FE] text-[#5B4DFB] font-bold text-xs shadow-xs flex items-center gap-1.5 cursor-pointer transition-colors"
+              className="px-3.5 py-2.5 rounded-xl bg-brand-subtle hover:bg-brand-subtle/80 border border-brand/20 text-brand font-bold text-xs shadow-xs flex items-center gap-1.5 cursor-pointer transition-colors"
             >
               <UserPlus className="w-4 h-4" />
               Invite Link
@@ -69,7 +69,7 @@ export function UserStatsHeader({
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={onOpenCreateModal}
-            className="px-4 py-2.5 rounded-xl bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white font-bold text-xs shadow-md shadow-[#5B4DFB]/20 transition-all flex items-center gap-2 cursor-pointer"
+            className="px-4 py-2.5 rounded-xl bg-brand hover:bg-brand-hover active:bg-brand-active text-white font-bold text-xs shadow-md shadow-brand/20 transition-all flex items-center gap-2 cursor-pointer"
           >
             <UserPlus className="w-4 h-4" />
             Add New User
@@ -87,7 +87,7 @@ export function UserStatsHeader({
             <h4 className="text-2xl font-black text-slate-900">{totalUsers}</h4>
             <p className="text-xs text-slate-500 font-medium mt-0.5">Total Staff Registered</p>
           </div>
-          <div className="w-11 h-11 rounded-2xl bg-[#F5F3FF] text-[#5B4DFB] flex items-center justify-center font-bold">
+          <div className="w-11 h-11 rounded-2xl bg-brand-subtle text-brand border border-brand/20 flex items-center justify-center font-bold">
             <Users className="w-5 h-5" />
           </div>
         </motion.div>

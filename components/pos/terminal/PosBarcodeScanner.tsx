@@ -33,7 +33,7 @@ export function PosBarcodeScanner({
           placeholder="Search products by name, category, SKU..."
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="w-full pl-9 pr-8 py-2 rounded-2xl bg-white border border-slate-200/90 text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 shadow-2xs transition-all"
+          className="w-full pl-9 pr-8 py-2 rounded-2xl bg-white border border-slate-200/90 text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand shadow-2xs transition-all"
         />
         {searchQuery && (
           <button
@@ -54,12 +54,12 @@ export function PosBarcodeScanner({
           placeholder="Scan barcode..."
           value={barcodeInput}
           onChange={(e) => setBarcodeInput(e.target.value)}
-          className="w-full pl-9 pr-14 py-2 rounded-2xl bg-white border border-slate-200/90 text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 shadow-2xs font-mono transition-all"
+          className="w-full pl-9 pr-14 py-2 rounded-2xl bg-white border border-slate-200/90 text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand shadow-2xs font-mono transition-all"
         />
         <button
           type="submit"
           disabled={!barcodeInput.trim()}
-          className="absolute right-1.5 top-1/2 -translate-y-1/2 px-2.5 py-1 rounded-xl bg-orange-50 hover:bg-orange-500 text-orange-600 hover:text-white font-extrabold text-[10px] transition-colors disabled:opacity-30 cursor-pointer"
+          className="absolute right-1.5 top-1/2 -translate-y-1/2 px-2.5 py-1 rounded-xl bg-brand-subtle hover:bg-brand text-brand hover:text-white font-extrabold text-[10px] transition-colors disabled:opacity-30 cursor-pointer"
         >
           Scan
         </button>

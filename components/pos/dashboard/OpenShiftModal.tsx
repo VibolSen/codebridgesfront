@@ -38,7 +38,7 @@ export function OpenShiftModal({
           >
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-purple-50 text-[#5B4DFB] flex items-center justify-center font-bold">
+                <div className="w-10 h-10 rounded-2xl bg-brand-subtle text-brand flex items-center justify-center font-bold">
                   <Clock className="w-5 h-5" />
                 </div>
                 <div>
@@ -71,7 +71,7 @@ export function OpenShiftModal({
                   required
                   value={openingFloat}
                   onChange={(e) => onFloatChange(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-[#5B4DFB] focus:ring-2 focus:ring-[#5B4DFB]/20 text-sm font-bold outline-hidden transition-all"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-brand focus:ring-2 focus:ring-brand/20 text-sm font-bold outline-hidden transition-all"
                   placeholder="100.00"
                 />
                 <p className="text-[11px] text-slate-400 mt-1">
@@ -90,7 +90,7 @@ export function OpenShiftModal({
                 <button
                   type="submit"
                   disabled={isProcessing}
-                  className="px-5 py-2 rounded-xl bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white font-extrabold text-xs shadow-md shadow-[#5B4DFB]/20 flex items-center gap-2 cursor-pointer disabled:opacity-50"
+                  className="px-5 py-2 rounded-xl bg-brand hover:bg-brand-hover text-white font-extrabold text-xs shadow-md shadow-brand/20 flex items-center gap-2 cursor-pointer disabled:opacity-50"
                 >
                   {isProcessing ? (
                     <RefreshCw className="w-3.5 h-3.5 animate-spin" />

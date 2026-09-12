@@ -37,7 +37,7 @@ export function SuperAdminSidebar({
 
   const [expandedGroups, setExpandedGroups] = useState<{ [key: string]: boolean }>({
     'platform-overview': true,
-    organizations: true,
+    'users-organizations': true,
     'system-infra': true,
   });
 
@@ -98,7 +98,7 @@ export function SuperAdminSidebar({
       {/* Top Context Pill / Badge */}
       <div className="px-3 pt-3 pb-2">
         {sidebarOpen ? (
-          <div className="flex items-center justify-between px-3 py-1.5 rounded-xl bg-gradient-to-r from-indigo-50/80 via-purple-50/40 to-slate-50 border border-indigo-100/80 text-[#5B4DFB] text-[11px] font-black tracking-wide shadow-2xs">
+          <div className="flex items-center justify-between px-3 py-1.5 rounded-xl bg-brand-subtle/50 border border-brand-border/60 text-brand text-[11px] font-black tracking-wide shadow-2xs">
             <div className="flex items-center gap-2 truncate">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -108,11 +108,11 @@ export function SuperAdminSidebar({
                 Platform Core Engine
               </span>
             </div>
-            <Sparkles className="w-3.5 h-3.5 text-[#5B4DFB] shrink-0 opacity-80" />
+            <Sparkles className="w-3.5 h-3.5 text-brand shrink-0 opacity-80" />
           </div>
         ) : (
           <div className="flex justify-center" title="Platform Cloud Ops - Active">
-            <div className="w-9 h-9 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-[#5B4DFB]">
+            <div className="w-9 h-9 rounded-xl bg-brand-subtle border border-brand-border/60 flex items-center justify-center text-brand">
               <Shield className="w-4 h-4" />
             </div>
           </div>
@@ -129,7 +129,7 @@ export function SuperAdminSidebar({
               placeholder="Quick find module..."
               value={navSearch}
               onChange={(e) => setNavSearch(e.target.value)}
-              className="w-full pl-8 pr-7 py-1.5 text-xs rounded-xl bg-slate-100/70 border border-slate-200/60 text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#5B4DFB]/20 focus:border-[#5B4DFB] transition-all font-medium"
+              className="w-full pl-8 pr-7 py-1.5 text-xs rounded-xl bg-slate-100/70 border border-slate-200/60 text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all font-medium"
             />
             {navSearch && (
               <button
@@ -193,18 +193,18 @@ export function SuperAdminSidebar({
                         title={!sidebarOpen ? item.name : undefined}
                         className={`group relative flex items-center gap-3 px-2.5 py-2 rounded-xl text-xs transition-all duration-150 ${
                           active
-                            ? 'bg-gradient-to-r from-[#5B4DFB] to-[#6F63FB] text-white font-black shadow-sm shadow-[#5B4DFB]/25'
+                            ? 'bg-gradient-to-r from-brand to-brand-hover text-white font-black shadow-sm shadow-brand/25'
                             : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/80 font-bold'
                         } ${!sidebarOpen ? 'justify-center px-0 w-11 h-10 mx-auto' : ''}`}
                       >
                         {/* Active Left Indicator Bar */}
                         {active && (
-                          <span className="absolute -left-1.5 top-1.5 bottom-1.5 w-1 rounded-r-full bg-[#5B4DFB] shadow-xs" />
+                          <span className="absolute -left-1.5 top-1.5 bottom-1.5 w-1 rounded-r-full bg-brand shadow-xs" />
                         )}
 
                         <Icon
                           className={`w-4 h-4 shrink-0 transition-transform duration-150 group-hover:scale-110 ${
-                            active ? 'text-white' : 'text-slate-400 group-hover:text-[#5B4DFB]'
+                            active ? 'text-white' : 'text-slate-400 group-hover:text-brand'
                           }`}
                         />
 

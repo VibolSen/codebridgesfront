@@ -49,7 +49,7 @@ export function InfrastructureKpiCards({
             <span>P99: &lt; 35ms Benchmark</span>
           </p>
         </div>
-        <div className="w-12 h-12 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center font-bold">
+        <div className="w-12 h-12 rounded-2xl bg-brand-subtle text-brand flex items-center justify-center font-bold">
           <Zap className="w-6 h-6" />
         </div>
       </motion.div>

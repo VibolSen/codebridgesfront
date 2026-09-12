@@ -104,7 +104,7 @@ function PosTerminalSettingsContent() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#5B4DFB] mb-1">
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand mb-1">
             <Settings className="w-4 h-4" />
             <span>POS Hardware &amp; Peripheral Configuration</span>
           </div>
@@ -124,7 +124,7 @@ function PosTerminalSettingsContent() {
             type="button"
             onClick={handleSave}
             disabled={loading}
-            className="px-5 py-2 rounded-xl bg-[#5B4DFB] hover:bg-[#4a3cf0] text-white font-black text-xs shadow-md shadow-[#5B4DFB]/20 transition-all flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+            className="px-5 py-2 rounded-xl bg-brand hover:bg-brand-hover text-white font-black text-xs shadow-md shadow-brand/20 transition-all flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
           >
             <Save className="w-3.5 h-3.5" />
             <span>{loading ? 'Saving Changes...' : 'Save Configuration'}</span>
@@ -153,7 +153,7 @@ function PosTerminalSettingsContent() {
           type="button"
           onClick={() => setActiveTab('hardware')}
           className={`flex-1 py-2 rounded-lg flex items-center justify-center gap-2 transition-all cursor-pointer ${
-            activeTab === 'hardware' ? 'bg-white text-[#5B4DFB] shadow-xs font-black' : 'text-slate-600 hover:text-slate-900'
+            activeTab === 'hardware' ? 'bg-white text-brand shadow-xs font-black' : 'text-slate-600 hover:text-slate-900'
           }`}
         >
           <Sliders className="w-3.5 h-3.5" />
@@ -163,7 +163,7 @@ function PosTerminalSettingsContent() {
           type="button"
           onClick={() => setActiveTab('policies')}
           className={`flex-1 py-2 rounded-lg flex items-center justify-center gap-2 transition-all cursor-pointer ${
-            activeTab === 'policies' ? 'bg-white text-[#5B4DFB] shadow-xs font-black' : 'text-slate-600 hover:text-slate-900'
+            activeTab === 'policies' ? 'bg-white text-brand shadow-xs font-black' : 'text-slate-600 hover:text-slate-900'
           }`}
         >
           <ShieldCheck className="w-3.5 h-3.5" />
@@ -199,7 +199,7 @@ export function PosTerminalSettingsView() {
       fallback={
         <div className="min-h-[400px] flex items-center justify-center p-6">
           <div className="flex items-center gap-2 text-slate-500 font-bold text-xs">
-            <Loader2 className="w-5 h-5 animate-spin text-[#5B4DFB]" />
+            <Loader2 className="w-5 h-5 animate-spin text-brand" />
             <span>Loading Terminal Settings...</span>
           </div>
         </div>

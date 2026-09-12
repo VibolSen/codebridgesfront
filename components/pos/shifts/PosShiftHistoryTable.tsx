@@ -45,7 +45,7 @@ export function PosShiftHistoryTable({
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle className="flex items-center gap-2">
-          <Calendar className="w-4 h-4 text-[#5B4DFB]" />
+          <Calendar className="w-4 h-4 text-brand" />
           <span>Shift Auditing History &amp; Z-Reports</span>
         </CardTitle>
         <Badge variant="neutral" size="sm">

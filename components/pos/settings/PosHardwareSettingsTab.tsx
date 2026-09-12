@@ -22,7 +22,7 @@ export function PosHardwareSettingsTab({
       <div className="bg-white rounded-2xl border border-slate-200 p-6 space-y-4 shadow-sm">
         <div className="flex items-center justify-between pb-3 border-b border-slate-100">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-purple-50 text-[#5B4DFB] flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-brand-subtle text-brand flex items-center justify-center">
               <Printer className="w-5 h-5" />
             </div>
             <div>
@@ -52,7 +52,7 @@ export function PosHardwareSettingsTab({
             <select
               value={settings.printerType}
               onChange={(e) => onChange('printerType', e.target.value)}
-              className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB]"
+              className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
             >
               <option value="network">TCP / IP (Network Ethernet/WiFi)</option>
               <option value="usb">USB Direct (WebUSB / RawBT)</option>
@@ -67,7 +67,7 @@ export function PosHardwareSettingsTab({
               value={settings.printerIp}
               onChange={(e) => onChange('printerIp', e.target.value)}
               placeholder="192.168.1.200"
-              className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB]"
+              className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
             />
           </div>
 
@@ -76,7 +76,7 @@ export function PosHardwareSettingsTab({
             <select
               value={settings.paperWidth}
               onChange={(e) => onChange('paperWidth', e.target.value)}
-              className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB]"
+              className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
             >
               <option value="80mm">Standard 80mm (48 characters)</option>
               <option value="58mm">Compact 58mm (32 characters)</option>
@@ -90,7 +90,7 @@ export function PosHardwareSettingsTab({
               type="checkbox"
               checked={settings.autoPrintReceipt}
               onChange={(e) => onChange('autoPrintReceipt', e.target.checked)}
-              className="w-4 h-4 text-[#5B4DFB] rounded focus:ring-[#5B4DFB]"
+              className="w-4 h-4 text-brand rounded focus:ring-brand"
             />
             <span className="text-xs font-bold text-slate-800">Auto-Print Receipt on Successful Payment</span>
           </label>
@@ -100,7 +100,7 @@ export function PosHardwareSettingsTab({
               type="checkbox"
               checked={settings.printKitchenTicket}
               onChange={(e) => onChange('printKitchenTicket', e.target.checked)}
-              className="w-4 h-4 text-[#5B4DFB] rounded focus:ring-[#5B4DFB]"
+              className="w-4 h-4 text-brand rounded focus:ring-brand"
             />
             <span className="text-xs font-bold text-slate-800">Duplicate Kitchen Order Ticket (KOT)</span>
           </label>

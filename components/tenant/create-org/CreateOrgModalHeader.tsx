@@ -9,9 +9,9 @@ interface CreateOrgModalHeaderProps {
 
 export function CreateOrgModalHeader({ onClose }: CreateOrgModalHeaderProps) {
   return (
-    <div className="flex items-center justify-between p-5 sm:p-6 border-b border-slate-100 bg-gradient-to-r from-slate-50 via-white to-[#F5F3FF]/60 shrink-0">
+    <div className="flex items-center justify-between p-5 sm:p-6 border-b border-slate-100 bg-gradient-to-r from-slate-50 via-white to-brand-subtle/60 shrink-0">
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#5B4DFB] to-[#7C3AED] text-white flex items-center justify-center shadow-md shadow-[#5B4DFB]/25 shrink-0">
+        <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-brand to-brand-hover text-white flex items-center justify-center shadow-md shadow-brand/25 shrink-0">
           <Sparkles className="w-5 h-5" />
         </div>
         <div>

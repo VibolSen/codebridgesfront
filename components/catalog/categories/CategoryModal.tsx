@@ -53,7 +53,7 @@ export function CategoryModal({
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               placeholder="e.g. Beverages, Dairy, Snacks..."
-              className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
             />
           </div>
 
@@ -62,7 +62,7 @@ export function CategoryModal({
             <select
               value={formData.parent_id}
               onChange={(e) => setFormData({ ...formData, parent_id: e.target.value })}
-              className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 cursor-pointer"
+              className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand cursor-pointer"
             >
               <option value="">None (Main Category)</option>
               {parentCategories.map((p) => (
@@ -82,7 +82,7 @@ export function CategoryModal({
             <button
               type="submit"
               disabled={saving}
-              className="px-5 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs shadow-md shadow-orange-500/20 cursor-pointer disabled:opacity-50"
+              className="px-5 py-2 rounded-xl bg-brand hover:bg-brand-hover active:bg-brand-active text-white font-bold text-xs shadow-md shadow-brand/20 cursor-pointer disabled:opacity-50"
             >
               {saving ? 'Saving...' : editingCategory ? 'Update Category' : 'Create Category'}
             </button>

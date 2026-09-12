@@ -38,7 +38,7 @@ export function PosHourlySalesChart({ data, todayTotal }: PosHourlySalesChartPro
       {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2.5">
-          <div className="w-10 h-10 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center border border-orange-200/60">
+          <div className="w-10 h-10 rounded-2xl bg-brand-subtle text-brand flex items-center justify-center border border-brand/20">
             <BarChart3 className="w-5 h-5" />
           </div>
           <div>
@@ -48,7 +48,7 @@ export function PosHourlySalesChart({ data, todayTotal }: PosHourlySalesChartPro
         </div>
 
         <div className="flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-700">
-          <Clock className="w-3.5 h-3.5 text-orange-500" />
+          <Clock className="w-3.5 h-3.5 text-brand" />
           <span>
             {peak.sales > 0 ? (
               <>Peak: <strong className="text-slate-900">{peak.hour}</strong> (${peak.sales.toFixed(2)})</>
@@ -83,14 +83,14 @@ export function PosHourlySalesChart({ data, todayTotal }: PosHourlySalesChartPro
                       item.sales === 0
                         ? 'bg-slate-200/60'
                         : isPeak
-                        ? 'bg-gradient-to-t from-orange-500 to-amber-400 shadow-md shadow-orange-500/20'
-                        : 'bg-gradient-to-t from-orange-300 to-amber-300 hover:from-orange-400 hover:to-amber-400'
+                        ? 'bg-brand shadow-md shadow-brand/20'
+                        : 'bg-brand/40 hover:bg-brand/70'
                     }`}
                   />
                 </div>
 
                 {/* Hour Label */}
-                <span className={`text-[9px] font-bold tracking-tight truncate ${isPeak ? 'text-orange-600 font-extrabold' : 'text-slate-400'}`}>
+                <span className={`text-[9px] font-bold tracking-tight truncate ${isPeak ? 'text-brand font-extrabold' : 'text-slate-400'}`}>
                   {item.hour.split(':')[0]}h
                 </span>
               </div>

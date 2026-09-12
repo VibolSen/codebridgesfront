@@ -57,7 +57,7 @@ export const CustomerCardGrid: React.FC<CustomerCardGridProps> = ({
           <div className="space-y-3">
             <div className="flex items-start justify-between gap-2">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-orange-500/10 text-orange-600 flex items-center justify-center font-bold text-sm">
+                <div className="w-10 h-10 rounded-full bg-brand-subtle text-brand border border-brand/20 flex items-center justify-center font-bold text-sm">
                   {cust.name ? cust.name[0] : 'C'}
                 </div>
                 <div>

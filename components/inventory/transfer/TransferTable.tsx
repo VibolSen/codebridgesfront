@@ -59,7 +59,7 @@ export const TransferTable: React.FC<TransferTableProps> = ({
                   initial="hidden"
                   animate="visible"
                   variants={cardVariants}
-                  className="hover:bg-orange-50/50 transition-colors"
+                  className="hover:bg-brand-subtle/50 transition-colors"
                 >
                   <td className="py-3.5 px-4 font-mono font-bold text-slate-900">
                     {trf.transfer_number}
@@ -68,7 +68,7 @@ export const TransferTable: React.FC<TransferTableProps> = ({
                   <td className="py-3.5 px-4">
                     <div className="flex items-center gap-1.5 font-bold text-slate-800">
                       <span>{trf.from_outlet_name || `Outlet #${trf.from_outlet_id}`}</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-orange-500 shrink-0" />
+                      <ArrowRight className="w-3.5 h-3.5 text-brand shrink-0" />
                       <span>{trf.to_outlet_name || `Outlet #${trf.to_outlet_id}`}</span>
                     </div>
                   </td>

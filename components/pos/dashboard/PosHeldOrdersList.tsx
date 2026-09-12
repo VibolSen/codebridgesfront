@@ -78,7 +78,7 @@ export function PosHeldOrdersList({
                     <p className="text-[10px] text-slate-400 flex items-center gap-2 mt-0.5">
                       <span>{itemsCount} items</span>
                       <span>•</span>
-                      <span className="font-bold text-orange-600">${Number(cartTotal).toFixed(2)}</span>
+                      <span className="font-bold text-brand">${Number(cartTotal).toFixed(2)}</span>
                     </p>
                   </div>
                 </div>

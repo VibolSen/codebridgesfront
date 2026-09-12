@@ -36,7 +36,7 @@ export function DashboardHeroBanner({
       <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
         <div className="space-y-2">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#F5F3FF] text-[#5B4DFB] border border-[#DDD6FE] flex items-center gap-1.5">
+            <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-brand-subtle text-brand border border-brand/20 flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-500 ring-2 ring-emerald-100 animate-pulse" />
               <span>{orgName}</span>
             </span>
@@ -72,7 +72,7 @@ export function DashboardHeroBanner({
               onClick={onOpenShift}
               className="px-4 py-2.5 rounded-2xl bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 font-extrabold text-xs flex items-center gap-2 transition-all cursor-pointer"
             >
-              <Clock className="w-4 h-4 text-[#5B4DFB]" />
+              <Clock className="w-4 h-4 text-brand" />
               <span>Open Shift Float</span>
             </button>
           )}
@@ -84,13 +84,13 @@ export function DashboardHeroBanner({
             className="p-2.5 rounded-2xl bg-slate-50 hover:bg-slate-100 text-slate-600 border border-slate-200 cursor-pointer transition-all"
           >
             <RefreshCw
-              className={`w-4 h-4 ${loading ? 'animate-spin text-[#5B4DFB]' : ''}`}
+              className={`w-4 h-4 ${loading ? 'animate-spin text-brand' : ''}`}
             />
           </button>
 
           <Link
-            href="/pos/terminal"
-            className="px-5 py-2.5 rounded-2xl bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white font-extrabold text-xs sm:text-sm shadow-md shadow-[#5B4DFB]/25 flex items-center gap-2 transition-all cursor-pointer"
+            href="/pos/pos-terminal"
+            className="px-5 py-2.5 rounded-2xl bg-brand hover:bg-brand-hover text-white font-extrabold text-xs sm:text-sm shadow-md shadow-brand/20 flex items-center gap-2 transition-all cursor-pointer"
           >
             <Store className="w-4 h-4" />
             <span>Open Cashier Register</span>

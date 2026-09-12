@@ -21,6 +21,7 @@ import {
   deleteDepartmentApi,
 } from '@/lib/api';
 import { DepartmentModal } from './DepartmentModal';
+import { DepartmentMetricsCards } from './DepartmentMetricsCards';
 
 export const SuperAdminDepartmentsView: React.FC = () => {
   const [departments, setDepartments] = useState<any[]>([]);
@@ -155,7 +156,7 @@ export const SuperAdminDepartmentsView: React.FC = () => {
       >
         <div>
           <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-2.5">
-            <Building2 className="w-6 h-6 text-orange-500" />
+            <Building2 className="w-6 h-6 text-brand" />
             Organizational Departments
           </h1>
           <p className="text-xs text-slate-500">
@@ -167,7 +168,7 @@ export const SuperAdminDepartmentsView: React.FC = () => {
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
           onClick={handleOpenCreateModal}
-          className="px-4 py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs shadow-md shadow-orange-500/20 transition-all flex items-center gap-2 self-start sm:self-auto"
+          className="px-4 py-2.5 rounded-xl bg-brand hover:bg-brand-hover active:bg-brand-active text-white font-bold text-xs shadow-md shadow-brand/20 transition-all flex items-center gap-2 self-start sm:self-auto"
         >
           <Plus className="w-4 h-4" />
           Create Department
@@ -175,46 +176,11 @@ export const SuperAdminDepartmentsView: React.FC = () => {
       </motion.div>
 
       {/* Metrics Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <motion.div
-          whileHover={{ scale: 1.02 }}
-          className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs flex items-center justify-between"
-        >
-          <div>
-            <h4 className="text-xl font-extrabold text-slate-900">{totalDepts}</h4>
-            <p className="text-xs text-slate-500 font-medium">Departments Configured</p>
-          </div>
-          <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center font-bold">
-            <Building2 className="w-5 h-5" />
-          </div>
-        </motion.div>
-
-        <motion.div
-          whileHover={{ scale: 1.02 }}
-          className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs flex items-center justify-between"
-        >
-          <div>
-            <h4 className="text-xl font-extrabold text-emerald-600">{totalStaffAcrossDepts}</h4>
-            <p className="text-xs text-slate-500 font-medium">Assigned Employees</p>
-          </div>
-          <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
-            <Users className="w-5 h-5" />
-          </div>
-        </motion.div>
-
-        <motion.div
-          whileHover={{ scale: 1.02 }}
-          className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs flex items-center justify-between"
-        >
-          <div>
-            <h4 className="text-xl font-extrabold text-indigo-600">{avgStaff}</h4>
-            <p className="text-xs text-slate-500 font-medium">Average Staff / Dept</p>
-          </div>
-          <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">
-            <Briefcase className="w-5 h-5" />
-          </div>
-        </motion.div>
-      </div>
+      <DepartmentMetricsCards
+        totalDepts={totalDepts}
+        totalStaffAcrossDepts={totalStaffAcrossDepts}
+        avgStaff={avgStaff}
+      />
 
       {/* Notifications */}
       {notification && (
@@ -248,7 +214,7 @@ export const SuperAdminDepartmentsView: React.FC = () => {
             placeholder="Search department name or code..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 text-xs rounded-xl bg-slate-100 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500 font-medium"
+            className="w-full pl-9 pr-4 py-2 text-xs rounded-xl bg-slate-100 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand font-medium"
           />
         </form>
       </div>

@@ -21,13 +21,13 @@ export function PosCustomerDisplayView() {
       {/* Top Banner */}
       <div className="flex items-center justify-between border-b border-slate-200 pb-4 bg-white p-6 rounded-2xl border shadow-xs">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-2xl bg-[#5B4DFB] text-white flex items-center justify-center shadow-md shadow-[#5B4DFB]/20">
+          <div className="w-12 h-12 rounded-2xl bg-brand text-white flex items-center justify-center shadow-md shadow-brand/20">
             <Store className="w-6 h-6" />
           </div>
           <div>
             <h1 className="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
               CodeBridges Store
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-purple-50 text-[#5B4DFB] border border-purple-200">
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-brand-subtle text-brand border border-brand/20">
                 Customer Display (CFD)
               </span>
             </h1>
@@ -44,7 +44,7 @@ export function PosCustomerDisplayView() {
           </div>
           <Link
             href="/inventory/dashboard"
-            className="text-xs font-bold text-slate-500 hover:text-[#5B4DFB] px-3 py-1.5 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors"
+            className="text-xs font-bold text-slate-500 hover:text-brand px-3 py-1.5 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors"
           >
             Exit CFD
           </Link>

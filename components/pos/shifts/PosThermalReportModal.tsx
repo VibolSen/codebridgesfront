@@ -123,7 +123,7 @@ export function PosThermalReportModal({
           <div className="text-center space-y-1 pb-3 border-b border-dashed border-slate-300">
             <p className="font-black text-sm text-slate-900 tracking-wider">CODEBRIDGES POS</p>
             <p className="text-[10px] text-slate-600 font-bold">{outletName}</p>
-            <p className="text-[10px] font-black text-[#5B4DFB] uppercase tracking-widest mt-1">
+            <p className="text-[10px] font-black text-brand uppercase tracking-widest mt-1">
               *** {reportTitle} ***
             </p>
           </div>
@@ -169,7 +169,7 @@ export function PosThermalReportModal({
             </div>
             <div className="flex justify-between font-black text-slate-900 pt-1 border-t border-slate-200">
               <span>GROSS SALES:</span>
-              <span className="text-[#5B4DFB]">${grossSales.toFixed(2)}</span>
+              <span className="text-brand">${grossSales.toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-[10px] text-slate-500">
               <span>VAT Tax (10%):</span>

@@ -33,7 +33,7 @@ export function PlatformGrowthChart({ growthData, isLoading = false }: PlatformG
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
         <div>
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-[#F5F3FF] text-[#5B4DFB] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-xl bg-brand-subtle text-brand flex items-center justify-center">
               <BarChart3 className="w-4 h-4" />
             </div>
             <div>
@@ -50,7 +50,7 @@ export function PlatformGrowthChart({ growthData, isLoading = false }: PlatformG
             onClick={() => setMetric('mrr')}
             className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
               metric === 'mrr'
-                ? 'bg-white text-[#5B4DFB] shadow-xs font-extrabold'
+                ? 'bg-white text-brand shadow-xs font-extrabold'
                 : 'text-slate-500 hover:text-slate-900'
             }`}
           >
@@ -61,7 +61,7 @@ export function PlatformGrowthChart({ growthData, isLoading = false }: PlatformG
             onClick={() => setMetric('orgs')}
             className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
               metric === 'orgs'
-                ? 'bg-white text-[#5B4DFB] shadow-xs font-extrabold'
+                ? 'bg-white text-brand shadow-xs font-extrabold'
                 : 'text-slate-500 hover:text-slate-900'
             }`}
           >
@@ -72,7 +72,7 @@ export function PlatformGrowthChart({ growthData, isLoading = false }: PlatformG
             onClick={() => setMetric('signups')}
             className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
               metric === 'signups'
-                ? 'bg-white text-[#5B4DFB] shadow-xs font-extrabold'
+                ? 'bg-white text-brand shadow-xs font-extrabold'
                 : 'text-slate-500 hover:text-slate-900'
             }`}
           >
@@ -90,7 +90,7 @@ export function PlatformGrowthChart({ growthData, isLoading = false }: PlatformG
           return (
             <div key={d.month} className="flex-1 flex flex-col items-center gap-2 group h-full justify-end">
               {/* Tooltip Value */}
-              <div className="text-[11px] font-extrabold text-[#5B4DFB] opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+              <div className="text-[11px] font-extrabold text-brand opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                 {metric === 'mrr' ? `$${val.toLocaleString()}` : val}
               </div>
 
@@ -100,7 +100,7 @@ export function PlatformGrowthChart({ growthData, isLoading = false }: PlatformG
                   initial={{ height: 0 }}
                   animate={{ height: `${heightPct}%` }}
                   transition={{ duration: 0.5, ease: 'easeOut' }}
-                  className="w-full bg-gradient-to-t from-[#5B4DFB] to-[#8B7EF8] rounded-lg group-hover:from-[#4E3FE3] group-hover:to-[#7566EB] transition-all shadow-xs"
+                  className="w-full bg-gradient-to-t from-brand to-brand-hover rounded-lg transition-all shadow-xs"
                 />
               </div>
 

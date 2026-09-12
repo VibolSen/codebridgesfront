@@ -57,7 +57,7 @@ export function ImpersonateModal({
           className="bg-white rounded-3xl shadow-2xl border border-slate-200 w-full max-w-lg overflow-hidden"
         >
           {/* Header */}
-          <div className="bg-gradient-to-r from-[#5B4DFB] to-[#6355D8] p-6 text-white flex items-center justify-between">
+          <div className="bg-gradient-to-r from-brand to-brand-hover p-6 text-white flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
                 <LogIn className="w-5 h-5" />
@@ -89,7 +89,7 @@ export function ImpersonateModal({
             {/* Warning Note */}
             <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1 text-xs text-slate-600">
               <div className="flex items-center gap-1.5 font-bold text-slate-800">
-                <ShieldCheck className="w-4 h-4 text-[#5B4DFB]" />
+                <ShieldCheck className="w-4 h-4 text-brand" />
                 <span>Mandatory Security Audit Notice</span>
               </div>
               <p className="text-[11px] leading-relaxed">
@@ -108,7 +108,7 @@ export function ImpersonateModal({
                 placeholder="e.g. Ticket #4829 - Resolving POS receipt template issue"
                 value={reason}
                 onChange={(e) => setReason(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand"
               />
             </div>
 
@@ -130,7 +130,7 @@ export function ImpersonateModal({
               <button
                 type="submit"
                 disabled={loading}
-                className="px-5 py-2.5 rounded-xl bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white font-extrabold text-xs shadow-md shadow-[#5B4DFB]/25 transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
+                className="px-5 py-2.5 rounded-xl bg-brand hover:bg-brand-hover text-white font-extrabold text-xs shadow-md shadow-brand/25 transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
               >
                 {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <LogIn className="w-4 h-4" />}
                 <span>Start Impersonation Session</span>

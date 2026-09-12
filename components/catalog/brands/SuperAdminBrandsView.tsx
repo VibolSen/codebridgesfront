@@ -132,7 +132,7 @@ export function SuperAdminBrandsView() {
       >
         <div>
           <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-2.5">
-            <Award className="w-6 h-6 text-orange-500" />
+            <Award className="w-6 h-6 text-brand" />
             Brands Management
           </h1>
           <p className="text-xs text-slate-500">Manage manufacturer and supplier product brands</p>
@@ -142,7 +142,7 @@ export function SuperAdminBrandsView() {
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
           onClick={handleOpenCreateModal}
-          className="px-4 py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs shadow-md shadow-orange-500/20 transition-all flex items-center gap-2 self-start sm:self-auto cursor-pointer"
+          className="px-4 py-2.5 rounded-xl bg-brand hover:bg-brand-hover active:bg-brand-active text-white font-bold text-xs shadow-md shadow-brand/20 transition-all flex items-center gap-2 self-start sm:self-auto cursor-pointer"
         >
           <Plus className="w-4 h-4" />
           Add New Brand
@@ -156,7 +156,7 @@ export function SuperAdminBrandsView() {
             <h4 className="text-xl font-extrabold text-slate-900">{totalBrandsCount}</h4>
             <p className="text-xs text-slate-500 font-medium">Total Registered Brands</p>
           </div>
-          <div className="w-10 h-10 rounded-xl bg-orange-500/10 text-orange-500 flex items-center justify-center font-bold">
+          <div className="w-10 h-10 rounded-xl bg-brand-subtle text-brand flex items-center justify-center font-bold">
             <Award className="w-5 h-5" />
           </div>
         </motion.div>
@@ -198,7 +198,7 @@ export function SuperAdminBrandsView() {
             placeholder="Search brand name..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 text-xs rounded-xl bg-slate-100 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            className="w-full pl-9 pr-4 py-2 text-xs rounded-xl bg-slate-100 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
           />
         </form>
       </div>
@@ -234,11 +234,11 @@ export function SuperAdminBrandsView() {
                     initial="hidden"
                     animate="visible"
                     variants={cardVariants}
-                    className="hover:bg-orange-50/50 transition-colors"
+                    className="hover:bg-brand-subtle/40 transition-colors"
                   >
                     <td className="py-3.5 px-4 font-bold text-slate-900">
                       <div className="flex items-center gap-2">
-                        <Award className="w-4 h-4 text-orange-500 shrink-0" />
+                        <Award className="w-4 h-4 text-brand shrink-0" />
                         <span>{brand.name}</span>
                       </div>
                     </td>
@@ -259,7 +259,7 @@ export function SuperAdminBrandsView() {
                       <div className="flex items-center justify-end gap-2">
                         <button
                           onClick={() => handleOpenEditModal(brand)}
-                          className="p-1.5 rounded-lg text-slate-500 hover:text-orange-600 hover:bg-orange-100 transition-colors cursor-pointer"
+                          className="p-1.5 rounded-lg text-slate-500 hover:text-brand hover:bg-brand-subtle transition-colors cursor-pointer"
                           title="Edit Brand"
                         >
                           <Edit3 className="w-4 h-4" />

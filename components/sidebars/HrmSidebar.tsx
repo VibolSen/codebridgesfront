@@ -116,7 +116,7 @@ function HrmSidebarContent() {
                   href={item.href}
                   className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold transition-colors ${
                     isActive
-                      ? 'bg-[#5B4DFB] text-white shadow-xs'
+                      ? 'bg-brand text-white shadow-sm shadow-brand/25'
                       : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                   }`}
                 >
@@ -152,7 +152,7 @@ function HrmSidebarContent() {
         </div>
         <Link
           href="/launchpad"
-          className="text-[11px] font-bold text-slate-500 hover:text-[#5B4DFB] flex items-center gap-1 transition-colors shrink-0 cursor-pointer"
+          className="text-[11px] font-bold text-slate-500 hover:text-brand flex items-center gap-1 transition-colors shrink-0 cursor-pointer"
           title="Return to Launchpad"
         >
           <LayoutGrid className="w-3.5 h-3.5" />
@@ -171,7 +171,7 @@ export function HrmSidebar({ sidebarOpen }: HrmSidebarProps) {
       <Suspense
         fallback={
           <div className="p-4 text-xs text-slate-400 flex items-center gap-2">
-            <RefreshCw className="w-3.5 h-3.5 animate-spin text-[#5B4DFB]" />
+            <RefreshCw className="w-3.5 h-3.5 animate-spin text-brand" />
             <span>Loading navigation...</span>
           </div>
         }

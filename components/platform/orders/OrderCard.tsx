@@ -49,11 +49,11 @@ export function OrderCard({ order, updatingId, onUpdateStatus }: OrderCardProps)
           <Phone className="w-3.5 h-3.5 text-slate-400" />
           <span>{order.customer_phone}</span>
         </div>
-        <div className="flex items-center gap-2 font-semibold text-orange-600">
+        <div className="flex items-center gap-2 font-semibold text-brand">
           {order.delivery_type === 'delivery' ? (
-            <Truck className="w-3.5 h-3.5 text-orange-500" />
+            <Truck className="w-3.5 h-3.5 text-brand" />
           ) : (
-            <Store className="w-3.5 h-3.5 text-orange-500" />
+            <Store className="w-3.5 h-3.5 text-brand" />
           )}
           <span className="capitalize">{order.delivery_type} Fulfillment</span>
         </div>
@@ -82,7 +82,7 @@ export function OrderCard({ order, updatingId, onUpdateStatus }: OrderCardProps)
       <div className="pt-3 border-t border-slate-100 space-y-3">
         <div className="flex justify-between items-baseline font-extrabold text-sm text-slate-900">
           <span>Grand Total:</span>
-          <span className="text-orange-600 font-mono">${Number(order.grand_total).toFixed(2)}</span>
+          <span className="text-brand font-mono font-black">${Number(order.grand_total).toFixed(2)}</span>
         </div>
 
         {/* Fulfillment Status Progression Buttons */}
@@ -101,7 +101,7 @@ export function OrderCard({ order, updatingId, onUpdateStatus }: OrderCardProps)
             <button
               onClick={() => onUpdateStatus(order.id, 'ready')}
               disabled={updatingId === order.id}
-              className="w-full py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs shadow-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50"
+              className="w-full py-2 rounded-xl bg-brand hover:bg-brand-hover text-white font-bold text-xs shadow-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50"
             >
               <CheckCircle2 className="w-3.5 h-3.5" /> Mark Ready for {order.delivery_type === 'delivery' ? 'Delivery' : 'Pickup'}
             </button>

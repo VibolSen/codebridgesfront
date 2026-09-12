@@ -43,7 +43,7 @@ export const StoreModal: React.FC<StoreModalProps> = ({
       >
         <div className="flex items-center justify-between border-b border-slate-100 pb-3">
           <h3 className="font-extrabold text-slate-900 text-lg flex items-center gap-2">
-            <Building2 className="w-5 h-5 text-orange-500" />
+            <Building2 className="w-5 h-5 text-brand" />
             {editingStore ? 'Edit Store Location' : 'Register New Store Outlet'}
           </h3>
           <button onClick={onClose} className="text-slate-400 hover:text-slate-600">
@@ -61,7 +61,7 @@ export const StoreModal: React.FC<StoreModalProps> = ({
                 placeholder="e.g. Freshmart Toul Kork Branch"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand"
               />
             </div>
             <div>
@@ -84,7 +84,7 @@ export const StoreModal: React.FC<StoreModalProps> = ({
                 placeholder="e.g. +855 12 345 678"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand"
               />
             </div>
             <div>
@@ -94,7 +94,7 @@ export const StoreModal: React.FC<StoreModalProps> = ({
                 placeholder="e.g. St 598, Phnom Penh"
                 value={formData.address}
                 onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand"
               />
             </div>
           </div>
@@ -106,7 +106,7 @@ export const StoreModal: React.FC<StoreModalProps> = ({
                 type="text"
                 value={formData.receipt_header}
                 onChange={(e) => setFormData({ ...formData, receipt_header: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 font-mono text-[11px]"
+                className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand font-mono text-[11px]"
               />
             </div>
             <div>
@@ -115,7 +115,7 @@ export const StoreModal: React.FC<StoreModalProps> = ({
                 type="text"
                 value={formData.receipt_footer}
                 onChange={(e) => setFormData({ ...formData, receipt_footer: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 font-mono text-[11px]"
+                className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand font-mono text-[11px]"
               />
             </div>
           </div>
@@ -131,7 +131,7 @@ export const StoreModal: React.FC<StoreModalProps> = ({
             <button
               type="submit"
               disabled={saving}
-              className="px-5 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold shadow-md shadow-orange-500/20"
+              className="px-5 py-2 rounded-xl bg-brand hover:bg-brand-hover text-white font-bold shadow-md shadow-brand/20"
             >
               {saving ? 'Saving...' : editingStore ? 'Update Store' : 'Create Store'}
             </button>

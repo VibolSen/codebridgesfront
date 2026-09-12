@@ -20,7 +20,7 @@ export function TaxReportTab({ taxData }: TaxReportTabProps) {
         </div>
         <div className="p-5 bg-white border border-slate-200 rounded-2xl shadow-xs space-y-1">
           <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">10% VAT Collected (USD)</span>
-          <p className="text-3xl font-black text-orange-600 font-mono">
+          <p className="text-3xl font-black text-brand font-mono">
             ${taxData.vat_collected_usd?.toFixed(2) ?? '0.00'}
           </p>
         </div>
@@ -33,7 +33,7 @@ export function TaxReportTab({ taxData }: TaxReportTabProps) {
       </div>
 
       <div className="p-6 bg-slate-900 text-white rounded-2xl space-y-3 shadow-lg">
-        <h3 className="font-bold text-sm text-orange-400 uppercase tracking-wider">Official Tax Settlement Summary</h3>
+        <h3 className="font-bold text-sm text-brand uppercase tracking-wider">Official Tax Settlement Summary</h3>
         <div className="grid grid-cols-2 gap-4 text-xs font-mono">
           <div>
             <p className="text-slate-400">VAT Rate Applied:</p>
@@ -45,7 +45,7 @@ export function TaxReportTab({ taxData }: TaxReportTabProps) {
           </div>
           <div>
             <p className="text-slate-400">VAT Payable KHR:</p>
-            <p className="font-bold text-base text-orange-400">
+            <p className="font-bold text-base text-brand">
               ៛{taxData.vat_collected_khr?.toLocaleString() ?? '0'}
             </p>
           </div>

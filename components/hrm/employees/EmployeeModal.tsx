@@ -50,7 +50,7 @@ export const EmployeeModal: React.FC<EmployeeModalProps> = ({
       >
         <div className="flex items-center justify-between border-b border-slate-100 pb-3">
           <h3 className="font-extrabold text-slate-900 text-base flex items-center gap-2">
-            <Briefcase className="w-5 h-5 text-orange-500" />
+            <Briefcase className="w-5 h-5 text-brand" />
             {editingEmployee ? 'Edit Employee Record' : 'Onboard New Staff Member'}
           </h3>
           <button onClick={onClose} className="text-slate-400 hover:text-slate-600">
@@ -67,7 +67,7 @@ export const EmployeeModal: React.FC<EmployeeModalProps> = ({
                 required
                 value={formData.first_name}
                 onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
-                className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
               />
             </div>
             <div>
@@ -77,7 +77,7 @@ export const EmployeeModal: React.FC<EmployeeModalProps> = ({
                 required
                 value={formData.last_name}
                 onChange={(e) => setFormData({ ...formData, last_name: e.target.value })}
-                className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
               />
             </div>
           </div>
@@ -89,7 +89,7 @@ export const EmployeeModal: React.FC<EmployeeModalProps> = ({
                 type="email"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
               />
             </div>
             <div>
@@ -98,7 +98,7 @@ export const EmployeeModal: React.FC<EmployeeModalProps> = ({
                 type="text"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
               />
             </div>
           </div>
@@ -109,7 +109,7 @@ export const EmployeeModal: React.FC<EmployeeModalProps> = ({
               <select
                 value={formData.department_id}
                 onChange={(e) => setFormData({ ...formData, department_id: e.target.value })}
-                className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
               >
                 <option value="">Select Department...</option>
                 {departments.map((d) => (
@@ -124,7 +124,7 @@ export const EmployeeModal: React.FC<EmployeeModalProps> = ({
               <select
                 value={formData.outlet_id}
                 onChange={(e) => setFormData({ ...formData, outlet_id: e.target.value })}
-                className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
               >
                 <option value="">Select Store...</option>
                 {outlets.map((o) => (
@@ -143,7 +143,7 @@ export const EmployeeModal: React.FC<EmployeeModalProps> = ({
                 type="text"
                 value={formData.designation}
                 onChange={(e) => setFormData({ ...formData, designation: e.target.value })}
-                className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
               />
             </div>
             <div>
@@ -151,7 +151,7 @@ export const EmployeeModal: React.FC<EmployeeModalProps> = ({
               <select
                 value={formData.employment_type}
                 onChange={(e) => setFormData({ ...formData, employment_type: e.target.value })}
-                className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
               >
                 <option value="Full-time">Full-time</option>
                 <option value="Part-time">Part-time</option>
@@ -164,7 +164,7 @@ export const EmployeeModal: React.FC<EmployeeModalProps> = ({
                 type="number"
                 value={formData.salary}
                 onChange={(e) => setFormData({ ...formData, salary: e.target.value })}
-                className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 font-mono"
+                className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand font-mono"
               />
             </div>
           </div>
@@ -180,7 +180,7 @@ export const EmployeeModal: React.FC<EmployeeModalProps> = ({
             <button
               type="submit"
               disabled={saving}
-              className="px-5 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold shadow-md shadow-orange-500/20"
+              className="px-5 py-2 rounded-xl bg-brand hover:bg-brand-hover active:bg-brand-active text-white font-bold shadow-md shadow-brand/20"
             >
               {saving ? 'Saving...' : editingEmployee ? 'Update Staff' : 'Onboard Staff'}
             </button>

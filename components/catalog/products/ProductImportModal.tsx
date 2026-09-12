@@ -76,7 +76,7 @@ export function ProductImportModal({
                   importTab === 'file' ? 'bg-white text-slate-900 shadow-xs' : 'hover:text-slate-900'
                 }`}
               >
-                <UploadCloud className="w-3.5 h-3.5 text-orange-500" />
+                <UploadCloud className="w-3.5 h-3.5 text-brand" />
                 Excel / CSV File
               </button>
 
@@ -97,7 +97,7 @@ export function ProductImportModal({
               onClick={onDownloadTemplate}
               className="px-3 py-1.5 rounded-xl border border-slate-200 text-slate-700 font-bold hover:bg-slate-100 transition-colors flex items-center gap-1.5 self-start sm:self-auto cursor-pointer"
             >
-              <Download className="w-3.5 h-3.5 text-orange-500" />
+              <Download className="w-3.5 h-3.5 text-brand" />
               Download Template (.csv)
             </button>
           </div>
@@ -105,7 +105,7 @@ export function ProductImportModal({
           {/* File Upload */}
           {importTab === 'file' && (
             <div className="space-y-3">
-              <div className="border-2 border-dashed border-slate-200 hover:border-orange-400 rounded-2xl p-6 text-center transition-colors bg-slate-50/50 relative">
+              <div className="border-2 border-dashed border-slate-200 hover:border-brand/40 rounded-2xl p-6 text-center transition-colors bg-slate-50/50 relative">
                 <UploadCloud className="w-8 h-8 text-slate-400 mx-auto mb-2" />
                 <p className="font-bold text-slate-800 text-xs mb-1">Click to upload or drag &amp; drop file</p>
                 <p className="text-[11px] text-slate-400">Supports .csv, .xlsx, .xls</p>
@@ -214,7 +214,7 @@ export function ProductImportModal({
               type="button"
               disabled={importing || parsedRows.length === 0}
               onClick={onExecuteImport}
-              className="px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold shadow-md shadow-orange-600/20 disabled:opacity-50 transition-colors flex items-center gap-1.5 cursor-pointer"
+              className="px-4 py-2 rounded-xl bg-brand hover:bg-brand-hover active:bg-brand-active text-white font-bold shadow-md shadow-brand/20 disabled:opacity-50 transition-colors flex items-center gap-1.5 cursor-pointer"
             >
               <RefreshCw className={`w-4 h-4 ${importing ? 'animate-spin' : ''}`} />
               <span>Confirm &amp; Import</span>

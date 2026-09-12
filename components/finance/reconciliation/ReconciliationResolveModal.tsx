@@ -64,7 +64,7 @@ export function ReconciliationResolveModal({
               placeholder="Enter audit notes (e.g. Verified with bank statement #BS-902, amount adjusted)..."
               value={resolutionNotes}
               onChange={(e) => setResolutionNotes(e.target.value)}
-              className="w-full p-3 bg-slate-100 border border-slate-200 rounded-xl text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              className="w-full p-3 bg-slate-100 border border-slate-200 rounded-xl text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
             />
           </div>
 

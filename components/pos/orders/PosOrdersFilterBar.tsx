@@ -30,7 +30,7 @@ export function PosOrdersFilterBar({
           placeholder="Search receipts by invoice #, customer name, cashier..."
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="w-full pl-9 pr-4 py-2 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
+          className="w-full pl-9 pr-4 py-2 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all"
         />
       </div>
 
@@ -43,7 +43,7 @@ export function PosOrdersFilterBar({
             onClick={() => onFilterTenderChange(t)}
             className={`px-3 py-1.5 rounded-xl text-xs font-bold capitalize transition-all cursor-pointer whitespace-nowrap ${
               filterTender === t
-                ? 'bg-orange-500 text-white shadow-xs font-black'
+                ? 'bg-brand text-white shadow-xs shadow-brand/20 font-black'
                 : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200/80'
             }`}
           >
@@ -56,7 +56,7 @@ export function PosOrdersFilterBar({
           onClick={onOpenReturnModal}
           className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 font-extrabold text-xs shadow-2xs transition-colors flex items-center gap-1 cursor-pointer shrink-0 ml-1"
         >
-          <RotateCcw className="w-3.5 h-3.5 text-orange-500" />
+          <RotateCcw className="w-3.5 h-3.5 text-brand" />
           <span>Return</span>
         </button>
       </div>

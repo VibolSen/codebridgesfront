@@ -22,7 +22,7 @@ export function SuppliersDirectoryTable({
         </div>
         <Link
           href="/super-admin/crm/suppliers"
-          className="px-3.5 py-1.5 bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white rounded-xl font-bold text-xs shadow-xs transition-colors flex items-center gap-1.5"
+          className="px-3.5 py-1.5 bg-brand hover:bg-brand-hover text-white rounded-xl font-bold text-xs shadow-xs transition-colors flex items-center gap-1.5"
         >
           <Plus className="w-3.5 h-3.5" />
           <span>Manage Suppliers</span>
@@ -44,7 +44,7 @@ export function SuppliersDirectoryTable({
             {loading ? (
               <tr>
                 <td colSpan={5} className="py-8 text-center text-slate-400 font-medium">
-                  <Loader2 className="w-5 h-5 animate-spin mx-auto text-[#5B4DFB] mb-1" />
+                  <Loader2 className="w-5 h-5 animate-spin mx-auto text-brand mb-1" />
                   Loading live suppliers directory...
                 </td>
               </tr>
@@ -60,7 +60,7 @@ export function SuppliersDirectoryTable({
                   <td className="px-4 py-3 font-extrabold text-slate-900">{s.name}</td>
                   <td className="px-4 py-3 font-semibold text-slate-800">{s.contact_person || s.contact || 'Main Contact'}</td>
                   <td className="px-4 py-3 text-slate-500 font-mono">{s.phone || s.email || 'N/A'}</td>
-                  <td className="px-4 py-3 font-bold text-[#5B4DFB]">{s.lead_time || s.leadTime || '2-3 days'}</td>
+                  <td className="px-4 py-3 font-bold text-brand">{s.lead_time || s.leadTime || '2-3 days'}</td>
                   <td className="px-4 py-3 text-right font-bold text-amber-600">{s.rating || '5.0 ★'}</td>
                 </tr>
               ))

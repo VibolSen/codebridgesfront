@@ -62,7 +62,7 @@ export function RevealApiKeyModal({
             />
             <button
               onClick={() => onCopy(newKeyData.key)}
-              className="px-4 py-3 rounded-xl bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold flex items-center gap-1.5 shadow-md transition-all cursor-pointer"
+              className="px-4 py-3 rounded-xl bg-brand hover:bg-brand-hover text-white text-xs font-bold flex items-center gap-1.5 shadow-md shadow-brand/20 transition-all cursor-pointer"
             >
               {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
               <span>{copied ? 'Copied!' : 'Copy'}</span>

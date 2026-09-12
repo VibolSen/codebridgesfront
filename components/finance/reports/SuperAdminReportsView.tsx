@@ -64,7 +64,7 @@ export function SuperAdminReportsView() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2.5">
-            <BarChart3 className="w-7 h-7 text-orange-500" />
+            <BarChart3 className="w-7 h-7 text-brand" />
             Financial Reports &amp; Analytics Hub
           </h1>
           <p className="text-xs text-slate-500 mt-1">
@@ -76,7 +76,7 @@ export function SuperAdminReportsView() {
           onClick={handleExportCsv}
           className="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-black text-white font-bold text-xs shadow-md transition-all flex items-center gap-2 cursor-pointer"
         >
-          <Download className="w-4 h-4 text-orange-400" />
+          <Download className="w-4 h-4 text-brand" />
           Export {activeTab.toUpperCase()} Report (CSV)
         </button>
       </div>
@@ -87,7 +87,7 @@ export function SuperAdminReportsView() {
           onClick={() => setActiveTab('sales')}
           className={`flex-1 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer ${
             activeTab === 'sales'
-              ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20'
+              ? 'bg-brand text-white shadow-md shadow-brand/20'
               : 'text-slate-600 hover:bg-slate-50'
           }`}
         >
@@ -97,7 +97,7 @@ export function SuperAdminReportsView() {
           onClick={() => setActiveTab('shifts')}
           className={`flex-1 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer ${
             activeTab === 'shifts'
-              ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20'
+              ? 'bg-brand text-white shadow-md shadow-brand/20'
               : 'text-slate-600 hover:bg-slate-50'
           }`}
         >
@@ -107,7 +107,7 @@ export function SuperAdminReportsView() {
           onClick={() => setActiveTab('tax')}
           className={`flex-1 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer ${
             activeTab === 'tax'
-              ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20'
+              ? 'bg-brand text-white shadow-md shadow-brand/20'
               : 'text-slate-600 hover:bg-slate-50'
           }`}
         >
@@ -118,7 +118,7 @@ export function SuperAdminReportsView() {
       {/* Main Tab Content */}
       {loading ? (
         <div className="py-24 text-center text-slate-400 space-y-2 bg-white rounded-2xl border border-slate-200">
-          <RefreshCw className="w-8 h-8 animate-spin mx-auto text-orange-500" />
+          <RefreshCw className="w-8 h-8 animate-spin mx-auto text-brand" />
           <p className="text-xs font-semibold">Generating analytics &amp; financial metrics...</p>
         </div>
       ) : (

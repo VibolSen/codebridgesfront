@@ -3,16 +3,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import {
-  Building2,
-  Bell,
-  User,
-  LogOut,
-  ChevronDown,
-  ShieldCheck,
-  Menu,
-} from 'lucide-react';
+import { User, Menu } from 'lucide-react';
 import { getAuthUser, logoutApi, getRoleDisplayName } from '@/lib/api';
+import { AppIcons } from '@/components/ui/icons';
+import { badgeStyles } from '@/lib/theme';
 
 interface ModuleSuiteHeaderProps {
   currentModuleId: 'pos' | 'crm' | 'hrm' | 'accounting' | 'inventory';
@@ -72,7 +66,7 @@ export function ModuleSuiteHeader({
       // Ignore
     }
     localStorage.clear();
-    router.push('/CodeBridgesOnboardingLaunchpad');
+    router.push('/launchpad');
   };
 
   return (
@@ -90,9 +84,9 @@ export function ModuleSuiteHeader({
         )}
 
         {/* Current Module Pill */}
-        <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-orange-50 border border-orange-200/80 shadow-2xs">
-          <ModuleIcon className="w-4 h-4 text-orange-600" />
-          <span className="font-extrabold text-xs text-orange-950">{moduleTitle}</span>
+        <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-brand-subtle border border-brand-border shadow-2xs">
+          <ModuleIcon className="w-4 h-4 text-brand" />
+          <span className="font-extrabold text-xs text-slate-900">{moduleTitle}</span>
         </div>
       </div>
 
@@ -100,7 +94,7 @@ export function ModuleSuiteHeader({
       <div className="flex items-center gap-3">
         {/* Workspace Organization Pill */}
         <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-700">
-          <Building2 className="w-3.5 h-3.5 text-orange-500" />
+          <AppIcons.Organization className="w-3.5 h-3.5 text-brand" />
           <span className="truncate max-w-[180px]">{activeOrg}</span>
         </div>
 
@@ -109,8 +103,8 @@ export function ModuleSuiteHeader({
           className="relative p-2 rounded-xl hover:bg-slate-100 text-slate-500 hover:text-slate-900 transition-colors cursor-pointer"
           title="Notifications"
         >
-          <Bell className="w-4 h-4" />
-          <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-orange-500" />
+          <AppIcons.Bell className="w-4 h-4" />
+          <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-brand" />
         </button>
 
         {/* User Profile Pill & Menu */}
@@ -119,13 +113,13 @@ export function ModuleSuiteHeader({
             onClick={() => setUserMenuOpen(!userMenuOpen)}
             className="flex items-center gap-2 p-1.5 rounded-xl hover:bg-slate-100 border border-slate-200 transition-all text-xs cursor-pointer"
           >
-            <div className="w-6 h-6 rounded-lg bg-orange-500 text-white flex items-center justify-center font-black text-[11px]">
+            <div className="w-6 h-6 rounded-lg bg-brand text-white flex items-center justify-center font-black text-[11px]">
               {user?.name?.[0]?.toUpperCase() || 'U'}
             </div>
             <span className="font-bold text-slate-800 hidden md:inline truncate max-w-[120px]">
               {user?.name || 'User'}
             </span>
-            <ChevronDown className="w-3 h-3 text-slate-400" />
+            <AppIcons.Dropdown className="w-3 h-3 text-slate-400" />
           </button>
 
           {/* User Menu Dropdown */}
@@ -134,7 +128,7 @@ export function ModuleSuiteHeader({
               <div className="px-3 py-2 border-b border-slate-100">
                 <p className="font-extrabold text-slate-900">{user?.name || 'User'}</p>
                 <p className="text-[11px] text-slate-400 font-mono truncate">{user?.email || 'user@codebridges.io'}</p>
-                <span className="inline-block mt-1 px-2 py-0.5 rounded-md bg-orange-50 text-orange-700 text-[10px] font-extrabold uppercase border border-orange-200">
+                <span className={`inline-block mt-1 ${badgeStyles.brand}`}>
                   {getRoleDisplayName(user, activeOrg)}
                 </span>
               </div>
@@ -143,7 +137,7 @@ export function ModuleSuiteHeader({
                 <Link
                   href="/super-admin/security/profile"
                   onClick={() => setUserMenuOpen(false)}
-                  className="w-full text-left px-3 py-2 rounded-xl hover:bg-slate-50 font-semibold text-slate-700 flex items-center gap-2"
+                  className="w-full text-left px-3 py-2 rounded-xl hover:bg-slate-50 font-semibold text-slate-700 flex items-center gap-2 transition-colors"
                 >
                   <User className="w-4 h-4" />
                   <span>Profile Settings</span>
@@ -152,9 +146,9 @@ export function ModuleSuiteHeader({
                   <Link
                     href="/super-admin/dashboard"
                     onClick={() => setUserMenuOpen(false)}
-                    className="w-full text-left px-3 py-2 rounded-xl hover:bg-orange-50 font-semibold text-orange-700 flex items-center gap-2"
+                    className="w-full text-left px-3 py-2 rounded-xl hover:bg-brand-subtle font-semibold text-brand flex items-center gap-2 transition-colors"
                   >
-                    <ShieldCheck className="w-4 h-4 text-orange-600" />
+                    <AppIcons.Security className="w-4 h-4 text-brand" />
                     <span>Super Admin Console</span>
                   </Link>
                 )}
@@ -163,9 +157,9 @@ export function ModuleSuiteHeader({
               <div className="pt-1 border-t border-slate-100">
                 <button
                   onClick={handleLogout}
-                  className="w-full text-left px-3 py-2 rounded-xl hover:bg-rose-50 font-bold text-rose-600 flex items-center gap-2 cursor-pointer"
+                  className="w-full text-left px-3 py-2 rounded-xl hover:bg-rose-50 font-bold text-rose-600 flex items-center gap-2 cursor-pointer transition-colors"
                 >
-                  <LogOut className="w-4 h-4" />
+                  <AppIcons.LogOut className="w-4 h-4" />
                   <span>Sign Out</span>
                 </button>
               </div>

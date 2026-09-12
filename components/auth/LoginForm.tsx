@@ -44,7 +44,7 @@ export function LoginForm() {
       } else if (user?.role === 'super_admin') {
         router.push('/super-admin/dashboard');
       } else if (user?.role === 'cashier') {
-        router.push('/pos/terminal');
+        router.push('/pos/pos-terminal');
       } else {
         router.push('/launchpad');
       }
@@ -70,18 +70,18 @@ export function LoginForm() {
       initial={{ opacity: 0, y: 20, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
-      className="w-full max-w-md bg-white border border-slate-200/80 rounded-3xl p-8 shadow-2xl shadow-[#5B4DFB]/5 space-y-6 relative overflow-hidden"
+      className="w-full max-w-md bg-white border border-slate-200/80 rounded-3xl p-8 shadow-2xl shadow-brand/5 space-y-6 relative overflow-hidden"
     >
       {/* Top Back Link */}
       <div className="flex items-center justify-between">
         <Link
           href="/launchpad"
-          className="text-xs font-bold text-slate-500 hover:text-[#5B4DFB] flex items-center gap-1.5 transition-colors"
+          className="text-xs font-bold text-slate-500 hover:text-brand flex items-center gap-1.5 transition-colors"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           Back to Launchpad
         </Link>
-        <span className="text-[10px] font-extrabold text-[#5B4DFB] bg-purple-50 px-2 py-0.5 rounded-full border border-purple-200 uppercase tracking-widest">
+        <span className="text-[10px] font-extrabold text-brand bg-brand-subtle px-2 py-0.5 rounded-full border border-brand/20 uppercase tracking-widest">
           SSO Auth
         </span>
       </div>
@@ -92,12 +92,12 @@ export function LoginForm() {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.15, type: 'spring', stiffness: 200 }}
-          className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white p-1.5 shadow-md shadow-[#5B4DFB]/20 mb-1 border border-slate-200/80 overflow-hidden"
+          className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white p-1.5 shadow-md shadow-brand/20 mb-1 border border-slate-200/80 overflow-hidden"
         >
           <img src="/logo/Codebridge.png" alt="CodeBridges Logo" className="w-full h-full object-contain" />
         </motion.div>
         <h1 className="text-2xl font-black tracking-tight text-slate-900">
-          CodeBridges Enterprise <span className="text-[#5B4DFB]">Suite</span>
+          CodeBridges Enterprise <span className="text-brand">Suite</span>
         </h1>
         <p className="text-xs text-slate-500 font-medium">Single Sign-On authentication for POS, Inventory, HR &amp; Finance</p>
       </div>
@@ -133,7 +133,7 @@ export function LoginForm() {
             type="button"
             onClick={() => setLoginMethod('email')}
             className={`flex-1 py-1.5 rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
-              loginMethod === 'email' ? 'bg-white text-[#5B4DFB] shadow-xs font-extrabold' : 'text-slate-500 hover:text-slate-800'
+              loginMethod === 'email' ? 'bg-white text-brand shadow-xs font-extrabold' : 'text-slate-500 hover:text-slate-800'
             }`}
           >
             <Mail className="w-3.5 h-3.5" /> Email
@@ -142,7 +142,7 @@ export function LoginForm() {
             type="button"
             onClick={() => setLoginMethod('phone')}
             className={`flex-1 py-1.5 rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
-              loginMethod === 'phone' ? 'bg-white text-[#5B4DFB] shadow-xs font-extrabold' : 'text-slate-500 hover:text-slate-800'
+              loginMethod === 'phone' ? 'bg-white text-brand shadow-xs font-extrabold' : 'text-slate-500 hover:text-slate-800'
             }`}
           >
             <Phone className="w-3.5 h-3.5" /> Phone
@@ -160,7 +160,7 @@ export function LoginForm() {
             value={identifier}
             onChange={(e) => setIdentifier(e.target.value)}
             placeholder={loginMethod === 'email' ? 'user@codebridges.com' : '+855 12 345 678'}
-            className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] focus:border-transparent transition-all text-xs font-medium"
+            className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand transition-all text-xs font-medium"
           />
         </div>
 
@@ -170,7 +170,7 @@ export function LoginForm() {
               <Lock className="w-3.5 h-3.5 text-slate-400" />
               Password
             </label>
-            <span className="text-[11px] text-[#5B4DFB] font-bold hover:underline cursor-pointer">
+            <span className="text-[11px] text-brand font-bold hover:underline cursor-pointer">
               Forgot password?
             </span>
           </div>
@@ -181,7 +181,7 @@ export function LoginForm() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full px-4 py-3 pr-11 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] focus:border-transparent transition-all text-xs font-medium"
+              className="w-full px-4 py-3 pr-11 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand transition-all text-xs font-medium"
             />
             <button
               type="button"
@@ -200,7 +200,7 @@ export function LoginForm() {
               type="checkbox"
               checked={rememberMe}
               onChange={(e) => setRememberMe(e.target.checked)}
-              className="w-4 h-4 rounded-md text-[#5B4DFB] focus:ring-[#5B4DFB] border-slate-300"
+              className="w-4 h-4 rounded-md text-brand focus:ring-brand/30 border-slate-300"
             />
             <span>Remember session</span>
           </label>
@@ -211,7 +211,7 @@ export function LoginForm() {
           whileTap={{ scale: 0.98 }}
           type="submit"
           disabled={loading}
-          className="w-full py-3.5 px-4 rounded-xl bg-[#5B4DFB] hover:bg-[#4E3FE3] active:bg-[#3D30D2] text-white font-bold text-xs shadow-md shadow-[#5B4DFB]/20 transition-all disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
+          className="w-full py-3.5 px-4 rounded-xl bg-brand hover:bg-brand-hover text-white font-bold text-xs shadow-md shadow-brand/20 transition-all disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
         >
           {loading ? (
             <>
@@ -234,7 +234,7 @@ export function LoginForm() {
       <div className="pt-3 border-t border-slate-100 space-y-1.5 text-center text-xs">
         <p className="text-slate-500 font-medium">
           Don't have a staff account?{' '}
-          <Link href="/register" className="font-extrabold text-orange-600 hover:underline">
+          <Link href="/register" className="font-extrabold text-brand hover:underline">
             Register Account Here
           </Link>
         </p>

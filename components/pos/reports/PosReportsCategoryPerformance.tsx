@@ -19,7 +19,7 @@ export function PosReportsCategoryPerformance({ categories = [] }: PosReportsCat
     <div className="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-[0_2px_12px_rgba(15,23,42,0.03)] space-y-4">
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-black text-slate-900 tracking-tight flex items-center gap-2">
-          <Layers className="w-4 h-4 text-[#5B4DFB]" />
+          <Layers className="w-4 h-4 text-brand" />
           <span>Top Category Performance</span>
         </h3>
         <span className="text-[10px] font-bold text-slate-400">By Revenue Share</span>
@@ -43,7 +43,7 @@ export function PosReportsCategoryPerformance({ categories = [] }: PosReportsCat
               <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
                 <div
                   style={{ width: `${Math.min(100, Math.max(2, cat.share || 0))}%` }}
-                  className="h-full bg-[#5B4DFB] rounded-full transition-all duration-500"
+                  className="h-full bg-brand rounded-full transition-all duration-500"
                 />
               </div>
             </div>

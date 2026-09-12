@@ -87,7 +87,7 @@ export function LowStockAlertsTable() {
         <div className="flex items-center gap-2">
           <Link
             href="/super-admin/inventory/purchase-orders"
-            className="px-3.5 py-1.5 rounded-xl bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white font-extrabold text-xs shadow-xs transition-colors flex items-center gap-1.5"
+            className="px-3.5 py-1.5 rounded-xl bg-brand hover:bg-brand-hover text-white font-extrabold text-xs shadow-xs transition-colors flex items-center gap-1.5"
           >
             <ShoppingCart className="w-3.5 h-3.5" />
             <span>Generate Bulk POs</span>
@@ -111,7 +111,7 @@ export function LowStockAlertsTable() {
             {loading ? (
               <tr>
                 <td colSpan={6} className="py-8 text-center text-slate-400 font-medium">
-                  <Loader2 className="w-5 h-5 animate-spin mx-auto text-[#5B4DFB] mb-1" />
+                  <Loader2 className="w-5 h-5 animate-spin mx-auto text-brand mb-1" />
                   Checking safety stock thresholds...
                 </td>
               </tr>
@@ -145,7 +145,7 @@ export function LowStockAlertsTable() {
                   <td className="px-4 py-3 text-right">
                     <Link
                       href="/super-admin/inventory/purchase-orders"
-                      className="px-2.5 py-1 rounded-lg bg-purple-50 text-[#5B4DFB] font-extrabold text-[11px] hover:bg-purple-100 transition-colors inline-flex items-center gap-1"
+                      className="px-2.5 py-1 rounded-lg bg-brand-subtle text-brand font-extrabold text-[11px] hover:bg-brand/20 transition-colors inline-flex items-center gap-1"
                     >
                       <span>PO +{item.suggestedPo}</span>
                       <ArrowRight className="w-3 h-3" />

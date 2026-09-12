@@ -23,6 +23,7 @@ export interface PosServiceItem {
   description: string;
   href: string;
   icon: any;
+  logoUrl?: string;
   color: string;
   bgColor: string;
   badge?: string;
@@ -48,8 +49,9 @@ export const POS_INTEGRATED_SERVICES: PosServiceItem[] = [
     name: 'Cashier Register Terminal',
     category: 'Sales & Checkout',
     description: 'Fast-touch barcode scanning, dual-currency split tender (USD/KHR), cart parking & instant checkout.',
-    href: '/pos/terminal',
+    href: '/pos/pos-terminal',
     icon: Monitor,
+    logoUrl: '/module/pos.svg',
     color: 'text-orange-600',
     bgColor: 'bg-orange-100',
     badge: 'Frontline Kiosk',
@@ -61,6 +63,7 @@ export const POS_INTEGRATED_SERVICES: PosServiceItem[] = [
     description: 'Shift float balancing, safe drops, Z-reports, completed sales & return receipts ledger.',
     href: '/pos',
     icon: Store,
+    logoUrl: '/module/pos.svg',
     color: 'text-amber-600',
     bgColor: 'bg-amber-100',
     badge: 'Manager View',
@@ -72,6 +75,7 @@ export const POS_INTEGRATED_SERVICES: PosServiceItem[] = [
     description: 'Real-time multi-warehouse stock levels, low-stock safety buffers, and supplier purchase orders.',
     href: '/inventory',
     icon: Boxes,
+    logoUrl: '/module/invetory.svg',
     color: 'text-emerald-600',
     bgColor: 'bg-emerald-100',
     badge: 'Stock Ledger',
@@ -83,6 +87,7 @@ export const POS_INTEGRATED_SERVICES: PosServiceItem[] = [
     description: 'Double-entry General Ledger, daily ABA/NBC Bakong reconciliation, AR invoices & AP supplier bills.',
     href: '/financial',
     icon: DollarSign,
+    logoUrl: '/module/financial.svg',
     color: 'text-teal-600',
     bgColor: 'bg-teal-100',
     badge: 'Finance Hub',
@@ -94,6 +99,7 @@ export const POS_INTEGRATED_SERVICES: PosServiceItem[] = [
     description: 'Employee profiles, 4-digit POS register PIN quick-switch, timesheets & automated monthly payroll.',
     href: '/hrm',
     icon: Users,
+    logoUrl: '/module/hr.svg',
     color: 'text-blue-600',
     bgColor: 'bg-blue-100',
     badge: 'Staff & PINs',
@@ -160,6 +166,7 @@ export interface CatalogModule {
   description: string;
   bgPill: string;
   icon: any;
+  logoUrl?: string;
   href: string;
   isCore?: boolean;
 }
@@ -171,10 +178,22 @@ export const CATALOG_MODULES: CatalogModule[] = [
     monogram: 'POS',
     category: 'Core Commerce & Operations',
     description: 'Unified Cashier Terminal, Till Shifts & Float Auditing, Multi-Warehouse Stock, Kitchen Display (KDS) & Customer Display (CFD).',
-    bgPill: 'bg-purple-50 text-[#5B4DFB]',
+    bgPill: 'bg-brand-subtle text-brand',
     icon: Store,
+    logoUrl: '/module/pos.svg',
     href: '/pos/dashboard',
     isCore: false,
+  },
+  {
+    id: 'inventory-suite',
+    name: 'Inventory & Stock Logistics',
+    monogram: 'IV',
+    category: 'Supply Chain & Warehousing',
+    description: 'Real-time multi-warehouse stock levels, transfers, safety buffers, supplier purchase orders, and stocktakes.',
+    bgPill: 'bg-emerald-50 text-emerald-700',
+    icon: Boxes,
+    logoUrl: '/module/invetory.svg',
+    href: '/inventory',
   },
   {
     id: 'staff-hrm',
@@ -184,6 +203,7 @@ export const CATALOG_MODULES: CatalogModule[] = [
     description: 'Staff headcount directory, 4-digit POS register PIN quick-switch, timesheets, and payroll.',
     bgPill: 'bg-rose-50 text-rose-600',
     icon: Users,
+    logoUrl: '/module/hr.svg',
     href: '/hrm',
   },
   {
@@ -204,6 +224,7 @@ export const CATALOG_MODULES: CatalogModule[] = [
     description: 'General Ledger, Chart of Accounts (COA), Accounts Receivable (AR), Accounts Payable (AP), bank reconciliations, and P&L.',
     bgPill: 'bg-emerald-50 text-emerald-700',
     icon: DollarSign,
+    logoUrl: '/module/financial.svg',
     href: '/financial',
   },
   {
@@ -214,6 +235,7 @@ export const CATALOG_MODULES: CatalogModule[] = [
     description: 'Automate recurring customer invoices, subscription quotas, and failed payment retry webhooks.',
     bgPill: 'bg-slate-100 text-slate-900',
     icon: Zap,
+    logoUrl: '/module/subscription.svg',
     href: '/super-admin/finance/billing',
   },
   {

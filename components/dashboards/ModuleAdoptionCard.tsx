@@ -39,7 +39,7 @@ export function ModuleAdoptionCard({ moduleStats, isLoading = false }: ModuleAdo
       <div>
         <div className="flex items-center justify-between pb-3 border-b border-slate-100">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-[#F5F3FF] text-[#5B4DFB] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-xl bg-brand-subtle text-brand flex items-center justify-center">
               <Layers className="w-4 h-4" />
             </div>
             <div>
@@ -49,7 +49,7 @@ export function ModuleAdoptionCard({ moduleStats, isLoading = false }: ModuleAdo
           </div>
           <Link
             href="/super-admin/platform/modules"
-            className="text-xs font-extrabold text-[#5B4DFB] hover:text-[#4E3FE3] transition-colors"
+            className="text-xs font-extrabold text-brand hover:text-brand-hover transition-colors"
           >
             Registry →
           </Link>
@@ -90,7 +90,7 @@ export function ModuleAdoptionCard({ moduleStats, isLoading = false }: ModuleAdo
 
       <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400 font-medium">
         <span>Provisioned via tenant policy</span>
-        <span className="font-bold text-[#5B4DFB]">Instant Multi-Tenant</span>
+        <span className="font-bold text-brand">Instant Multi-Tenant</span>
       </div>
     </div>
   );

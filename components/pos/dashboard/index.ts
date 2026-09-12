@@ -1,6 +1,5 @@
-export * from '@/components/dashboards/OrganizationDashboard';
+export * from '@/components/dashboards/POSDashboard';
 export * from './DashboardHeroBanner';
-export * from './EcosystemHubGrid';
 export * from './DashboardOfflineBanner';
 export * from './OpenShiftModal';
 export * from './CloseShiftModal';

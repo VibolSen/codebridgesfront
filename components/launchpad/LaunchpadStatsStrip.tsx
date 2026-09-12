@@ -1,7 +1,9 @@
 'use client';
 
 import React from 'react';
-import { Users, Layers, Activity, TrendingUp } from 'lucide-react';
+import { TrendingUp } from 'lucide-react';
+import { AppIcons } from '@/components/ui/icons';
+import { cardStyles } from '@/lib/theme';
 
 interface LaunchpadStatsStripProps {
   staffCount: number;
@@ -19,11 +21,11 @@ export function LaunchpadStatsStrip({
   outletsCount,
 }: LaunchpadStatsStripProps) {
   return (
-    <div className="bg-white rounded-3xl border border-slate-200/80 p-5 shadow-[0_2px_12px_rgba(15,23,42,0.03)] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
+    <div className={`${cardStyles.base} p-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 divide-y sm:divide-y-0 sm:divide-x divide-slate-100`}>
       {/* Stat 1: Members */}
       <div className="space-y-1 sm:px-3 first:pl-0">
         <div className="flex items-center gap-1.5 text-slate-400 text-xs font-bold">
-          <Users className="w-3.5 h-3.5" />
+          <AppIcons.Staff className="w-3.5 h-3.5" />
           <span>Total Headcount</span>
         </div>
         <p className="text-2xl font-black text-slate-900 font-mono">{staffCount}</p>
@@ -34,11 +36,11 @@ export function LaunchpadStatsStrip({
 
       {/* Stat 2: Active Modules */}
       <div className="space-y-1 sm:px-4 pt-4 sm:pt-0">
-        <div className="flex items-center gap-1.5 text-blue-600 text-xs font-bold">
-          <Layers className="w-3.5 h-3.5" />
+        <div className="flex items-center gap-1.5 text-brand text-xs font-bold">
+          <AppIcons.Layers className="w-3.5 h-3.5" />
           <span>Enabled Services</span>
         </div>
-        <p className="text-2xl font-black text-blue-600 font-mono">{enabledModulesCount}</p>
+        <p className="text-2xl font-black text-brand font-mono">{enabledModulesCount}</p>
         <p className="text-[11px] text-slate-400 font-medium">
           {enabledModulesCount} of {totalModulesCount} platform services active
         </p>
@@ -47,7 +49,7 @@ export function LaunchpadStatsStrip({
       {/* Stat 3: Active Shift Status */}
       <div className="space-y-1 sm:px-4 pt-4 sm:pt-0">
         <div className="flex items-center gap-1.5 text-amber-600 text-xs font-bold">
-          <Activity className="w-3.5 h-3.5" />
+          <AppIcons.Infrastructure className="w-3.5 h-3.5" />
           <span>Register Shift Status</span>
         </div>
         <div className="flex items-baseline gap-2">

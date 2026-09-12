@@ -67,14 +67,14 @@ export function CategoryTable({
                 initial="hidden"
                 animate="visible"
                 variants={cardVariants}
-                className="hover:bg-orange-50/50 transition-colors"
+                className="hover:bg-brand-subtle/40 transition-colors"
               >
                 <td className="py-3.5 px-4 font-bold text-slate-900">
                   <div className="flex items-center gap-2">
                     {isSub ? (
                       <Layers className="w-4 h-4 text-indigo-500 shrink-0" />
                     ) : (
-                      <Tag className="w-4 h-4 text-orange-500 shrink-0" />
+                      <Tag className="w-4 h-4 text-brand shrink-0" />
                     )}
                     <span>{cat.name}</span>
                   </div>
@@ -90,7 +90,7 @@ export function CategoryTable({
                       Sub-Category of {cat.parent_name}
                     </span>
                   ) : (
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-orange-50 text-orange-700 border border-orange-200">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-brand-subtle text-brand border border-brand/20">
                       Main Category
                     </span>
                   )}
@@ -104,7 +104,7 @@ export function CategoryTable({
                   <div className="flex items-center justify-end gap-2">
                     <button
                       onClick={() => onEdit(cat)}
-                      className="p-1.5 rounded-lg text-slate-500 hover:text-orange-600 hover:bg-orange-100 transition-colors cursor-pointer"
+                      className="p-1.5 rounded-lg text-slate-500 hover:text-brand hover:bg-brand-subtle transition-colors cursor-pointer"
                       title="Edit Category"
                     >
                       <Edit3 className="w-4 h-4" />

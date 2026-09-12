@@ -140,7 +140,7 @@ export function PosHoldCartModal({
                           onResumeCart(item.id);
                           onClose();
                         }}
-                        className="px-2.5 py-1 rounded-lg bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold flex items-center gap-1 shadow-2xs transition-colors cursor-pointer"
+                        className="px-2.5 py-1 rounded-lg bg-brand hover:bg-brand-hover text-white text-xs font-bold flex items-center gap-1 shadow-2xs transition-colors cursor-pointer"
                       >
                         <PlayCircle className="w-3 h-3" />
                         <span>Resume</span>

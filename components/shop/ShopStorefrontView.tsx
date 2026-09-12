@@ -139,12 +139,12 @@ export const ShopStorefrontView: React.FC = () => {
       {/* Top E-Commerce Header */}
       <header className="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-md border-b border-slate-800 px-6 py-4 flex items-center justify-between shadow-lg">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center font-black text-white text-lg shadow-lg shadow-orange-500/30">
-            F
+          <div className="w-10 h-10 rounded-xl bg-brand flex items-center justify-center font-black text-white text-lg shadow-lg shadow-brand/20">
+            CB
           </div>
           <div>
-            <h1 className="font-black text-base tracking-tight text-white flex items-center gap-1.5">
-              Freshmart Online Storefront <Sparkles className="w-4 h-4 text-orange-400" />
+            <h1 className="text-xl font-black text-white tracking-tight flex items-center gap-2">
+              Freshmart Online Storefront <Sparkles className="w-4 h-4 text-brand" />
             </h1>
             <p className="text-[11px] text-slate-400">Order Online • Express Delivery or Store Pickup</p>
           </div>
@@ -153,12 +153,12 @@ export const ShopStorefrontView: React.FC = () => {
         {/* Cart Drawer Trigger */}
         <button
           onClick={() => setShowCartDrawer(true)}
-          className="relative px-4 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs shadow-md shadow-orange-500/30 transition-all flex items-center gap-2"
+          className="relative px-4 py-2 rounded-xl bg-brand hover:bg-brand-hover text-white font-bold text-xs shadow-md shadow-brand/20 transition-all flex items-center gap-2"
         >
           <ShoppingBag className="w-4 h-4" />
-          <span>Cart</span>
+          <span>My Cart</span>
           {cartTotalItems > 0 && (
-            <span className="w-5 h-5 rounded-full bg-white text-orange-600 font-extrabold text-[10px] flex items-center justify-center">
+            <span className="w-5 h-5 rounded-full bg-white text-brand font-extrabold text-[10px] flex items-center justify-center">
               {cartTotalItems}
             </span>
           )}

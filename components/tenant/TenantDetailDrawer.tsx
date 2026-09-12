@@ -26,11 +26,11 @@ interface TenantDetailDrawerProps {
 }
 
 const AVAILABLE_MODULES = [
-  { id: 'pos', name: 'Point of Sale (POS)', icon: Monitor, color: 'bg-[#F5F3FF] text-[#7C3AED]' },
-  { id: 'inventory', name: 'Stock & Inventory', icon: Boxes, color: 'bg-[#FFFBEB] text-[#D97706]' },
-  { id: 'finance', name: 'Finance & Accounts', icon: DollarSign, color: 'bg-[#ECFDF5] text-[#059669]' },
-  { id: 'hrm', name: 'HR & Workforce', icon: Briefcase, color: 'bg-[#FFF1F2] text-[#E11D48]' },
-  { id: 'crm', name: 'CRM & Pipeline', icon: Users, color: 'bg-[#EFF6FF] text-[#2563EB]' },
+  { id: 'pos', name: 'Point of Sale (POS)', icon: Monitor, color: 'bg-brand-subtle text-brand' },
+  { id: 'inventory', name: 'Stock & Inventory', icon: Boxes, color: 'bg-amber-50 text-amber-600' },
+  { id: 'finance', name: 'Finance & Accounts', icon: DollarSign, color: 'bg-emerald-50 text-emerald-600' },
+  { id: 'hrm', name: 'HR & Workforce', icon: Briefcase, color: 'bg-rose-50 text-rose-600' },
+  { id: 'crm', name: 'CRM & Pipeline', icon: Users, color: 'bg-blue-50 text-blue-600' },
   { id: 'shop', name: 'E-Commerce Storefront', icon: ShoppingBag, color: 'bg-rose-50 text-rose-600' },
 ];
 
@@ -77,9 +77,9 @@ export function TenantDetailDrawer({
           className="relative w-full max-w-xl bg-white h-full shadow-2xl border-l border-slate-200 flex flex-col z-10 overflow-y-auto"
         >
           {/* Drawer Header */}
-          <div className="p-6 border-b border-slate-100 bg-gradient-to-r from-[#F5F3FF] via-white to-slate-50 flex items-center justify-between">
+          <div className="p-6 border-b border-slate-100 bg-gradient-to-r from-brand-subtle via-white to-slate-50 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-2xl bg-[#5B4DFB] text-white flex items-center justify-center shadow-md shadow-[#5B4DFB]/20 font-black">
+              <div className="w-11 h-11 rounded-2xl bg-brand text-white flex items-center justify-center shadow-md shadow-brand/20 font-black">
                 <Building2 className="w-6 h-6" />
               </div>
               <div>
@@ -104,10 +104,10 @@ export function TenantDetailDrawer({
           {/* Drawer Body */}
           <div className="p-6 space-y-6 flex-1">
             {/* Action Bar: Impersonation Trigger */}
-            <div className="p-4 rounded-2xl bg-[#F5F3FF] border border-[#DDD6FE] flex items-center justify-between">
+            <div className="p-4 rounded-2xl bg-brand-subtle border border-brand/20 flex items-center justify-between">
               <div className="space-y-0.5">
-                <div className="flex items-center gap-1.5 font-extrabold text-xs text-[#5B4DFB]">
-                  <LogIn className="w-4 h-4 text-[#5B4DFB]" />
+                <div className="flex items-center gap-1.5 font-extrabold text-xs text-brand">
+                  <LogIn className="w-4 h-4 text-brand" />
                   <span>Audited Account Impersonation</span>
                 </div>
                 <p className="text-[11px] text-slate-600 font-medium leading-relaxed">
@@ -116,7 +116,7 @@ export function TenantDetailDrawer({
               </div>
               <button
                 onClick={() => onImpersonate(tenant)}
-                className="px-4 py-2 rounded-xl bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white font-extrabold text-xs shadow-md shadow-[#5B4DFB]/20 transition-all shrink-0 cursor-pointer"
+                className="px-4 py-2 rounded-xl bg-brand hover:bg-brand-hover text-white font-extrabold text-xs shadow-md shadow-brand/20 transition-all shrink-0 cursor-pointer"
               >
                 Login as Tenant →
               </button>
@@ -154,7 +154,7 @@ export function TenantDetailDrawer({
                 {onEditQuotas && (
                   <button
                     onClick={() => onEditQuotas(tenant)}
-                    className="text-[11px] font-bold text-[#5B4DFB] hover:text-[#4E3FE3] cursor-pointer"
+                    className="text-[11px] font-bold text-brand hover:text-brand-hover cursor-pointer"
                   >
                     Adjust Limits
                   </button>
@@ -193,7 +193,7 @@ export function TenantDetailDrawer({
                       onClick={() => handleModuleClick(mod.id)}
                       className={`p-3 rounded-xl border text-left transition-all flex items-center justify-between cursor-pointer ${
                         isEnabled
-                          ? 'border-[#DDD6FE] bg-[#F5F3FF]/70 shadow-xs ring-1 ring-[#5B4DFB]/30'
+                          ? 'border-brand/30 bg-brand-subtle/70 shadow-xs ring-1 ring-brand/30'
                           : 'border-slate-200 bg-slate-50/50 hover:bg-slate-50 opacity-70'
                       }`}
                     >
@@ -206,7 +206,7 @@ export function TenantDetailDrawer({
                       <div
                         className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ${
                           isEnabled
-                            ? 'bg-[#5B4DFB] border-[#5B4DFB] text-white'
+                            ? 'bg-brand border-brand text-white'
                             : 'border-slate-300 bg-white'
                         }`}
                       >
@@ -229,7 +229,7 @@ export function TenantDetailDrawer({
             </button>
             <button
               onClick={() => onImpersonate(tenant)}
-              className="px-5 py-2 rounded-xl bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white font-extrabold text-xs shadow-md shadow-[#5B4DFB]/20 transition-all flex items-center gap-1.5 cursor-pointer"
+              className="px-5 py-2 rounded-xl bg-brand hover:bg-brand-hover text-white font-extrabold text-xs shadow-md shadow-brand/20 transition-all flex items-center gap-1.5 cursor-pointer"
             >
               <span>Impersonate Tenant</span>
               <ExternalLink className="w-3.5 h-3.5" />

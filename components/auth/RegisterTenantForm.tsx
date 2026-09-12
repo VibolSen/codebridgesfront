@@ -56,7 +56,7 @@ const PLANS: PlanTier[] = [
       'ABA Bakong Reconciliation Reports',
       'Priority Support',
     ],
-    gradient: 'from-orange-500 to-amber-500',
+    gradient: 'from-brand to-brand-hover',
     cta: 'Start 14-Day Free Trial',
   },
   {
@@ -210,7 +210,7 @@ export function RegisterTenantForm() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 selection:bg-orange-500 selection:text-white font-sans">
+    <div className="min-h-screen bg-canvas text-slate-900 selection:bg-brand selection:text-white font-sans">
       <TenantSetupHeader
         currentUser={currentUser}
         backUrl="/launchpad"

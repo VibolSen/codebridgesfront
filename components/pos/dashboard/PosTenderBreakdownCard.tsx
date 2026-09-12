@@ -24,7 +24,7 @@ export function PosTenderBreakdownCard({ kpis }: PosTenderBreakdownCardProps) {
       <div>
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-purple-500 text-white flex items-center justify-center font-bold shadow-xs shadow-purple-500/20">
+            <div className="w-9 h-9 rounded-xl bg-brand text-white flex items-center justify-center font-bold shadow-xs shadow-brand/20">
               <PieChart className="w-5 h-5" />
             </div>
             <div>
@@ -51,7 +51,7 @@ export function PosTenderBreakdownCard({ kpis }: PosTenderBreakdownCardProps) {
           />
           <div
             style={{ width: `${khqrPct}%` }}
-            className="bg-orange-500 transition-all duration-500"
+            className="bg-brand transition-all duration-500"
             title={`ABA KHQR: ${khqrPct}%`}
           />
           <div
@@ -78,7 +78,7 @@ export function PosTenderBreakdownCard({ kpis }: PosTenderBreakdownCardProps) {
 
           <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-100">
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-lg bg-orange-100 text-orange-700 flex items-center justify-center">
+              <div className="w-6 h-6 rounded-lg bg-brand-subtle text-brand flex items-center justify-center">
                 <QrCode className="w-3.5 h-3.5" />
               </div>
               <span className="font-bold text-slate-700">ABA KHQR Pay</span>

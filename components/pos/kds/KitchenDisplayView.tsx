@@ -40,7 +40,7 @@ export function KitchenDisplayView() {
       <div className="bg-white p-6 rounded-3xl border border-slate-200/90 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-xl sm:text-2xl font-black tracking-tight text-slate-900 flex items-center gap-3">
-            <ChefHat className="w-7 h-7 text-[#5B4DFB]" />
+            <ChefHat className="w-7 h-7 text-brand" />
             Kitchen Display System (KDS)
           </h1>
           <p className="text-xs text-slate-500 font-medium mt-1">
@@ -49,8 +49,8 @@ export function KitchenDisplayView() {
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="px-3.5 py-1.5 rounded-full bg-purple-50 border border-purple-200 text-[#5B4DFB] text-xs font-bold flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#5B4DFB] animate-ping" />
+          <div className="px-3.5 py-1.5 rounded-full bg-brand-subtle border border-brand/20 text-brand text-xs font-bold flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-brand animate-ping" />
             <span>{tickets.length} ACTIVE TICKETS</span>
           </div>
 
@@ -99,7 +99,7 @@ export function KitchenDisplayView() {
                 <button
                   type="button"
                   onClick={() => handleUpdateStatus(ticket.id, 'ready')}
-                  className="w-full py-2 rounded-xl bg-[#5B4DFB] hover:bg-[#4d3fe3] text-white text-xs font-black transition-colors cursor-pointer"
+                  className="w-full py-2 rounded-xl bg-brand hover:bg-brand-hover text-white text-xs font-black transition-colors cursor-pointer"
                 >
                   Mark as Ready
                 </button>

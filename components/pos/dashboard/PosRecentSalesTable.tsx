@@ -30,7 +30,7 @@ export function PosRecentSalesTable({
     switch (tender?.toLowerCase()) {
       case 'khqr':
         return (
-          <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-orange-50 text-orange-700 border border-orange-200 flex items-center gap-1">
+          <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-brand-subtle text-brand border border-brand/20 flex items-center gap-1">
             <QrCode className="w-2.5 h-2.5" />
             <span>KHQR</span>
           </span>
@@ -56,7 +56,7 @@ export function PosRecentSalesTable({
     <div className="p-6 rounded-3xl bg-white border border-slate-200/90 shadow-xs space-y-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center font-bold">
+          <div className="w-8 h-8 rounded-xl bg-brand-subtle text-brand flex items-center justify-center font-bold">
             <Receipt className="w-4 h-4" />
           </div>
           <div>
@@ -69,7 +69,7 @@ export function PosRecentSalesTable({
 
         <Link
           href="/pos/orders"
-          className="text-xs font-bold text-orange-600 hover:text-orange-700 hover:underline flex items-center gap-1"
+          className="text-xs font-bold text-brand hover:text-brand-hover hover:underline flex items-center gap-1"
         >
           <span>All Receipts</span>
           <ArrowRight className="w-3.5 h-3.5" />

@@ -97,7 +97,7 @@ export function PosOrdersManagementView() {
             Search completed checkout transactions, re-print thermal receipts, and initiate customer returns
           </p>
         </div>
-        <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-orange-50 text-orange-700 border border-orange-200 w-fit">
+        <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-brand-subtle text-brand border border-brand/20 w-fit">
           {filteredTransactions.length} Transactions
         </span>
       </div>

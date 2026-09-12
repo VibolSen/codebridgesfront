@@ -52,7 +52,7 @@ export const RoleModal: React.FC<RoleModalProps> = ({
           >
             <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
               <div className="flex items-center gap-2">
-                <span className="p-2 rounded-xl bg-orange-500/10 text-orange-600">
+                <span className="p-2 rounded-xl bg-brand-subtle text-brand">
                   <ShieldCheck className="w-4 h-4" />
                 </span>
                 <h3 className="font-extrabold text-sm text-slate-900">
@@ -78,7 +78,7 @@ export const RoleModal: React.FC<RoleModalProps> = ({
                   placeholder="e.g. Senior Shift Supervisor"
                   value={roleName}
                   onChange={(e) => setRoleName(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand"
                 />
               </div>
 
@@ -91,7 +91,7 @@ export const RoleModal: React.FC<RoleModalProps> = ({
                   placeholder="Briefly describe what duties and department this role oversees..."
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand"
                 />
               </div>
 
@@ -115,7 +115,7 @@ export const RoleModal: React.FC<RoleModalProps> = ({
                               onClick={() => onTogglePerm(p.id)}
                               className={`p-2.5 rounded-xl border text-left flex items-start justify-between gap-2 transition-all ${
                                 isChecked
-                                  ? 'bg-orange-50/70 border-orange-200 text-orange-950 font-bold'
+                                  ? 'bg-brand-subtle/70 border-brand/30 text-brand font-bold'
                                   : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
                               }`}
                             >
@@ -128,7 +128,7 @@ export const RoleModal: React.FC<RoleModalProps> = ({
                               <span
                                 className={`w-4 h-4 rounded-md flex items-center justify-center shrink-0 mt-0.5 ${
                                   isChecked
-                                    ? 'bg-orange-500 text-white'
+                                    ? 'bg-brand text-white'
                                     : 'border border-slate-300 bg-white'
                                 }`}
                               >
@@ -154,7 +154,7 @@ export const RoleModal: React.FC<RoleModalProps> = ({
                 <button
                   type="submit"
                   disabled={saving}
-                  className="px-5 py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold shadow-md shadow-orange-500/20 flex items-center gap-1.5"
+                  className="px-5 py-2.5 rounded-xl bg-brand hover:bg-brand-hover text-white font-bold shadow-md shadow-brand/20 flex items-center gap-1.5"
                 >
                   {saving ? (
                     <RefreshCw className="w-3.5 h-3.5 animate-spin" />

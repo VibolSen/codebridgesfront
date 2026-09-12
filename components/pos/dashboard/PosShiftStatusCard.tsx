@@ -115,11 +115,11 @@ export function PosShiftStatusCard({
                 </p>
               </div>
 
-              <div className="p-3 rounded-2xl bg-orange-50/60 border border-orange-100 space-y-0.5">
-                <span className="text-[10px] font-bold text-orange-700 uppercase tracking-wider">
+              <div className="p-3 rounded-2xl bg-brand-subtle/60 border border-brand/20 space-y-0.5">
+                <span className="text-[10px] font-bold text-brand uppercase tracking-wider">
                   Expected in Drawer
                 </span>
-                <p className="text-sm font-black text-orange-900">
+                <p className="text-sm font-black text-brand-strong">
                   ${(
                     parseFloat(activeShift.opening_float || 0) +
                     parseFloat(shiftSummary?.cash_sales_total || 0)
@@ -154,7 +154,7 @@ export function PosShiftStatusCard({
         ) : (
           <button
             onClick={onOpenShift}
-            className="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-extrabold text-xs shadow-md shadow-orange-500/20 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+            className="flex-1 py-2.5 rounded-xl bg-brand hover:bg-brand-hover text-white font-extrabold text-xs shadow-md shadow-brand/20 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
           >
             <span>Open New Shift</span>
             <ArrowRight className="w-3.5 h-3.5" />

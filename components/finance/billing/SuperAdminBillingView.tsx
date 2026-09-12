@@ -55,22 +55,20 @@ export function SuperAdminBillingView() {
       {/* Header */}
       <div className="bg-white p-6 rounded-3xl border border-slate-200/90 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3.5">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-orange-500 via-amber-500 to-yellow-400 p-0.5 shadow-md shadow-orange-500/15 flex items-center justify-center">
-            <div className="w-full h-full bg-white rounded-[14px] flex items-center justify-center">
-              <CreditCard className="w-6 h-6 text-orange-500" />
-            </div>
+          <div className="w-12 h-12 rounded-2xl bg-brand-subtle border border-brand/20 shadow-2xs flex items-center justify-center">
+            <CreditCard className="w-6 h-6 text-brand" />
           </div>
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-xl font-black text-slate-900 tracking-tight">
-                Subscription Plans &amp; SaaS Revenue Studio
+                Subscription Management
               </h1>
-              <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-extrabold border border-emerald-200 uppercase">
-                Revenue Engine
+              <span className="px-2.5 py-0.5 rounded-full bg-brand-subtle text-brand text-[10px] font-extrabold border border-brand/20 uppercase">
+                Subscriber Hub
               </span>
             </div>
             <p className="text-xs text-slate-500 font-medium mt-0.5">
-              Manage multi-tenant subscription tiers, outlet quotas, pricing frequencies, and recurring billing cycles.
+              Manage multi-tenant subscription tiers, storage quotas, subscriber entitlements, and recurring billing cycles.
             </p>
           </div>
         </div>
@@ -82,7 +80,7 @@ export function SuperAdminBillingView() {
             onClick={() => setBillingPeriod('monthly')}
             className={`px-4 py-2 rounded-xl transition-all cursor-pointer ${
               billingPeriod === 'monthly'
-                ? 'bg-white text-orange-600 shadow-xs'
+                ? 'bg-white text-brand shadow-xs'
                 : 'text-slate-500 hover:text-slate-800'
             }`}
           >
@@ -93,12 +91,12 @@ export function SuperAdminBillingView() {
             onClick={() => setBillingPeriod('annual')}
             className={`px-4 py-2 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 ${
               billingPeriod === 'annual'
-                ? 'bg-white text-orange-600 shadow-xs'
+                ? 'bg-white text-brand shadow-xs'
                 : 'text-slate-500 hover:text-slate-800'
             }`}
           >
             <span>Annual (2 Mo Free)</span>
-            <span className="px-1.5 py-0.5 rounded-md bg-amber-100 text-amber-800 text-[9px]">Save 17%</span>
+            <span className="px-1.5 py-0.5 rounded-md bg-brand-subtle text-brand text-[9px] font-bold border border-brand/20">Save 17%</span>
           </button>
         </div>
       </div>
@@ -106,7 +104,7 @@ export function SuperAdminBillingView() {
       {/* Subscription Plans Grid */}
       {loading ? (
         <div className="py-24 text-center bg-white rounded-3xl border border-slate-200/90 p-8 space-y-3">
-          <RefreshCw className="w-8 h-8 animate-spin mx-auto text-orange-500 mb-2" />
+          <RefreshCw className="w-8 h-8 animate-spin mx-auto text-brand mb-2" />
           <p className="text-xs font-bold text-slate-500">Loading dynamic subscription tiers from cloud database...</p>
         </div>
       ) : plans.length === 0 ? (

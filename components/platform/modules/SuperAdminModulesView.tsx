@@ -11,7 +11,7 @@ import {
   Loader2,
 } from 'lucide-react';
 import { apiFetch } from '@/lib/api';
-import { MASTER_MODULES, INITIAL_FLAGS, PlatformModule, FeatureFlag, TenantOption } from './types';
+import { MASTER_MODULES, TenantOption } from './types';
 import { ModuleRegistryTab } from './ModuleRegistryTab';
 import { TenantLicensingTab } from './TenantLicensingTab';
 import { FeatureFlagsTab } from './FeatureFlagsTab';
@@ -22,10 +22,9 @@ function ModulesViewContent() {
   const initialTab = searchParams.get('tab') || 'registry';
 
   const [activeTab, setActiveTab] = useState<string>(initialTab);
-  const [modulesList, setModulesList] = useState<PlatformModule[]>(MASTER_MODULES);
-  const [flagsList, setFlagsList] = useState<FeatureFlag[]>(INITIAL_FLAGS);
+  const modulesList = MASTER_MODULES;
 
-  // Dynamic Tenants & Entitlements State
+  // Dynamic Tenants & Entitlements State from Real API
   const [tenants, setTenants] = useState<TenantOption[]>([]);
   const [selectedTenantId, setSelectedTenantId] = useState<string>('');
   const [tenantModules, setTenantModules] = useState<string[]>([]);
@@ -50,7 +49,7 @@ function ModulesViewContent() {
     router.replace(targetUrl, { scroll: false });
   };
 
-  // Fetch real tenant list from backend
+  // Fetch real tenants list from backend API
   const loadTenants = useCallback(async () => {
     try {
       setLoadingTenants(true);
@@ -61,13 +60,14 @@ function ModulesViewContent() {
         name: t.name,
         client_tier: t.client_tier,
         company_code: t.company_code,
+        enabled_modules: t.enabled_modules,
       }));
       setTenants(formatted);
       if (formatted.length > 0 && !selectedTenantId) {
         setSelectedTenantId(formatted[0].id);
       }
     } catch {
-      showToast('Failed to load tenants list.', 'error');
+      showToast('Failed to load tenants list from API.', 'error');
     } finally {
       setLoadingTenants(false);
     }
@@ -77,7 +77,27 @@ function ModulesViewContent() {
     loadTenants();
   }, [loadTenants]);
 
-  // Fetch active module entitlements for selected tenant
+  // Dynamic adoption count computed solely from real API tenant data
+  const getAdoptionCount = useCallback((moduleId: string): number => {
+    return tenants.filter((t) => {
+      let raw = t.enabled_modules;
+      if (typeof raw === 'string') {
+        try {
+          raw = JSON.parse(raw);
+        } catch {
+          raw = [];
+        }
+      }
+      if (!Array.isArray(raw)) return false;
+      return (
+        raw.includes(moduleId) ||
+        raw.includes(`${moduleId}-management`) ||
+        raw.includes(`${moduleId}-suite`)
+      );
+    }).length;
+  }, [tenants]);
+
+  // Fetch active module entitlements for selected tenant from real API
   const loadTenantModules = useCallback(async (tenantId: string) => {
     if (!tenantId) return;
     try {
@@ -86,10 +106,10 @@ function ModulesViewContent() {
       if (res?.success && Array.isArray(res.modules)) {
         setTenantModules(res.modules);
       } else {
-        setTenantModules(['pos', 'inventory', 'finance']);
+        setTenantModules([]);
       }
     } catch {
-      setTenantModules(['pos', 'inventory', 'finance']);
+      setTenantModules([]);
     } finally {
       setLoadingModules(false);
     }
@@ -101,13 +121,7 @@ function ModulesViewContent() {
     }
   }, [selectedTenantId, loadTenantModules]);
 
-  const handleToggleDefault = (moduleId: string) => {
-    setModulesList((prev) =>
-      prev.map((m) => (m.id === moduleId ? { ...m, isDefault: !m.isDefault } : m))
-    );
-    showToast('Default registration module entitlement updated.');
-  };
-
+  // Live toggle persisted directly to backend cloud database
   const handleToggleTenantModule = async (moduleId: string) => {
     if (!selectedTenantId) return;
     const isCurrentlyActive = tenantModules.includes(moduleId);
@@ -118,7 +132,6 @@ function ModulesViewContent() {
     const currentTenant = tenants.find((t) => t.id === selectedTenantId);
     const tenantName = currentTenant?.name || 'Organization';
 
-    // Optimistic UI update
     setTenantModules(nextModules);
     setSavingModule(true);
 
@@ -133,9 +146,10 @@ function ModulesViewContent() {
 
       if (res?.success) {
         showToast(`Updated licenses for ${tenantName}: ${isCurrentlyActive ? 'revoked' : 'granted'} ${moduleId.toUpperCase()}`);
+        loadTenants();
       } else {
         setTenantModules(tenantModules);
-        showToast(res?.message || 'Failed to save module update.', 'error');
+        showToast(res?.message || 'Failed to update module on server.', 'error');
       }
     } catch (err: any) {
       setTenantModules(tenantModules);
@@ -143,13 +157,6 @@ function ModulesViewContent() {
     } finally {
       setSavingModule(false);
     }
-  };
-
-  const handleFlagStatusChange = (flagId: string, newStatus: 'enabled_all' | 'beta_only' | 'disabled') => {
-    setFlagsList((prev) =>
-      prev.map((f) => (f.id === flagId ? { ...f, status: newStatus } : f))
-    );
-    showToast('Feature flag rollout status updated.');
   };
 
   return (
@@ -172,53 +179,53 @@ function ModulesViewContent() {
       )}
 
       {/* Header */}
-      <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/90 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <div className="space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F5F3FF] text-[#5B4DFB] text-[11px] font-extrabold uppercase tracking-wider">
+      <div className="bg-white p-5 sm:p-7 rounded-3xl border border-slate-200/90 shadow-2xs flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div className="space-y-1.5">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-subtle text-brand text-[11px] font-extrabold uppercase tracking-wider">
             <Layers className="w-3.5 h-3.5" />
             <span>Platform Core Subsystems</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900">
-            Modules & Feature Flags Studio
+          <h1 className="text-xl sm:text-2xl font-black tracking-tight text-slate-900">
+            Modules &amp; Feature Flags Studio
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 font-medium leading-relaxed max-w-2xl">
-            Configure global platform module availability, grant or revoke organization licenses, and control beta feature rollouts.
+          <p className="text-xs text-slate-500 font-medium leading-relaxed max-w-2xl">
+            Live catalog of platform capabilities with server-authoritative tenant license synchronization.
           </p>
         </div>
 
         {/* Top Tab Switcher */}
-        <div className="flex p-1.5 bg-slate-100 rounded-2xl self-start text-xs font-bold gap-1 border border-slate-200/60 shadow-2xs">
+        <div className="flex p-1 bg-slate-100 rounded-2xl self-start text-xs font-bold gap-1 border border-slate-200/60 shadow-2xs">
           <button
             onClick={() => handleTabSwitch('registry')}
-            className={`px-4 py-2 rounded-xl transition-all flex items-center gap-2 cursor-pointer ${
+            className={`px-3.5 py-1.5 rounded-xl transition-all flex items-center gap-2 cursor-pointer ${
               activeTab === 'registry'
                 ? 'bg-white text-slate-900 shadow-xs ring-1 ring-slate-200/80 font-extrabold'
                 : 'text-slate-500 hover:text-slate-900 hover:bg-white/60'
             }`}
           >
-            <Layers className={`w-4 h-4 ${activeTab === 'registry' ? 'text-[#5B4DFB]' : 'text-slate-400'}`} />
+            <Layers className={`w-3.5 h-3.5 ${activeTab === 'registry' ? 'text-brand' : 'text-slate-400'}`} />
             <span>Module Registry</span>
           </button>
           <button
             onClick={() => handleTabSwitch('entitlements')}
-            className={`px-4 py-2 rounded-xl transition-all flex items-center gap-2 cursor-pointer ${
+            className={`px-3.5 py-1.5 rounded-xl transition-all flex items-center gap-2 cursor-pointer ${
               activeTab === 'entitlements'
                 ? 'bg-white text-slate-900 shadow-xs ring-1 ring-slate-200/80 font-extrabold'
                 : 'text-slate-500 hover:text-slate-900 hover:bg-white/60'
             }`}
           >
-            <Sliders className={`w-4 h-4 ${activeTab === 'entitlements' ? 'text-[#5B4DFB]' : 'text-slate-400'}`} />
+            <Sliders className={`w-3.5 h-3.5 ${activeTab === 'entitlements' ? 'text-brand' : 'text-slate-400'}`} />
             <span>Tenant Entitlements</span>
           </button>
           <button
             onClick={() => handleTabSwitch('flags')}
-            className={`px-4 py-2 rounded-xl transition-all flex items-center gap-2 cursor-pointer ${
+            className={`px-3.5 py-1.5 rounded-xl transition-all flex items-center gap-2 cursor-pointer ${
               activeTab === 'flags'
                 ? 'bg-white text-slate-900 shadow-xs ring-1 ring-slate-200/80 font-extrabold'
                 : 'text-slate-500 hover:text-slate-900 hover:bg-white/60'
             }`}
           >
-            <Zap className={`w-4 h-4 ${activeTab === 'flags' ? 'text-amber-600' : 'text-slate-400'}`} />
+            <Zap className={`w-3.5 h-3.5 ${activeTab === 'flags' ? 'text-amber-600' : 'text-slate-400'}`} />
             <span>Feature Flags</span>
           </button>
         </div>
@@ -227,7 +234,7 @@ function ModulesViewContent() {
       {activeTab === 'registry' && (
         <ModuleRegistryTab
           modulesList={modulesList}
-          onToggleDefault={handleToggleDefault}
+          getAdoptionCount={getAdoptionCount}
         />
       )}
 
@@ -245,12 +252,7 @@ function ModulesViewContent() {
         />
       )}
 
-      {activeTab === 'flags' && (
-        <FeatureFlagsTab
-          flagsList={flagsList}
-          onFlagStatusChange={handleFlagStatusChange}
-        />
-      )}
+      {activeTab === 'flags' && <FeatureFlagsTab />}
     </div>
   );
 }
@@ -259,10 +261,10 @@ export function SuperAdminModulesView() {
   return (
     <Suspense
       fallback={
-        <div className="p-8 flex items-center justify-center min-h-[400px]">
+        <div className="p-8 flex items-center justify-center min-h-[300px]">
           <div className="flex items-center gap-2 text-slate-500 font-bold text-xs">
-            <Loader2 className="w-5 h-5 animate-spin text-[#5B4DFB]" />
-            <span>Loading Module Registry...</span>
+            <Loader2 className="w-5 h-5 animate-spin text-brand" />
+            <span>Loading Modules Studio...</span>
           </div>
         </div>
       }

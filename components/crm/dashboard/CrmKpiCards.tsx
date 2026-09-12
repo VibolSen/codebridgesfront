@@ -41,8 +41,8 @@ export function CrmKpiCards() {
       change: 'Active sales opportunities',
       isPositive: true,
       icon: DollarSign,
-      color: 'text-purple-600',
-      bg: 'bg-purple-100',
+      color: 'text-brand',
+      bg: 'bg-brand-subtle border border-brand/20',
     },
     {
       title: 'Deals Won (MTD)',
@@ -61,8 +61,8 @@ export function CrmKpiCards() {
       change: 'Pipeline conversion benchmark',
       isPositive: true,
       icon: TrendingUp,
-      color: 'text-orange-600',
-      bg: 'bg-orange-100',
+      color: 'text-brand',
+      bg: 'bg-brand-subtle border border-brand/20',
     },
     {
       title: 'Inbound Leads Velocity',
@@ -97,7 +97,7 @@ export function CrmKpiCards() {
               <p className="text-xs text-slate-400 font-semibold">{c.subtitle}</p>
             </div>
 
-            <div className="pt-2 border-t border-slate-100 flex items-center gap-1 text-[11px] font-extrabold text-purple-600">
+            <div className="pt-2 border-t border-slate-100 flex items-center gap-1 text-[11px] font-extrabold text-brand">
               {loading ? (
                 <Loader2 className="w-3.5 h-3.5 animate-spin text-slate-400" />
               ) : (

@@ -18,17 +18,15 @@ export function SuperAdminCommunicationsView() {
       {/* Header */}
       <div className="bg-white p-6 rounded-3xl border border-slate-200/90 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3.5">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-orange-500 via-amber-500 to-yellow-400 p-0.5 shadow-md shadow-orange-500/15 flex items-center justify-center">
-            <div className="w-full h-full bg-white rounded-[14px] flex items-center justify-center">
-              <Radio className="w-6 h-6 text-orange-500" />
-            </div>
+          <div className="w-12 h-12 rounded-2xl bg-brand-subtle border border-brand/20 shadow-md shadow-brand/10 flex items-center justify-center">
+            <Radio className="w-6 h-6 text-brand" />
           </div>
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-xl font-black text-slate-900 tracking-tight">
                 Global Merchant Broadcasts &amp; Announcements
               </h1>
-              <span className="px-2.5 py-0.5 rounded-full bg-purple-50 text-purple-700 text-[10px] font-extrabold border border-purple-200 uppercase">
+              <span className="px-2.5 py-0.5 rounded-full bg-brand-subtle text-brand text-[10px] font-extrabold border border-brand/20 uppercase">
                 Communications
               </span>
             </div>
@@ -41,7 +39,7 @@ export function SuperAdminCommunicationsView() {
         <button
           type="button"
           onClick={() => setShowCreateModal(true)}
-          className="px-5 py-2.5 rounded-2xl bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white font-black text-xs shadow-md shadow-orange-500/20 flex items-center gap-2 transition-all cursor-pointer"
+          className="px-5 py-2.5 rounded-2xl bg-brand hover:bg-brand-hover text-white font-black text-xs shadow-md shadow-brand/20 flex items-center gap-2 transition-all cursor-pointer"
         >
           <Plus className="w-4 h-4" />
           <span>New Merchant Broadcast</span>

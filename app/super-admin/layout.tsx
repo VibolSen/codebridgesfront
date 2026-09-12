@@ -24,7 +24,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     // Enforce strict platform isolation: Only super_admin can access /super-admin/*
     if (currentUser.role !== 'super_admin') {
       if (currentUser.role === 'cashier') {
-        router.push('/pos/terminal');
+        router.push('/pos/pos-terminal');
       } else {
         router.push('/launchpad');
       }
@@ -42,9 +42,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   if (!isAuthorized) {
     return (
-      <div className="h-screen w-screen flex flex-col items-center justify-center bg-[#f0f4f9] text-slate-800 font-sans">
+      <div className="h-screen w-screen flex flex-col items-center justify-center bg-canvas text-slate-800 font-sans">
         <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-[0_2px_12px_rgba(15,23,42,0.03)] flex flex-col items-center gap-4 text-center max-w-sm">
-          <div className="w-12 h-12 rounded-2xl bg-[#F5F3FF] text-[#5B4DFB] flex items-center justify-center">
+          <div className="w-12 h-12 rounded-2xl bg-brand-subtle text-brand flex items-center justify-center">
             <Loader2 className="w-6 h-6 animate-spin" />
           </div>
           <div>
@@ -59,7 +59,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   return (
-    <div className="h-screen w-screen overflow-hidden bg-[#f0f4f9] text-slate-800 flex flex-col font-sans">
+    <div className="h-screen w-screen overflow-hidden bg-canvas text-slate-800 flex flex-col font-sans">
       <ImpersonationBanner />
 
       <SuperAdminHeader
@@ -74,7 +74,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <SuperAdminSidebar sidebarOpen={sidebarOpen} userRole="super_admin" />
         </Suspense>
 
-        <main className="flex-1 overflow-y-auto bg-[#f0f4f9] p-4 sm:p-6 lg:p-8">
+        <main className="flex-1 overflow-y-auto bg-canvas p-4 sm:p-6 lg:p-8">
           {children}
         </main>
       </div>

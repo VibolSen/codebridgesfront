@@ -34,7 +34,7 @@ export function UniversalModuleLayout({
   React.useEffect(() => {
     const user = getAuthUser();
     if (user?.role === 'cashier') {
-      router.replace('/pos/terminal');
+      router.replace('/pos/pos-terminal');
     }
   }, [router]);
 
@@ -67,7 +67,7 @@ export function UniversalModuleLayout({
         )}
 
         {/* Content Viewport */}
-        <main className="flex-1 overflow-y-auto bg-[#F0F4F8] p-4 sm:p-6 lg:p-8">
+        <main className="flex-1 overflow-y-auto bg-canvas p-4 sm:p-6 lg:p-8">
           <React.Suspense
             fallback={
               <div className="h-full w-full flex items-center justify-center p-8 text-xs font-bold text-slate-400">

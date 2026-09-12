@@ -31,7 +31,7 @@ export const SuperAdminProfileSettingsView: React.FC = () => {
     <div className="p-8 space-y-6 max-w-4xl mx-auto font-sans text-slate-800">
       <div>
         <h1 className="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2.5">
-          <Settings className="w-7 h-7 text-orange-500" />
+          <Settings className="w-7 h-7 text-brand" />
           Profile Settings & Password Security
         </h1>
         <p className="text-xs text-slate-500 mt-1">
@@ -103,7 +103,7 @@ export const SuperAdminProfileSettingsView: React.FC = () => {
         <div className="pt-4 flex justify-end">
           <button
             type="submit"
-            className="px-6 py-3 bg-orange-500 hover:bg-orange-600 font-bold text-xs text-white rounded-xl shadow-md transition-all flex items-center gap-2 cursor-pointer"
+            className="px-6 py-3 bg-brand hover:bg-brand-hover font-bold text-xs text-white rounded-xl shadow-md shadow-brand/20 transition-all flex items-center gap-2 cursor-pointer"
           >
             <Save className="w-4 h-4" /> Save Profile Changes
           </button>

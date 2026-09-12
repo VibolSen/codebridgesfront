@@ -5,7 +5,7 @@ import { Monitor } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import { UniversalModuleLayout } from '@/components/module-shell';
 import { getAuthUser } from '@/lib/api';
-import { OrganizationSidebar } from '@/components/sidebars/OrganizationSidebar';
+import { POSSidebar } from '@/components/sidebars/POSSidebar';
 
 export default function PosLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -14,13 +14,20 @@ export default function PosLayout({ children }: { children: React.ReactNode }) {
   // Cashiers are restricted exclusively to the frontline Cashier Terminal and Customer Display
   React.useEffect(() => {
     const user = getAuthUser();
-    if (user?.role === 'cashier' && pathname !== '/pos/terminal' && pathname !== '/pos/customer-display') {
-      router.replace('/pos/terminal');
+    const isAllowedForCashier =
+      pathname === '/pos/pos-terminal' ||
+      pathname === '/pos/customer-display';
+    if (user?.role === 'cashier' && !isAllowedForCashier) {
+      router.replace('/pos/pos-terminal');
     }
   }, [pathname, router]);
 
-  // Frontline Terminal and Customer CFD are standalone full-screen interfaces
-  if (pathname === '/pos/terminal' || pathname === '/pos/customer-display') {
+  // Customer CFD and Kitchen Display KDS are standalone full-screen secondary monitor interfaces
+  const isStandalone =
+    pathname === '/pos/customer-display' ||
+    pathname === '/pos/kitchen-display';
+
+  if (isStandalone) {
     return <>{children}</>;
   }
 
@@ -30,9 +37,9 @@ export default function PosLayout({ children }: { children: React.ReactNode }) {
       moduleTitle="POS Management"
       moduleIcon={Monitor}
       moduleBadge="CORE"
-      moduleBadgeColor="bg-purple-100 text-[#5B4DFB]"
+      moduleBadgeColor="bg-brand-subtle text-brand border border-brand-border/40"
       customSidebar={({ sidebarOpen, onToggleSidebar }) => (
-        <OrganizationSidebar
+        <POSSidebar
           sidebarOpen={sidebarOpen}
           onToggleSidebar={onToggleSidebar}
         />

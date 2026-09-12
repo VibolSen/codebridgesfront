@@ -30,7 +30,7 @@ function SidebarNavList({
   sections,
   moduleName,
   moduleBadge,
-  moduleBadgeColor = 'bg-purple-100 text-purple-800',
+  moduleBadgeColor = 'bg-brand-subtle text-brand border border-brand-border',
 }: {
   sections: NavSection[];
   moduleName: string;
@@ -56,7 +56,7 @@ function SidebarNavList({
       return false;
     }
 
-    // 3. Exact pathname match for routes (e.g. /pos vs /pos/shifts vs /pos/orders vs /kds)
+    // 3. Exact pathname match for routes
     return pathname === itemPath;
   };
 
@@ -92,7 +92,7 @@ function SidebarNavList({
                   href={item.href}
                   className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs transition-all duration-200 ease-out group select-none ${
                     isActive
-                      ? 'bg-[#5B4DFB] text-white shadow-md shadow-[#5B4DFB]/25 font-black translate-x-0.5'
+                      ? 'bg-brand text-white shadow-md shadow-brand/25 font-black translate-x-0.5'
                       : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/80 hover:translate-x-1 font-bold'
                   }`}
                 >
@@ -101,7 +101,7 @@ function SidebarNavList({
                       className={`w-4 h-4 shrink-0 transition-all duration-200 ${
                         isActive
                           ? 'text-white'
-                          : 'text-slate-400 group-hover:text-[#5B4DFB] group-hover:scale-110'
+                          : 'text-slate-400 group-hover:text-brand group-hover:scale-110'
                       }`}
                     />
                     <span className="truncate">{item.label}</span>

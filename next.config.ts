@@ -14,6 +14,31 @@ const nextConfig: NextConfig = {
         permanent: false,
       },
       {
+        source: '/pos/terminal',
+        destination: '/pos/pos-terminal',
+        permanent: false,
+      },
+      {
+        source: '/pos/checkout-register',
+        destination: '/pos/pos-terminal',
+        permanent: false,
+      },
+      {
+        source: '/pos/access',
+        destination: '/pos/security',
+        permanent: false,
+      },
+      {
+        source: '/pos/kds',
+        destination: '/pos/kitchen-display',
+        permanent: false,
+      },
+      {
+        source: '/pos/stock',
+        destination: '/pos/stock-warehouses',
+        permanent: false,
+      },
+      {
         source: '/super-admin',
         destination: '/super-admin/dashboard',
         permanent: false,
@@ -31,6 +56,11 @@ const nextConfig: NextConfig = {
       {
         source: '/financial',
         destination: '/financial/dashboard',
+        permanent: false,
+      },
+      {
+        source: '/CodeBridgesOnboardingLaunchpad',
+        destination: '/launchpad',
         permanent: false,
       },
     ];

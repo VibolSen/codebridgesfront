@@ -48,7 +48,7 @@ export const StocktakeVarianceTable: React.FC<StocktakeVarianceTableProps> = ({
             value={searchTerm}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Search SKU or item name..."
-            className="w-full pl-8 pr-3 py-1.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-orange-500"
+            className="w-full pl-8 pr-3 py-1.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
           />
         </div>
 
@@ -59,7 +59,7 @@ export const StocktakeVarianceTable: React.FC<StocktakeVarianceTableProps> = ({
             value={barcodeInput}
             onChange={(e) => onBarcodeChange(e.target.value)}
             placeholder="Scan barcode..."
-            className="px-3 py-1.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-mono font-bold"
+            className="px-3 py-1.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-mono font-bold focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
           />
         </div>
       </div>
@@ -67,7 +67,7 @@ export const StocktakeVarianceTable: React.FC<StocktakeVarianceTableProps> = ({
       <div className="overflow-x-auto">
         {loading ? (
           <div className="py-12 text-center text-slate-400 font-medium text-xs flex flex-col items-center justify-center gap-2">
-            <Loader2 className="w-6 h-6 animate-spin text-amber-600" />
+            <Loader2 className="w-6 h-6 animate-spin text-brand" />
             <span>Loading physical stock items from catalog...</span>
           </div>
         ) : filteredItems.length === 0 ? (
@@ -116,12 +116,12 @@ export const StocktakeVarianceTable: React.FC<StocktakeVarianceTableProps> = ({
                           onChange={(e) =>
                             onUpdateCount(item.id, parseInt(e.target.value) || 0)
                           }
-                          className="w-16 text-center py-1 rounded-lg bg-slate-50 border border-slate-200 font-mono font-black text-xs text-slate-900"
+                          className="w-16 text-center py-1 rounded-lg bg-slate-50 border border-slate-200 font-mono font-black text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
                         />
                         <button
                           type="button"
                           onClick={() => onUpdateCount(item.id, item.countedStock + 1)}
-                          className="w-6 h-6 rounded-lg bg-orange-100 text-orange-700 hover:bg-orange-200 font-black text-xs cursor-pointer"
+                          className="w-6 h-6 rounded-lg bg-brand-subtle text-brand hover:bg-brand/20 font-black text-xs cursor-pointer"
                         >
                           +
                         </button>

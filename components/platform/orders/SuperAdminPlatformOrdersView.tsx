@@ -59,7 +59,7 @@ export function SuperAdminPlatformOrdersView() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2.5">
-            <ShoppingBag className="w-7 h-7 text-orange-500" />
+            <ShoppingBag className="w-7 h-7 text-brand" />
             Online Order Fulfillment Dashboard
           </h1>
           <p className="text-xs text-slate-500 mt-1">
@@ -104,7 +104,7 @@ export function SuperAdminPlatformOrdersView() {
             placeholder="Search order #, customer, phone..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            className="w-full pl-9 pr-4 py-2 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand"
           />
         </div>
       </div>
@@ -112,7 +112,7 @@ export function SuperAdminPlatformOrdersView() {
       {/* Orders Grid / List */}
       {loading ? (
         <div className="py-24 text-center text-slate-400 space-y-2">
-          <RefreshCw className="w-8 h-8 animate-spin mx-auto text-orange-500" />
+          <RefreshCw className="w-8 h-8 animate-spin mx-auto text-brand" />
           <p className="text-xs font-semibold">Fetching customer online orders...</p>
         </div>
       ) : filteredOrders.length === 0 ? (

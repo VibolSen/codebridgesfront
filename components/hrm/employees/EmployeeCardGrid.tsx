@@ -61,7 +61,7 @@ export const EmployeeCardGrid: React.FC<EmployeeCardGridProps> = ({
           <div className="space-y-3">
             <div className="flex items-start justify-between gap-2">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-orange-500/10 text-orange-600 flex items-center justify-center font-bold text-sm">
+                <div className="w-10 h-10 rounded-full bg-brand-subtle text-brand border border-brand/20 flex items-center justify-center font-bold text-sm">
                   {emp.first_name ? emp.first_name[0] : ''}
                   {emp.last_name ? emp.last_name[0] : ''}
                 </div>
@@ -69,7 +69,7 @@ export const EmployeeCardGrid: React.FC<EmployeeCardGridProps> = ({
                   <h3 className="font-bold text-slate-900 text-sm">
                     {emp.first_name} {emp.last_name}
                   </h3>
-                  <p className="text-[11px] text-orange-600 font-semibold">
+                  <p className="text-[11px] text-brand font-semibold">
                     {emp.designation || 'Staff Member'}
                   </p>
                 </div>

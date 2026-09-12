@@ -53,7 +53,7 @@ export const RolesListSidebar: React.FC<RolesListSidebarProps> = ({
         </h3>
         <button
           onClick={onOpenCreateModal}
-          className="p-1.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white shadow-sm transition-all"
+          className="p-1.5 rounded-xl bg-brand hover:bg-brand-hover text-white shadow-sm transition-all"
           title="Create New Role"
         >
           <Plus className="w-4 h-4" />
@@ -67,7 +67,7 @@ export const RolesListSidebar: React.FC<RolesListSidebarProps> = ({
           placeholder="Filter roles by title..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full pl-8 pr-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-semibold placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+          className="w-full pl-8 pr-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-semibold placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand"
         />
       </div>
 
@@ -83,7 +83,7 @@ export const RolesListSidebar: React.FC<RolesListSidebarProps> = ({
                 onClick={() => onSelectRole(r)}
                 className={`p-3.5 rounded-2xl border transition-all cursor-pointer flex flex-col gap-2 ${
                   isSelected
-                    ? 'bg-orange-500 text-white border-orange-500 shadow-md shadow-orange-500/20'
+                    ? 'bg-brand text-white border-brand shadow-md shadow-brand/20'
                     : 'bg-white border-slate-200/80 hover:border-slate-300 text-slate-700'
                 }`}
               >
@@ -91,7 +91,7 @@ export const RolesListSidebar: React.FC<RolesListSidebarProps> = ({
                   <div className="flex items-center gap-1.5 font-black text-xs tracking-tight">
                     {r.is_system && (
                       <Lock
-                        className={`w-3.5 h-3.5 ${isSelected ? 'text-orange-200' : 'text-slate-400'}`}
+                        className={`w-3.5 h-3.5 ${isSelected ? 'text-brand-subtle' : 'text-slate-400'}`}
                       />
                     )}
                     <span>{r.name}</span>
@@ -99,7 +99,7 @@ export const RolesListSidebar: React.FC<RolesListSidebarProps> = ({
 
                   <span
                     className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-bold ${
-                      isSelected ? 'bg-orange-600 text-white' : 'bg-slate-100 text-slate-600'
+                      isSelected ? 'bg-brand-hover text-white' : 'bg-slate-100 text-slate-600'
                     }`}
                   >
                     {r.permission_ids?.length ?? r.permissions_count ?? 0} perms
@@ -108,7 +108,7 @@ export const RolesListSidebar: React.FC<RolesListSidebarProps> = ({
 
                 <p
                   className={`text-[11px] line-clamp-1 ${
-                    isSelected ? 'text-orange-100' : 'text-slate-500'
+                    isSelected ? 'text-brand-subtle' : 'text-slate-500'
                   }`}
                 >
                   {r.description || 'System access role template'}
@@ -117,7 +117,7 @@ export const RolesListSidebar: React.FC<RolesListSidebarProps> = ({
                 <div className="flex items-center justify-between pt-1 border-t border-black/5">
                   <span
                     className={`text-[9px] font-extrabold uppercase tracking-wider ${
-                      isSelected ? 'text-orange-200' : 'text-slate-400'
+                      isSelected ? 'text-brand-subtle' : 'text-slate-400'
                     }`}
                   >
                     {r.is_system ? 'Built-in Template' : 'Tenant Custom Role'}

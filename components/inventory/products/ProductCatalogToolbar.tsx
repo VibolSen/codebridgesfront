@@ -53,7 +53,7 @@ export function ProductCatalogToolbar({
             value={search}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Search by name, SKU, barcode, or category..."
-            className="w-full pl-9 pr-8 py-2 rounded-xl bg-white border border-slate-200 text-xs font-semibold text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] focus:border-transparent shadow-2xs"
+            className="w-full pl-9 pr-8 py-2 rounded-xl bg-white border border-slate-200 text-xs font-semibold text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand shadow-2xs"
           />
           {search && (
             <button
@@ -73,7 +73,7 @@ export function ProductCatalogToolbar({
             <select
               value={selectedCategory}
               onChange={(e) => onSelectCategory(e.target.value)}
-              className="pl-8 pr-7 py-2 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] cursor-pointer shadow-2xs appearance-none"
+              className="pl-8 pr-7 py-2 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand cursor-pointer shadow-2xs appearance-none"
             >
               <option value="all">All Categories ({totalProductsCount})</option>
               {categories.map((cat) => (
@@ -92,7 +92,7 @@ export function ProductCatalogToolbar({
             <select
               value={stockStatus}
               onChange={(e) => onSelectStockStatus(e.target.value as StockStatusFilter)}
-              className="pl-8 pr-7 py-2 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] cursor-pointer shadow-2xs appearance-none"
+              className="pl-8 pr-7 py-2 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand cursor-pointer shadow-2xs appearance-none"
             >
               <option value="all">All Stock Statuses</option>
               <option value="in_stock">In Stock ({stats.inStock})</option>
@@ -111,7 +111,7 @@ export function ProductCatalogToolbar({
           <select
             value={currentSortPreset}
             onChange={(e) => onSortPresetChange(e.target.value)}
-            className="py-2 px-3 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] cursor-pointer shadow-2xs"
+            className="py-2 px-3 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand cursor-pointer shadow-2xs"
           >
             <option value="name_asc">Name: A → Z</option>
             <option value="name_desc">Name: Z → A</option>

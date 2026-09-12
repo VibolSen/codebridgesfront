@@ -35,7 +35,7 @@ export function PosAccessPinModal({
       <div className="bg-white rounded-3xl p-6 max-w-sm w-full border border-slate-200 shadow-2xl space-y-4">
         <div className="flex items-center justify-between pb-3 border-b border-slate-100">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-purple-50 text-[#5B4DFB] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-xl bg-brand-subtle text-brand flex items-center justify-center">
               <KeyRound className="w-4 h-4" />
             </div>
             <div>
@@ -77,7 +77,7 @@ export function PosAccessPinModal({
               value={newPin}
               onChange={(e) => onNewPinChange(e.target.value.replace(/\D/g, ''))}
               placeholder="••••"
-              className="w-full text-center tracking-[0.5em] text-lg font-black py-2 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB]"
+              className="w-full text-center tracking-[0.5em] text-lg font-black py-2 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
               autoFocus
             />
           </div>
@@ -92,7 +92,7 @@ export function PosAccessPinModal({
               value={confirmPin}
               onChange={(e) => onConfirmPinChange(e.target.value.replace(/\D/g, ''))}
               placeholder="••••"
-              className="w-full text-center tracking-[0.5em] text-lg font-black py-2 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB]"
+              className="w-full text-center tracking-[0.5em] text-lg font-black py-2 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
             />
           </div>
 
@@ -106,7 +106,7 @@ export function PosAccessPinModal({
             </button>
             <button
               type="submit"
-              className="flex-1 py-2 rounded-xl bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white font-black text-xs shadow-md shadow-[#5B4DFB]/20 transition-all"
+              className="flex-1 py-2 rounded-xl bg-brand hover:bg-brand-hover text-white font-black text-xs shadow-md shadow-brand/20 transition-all cursor-pointer"
             >
               Save PIN
             </button>

@@ -31,7 +31,7 @@ export function CreateOrgFormFields({
       {/* Workspace Name Input */}
       <div className="space-y-1.5">
         <label className="text-xs font-extrabold uppercase tracking-wider text-slate-600 flex items-center gap-1.5">
-          <Store className="w-3.5 h-3.5 text-[#5B4DFB]" />
+          <Store className="w-3.5 h-3.5 text-brand" />
           <span>
             {workspaceType === 'personal' ? 'Store / Workspace Name' : 'Company / Organization Name'}{' '}
             <span className="text-rose-500">*</span>
@@ -47,20 +47,20 @@ export function CreateOrgFormFields({
               ? 'e.g. Sokha Coffee Bar, Kiosk #3'
               : 'e.g. Phnom Penh Retail Mart, Grand Cafe Group'
           }
-          className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] focus:border-[#5B4DFB] text-xs font-semibold text-slate-900 bg-slate-50/50 placeholder:text-slate-400"
+          className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand text-xs font-semibold text-slate-900 bg-slate-50/50 placeholder:text-slate-400"
         />
       </div>
 
       {/* Industry Dropdown */}
       <div className="space-y-1.5">
         <label className="text-xs font-extrabold uppercase tracking-wider text-slate-600 flex items-center gap-1.5">
-          <Briefcase className="w-3.5 h-3.5 text-[#5B4DFB]" />
+          <Briefcase className="w-3.5 h-3.5 text-brand" />
           <span>Industry Type</span>
         </label>
         <select
           value={industry}
           onChange={(e) => setIndustry(e.target.value)}
-          className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] focus:border-[#5B4DFB] text-xs font-semibold text-slate-800 bg-slate-50/50"
+          className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand text-xs font-semibold text-slate-800 bg-slate-50/50"
         >
           <option value="retail">Retail & Fashion</option>
           <option value="restaurant">Restaurant, Cafe & Bar</option>
@@ -83,7 +83,7 @@ export function CreateOrgFormFields({
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="contact@store.com"
-            className="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] text-xs font-medium text-slate-800 bg-slate-50/50"
+            className="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand text-xs font-medium text-slate-800 bg-slate-50/50"
           />
         </div>
         <div className="space-y-1">
@@ -96,7 +96,7 @@ export function CreateOrgFormFields({
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             placeholder="+855 12 345 678"
-            className="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] text-xs font-medium text-slate-800 bg-slate-50/50"
+            className="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand text-xs font-medium text-slate-800 bg-slate-50/50"
           />
         </div>
       </div>

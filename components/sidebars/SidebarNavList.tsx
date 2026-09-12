@@ -40,7 +40,7 @@ export function getSidebarNavSections(activeShift: any, lowStockCount: number = 
       title: 'Executive Command',
       items: [
         {
-          label: 'Organization Dashboard',
+          label: 'POS Dashboard',
           href: '/pos/dashboard',
           icon: LayoutDashboard,
         },
@@ -50,8 +50,8 @@ export function getSidebarNavSections(activeShift: any, lowStockCount: number = 
       title: 'Point of Sale Fleet',
       items: [
         {
-          label: 'Checkout Register',
-          href: '/pos/terminal',
+          label: 'POS Terminal',
+          href: '/pos/pos-terminal',
           icon: Store,
           badge: 'Live',
           badgeColor: 'bg-amber-100 text-amber-800',
@@ -76,7 +76,7 @@ export function getSidebarNavSections(activeShift: any, lowStockCount: number = 
         },
         {
           label: 'Kitchen Display (KDS)',
-          href: '/kds',
+          href: '/pos/kitchen-display',
           icon: ChefHat,
           target: '_blank',
         },
@@ -87,24 +87,24 @@ export function getSidebarNavSections(activeShift: any, lowStockCount: number = 
       items: [
         {
           label: 'Stock & Warehouses',
-          href: '/inventory',
+          href: '/pos/stock-warehouses',
           icon: Boxes,
           badge: lowStockCount > 0 ? `${lowStockCount} Low` : undefined,
           badgeColor: 'bg-rose-100 text-rose-800',
         },
         {
           label: 'Transfers & Shipments',
-          href: '/inventory?tab=transfers',
+          href: '/pos/transfers',
           icon: Truck,
         },
         {
           label: 'Products & SKUs',
-          href: '/inventory?tab=products',
+          href: '/pos/products',
           icon: Package,
         },
         {
           label: 'Purchase Orders',
-          href: '/inventory?tab=pos',
+          href: '/pos/purchase-orders',
           icon: ShoppingCart,
         },
       ],
@@ -114,7 +114,7 @@ export function getSidebarNavSections(activeShift: any, lowStockCount: number = 
       items: [
         {
           label: 'Cashier PINs & Security',
-          href: '/pos/access',
+          href: '/pos/security',
           icon: ShieldCheck,
         },
       ],
@@ -185,7 +185,7 @@ export function SidebarNavList({ sections, activeShift, lowStockCount }: Sidebar
                 target={item.target}
                 className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs transition-all duration-200 ease-out group select-none ${
                   isActive
-                    ? 'bg-[#5B4DFB] text-white shadow-md shadow-[#5B4DFB]/25 font-black translate-x-0.5'
+                    ? 'bg-brand text-white shadow-md shadow-brand/25 font-black translate-x-0.5'
                     : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/80 hover:translate-x-1 font-bold'
                 }`}
               >
@@ -194,7 +194,7 @@ export function SidebarNavList({ sections, activeShift, lowStockCount }: Sidebar
                     className={`w-4 h-4 shrink-0 transition-all duration-200 ${
                       isActive
                         ? 'text-white'
-                        : 'text-slate-400 group-hover:text-[#5B4DFB] group-hover:scale-110'
+                        : 'text-slate-400 group-hover:text-brand group-hover:scale-110'
                     }`}
                   />
                   <span className="truncate">{item.label}</span>

@@ -40,7 +40,7 @@ export const DepartmentModal: React.FC<DepartmentModalProps> = ({
       >
         <div className="flex items-center justify-between border-b border-slate-100 pb-3">
           <h3 className="font-extrabold text-slate-900 text-base flex items-center gap-2">
-            <Building2 className="w-5 h-5 text-orange-500" />
+            <Building2 className="w-5 h-5 text-brand" />
             {editingDepartment ? 'Edit Department' : 'Create Department'}
           </h3>
           <button onClick={onClose} className="text-slate-400 hover:text-slate-600">
@@ -57,7 +57,7 @@ export const DepartmentModal: React.FC<DepartmentModalProps> = ({
               placeholder="e.g. Finance & Accounting"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
             />
           </div>
 
@@ -79,7 +79,7 @@ export const DepartmentModal: React.FC<DepartmentModalProps> = ({
               placeholder="Brief description of responsibilities..."
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
             />
           </div>
 
@@ -94,7 +94,7 @@ export const DepartmentModal: React.FC<DepartmentModalProps> = ({
             <button
               type="submit"
               disabled={saving}
-              className="px-5 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold shadow-md shadow-orange-500/20"
+              className="px-5 py-2 rounded-xl bg-brand hover:bg-brand-hover active:bg-brand-active text-white font-bold shadow-md shadow-brand/20"
             >
               {saving ? 'Saving...' : editingDepartment ? 'Update Dept' : 'Create Dept'}
             </button>

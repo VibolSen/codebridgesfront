@@ -12,7 +12,7 @@ export function CfdItemsList({ cart }: CfdItemsListProps) {
     <div className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs space-y-4">
       <div className="flex items-center justify-between border-b border-slate-100 pb-3">
         <h2 className="text-sm font-black text-slate-800 uppercase tracking-wider flex items-center gap-2">
-          <ShoppingBag className="w-4 h-4 text-orange-500" />
+          <ShoppingBag className="w-4 h-4 text-brand" />
           <span>Your Current Order Items</span>
         </h2>
         <span className="text-xs font-extrabold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">
@@ -31,7 +31,7 @@ export function CfdItemsList({ cart }: CfdItemsListProps) {
               <span className="font-black text-slate-900 text-base font-mono">
                 ${item.subtotal.toFixed(2)}
               </span>
-              <p className="text-xs text-orange-600 font-extrabold">Qty: {item.qty}</p>
+              <p className="text-xs text-brand font-extrabold">Qty: {item.qty}</p>
             </div>
           </div>
         ))}

@@ -34,7 +34,7 @@ export function TenantFilterBar({
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-6 rounded-3xl border border-slate-200 shadow-2xs">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <div className="p-2 rounded-xl bg-[#F5F3FF] text-[#5B4DFB]">
+            <div className="p-2 rounded-xl bg-brand-subtle text-brand">
               <Building2 className="w-5 h-5" />
             </div>
             <h1 className="text-xl font-extrabold text-slate-900">Client Tenant Management</h1>
@@ -57,7 +57,7 @@ export function TenantFilterBar({
           <button
             type="button"
             onClick={onOpenCreateModal}
-            className="px-4 py-2.5 rounded-xl bg-[#5B4DFB] hover:bg-[#4E3FE3] active:scale-98 text-white font-extrabold text-xs shadow-md shadow-[#5B4DFB]/25 flex items-center gap-2 transition-all cursor-pointer"
+            className="px-4 py-2.5 rounded-xl bg-brand hover:bg-brand-hover active:scale-98 text-white font-extrabold text-xs shadow-md shadow-brand/25 flex items-center gap-2 transition-all cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             <span>Register New Tenant</span>
@@ -71,9 +71,9 @@ export function TenantFilterBar({
           {[
             { key: 'all', statusFilter: '', tierFilter: '', label: 'Total Clients', value: stats.total, color: 'text-slate-900', bg: 'bg-white' },
             { key: 'active', statusFilter: 'active', tierFilter: '', label: 'Active', value: stats.active, color: 'text-emerald-700', bg: 'bg-emerald-50' },
-            { key: 'trial', statusFilter: 'trial', tierFilter: '', label: 'On Trial', value: stats.trial, color: 'text-[#5B4DFB]', bg: 'bg-[#F5F3FF]' },
+            { key: 'trial', statusFilter: 'trial', tierFilter: '', label: 'On Trial', value: stats.trial, color: 'text-brand', bg: 'bg-brand-subtle' },
             { key: 'suspended', statusFilter: 'suspended', tierFilter: '', label: 'Suspended', value: stats.suspended, color: 'text-rose-700', bg: 'bg-rose-50' },
-            { key: 'enterprise_org', statusFilter: '', tierFilter: 'enterprise_org', label: 'Enterprise', value: stats.enterprise_org, color: 'text-[#5B4DFB]', bg: 'bg-[#F5F3FF]' },
+            { key: 'enterprise_org', statusFilter: '', tierFilter: 'enterprise_org', label: 'Enterprise', value: stats.enterprise_org, color: 'text-brand', bg: 'bg-brand-subtle' },
             { key: 'business_runner', statusFilter: '', tierFilter: 'business_runner', label: 'Biz Runner', value: stats.business_runner, color: 'text-amber-800', bg: 'bg-amber-50' },
             { key: 'free_personal', statusFilter: '', tierFilter: 'free_personal', label: 'Personal', value: stats.free_personal, color: 'text-slate-600', bg: 'bg-slate-50' },
           ].map((s) => {
@@ -87,7 +87,7 @@ export function TenantFilterBar({
                   setFilterTier(s.tierFilter);
                 }}
                 className={`p-4 rounded-2xl border text-left flex flex-col gap-1 shadow-2xs transition-all cursor-pointer ${s.bg} ${
-                  isCurrent ? 'ring-2 ring-[#5B4DFB] border-[#5B4DFB] shadow-sm' : 'border-slate-200 hover:border-slate-300'
+                  isCurrent ? 'ring-2 ring-brand border-brand shadow-sm' : 'border-slate-200 hover:border-slate-300'
                 }`}
               >
                 <span className={`text-2xl font-black ${s.color}`}>{s.value}</span>
@@ -124,7 +124,7 @@ export function TenantFilterBar({
             type="button"
             onClick={() => setFilterStatus('trial')}
             className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer ${
-              filterStatus === 'trial' ? 'bg-[#5B4DFB] text-white shadow-xs' : 'text-slate-500 hover:text-slate-900'
+              filterStatus === 'trial' ? 'bg-brand text-white shadow-xs' : 'text-slate-500 hover:text-slate-900'
             }`}
           >
             <Clock className="w-3.5 h-3.5" />
@@ -151,7 +151,7 @@ export function TenantFilterBar({
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && onRefresh()}
-              className="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] font-medium"
+              className="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand font-medium"
             />
           </div>
 

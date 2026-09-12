@@ -30,13 +30,13 @@ export function IntegrationsSettingsTab({
 }: IntegrationsSettingsTabProps) {
   return (
     <div className="space-y-6">
-      <div className="p-4 rounded-2xl bg-orange-50/60 border border-orange-200/80 flex items-start gap-3">
-        <QrCode className="w-5 h-5 text-orange-600 shrink-0 mt-0.5" />
+      <div className="p-4 rounded-2xl bg-brand-subtle/60 border border-brand/20 flex items-start gap-3">
+        <QrCode className="w-5 h-5 text-brand shrink-0 mt-0.5" />
         <div>
-          <p className="text-xs font-black text-orange-950">
+          <p className="text-xs font-black text-brand">
             National Bank of Cambodia (NBC) Bakong KHQR Master Gateway
           </p>
-          <p className="text-[11px] text-orange-800 mt-0.5">
+          <p className="text-[11px] text-slate-600 mt-0.5">
             Platform-wide master credentials used to sign dynamic KHQR payloads across all merchant registers.
           </p>
         </div>
@@ -51,7 +51,7 @@ export function IntegrationsSettingsTab({
             type="text"
             value={bakongMerchantId}
             onChange={(e) => setBakongMerchantId(e.target.value)}
-            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono font-medium focus:outline-none focus:ring-2 focus:ring-orange-500/30"
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono font-medium focus:outline-none focus:ring-2 focus:ring-brand/30"
           />
         </div>
         <div>
@@ -62,7 +62,7 @@ export function IntegrationsSettingsTab({
             type="text"
             value={bakongBankName}
             onChange={(e) => setBakongBankName(e.target.value)}
-            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-orange-500/30"
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-brand/30"
           />
         </div>
         <div className="sm:col-span-2">
@@ -73,7 +73,7 @@ export function IntegrationsSettingsTab({
             type="password"
             value={bakongSecret}
             onChange={(e) => setBakongSecret(e.target.value)}
-            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono font-medium focus:outline-none focus:ring-2 focus:ring-orange-500/30"
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono font-medium focus:outline-none focus:ring-2 focus:ring-brand/30"
           />
         </div>
       </div>

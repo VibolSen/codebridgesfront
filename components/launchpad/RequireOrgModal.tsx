@@ -3,8 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Building2, Plus } from 'lucide-react';
 import { CreateOrgModal } from '@/components/tenant';
+import { AppIcons } from '@/components/ui/icons';
+import { buttonStyles, cardStyles } from '@/lib/theme';
+import { modalBackdrop, modalContent } from '@/lib/animations';
 
 interface RequireOrgModalProps {
   isOpen: boolean;
@@ -27,20 +29,22 @@ export function RequireOrgModal({ isOpen, onClose }: RequireOrgModalProps) {
         {isOpen && !isCreateModalOpen && (
           <div className="fixed inset-0 z-[99990] flex items-center justify-center p-4">
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              variants={modalBackdrop}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
               onClick={onClose}
               className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm"
             />
             <motion.div
-              initial={{ scale: 0.9, opacity: 0, y: 15 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 15 }}
-              className="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 text-slate-800 space-y-5 text-center relative z-10 my-auto"
+              variants={modalContent}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className={`${cardStyles.base} max-w-md w-full p-6 shadow-2xl text-slate-800 space-y-5 text-center relative z-10 my-auto`}
             >
-              <div className="w-14 h-14 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center mx-auto shadow-inner">
-                <Building2 className="w-7 h-7" />
+              <div className="w-14 h-14 rounded-2xl bg-brand-subtle text-brand flex items-center justify-center mx-auto shadow-inner border border-brand-border">
+                <AppIcons.Organization className="w-7 h-7" />
               </div>
               <div>
                 <h3 className="text-xl font-black text-slate-900">Organization Required</h3>
@@ -52,18 +56,16 @@ export function RequireOrgModal({ isOpen, onClose }: RequireOrgModalProps) {
               <div className="pt-2 space-y-2">
                 <button
                   type="button"
-                  onClick={() => {
-                    setIsCreateModalOpen(true);
-                  }}
-                  className="w-full py-3 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 text-white font-extrabold text-xs shadow-md shadow-orange-500/25 hover:from-orange-600 hover:to-amber-600 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  onClick={() => setIsCreateModalOpen(true)}
+                  className={`w-full py-3 ${buttonStyles.primary}`}
                 >
-                  <Plus className="w-4 h-4" />
+                  <AppIcons.Plus className="w-4 h-4" />
                   <span>Create Organization Now</span>
                 </button>
                 <button
                   type="button"
                   onClick={onClose}
-                  className="w-full py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-colors cursor-pointer"
+                  className={`w-full ${buttonStyles.secondary}`}
                 >
                   Close
                 </button>

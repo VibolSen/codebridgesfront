@@ -38,3 +38,11 @@ export { Tabs } from './Tabs';
 export type { TabsProps, TabItem } from './Tabs';
 
 export { ImpersonationBanner, SecurityAlertBar } from './ImpersonationBanner';
+
+export { ModuleCard } from './ModuleCard';
+export type { ModuleCardProps } from './ModuleCard';
+
+export { SubscriptionHubModal } from './SubscriptionHubModal';
+
+export { AppIcons } from './icons';
+export type { AppIconKey } from './icons';

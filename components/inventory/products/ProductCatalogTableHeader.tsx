@@ -18,9 +18,9 @@ export function ProductCatalogTableHeader({
   const renderSortIcon = (key: SortKey) => {
     if (sortKey === key) {
       return sortOrder === 'asc' ? (
-        <ArrowUp className="w-3.5 h-3.5 text-[#5B4DFB]" />
+        <ArrowUp className="w-3.5 h-3.5 text-brand" />
       ) : (
-        <ArrowDown className="w-3.5 h-3.5 text-[#5B4DFB]" />
+        <ArrowDown className="w-3.5 h-3.5 text-brand" />
       );
     }
     return <ArrowUpDown className="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-600" />;

@@ -33,7 +33,7 @@ export function ResetPasswordModal({
       >
         <div className="flex items-center justify-between border-b border-slate-100 pb-3">
           <h3 className="font-extrabold text-slate-900 text-base flex items-center gap-2">
-            <KeyRound className="w-4 h-4 text-[#5B4DFB]" /> Reset Staff Password
+            <KeyRound className="w-4 h-4 text-brand" /> Reset Staff Password
           </h3>
           <button onClick={onClose} className="text-slate-400 hover:text-slate-600 cursor-pointer transition-colors">
             <X className="w-4 h-4" />
@@ -54,7 +54,7 @@ export function ResetPasswordModal({
               value={newPasswordInput}
               onChange={(e) => onPasswordChange(e.target.value)}
               placeholder="Minimum 6 characters"
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#5B4DFB] focus:bg-white font-mono transition-all"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand focus:bg-white font-mono transition-all"
             />
           </div>
 
@@ -69,7 +69,7 @@ export function ResetPasswordModal({
             <button
               type="submit"
               disabled={saving}
-              className="px-4 py-2.5 rounded-xl bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white font-bold text-xs shadow-md shadow-[#5B4DFB]/20 cursor-pointer transition-all"
+              className="px-4 py-2.5 rounded-xl bg-brand hover:bg-brand-hover text-white font-bold text-xs shadow-md shadow-brand/20 cursor-pointer transition-all"
             >
               {saving ? 'Resetting...' : 'Reset Password'}
             </button>

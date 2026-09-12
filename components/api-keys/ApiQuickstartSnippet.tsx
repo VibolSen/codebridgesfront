@@ -60,13 +60,13 @@ echo $response;`,
     <div className="bg-slate-900 text-white rounded-3xl p-8 shadow-xl space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl bg-brand/20 text-brand flex items-center justify-center">
             <Terminal className="w-5 h-5" />
           </div>
           <div>
             <h3 className="text-sm font-black tracking-tight">API Quickstart Integration Examples</h3>
             <p className="text-xs text-slate-400">
-              Authenticate any external request using the <code className="text-orange-400 font-mono">X-API-Key</code> HTTP header.
+              Authenticate any external request using the <code className="text-brand font-mono">X-API-Key</code> HTTP header.
             </p>
           </div>
         </div>
@@ -77,7 +77,7 @@ echo $response;`,
               key={tab}
               onClick={() => setCodeTab(tab)}
               className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase transition-all cursor-pointer ${
-                codeTab === tab ? 'bg-orange-500 text-white' : 'text-slate-400 hover:text-white'
+                codeTab === tab ? 'bg-brand text-white' : 'text-slate-400 hover:text-white'
               }`}
             >
               {tab}

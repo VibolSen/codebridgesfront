@@ -59,7 +59,7 @@ export function PosShiftOpenModal({
           {/* Header */}
           <div className="flex items-center justify-between border-b border-slate-100 pb-3">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-xl bg-orange-500 text-white flex items-center justify-center font-bold shadow-xs">
+              <div className="w-8 h-8 rounded-xl bg-brand text-white flex items-center justify-center font-bold shadow-xs shadow-brand/20">
                 <Clock className="w-4 h-4" />
               </div>
               <div>
@@ -91,7 +91,7 @@ export function PosShiftOpenModal({
                 required
                 value={openingFloat}
                 onChange={(e) => setOpeningFloat(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xl font-black text-slate-900 font-mono focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xl font-black text-slate-900 font-mono focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
               />
 
               <div className="flex items-center gap-1.5 pt-1">
@@ -100,7 +100,7 @@ export function PosShiftOpenModal({
                     key={amt}
                     type="button"
                     onClick={() => setOpeningFloat(amt.toFixed(2))}
-                    className="px-2.5 py-1 rounded-lg bg-white border border-slate-200 hover:border-orange-400 text-xs font-bold text-slate-700 font-mono shadow-2xs cursor-pointer"
+                    className="px-2.5 py-1 rounded-lg bg-white border border-slate-200 hover:border-brand text-xs font-bold text-slate-700 font-mono shadow-2xs cursor-pointer"
                   >
                     ${amt}
                   </button>
@@ -116,7 +116,7 @@ export function PosShiftOpenModal({
                 placeholder="e.g. Morning Shift - Terminal 01..."
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
               />
             </div>
 
@@ -132,7 +132,7 @@ export function PosShiftOpenModal({
               <button
                 type="submit"
                 disabled={isProcessing}
-                className="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-extrabold text-xs shadow-md shadow-orange-500/20 disabled:opacity-50 cursor-pointer"
+                className="flex-1 py-2.5 rounded-xl bg-brand hover:bg-brand-hover text-white font-extrabold text-xs shadow-md shadow-brand/20 disabled:opacity-50 cursor-pointer transition-all"
               >
                 {isProcessing ? 'Opening...' : 'Confirm Open Shift'}
               </button>

@@ -106,7 +106,7 @@ export function PosCheckoutModal({
           {/* Pinned Header */}
           <div className="px-5 py-3.5 flex items-center justify-between border-b border-slate-100 shrink-0 bg-white">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-orange-500 text-white flex items-center justify-center font-bold shadow-xs shadow-orange-500/20">
+              <div className="w-8 h-8 rounded-xl bg-brand text-white flex items-center justify-center font-bold shadow-xs shadow-brand/20">
                 <DollarSign className="w-4 h-4" />
               </div>
               <div>
@@ -130,16 +130,16 @@ export function PosCheckoutModal({
           {/* Scrollable Content Body */}
           <div className="p-4 sm:p-5 overflow-y-auto flex-1 min-h-0 space-y-3.5">
             {/* Grand Total Hero Display - Compact & Bold */}
-            <div className="p-3.5 rounded-2xl bg-gradient-to-br from-orange-500 via-amber-500 to-orange-600 text-white shadow-sm flex items-center justify-between">
+            <div className="p-3.5 rounded-2xl bg-brand text-white shadow-sm flex items-center justify-between">
               <div>
-                <span className="text-[10px] font-extrabold uppercase tracking-wider text-orange-100">
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-brand-subtle">
                   Total Amount Due
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-black tracking-tight font-mono">
                   ${grandTotal.toFixed(2)}
                 </h2>
               </div>
-              <div className="text-right text-[11px] text-orange-100 font-medium">
+              <div className="text-right text-[11px] text-brand-subtle font-medium">
                 <p>{cart.length} item{cart.length === 1 ? '' : 's'}</p>
                 <p>Includes 10% VAT</p>
               </div>
@@ -167,7 +167,7 @@ export function PosCheckoutModal({
                     min="0"
                     value={cashTendered}
                     onChange={(e) => setCashTendered(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-white border border-slate-300 text-base font-black text-slate-900 font-mono focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    className="w-full px-3 py-2 rounded-xl bg-white border border-slate-300 text-base font-black text-slate-900 font-mono focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
                   />
                 </div>
 
@@ -178,7 +178,7 @@ export function PosCheckoutModal({
                       key={denom}
                       type="button"
                       onClick={() => setCashTendered(denom.toFixed(2))}
-                      className="px-2.5 py-1 rounded-lg bg-white border border-slate-200 hover:border-orange-400 text-[11px] font-black text-slate-700 font-mono shadow-2xs cursor-pointer shrink-0"
+                      className="px-2.5 py-1 rounded-lg bg-white border border-slate-200 hover:border-brand text-[11px] font-black text-slate-700 font-mono shadow-2xs cursor-pointer shrink-0"
                     >
                       ${denom.toFixed(2)}
                     </button>
@@ -196,10 +196,10 @@ export function PosCheckoutModal({
             )}
 
             {tenderType === 'khqr' && (
-              <div className="p-3.5 rounded-2xl bg-orange-50 border border-orange-200 text-center space-y-1 text-xs text-orange-900">
-                <QrCode className="w-6 h-6 text-orange-600 mx-auto" />
+              <div className="p-3.5 rounded-2xl bg-brand-subtle border border-brand/20 text-center space-y-1 text-xs text-brand">
+                <QrCode className="w-6 h-6 text-brand mx-auto" />
                 <p className="font-extrabold text-xs">Instant Dynamic KHQR Code</p>
-                <p className="text-[11px] text-orange-700">
+                <p className="text-[11px] text-brand/80">
                   Clicking confirm will launch the high-resolution Bakong KHQR prompt with live webhook payment verification.
                 </p>
               </div>
@@ -221,11 +221,11 @@ export function PosCheckoutModal({
                 type="checkbox"
                 checked={printReceipt}
                 onChange={(e) => setPrintReceipt(e.target.checked)}
-                className="w-4 h-4 rounded text-orange-500 accent-orange-500 cursor-pointer shrink-0"
+                className="w-4 h-4 rounded text-brand accent-brand cursor-pointer shrink-0"
               />
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-1 font-bold text-xs text-slate-800">
-                  <Printer className="w-3.5 h-3.5 text-orange-500 shrink-0" />
+                  <Printer className="w-3.5 h-3.5 text-brand shrink-0" />
                   <span>Print customer receipt</span>
                 </div>
                 <p className="text-[10px] text-slate-500 truncate">
@@ -237,7 +237,7 @@ export function PosCheckoutModal({
               <span
                 className={`text-[9px] font-black uppercase px-2 py-0.5 rounded-md shrink-0 ${
                   printReceipt
-                    ? 'bg-orange-100 text-orange-700'
+                    ? 'bg-brand-subtle text-brand'
                     : 'bg-slate-200 text-slate-600'
                 }`}
               >
@@ -259,7 +259,7 @@ export function PosCheckoutModal({
               type="button"
               onClick={handleConfirm}
               disabled={isProcessing || !isCashSufficient}
-              className="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-extrabold text-xs shadow-md shadow-orange-500/20 disabled:opacity-50 cursor-pointer flex items-center justify-center gap-1.5 transition-all"
+              className="flex-1 py-2.5 rounded-xl bg-brand hover:bg-brand-hover text-white font-extrabold text-xs shadow-md shadow-brand/20 disabled:opacity-50 cursor-pointer flex items-center justify-center gap-1.5 transition-all"
             >
               <CheckCircle2 className="w-4 h-4" />
               <span>

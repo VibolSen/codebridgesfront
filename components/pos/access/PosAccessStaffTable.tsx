@@ -29,7 +29,7 @@ export function PosAccessStaffTable({
     <div className="bg-white rounded-3xl border border-slate-200/80 shadow-[0_2px_12px_rgba(15,23,42,0.03)] overflow-hidden">
       <div className="p-5 border-b border-slate-100 flex items-center justify-between">
         <h3 className="text-sm font-black text-slate-900 tracking-tight flex items-center gap-2">
-          <Users className="w-4 h-4 text-[#5B4DFB]" />
+          <Users className="w-4 h-4 text-brand" />
           <span>Active Register Operators ({users.length})</span>
         </h3>
         <span className="text-[10px] font-bold text-slate-400">Click &quot;Set PIN&quot; to configure register access</span>
@@ -62,7 +62,7 @@ export function PosAccessStaffTable({
                     {/* Name & Role */}
                     <td className="py-3.5 px-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-xl bg-[#5B4DFB] text-white font-black text-xs flex items-center justify-center shrink-0">
+                        <div className="w-8 h-8 rounded-xl bg-brand text-white font-black text-xs flex items-center justify-center shrink-0">
                           {u.name ? u.name.slice(0, 2).toUpperCase() : 'OP'}
                         </div>
                         <div>
@@ -135,7 +135,7 @@ export function PosAccessStaffTable({
                         onClick={() => onOpenPinModal(u)}
                         className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs transition-colors flex items-center gap-1.5 ml-auto cursor-pointer"
                       >
-                        <KeyRound className="w-3.5 h-3.5 text-[#5B4DFB]" />
+                        <KeyRound className="w-3.5 h-3.5 text-brand" />
                         <span>{perms.hasPin ? 'Change PIN' : 'Set PIN'}</span>
                       </button>
                     </td>

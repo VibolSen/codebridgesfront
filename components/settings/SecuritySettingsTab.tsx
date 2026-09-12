@@ -39,7 +39,7 @@ export function SecuritySettingsTab({
             type="checkbox"
             checked={enforce2FA}
             onChange={(e) => setEnforce2FA(e.target.checked)}
-            className="w-4 h-4 rounded text-orange-500 focus:ring-orange-500 border-slate-300 cursor-pointer"
+            className="w-4 h-4 rounded text-brand focus:ring-brand border-slate-300 cursor-pointer"
           />
         </div>
 
@@ -56,7 +56,7 @@ export function SecuritySettingsTab({
             type="checkbox"
             checked={allowCashierPinSwitch}
             onChange={(e) => setAllowCashierPinSwitch(e.target.checked)}
-            className="w-4 h-4 rounded text-orange-500 focus:ring-orange-500 border-slate-300 cursor-pointer"
+            className="w-4 h-4 rounded text-brand focus:ring-brand border-slate-300 cursor-pointer"
           />
         </div>
 

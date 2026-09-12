@@ -64,7 +64,7 @@ export function PosProductGrid({
   if (filteredProducts.length === 0) {
     return (
       <div className="p-12 text-center rounded-3xl bg-white border border-slate-200/90 shadow-xs flex flex-col items-center justify-center space-y-3">
-        <div className="w-14 h-14 rounded-2xl bg-orange-50 text-orange-500 flex items-center justify-center border border-orange-200/60">
+        <div className="w-14 h-14 rounded-2xl bg-brand-subtle text-brand flex items-center justify-center border border-brand/20">
           <Package className="w-7 h-7" />
         </div>
         <div className="space-y-1">
@@ -97,7 +97,7 @@ export function PosProductGrid({
             className={`p-4 rounded-2xl bg-white border transition-all flex flex-col justify-between cursor-pointer select-none relative group ${
               isOutOfStock
                 ? 'opacity-60 border-slate-200 bg-slate-50 cursor-not-allowed'
-                : 'border-slate-200/90 shadow-xs hover:shadow-md hover:border-orange-300'
+                : 'border-slate-200/90 shadow-xs hover:shadow-md hover:border-brand/40'
             }`}
           >
             {/* Top Category Tag & Stock */}
@@ -122,7 +122,7 @@ export function PosProductGrid({
 
             {/* Product Icon & Title */}
             <div className="space-y-1.5 my-1">
-              <div className="w-10 h-10 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center border border-orange-200/50 group-hover:scale-105 group-hover:bg-orange-500 group-hover:text-white transition-all">
+              <div className="w-10 h-10 rounded-xl bg-brand-subtle text-brand flex items-center justify-center border border-brand/20 group-hover:scale-105 group-hover:bg-brand group-hover:text-white transition-all">
                 <Package className="w-5 h-5" />
               </div>
               <h4 className="font-extrabold text-xs text-slate-900 line-clamp-2 leading-tight">
@@ -138,7 +138,7 @@ export function PosProductGrid({
               <span className="text-sm font-black text-slate-900 tracking-tight">
                 ${Number(product.price).toFixed(2)}
               </span>
-              <div className="w-6 h-6 rounded-lg bg-orange-50 group-hover:bg-orange-500 text-orange-600 group-hover:text-white flex items-center justify-center transition-colors shadow-2xs">
+              <div className="w-6 h-6 rounded-lg bg-brand-subtle group-hover:bg-brand text-brand group-hover:text-white flex items-center justify-center transition-colors shadow-2xs">
                 <Plus className="w-3.5 h-3.5" />
               </div>
             </div>

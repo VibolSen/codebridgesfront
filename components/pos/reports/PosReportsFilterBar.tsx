@@ -41,7 +41,7 @@ export function PosReportsFilterBar({
             type="button"
             onClick={() => onPeriodChange(item.id as any)}
             className={`px-3 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer ${
-              period === item.id ? 'bg-white text-[#5B4DFB] shadow-xs' : 'text-slate-500 hover:text-slate-800'
+              period === item.id ? 'bg-white text-brand shadow-xs' : 'text-slate-500 hover:text-slate-800'
             }`}
           >
             {item.label}

@@ -38,7 +38,7 @@ export function Tabs({
               className={cn(
                 'flex items-center gap-2 pb-3 pt-1 text-xs font-bold transition-all relative whitespace-nowrap cursor-pointer',
                 isActive
-                  ? 'text-[#5B4DFB]'
+                  ? 'text-brand'
                   : 'text-slate-500 hover:text-slate-800'
               )}
             >
@@ -48,14 +48,14 @@ export function Tabs({
                 <span
                   className={cn(
                     'px-1.5 py-0.5 rounded-full text-[10px] font-extrabold',
-                    isActive ? 'bg-purple-100 text-[#5B4DFB]' : 'bg-slate-100 text-slate-500'
+                    isActive ? 'bg-brand-subtle text-brand' : 'bg-slate-100 text-slate-500'
                   )}
                 >
                   {tab.count}
                 </span>
               )}
               {isActive && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#5B4DFB] rounded-full" />
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand rounded-full" />
               )}
             </button>
           );
@@ -87,7 +87,7 @@ export function Tabs({
               <span
                 className={cn(
                   'px-1.5 py-0.2 rounded-md text-[10px] font-extrabold',
-                  isActive ? 'bg-purple-100 text-[#5B4DFB]' : 'bg-slate-200/70 text-slate-600'
+                  isActive ? 'bg-brand-subtle text-brand' : 'bg-slate-200/70 text-slate-600'
                 )}
               >
                 {tab.count}

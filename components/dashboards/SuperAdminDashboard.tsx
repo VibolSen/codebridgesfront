@@ -54,10 +54,10 @@ function SuperAdminDashboardContent() {
   return (
     <div className="space-y-6 max-w-7xl mx-auto">
       {/* 1. OONE Royal Iris Purple Hero Banner */}
-      <div className="bg-gradient-to-r from-[#5B4DFB] via-[#6355D8] to-[#7B6EF6] rounded-3xl p-6 sm:p-8 text-white shadow-[0_10px_30px_rgba(91,77,251,0.15)] flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
+      <div className="bg-gradient-to-r from-brand via-brand-hover to-indigo-700 rounded-3xl p-6 sm:p-8 text-white shadow-[0_10px_30px_rgba(91,77,251,0.15)] flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
         {/* Soft Ambient Blur Glows */}
         <div className="absolute -right-10 -top-10 w-72 h-72 bg-white/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute right-1/3 -bottom-10 w-48 h-48 bg-[#9387FF]/20 rounded-full blur-2xl pointer-events-none" />
+        <div className="absolute right-1/3 -bottom-10 w-48 h-48 bg-brand-border/20 rounded-full blur-2xl pointer-events-none" />
 
         <div className="space-y-2 relative z-10 max-w-2xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[11px] font-extrabold uppercase tracking-wider text-white">
@@ -85,7 +85,7 @@ function SuperAdminDashboardContent() {
 
           <Link
             href="/super-admin/platform/tenants"
-            className="px-4 py-2.5 rounded-xl bg-white text-[#5B4DFB] font-extrabold text-xs hover:bg-slate-50 transition-all shadow-sm flex items-center gap-2"
+            className="px-4 py-2.5 rounded-xl bg-white text-brand font-extrabold text-xs hover:bg-slate-50 transition-all shadow-sm flex items-center gap-2"
           >
             <Building2 className="w-4 h-4" />
             <span>Manage Tenants</span>
@@ -125,7 +125,7 @@ function SuperAdminDashboardContent() {
           onClick={() => setActiveTab('overview')}
           className={`px-4 py-2.5 font-extrabold text-xs rounded-t-xl transition-all border-b-2 flex items-center gap-2 cursor-pointer ${
             activeTab === 'overview'
-              ? 'border-[#5B4DFB] text-[#5B4DFB] bg-[#5B4DFB]/5'
+              ? 'border-brand text-brand bg-brand-subtle/50'
               : 'border-transparent text-slate-500 hover:text-slate-900 hover:bg-slate-100/60'
           }`}
         >
@@ -138,7 +138,7 @@ function SuperAdminDashboardContent() {
           onClick={() => setActiveTab('growth')}
           className={`px-4 py-2.5 font-extrabold text-xs rounded-t-xl transition-all border-b-2 flex items-center gap-2 cursor-pointer ${
             activeTab === 'growth'
-              ? 'border-[#5B4DFB] text-[#5B4DFB] bg-[#5B4DFB]/5'
+              ? 'border-brand text-brand bg-brand-subtle/50'
               : 'border-transparent text-slate-500 hover:text-slate-900 hover:bg-slate-100/60'
           }`}
         >
@@ -151,7 +151,7 @@ function SuperAdminDashboardContent() {
           onClick={() => setActiveTab('infra')}
           className={`px-4 py-2.5 font-extrabold text-xs rounded-t-xl transition-all border-b-2 flex items-center gap-2 cursor-pointer ${
             activeTab === 'infra'
-              ? 'border-[#5B4DFB] text-[#5B4DFB] bg-[#5B4DFB]/5'
+              ? 'border-brand text-brand bg-brand-subtle/50'
               : 'border-transparent text-slate-500 hover:text-slate-900 hover:bg-slate-100/60'
           }`}
         >
@@ -219,7 +219,7 @@ export function SuperAdminDashboard() {
       fallback={
         <div className="p-12 flex items-center justify-center min-h-[400px]">
           <div className="flex items-center gap-2 text-slate-500 font-bold text-xs">
-            <Loader2 className="w-5 h-5 animate-spin text-[#5B4DFB]" />
+            <Loader2 className="w-5 h-5 animate-spin text-brand" />
             <span>Loading Platform Operations Cockpit...</span>
           </div>
         </div>

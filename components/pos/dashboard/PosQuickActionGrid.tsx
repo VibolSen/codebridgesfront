@@ -29,11 +29,11 @@ export function PosQuickActionGrid({
     {
       title: 'Launch Cashier Register',
       subtitle: 'Start ringing orders & fast touch sales',
-      href: '/pos/terminal',
+      href: '/pos/pos-terminal',
       icon: Monitor,
-      gradient: 'from-orange-500 to-amber-500',
+      gradient: 'from-brand to-brand-hover',
       badge: 'Primary Register',
-      badgeColor: 'bg-orange-100 text-orange-800',
+      badgeColor: 'bg-brand-subtle text-brand',
       isPrimary: true,
     },
     {
@@ -78,7 +78,7 @@ export function PosQuickActionGrid({
       subtitle: 'Real-time order ticket bump screen',
       href: '/kds',
       icon: ChefHat,
-      gradient: 'from-red-500 to-orange-500',
+      gradient: 'from-amber-500 to-brand',
       badge: 'Kitchen',
       badgeColor: 'bg-amber-100 text-amber-800',
       target: '_blank',
@@ -89,7 +89,7 @@ export function PosQuickActionGrid({
     <div className="space-y-3">
       <div className="flex items-center justify-between">
         <h3 className="text-base font-extrabold text-slate-900 flex items-center gap-2">
-          <Sparkles className="w-4 h-4 text-orange-500" />
+          <Sparkles className="w-4 h-4 text-brand" />
           <span>POS Operations Command Launchers</span>
         </h3>
         <span className="text-xs text-slate-400 font-medium">Terminal REG-01</span>
@@ -104,8 +104,8 @@ export function PosQuickActionGrid({
               whileTap={{ scale: 0.98 }}
               className={`p-5 rounded-3xl border transition-all h-full flex flex-col justify-between cursor-pointer ${
                 act.isPrimary
-                  ? 'bg-gradient-to-br from-orange-500 to-amber-500 text-white border-orange-400 shadow-md shadow-orange-500/20'
-                  : 'bg-white text-slate-900 border-slate-200/90 hover:border-orange-300 hover:shadow-md'
+                  ? 'bg-brand text-white border-brand shadow-md shadow-brand/20'
+                  : 'bg-white text-slate-900 border-slate-200/90 hover:border-brand/40 hover:shadow-md'
               }`}
             >
               <div>
@@ -121,7 +121,7 @@ export function PosQuickActionGrid({
                   </div>
                   <span
                     className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full ${
-                      act.isPrimary ? 'bg-white text-orange-600' : act.badgeColor
+                      act.isPrimary ? 'bg-white text-brand' : act.badgeColor
                     }`}
                   >
                     {act.badge}
@@ -131,7 +131,7 @@ export function PosQuickActionGrid({
                 <h4 className="text-sm font-extrabold leading-snug">{act.title}</h4>
                 <p
                   className={`text-xs mt-1 leading-relaxed ${
-                    act.isPrimary ? 'text-orange-50 font-medium' : 'text-slate-500'
+                    act.isPrimary ? 'text-brand-subtle font-medium' : 'text-slate-500'
                   }`}
                 >
                   {act.subtitle}
@@ -140,7 +140,7 @@ export function PosQuickActionGrid({
 
               <div
                 className={`mt-4 pt-3 flex items-center justify-between text-xs font-bold ${
-                  act.isPrimary ? 'border-t border-white/20 text-white' : 'border-t border-slate-100 text-orange-600'
+                  act.isPrimary ? 'border-t border-white/20 text-white' : 'border-t border-slate-100 text-brand'
                 }`}
               >
                 <span>Launch Action</span>

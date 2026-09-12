@@ -146,10 +146,8 @@ export function SuperAdminPlatformUsersView() {
       {/* Header */}
       <div className="bg-white p-6 rounded-3xl border border-slate-200/90 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3.5">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-orange-500 via-amber-500 to-yellow-400 p-0.5 shadow-md shadow-orange-500/15 flex items-center justify-center">
-            <div className="w-full h-full bg-white rounded-[14px] flex items-center justify-center">
-              <Users className="w-6 h-6 text-orange-500" />
-            </div>
+          <div className="w-12 h-12 rounded-2xl bg-brand-subtle border border-brand-border/60 shadow-2xs flex items-center justify-center">
+            <Users className="w-6 h-6 text-brand" />
           </div>
           <div>
             <div className="flex items-center gap-2">
@@ -190,7 +188,7 @@ export function SuperAdminPlatformUsersView() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search live users by Name, Email, or Organization..."
-            className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 transition-all"
+            className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all"
           />
         </div>
 
@@ -199,7 +197,7 @@ export function SuperAdminPlatformUsersView() {
           <select
             value={roleFilter}
             onChange={(e) => setRoleFilter(e.target.value)}
-            className="px-3 py-2.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-orange-500/30 cursor-pointer"
+            className="px-3 py-2.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand cursor-pointer"
           >
             <option value="all">All Roles</option>
             <option value="super_admin">Super Admin</option>

@@ -55,7 +55,7 @@ export const InventoryBalancesTable: React.FC<InventoryBalancesTableProps> = ({
                     initial="hidden"
                     animate="visible"
                     variants={cardVariants}
-                    className="hover:bg-orange-50/50 transition-colors"
+                    className="hover:bg-brand-subtle/50 transition-colors"
                   >
                     <td className="py-3.5 px-4">
                       <div className="flex items-center gap-3">
@@ -98,22 +98,22 @@ export const InventoryBalancesTable: React.FC<InventoryBalancesTableProps> = ({
                       {item.reserved}
                     </td>
 
-                    <td className="py-3.5 px-4 text-right font-extrabold text-orange-600 font-mono">
+                    <td className="py-3.5 px-4 text-right font-extrabold text-brand font-mono">
                       {item.available}
                     </td>
 
                     <td className="py-3.5 px-4">
                       {isOut ? (
                         <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-600 border border-rose-200">
-                          <XCircle className="w-3 h-3" /> Out of Stock
+                          <XCircle className="w-3.5 h-3.5" /> Out of Stock
                         </span>
                       ) : isLow ? (
                         <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-600 border border-amber-200">
-                          <AlertTriangle className="w-3 h-3" /> Low Stock ({item.on_hand})
+                          <AlertTriangle className="w-3.5 h-3.5" /> Low Stock ({item.on_hand})
                         </span>
                       ) : (
                         <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-600 border border-emerald-200">
-                          <CheckCircle2 className="w-3 h-3" /> In Stock
+                          <CheckCircle2 className="w-3.5 h-3.5" /> In Stock
                         </span>
                       )}
                     </td>
@@ -122,7 +122,7 @@ export const InventoryBalancesTable: React.FC<InventoryBalancesTableProps> = ({
                       <div className="flex items-center justify-end gap-2">
                         <button
                           onClick={() => onOpenAdjustModal(item)}
-                          className="p-1.5 rounded-lg text-slate-500 hover:text-orange-600 hover:bg-orange-100 transition-colors"
+                          className="p-1.5 rounded-lg text-slate-500 hover:text-brand hover:bg-brand-subtle transition-colors cursor-pointer"
                           title="Adjust Stock Balance"
                         >
                           <RefreshCw className="w-4 h-4" />

@@ -49,7 +49,7 @@ export function TenantTableRow({
       <td className="px-5 py-3.5">
         <div className="flex flex-col gap-0.5">
           <span className="font-bold text-slate-900 flex items-center gap-1.5">
-            <TierIcon className="w-4 h-4 text-[#5B4DFB]" />
+            <TierIcon className="w-4 h-4 text-brand" />
             {tenant.name}
           </span>
           <span className="text-slate-400 font-mono text-[10px]">{tenant.company_code} · {tenant.slug}</span>
@@ -61,7 +61,7 @@ export function TenantTableRow({
         {tenant.owner ? (
           <div className="flex flex-col gap-0.5">
             <span className="font-extrabold text-slate-900 flex items-center gap-1">
-              <UserCheck className="w-3.5 h-3.5 text-[#5B4DFB] shrink-0" />
+              <UserCheck className="w-3.5 h-3.5 text-brand shrink-0" />
               {tenant.owner.name}
             </span>
             <span className="text-slate-500 font-medium text-[10px] truncate max-w-[160px]">
@@ -146,7 +146,7 @@ export function TenantTableRow({
               e.stopPropagation();
               onOpenImpersonate(tenant);
             }}
-            className="p-1.5 rounded-lg text-[#5B4DFB] hover:text-[#4E3FE3] hover:bg-[#F5F3FF] transition-colors cursor-pointer"
+            className="p-1.5 rounded-lg text-brand hover:text-brand-hover hover:bg-brand-subtle transition-colors cursor-pointer"
             title="Login as Tenant"
           >
             <LogIn className="w-4 h-4" />
@@ -155,7 +155,7 @@ export function TenantTableRow({
           <button
             type="button"
             onClick={(e) => onOpenEdit(tenant, e)}
-            className="p-1.5 rounded-lg text-slate-500 hover:text-[#5B4DFB] hover:bg-[#F5F3FF] transition-colors cursor-pointer"
+            className="p-1.5 rounded-lg text-slate-500 hover:text-brand hover:bg-brand-subtle transition-colors cursor-pointer"
             title="Edit Quotas & Owner"
           >
             <Edit className="w-4 h-4" />

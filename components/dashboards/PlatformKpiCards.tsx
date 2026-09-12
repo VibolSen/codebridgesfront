@@ -43,13 +43,13 @@ export function PlatformKpiCards({ stats, isLoading = false }: PlatformKpiCardsP
       <motion.div
         whileHover={{ y: -3 }}
         transition={{ duration: 0.2 }}
-        className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-[0_2px_12px_rgba(15,23,42,0.03)] hover:border-[#5B4DFB]/30 hover:shadow-md transition-all group"
+        className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-[0_2px_12px_rgba(15,23,42,0.03)] hover:border-brand/30 hover:shadow-md transition-all group"
       >
         <div className="flex items-center justify-between">
           <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
             Total Organizations
           </span>
-          <div className="w-9 h-9 rounded-xl bg-[#F5F3FF] text-[#5B4DFB] flex items-center justify-center transition-transform group-hover:scale-110">
+          <div className="w-9 h-9 rounded-xl bg-brand-subtle text-brand flex items-center justify-center transition-transform group-hover:scale-110">
             <Building2 className="w-5 h-5" />
           </div>
         </div>
@@ -73,7 +73,7 @@ export function PlatformKpiCards({ stats, isLoading = false }: PlatformKpiCardsP
       <motion.div
         whileHover={{ y: -3 }}
         transition={{ duration: 0.2 }}
-        className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-[0_2px_12px_rgba(15,23,42,0.03)] hover:border-[#5B4DFB]/30 hover:shadow-md transition-all group"
+        className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-[0_2px_12px_rgba(15,23,42,0.03)] hover:border-brand/30 hover:shadow-md transition-all group"
       >
         <div className="flex items-center justify-between">
           <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
@@ -95,7 +95,7 @@ export function PlatformKpiCards({ stats, isLoading = false }: PlatformKpiCardsP
           <span>
             ARR: <strong className="text-slate-800 font-mono">${stats.arr.toLocaleString()}</strong>
           </span>
-          <span className="text-[#5B4DFB] bg-[#F5F3FF] px-2 py-0.5 rounded-full font-extrabold text-[10px] border border-[#DDD6FE]">
+          <span className="text-brand bg-brand-subtle px-2 py-0.5 rounded-full font-extrabold text-[10px] border border-brand-border/60">
             Annual Run Rate
           </span>
         </div>
@@ -105,7 +105,7 @@ export function PlatformKpiCards({ stats, isLoading = false }: PlatformKpiCardsP
       <motion.div
         whileHover={{ y: -3 }}
         transition={{ duration: 0.2 }}
-        className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-[0_2px_12px_rgba(15,23,42,0.03)] hover:border-[#5B4DFB]/30 hover:shadow-md transition-all group"
+        className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-[0_2px_12px_rgba(15,23,42,0.03)] hover:border-brand/30 hover:shadow-md transition-all group"
       >
         <div className="flex items-center justify-between">
           <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
@@ -135,7 +135,7 @@ export function PlatformKpiCards({ stats, isLoading = false }: PlatformKpiCardsP
       <motion.div
         whileHover={{ y: -3 }}
         transition={{ duration: 0.2 }}
-        className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-[0_2px_12px_rgba(15,23,42,0.03)] hover:border-[#5B4DFB]/30 hover:shadow-md transition-all group"
+        className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-[0_2px_12px_rgba(15,23,42,0.03)] hover:border-brand/30 hover:shadow-md transition-all group"
       >
         <div className="flex items-center justify-between">
           <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">

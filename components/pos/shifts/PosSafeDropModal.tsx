@@ -72,14 +72,14 @@ export function PosSafeDropModal({
         className="w-full max-w-md bg-white rounded-3xl border border-slate-200 shadow-2xl overflow-hidden"
       >
         {/* Header */}
-        <div className="px-6 py-5 bg-gradient-to-r from-indigo-600 to-blue-700 text-white flex items-center justify-between">
+        <div className="px-6 py-5 bg-brand text-white flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-white/20 flex items-center justify-center font-black">
               <ShieldAlert className="w-5 h-5" />
             </div>
             <div>
               <h2 className="text-base font-black tracking-tight">Safe Cash Drop (Skim)</h2>
-              <p className="text-[11px] text-indigo-100 font-medium">
+              <p className="text-[11px] text-brand-subtle font-medium">
                 Transfer excess register cash to the store master safe
               </p>
             </div>
@@ -121,7 +121,7 @@ export function PosSafeDropModal({
                 value={dropAmount}
                 onChange={(e) => setDropAmount(e.target.value)}
                 placeholder="200.00"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-black text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-black text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
               />
             </div>
           </div>
@@ -136,7 +136,7 @@ export function PosSafeDropModal({
               required
               value={envelopeSerial}
               onChange={(e) => setEnvelopeSerial(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
             />
           </div>
 
@@ -144,7 +144,7 @@ export function PosSafeDropModal({
           <div>
             <label className="block text-xs font-bold text-slate-700 mb-1 flex items-center justify-between">
               <span>Supervisor Authorization PIN *</span>
-              <span className="text-[10px] text-indigo-600 font-bold uppercase">Required</span>
+              <span className="text-[10px] text-brand font-bold uppercase">Required</span>
             </label>
             <div className="relative">
               <Key className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -155,7 +155,7 @@ export function PosSafeDropModal({
                 value={supervisorPin}
                 onChange={(e) => setSupervisorPin(e.target.value)}
                 placeholder="••••"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono font-bold tracking-widest text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono font-bold tracking-widest text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
               />
             </div>
           </div>
@@ -171,7 +171,7 @@ export function PosSafeDropModal({
             </button>
             <button
               type="submit"
-              className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs shadow-md shadow-indigo-600/20 transition-all cursor-pointer flex items-center gap-2"
+              className="px-5 py-2.5 rounded-xl bg-brand hover:bg-brand-hover text-white font-extrabold text-xs shadow-md shadow-brand/20 transition-all cursor-pointer flex items-center gap-2"
             >
               <CheckCircle2 className="w-4 h-4" />
               <span>Confirm Safe Drop</span>

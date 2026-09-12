@@ -7,4 +7,5 @@ export * from './ProductCatalogTableHeader';
 export * from './ProductCatalogTableRow';
 export * from './ProductCatalogPagination';
 export * from './AddProductModal';
+export * from './EditProductModal';
 export * from './ProductsCatalogView';

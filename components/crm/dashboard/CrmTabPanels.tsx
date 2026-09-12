@@ -89,7 +89,7 @@ export function CrmTabPanels({
           </div>
           <Link
             href="/super-admin/crm/customers"
-            className="px-3.5 py-1.5 bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white rounded-xl font-bold text-xs shadow-xs transition-colors flex items-center gap-1.5"
+            className="px-3.5 py-1.5 bg-brand hover:bg-brand-hover active:bg-brand-active text-white rounded-xl font-bold text-xs shadow-xs transition-colors flex items-center gap-1.5"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Create Contact</span>
@@ -111,7 +111,7 @@ export function CrmTabPanels({
               {loadingContacts ? (
                 <tr>
                   <td colSpan={5} className="py-8 text-center text-slate-400 font-medium">
-                    <Loader2 className="w-5 h-5 animate-spin mx-auto text-[#5B4DFB] mb-1" />
+                    <Loader2 className="w-5 h-5 animate-spin mx-auto text-brand mb-1" />
                     Loading contacts directory...
                   </td>
                 </tr>
@@ -133,7 +133,7 @@ export function CrmTabPanels({
                       </span>
                     </td>
                     <td className="px-4 py-3 text-right">
-                      <Link href="/super-admin/crm/customers" className="text-[#5B4DFB] font-extrabold hover:underline">
+                      <Link href="/super-admin/crm/customers" className="text-brand font-extrabold hover:underline">
                         View Profile
                       </Link>
                     </td>
@@ -153,14 +153,14 @@ export function CrmTabPanels({
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
           <div>
             <h3 className="font-extrabold text-base text-slate-900 flex items-center gap-2">
-              <Building2 className="w-4 h-4 text-[#5B4DFB]" />
+              <Building2 className="w-4 h-4 text-brand" />
               <span>Companies &amp; B2B</span>
             </h3>
             <p className="text-xs text-slate-500 font-medium">Corporate wholesale accounts, billing terms, and credit lines</p>
           </div>
           <Link
             href="/super-admin/crm/customers"
-            className="px-3.5 py-1.5 bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white rounded-xl font-bold text-xs shadow-xs transition-colors flex items-center gap-1.5"
+            className="px-3.5 py-1.5 bg-brand hover:bg-brand-hover active:bg-brand-active text-white rounded-xl font-bold text-xs shadow-xs transition-colors flex items-center gap-1.5"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Add B2B Company</span>
@@ -175,7 +175,7 @@ export function CrmTabPanels({
           </div>
           <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
             <span className="text-xs font-bold text-slate-500">Active Pipeline Value</span>
-            <p className="text-2xl font-black text-[#5B4DFB] font-mono">
+            <p className="text-2xl font-black text-brand font-mono">
               ${pipelineRevenue.toLocaleString('en-US', { minimumFractionDigits: 2 })}
             </p>
             <p className="text-xs text-slate-400">Total active commercial deal potential</p>
@@ -191,7 +191,7 @@ export function CrmTabPanels({
         <div className="pb-4 border-b border-slate-100 flex items-center justify-between">
           <div>
             <h3 className="font-extrabold text-base text-slate-900 flex items-center gap-2">
-              <BarChart3 className="w-4 h-4 text-[#5B4DFB]" />
+              <BarChart3 className="w-4 h-4 text-brand" />
               <span>CRM Reports</span>
             </h3>
             <p className="text-xs text-slate-500 font-medium">Pipeline velocity, win/loss conversion rates, and revenue forecasting</p>
@@ -210,7 +210,7 @@ export function CrmTabPanels({
             <h3 className="font-extrabold text-base text-slate-900">CRM Access &amp; RBAC</h3>
             <p className="text-xs text-slate-500 font-medium">Domain-scoped RBAC permissions (module_name = 'crm')</p>
           </div>
-          <span className="px-2.5 py-1 rounded-full text-[10px] font-black bg-purple-100 text-[#5B4DFB]">
+          <span className="px-2.5 py-1 rounded-full text-[10px] font-black bg-brand-subtle text-brand border border-brand/20">
             Module Scoped
           </span>
         </div>
@@ -219,7 +219,7 @@ export function CrmTabPanels({
           <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
             <h4 className="font-extrabold text-sm text-slate-900">CRM Director / Admin</h4>
             <p className="text-xs text-slate-500">Full access to pipeline stages, commission rates, and deal deletion.</p>
-            <span className="inline-block px-2.5 py-0.5 rounded-full bg-purple-100 text-[#5B4DFB] text-[10px] font-bold">
+            <span className="inline-block px-2.5 py-0.5 rounded-full bg-brand-subtle text-brand text-[10px] font-bold border border-brand/20">
               {rolesCount.directors} Assigned
             </span>
           </div>
@@ -248,7 +248,7 @@ export function CrmTabPanels({
         <div className="flex items-center justify-between pb-4 border-b border-slate-100">
           <div>
             <h3 className="font-extrabold text-base text-slate-900 flex items-center gap-2">
-              <Settings className="w-4 h-4 text-[#5B4DFB]" />
+              <Settings className="w-4 h-4 text-brand" />
               <span>CRM Settings</span>
             </h3>
             <p className="text-xs text-slate-500 font-medium">Pipeline stages, automatic lead routing, and customer lifecycle triggers</p>
@@ -268,7 +268,7 @@ export function CrmTabPanels({
               setSettingsSaved(true);
               setTimeout(() => setSettingsSaved(false), 2500);
             }}
-            className="px-5 py-2.5 rounded-xl bg-[#5B4DFB] hover:bg-[#4E3FE3] text-white font-black text-xs shadow-md shadow-[#5B4DFB]/20 transition-all flex items-center gap-1.5 cursor-pointer"
+            className="px-5 py-2.5 rounded-xl bg-brand hover:bg-brand-hover active:bg-brand-active text-white font-black text-xs shadow-md shadow-brand/20 transition-all flex items-center gap-1.5 cursor-pointer"
           >
             <Save className="w-4 h-4" />
             <span>Save Configuration</span>

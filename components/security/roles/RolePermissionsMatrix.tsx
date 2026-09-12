@@ -79,7 +79,7 @@ export const RolePermissionsMatrix: React.FC<RolePermissionsMatrixProps> = ({
         <button
           onClick={onSaveRolePermissions}
           disabled={saving}
-          className="px-5 py-2.5 rounded-2xl bg-orange-500 hover:bg-orange-600 disabled:opacity-50 text-white font-bold text-xs shadow-md shadow-orange-500/20 flex items-center gap-2 transition-all shrink-0 cursor-pointer"
+          className="px-5 py-2.5 rounded-2xl bg-brand hover:bg-brand-hover disabled:opacity-50 text-white font-bold text-xs shadow-md shadow-brand/20 flex items-center gap-2 transition-all shrink-0 cursor-pointer"
         >
           {saving ? (
             <RefreshCw className="w-3.5 h-3.5 animate-spin" />
@@ -124,7 +124,7 @@ export const RolePermissionsMatrix: React.FC<RolePermissionsMatrixProps> = ({
           return (
             <div key={grp} className="space-y-3">
               <div className="flex items-center gap-2 border-b border-slate-100 pb-2">
-                <span className="w-2 h-2 rounded-full bg-orange-500" />
+                <span className="w-2 h-2 rounded-full bg-brand" />
                 <h4 className="font-extrabold text-xs text-slate-800 uppercase tracking-wider">
                   {grp} Module
                 </h4>
@@ -140,7 +140,7 @@ export const RolePermissionsMatrix: React.FC<RolePermissionsMatrixProps> = ({
                       onClick={() => onTogglePermission(p.id)}
                       className={`p-3.5 rounded-2xl border text-left flex items-start justify-between gap-3 transition-all cursor-pointer ${
                         isChecked
-                          ? 'bg-orange-50/60 border-orange-200 text-orange-950 font-bold'
+                          ? 'bg-brand-subtle/60 border-brand/30 text-brand font-bold'
                           : 'bg-white border-slate-200/80 text-slate-600 hover:border-slate-300'
                       }`}
                     >
@@ -156,7 +156,7 @@ export const RolePermissionsMatrix: React.FC<RolePermissionsMatrixProps> = ({
                       <span
                         className={`w-5 h-5 rounded-lg flex items-center justify-center shrink-0 mt-0.5 transition-colors ${
                           isChecked
-                            ? 'bg-orange-500 text-white shadow-xs'
+                            ? 'bg-brand text-white shadow-xs'
                             : 'border-2 border-slate-200 bg-white'
                         }`}
                       >

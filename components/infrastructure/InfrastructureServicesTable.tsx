@@ -29,7 +29,7 @@ export function InfrastructureServicesTable({ services }: InfrastructureServices
               <tr key={s.id} className="hover:bg-slate-50/80 transition-colors">
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center font-bold">
+                    <div className="w-8 h-8 rounded-xl bg-brand-subtle text-brand flex items-center justify-center font-bold">
                       <Server className="w-4 h-4" />
                     </div>
                     <div>

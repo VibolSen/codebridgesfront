@@ -25,9 +25,9 @@ export function QuickFillSection({ onQuickFill }: QuickFillSectionProps) {
           whileTap={{ scale: 0.97 }}
           type="button"
           onClick={() => onQuickFill('vibolsen2002@gmail.com', 'Vibol@2020')}
-          className="px-2 py-1.5 text-xs font-bold rounded-xl bg-orange-50 hover:bg-orange-100 text-orange-600 border border-orange-200 transition-colors text-center shadow-2xs flex items-center justify-center gap-1 cursor-pointer"
+          className="px-2 py-1.5 text-xs font-bold rounded-xl bg-brand-subtle hover:bg-brand-border/40 text-brand border border-brand/20 transition-colors text-center shadow-2xs flex items-center justify-center gap-1 cursor-pointer"
         >
-          <ShieldCheck className="w-3.5 h-3.5 text-orange-500" />
+          <ShieldCheck className="w-3.5 h-3.5 text-brand" />
           Super Admin
         </motion.button>
         <motion.button
